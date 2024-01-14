@@ -2,8 +2,9 @@ package qmq
 
 import (
 	"context"
-	"sync"
+	"log"
 	"strconv"
+	"sync"
 	"time"
 
 	"github.com/redis/go-redis/v9"
@@ -96,4 +97,26 @@ func (q *QMQConnection) TempSet(ctx context.Context, data QMQData, timeoutMs int
 		}
 	}
 	return true, nil
+}
+
+func (q *QMQConnection) Get(ctx context.Context, data []string) {
+	q.lock.Lock()
+	defer q.lock.Unlock()
+
+	requests := make([]string, 0)
+	for _, d := range data {
+		// for _, r := range d.GetReadRequests() {
+		requests = append(requests, d)
+		// }
+	}
+
+	results := q.redis.MGet(ctx, requests...)
+	if results.Err() != nil {
+		log.Printf("Failed to get data from Redis: %v", results.Err())
+		return
+	}
+
+	for _, result := range results.Args()[1:] {
+		log.Printf("Result: (%T, %v)", result, result)
+	}
 }
