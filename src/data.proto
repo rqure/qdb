@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+option go_package = "qmq/qmq";
 package qmq;
 
 import "google/protobuf/timestamp.proto";
@@ -75,10 +76,10 @@ message QMQAudioRequest {
 }
 
 enum QMQLightBulbStateEnum {
-    LIGHT_BULB_STATE_UNSPECIFIED = 1;
-    LIGHT_BULB_STATE_UNKNOWN = 2;
-    LIGHT_BULB_STATE_ON = 3;
-    LIGHT_BULB_STATE_OFF = 4;
+    LIGHT_BULB_STATE_UNSPECIFIED = 0;
+    LIGHT_BULB_STATE_UNKNOWN = 1;
+    LIGHT_BULB_STATE_ON = 2;
+    LIGHT_BULB_STATE_OFF = 3;
 }
 
 message QMQLightBulbState {
@@ -93,10 +94,10 @@ message QMQLightBulb {
 }
 
 enum QMQDoorLockStateEnum {
-    DOOR_LOCK_STATE_UNSPECIFIED = 1;
-    DOOR_LOCK_STATE_UNKNOWN = 2;
-    DOOR_LOCK_STATE_LOCKED = 3;
-    DOOR_LOCK_STATE_UNLOCKED = 4;
+    DOOR_LOCK_STATE_UNSPECIFIED = 0;
+    DOOR_LOCK_STATE_UNKNOWN = 1;
+    DOOR_LOCK_STATE_LOCKED = 2;
+    DOOR_LOCK_STATE_UNLOCKED = 3;
 }
 
 message QMQDoorLockState {
