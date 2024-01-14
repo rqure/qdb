@@ -3,13 +3,109 @@ syntax = "proto3";
 package qmq;
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/any.proto";
 
 message QMQBase {
     string key = 1;
-    google.protobuf.Timestamp writeTime = 5;
+    google.protobuf.Timestamp writetime = 5;
 }
 
-message QMQRawInteger {
+message QMQInt {
     QMQBase base = 1;
     int64 value = 2;
+}
+
+message QMQString {
+    QMQBase base = 1;
+    int64 value = 2;
+}
+
+message QMQTimestamp {
+    QMQBase base = 1;
+    google.protobuf.Timestamp value = 2;
+}
+
+message QMQFloat {
+    QMQBase base = 1;
+    double value = 2;
+}
+
+message QMQBool {
+    QMQBase base = 1;
+    bool value = 2;
+}
+
+message QMQContainer {
+    QMQBase base = 1;
+    repeated google.protobuf.Any value = 2;
+}
+
+enum QMQLogLevelEnum {
+    LOG_LEVEL_UNSPECIFIED = 0;
+    LOG_LEVEL_TRACE = 1;
+    LOG_LEVEL_DEBUG = 2;
+    LOG_LEVEL_ADVISE = 3;
+    LOG_LEVEL_WARN = 4;
+    LOG_LEVEL_ERROR = 5;
+    LOG_LEVEL_PANIC = 6;
+}
+
+message QMQLog {
+    string application = 1;
+    QMQLogLevelEnum level = 2;
+    string message = 3;
+    google.protobuf.Timestamp timestamp = 4;
+}
+
+message QMQStream {
+    QMQBase base = 1;
+    QMQString last_consumed_id = 2;
+    QMQInt length = 3;
+}
+
+message QMQPrayer {
+    QMQBase base = 1;
+    QMQString name = 2;
+    QMQTimestamp time = 3;
+}
+
+message QMQAudioRequest {
+    QMQBase base = 1;
+    QMQString filename = 2;
+}
+
+enum QMQLightBulbStateEnum {
+    LIGHT_BULB_STATE_UNSPECIFIED = 1;
+    LIGHT_BULB_STATE_UNKNOWN = 2;
+    LIGHT_BULB_STATE_ON = 3;
+    LIGHT_BULB_STATE_OFF = 4;
+}
+
+message QMQLightBulbState {
+    QMQBase base = 1;
+    QMQLightBulbStateEnum value = 2;
+}
+
+message QMQLightBulb {
+    QMQBase base = 1;
+    QMQLightBulbState current_state = 2;
+    QMQLightBulbState requested_state = 3;
+}
+
+enum QMQDoorLockStateEnum {
+    DOOR_LOCK_STATE_UNSPECIFIED = 1;
+    DOOR_LOCK_STATE_UNKNOWN = 2;
+    DOOR_LOCK_STATE_LOCKED = 3;
+    DOOR_LOCK_STATE_UNLOCKED = 4;
+}
+
+message QMQDoorLockState {
+    QMQBase base = 1;
+    QMQDoorLockStateEnum value = 2;
+}
+
+message QMQDoorLock {
+    QMQBase base = 1;
+    QMQDoorLockState current_state = 2;
+    QMQDoorLockState requested_state = 3;
 }
