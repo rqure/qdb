@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package qmq;
+
+import "google/protobuf/timestamp.proto";
+
+message QMQBase {
+    string key = 1;
+    google.protobuf.Timestamp writeTime = 5;
+}
+
+message QMQRawInteger {
+    QMQBase base = 1;
+    int64 value = 2;
+}
