@@ -53,21 +53,30 @@ func (q *QMQConnection) Disconnect(ctx context.Context) {
 	}
 }
 
-func (q *QMQConnection) Set(ctx context.Context, k string, v *QMQData) error {
+func (q *QMQConnection) Set(ctx context.Context, k string, d *QMQData) error {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
 	writeRequests := make(map[string]interface{})
-	writeRequests[k] = v.String()
+	v, err := proto.Marshal(d)
+	if err != nil {
+		return err
+	}
+	writeRequests[k] = v
 
 	return q.redis.MSet(ctx, writeRequests).Err()
 }
 
-func (q *QMQConnection) TempSet(ctx context.Context, k string, v *QMQData, timeoutMs int64) (bool, error) {
+func (q *QMQConnection) TempSet(ctx context.Context, k string, d *QMQData, timeoutMs int64) (bool, error) {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
-	result, err := q.redis.SetNX(ctx, k, v.String(), time.Duration(timeoutMs)*time.Millisecond).Result()
+	v, err := proto.Marshal(d)
+	if err != nil {
+		return false, err
+	}
+
+	result, err := q.redis.SetNX(ctx, k, v, time.Duration(timeoutMs)*time.Millisecond).Result()
 	if err != nil {
 		return false, err
 	}
@@ -105,4 +114,29 @@ func (q *QMQConnection) Get(ctx context.Context, k ...string) map[string]*QMQDat
 	}
 
 	return results
+}
+
+func (q *QMQConnection) StreamAdd(ctx context.Context, k string, s *QMQStream, m proto.Message) error {
+	q.lock.Lock()
+	defer q.lock.Unlock()
+
+	b, err := proto.Marshal(m)
+	if err != nil {
+		return err
+	}
+
+	_, err = q.redis.XAdd(ctx, &redis.XAddArgs{
+		Stream: k,
+		Values: b,
+		MaxLen: s.Length,
+	}).Result()
+
+	return err
+}
+
+func (q *QMQConnection) StreamRead(ctx context.Context, k string, s *QMQStream, m proto.Message) error {
+	q.Get(ctx, k+":data")
+
+	q.lock.Lock()
+	defer q.lock.Unlock()
 }
