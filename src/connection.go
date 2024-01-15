@@ -8,19 +8,8 @@ import (
 	"time"
 
 	"github.com/redis/go-redis/v9"
+	"google.golang.org/protobuf/proto"
 )
-
-type QMQData interface {
-	GetWriteRequests() map[string]interface{}
-	GetReadRequests() []string
-	UpdateFromRead(readResults map[string]string)
-}
-
-type QMQStream interface {
-	GetKey() string
-	GetLength() int64
-	GetLastConsumedID() QMQData
-}
 
 type QMQConnection struct {
 	host     string
@@ -64,59 +53,56 @@ func (q *QMQConnection) Disconnect(ctx context.Context) {
 	}
 }
 
-func (q *QMQConnection) Set(ctx context.Context, data []QMQData) error {
+func (q *QMQConnection) Set(ctx context.Context, k string, v *QMQData) error {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
 	writeRequests := make(map[string]interface{})
-	for _, d := range data {
-		for k, v := range d.GetWriteRequests() {
-			writeRequests[k] = v
-		}
-	}
+	writeRequests[k] = v.String()
 
 	return q.redis.MSet(ctx, writeRequests).Err()
 }
 
-func (q *QMQConnection) TempSet(ctx context.Context, data QMQData, timeoutMs int64) (bool, error) {
+func (q *QMQConnection) TempSet(ctx context.Context, k string, v *QMQData, timeoutMs int64) (bool, error) {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
-	results := make([]bool, 0)
-	for k, v := range data.GetWriteRequests() {
-		result, err := q.redis.SetNX(ctx, k, v, time.Duration(timeoutMs)*time.Millisecond).Result()
-		if err != nil {
-			return false, err
-		}
-		results = append(results, result)
+	result, err := q.redis.SetNX(ctx, k, v.String(), time.Duration(timeoutMs)*time.Millisecond).Result()
+	if err != nil {
+		return false, err
 	}
 
-	for _, result := range results {
-		if !result {
-			return false, nil
-		}
+	if !result {
+		return false, nil
 	}
+
 	return true, nil
 }
 
-func (q *QMQConnection) Get(ctx context.Context, data []string) {
+func (q *QMQConnection) Get(ctx context.Context, k ...string) map[string]*QMQData {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
-	requests := make([]string, 0)
-	for _, d := range data {
-		// for _, r := range d.GetReadRequests() {
-		requests = append(requests, d)
-		// }
+	results := make(map[string]*QMQData)
+
+	values := q.redis.MGet(ctx, k...)
+	if values.Err() != nil {
+		log.Printf("Failed to get data from Redis: %v", values.Err())
 	}
 
-	results := q.redis.MGet(ctx, requests...)
-	if results.Err() != nil {
-		log.Printf("Failed to get data from Redis: %v", results.Err())
-		return
+	for i, v := range values.Args()[1:] {
+		switch r := v.(type) {
+		case []byte:
+			results[k[i]] = &QMQData{}
+			err := proto.Unmarshal(r, results[k[i]])
+			if err != nil {
+				log.Printf("Failed to unmarshal data from Redis: %v", err)
+			}
+			break
+		default:
+			log.Printf("Failed to find correct type for data from Redis: (%T - %v)", v, v)
+		}
 	}
 
-	for _, result := range results.Args()[1:] {
-		log.Printf("Result: (%T, %v)", result, result)
-	}
+	return results
 }
