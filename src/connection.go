@@ -245,6 +245,7 @@ func (q *QMQConnection) StreamRead(ctx context.Context, s *QMQStream, m protoref
 				if err != nil {
 					return UNMARSHAL_FAILED
 				}
+				s.Context.LastConsumedId = message.ID
 				return nil
 			}
 		}

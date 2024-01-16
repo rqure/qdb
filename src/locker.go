@@ -12,6 +12,14 @@ type QMQLocker struct {
 	conn  *QMQConnection
 }
 
+func NewQMQLocker(id string, conn *QMQConnection) *QMQLocker {
+	return &QMQLocker{
+		id:    id,
+		token: "",
+		conn:  conn,
+	}
+}
+
 func (l *QMQLocker) LockWithTimeout(ctx context.Context, timeoutMs int64) bool {
 	randomBytes := make([]byte, 8)
 	_, err := rand.Read(randomBytes)
