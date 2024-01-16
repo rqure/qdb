@@ -2,14 +2,51 @@ package qmq
 
 import (
 	"context"
-	"log"
+	"encoding/base64"
+	"fmt"
 	"strconv"
 	"sync"
 	"time"
 
 	"github.com/redis/go-redis/v9"
 	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/reflect/protoreflect"
 )
+
+type QMQStream struct {
+	key string
+
+	Context QMQStreamContext
+}
+
+func (s *QMQStream) Key() string {
+	return s.key
+}
+
+func (s *QMQStream) ContextKey() string {
+	return s.key + ":context"
+}
+
+type QMQConnectionError int
+
+const (
+	CONNECTION_FAILED QMQConnectionError = iota
+	MARSHAL_FAILED
+	UNMARSHAL_FAILED
+	SET_FAILED
+	TEMPSET_FAILED
+	GET_FAILED
+	STREAM_ADD_FAILED
+	STREAM_READ_FAILED
+	DECODE_FAILED
+	CAST_FAILED
+	STREAM_CONTEXT_FAILED
+	STREAM_EMPTY
+)
+
+func (e QMQConnectionError) Error() string {
+	return fmt.Sprintf("QMQConnectionError: %d", e)
+}
 
 type QMQConnection struct {
 	host     string
@@ -40,7 +77,11 @@ func (q *QMQConnection) Connect(ctx context.Context) error {
 	}
 	q.redis = redis.NewClient(opt)
 
-	return q.redis.Ping(ctx).Err()
+	if q.redis.Ping(ctx).Err() != nil {
+		return CONNECTION_FAILED
+	}
+
+	return nil
 }
 
 func (q *QMQConnection) Disconnect(ctx context.Context) {
@@ -60,11 +101,15 @@ func (q *QMQConnection) Set(ctx context.Context, k string, d *QMQData) error {
 	writeRequests := make(map[string]interface{})
 	v, err := proto.Marshal(d)
 	if err != nil {
-		return err
+		return MARSHAL_FAILED
 	}
 	writeRequests[k] = v
 
-	return q.redis.MSet(ctx, writeRequests).Err()
+	if q.redis.MSet(ctx, writeRequests).Err() != nil {
+		return SET_FAILED
+	}
+
+	return nil
 }
 
 func (q *QMQConnection) TempSet(ctx context.Context, k string, d *QMQData, timeoutMs int64) (bool, error) {
@@ -73,12 +118,12 @@ func (q *QMQConnection) TempSet(ctx context.Context, k string, d *QMQData, timeo
 
 	v, err := proto.Marshal(d)
 	if err != nil {
-		return false, err
+		return false, MARSHAL_FAILED
 	}
 
 	result, err := q.redis.SetNX(ctx, k, v, time.Duration(timeoutMs)*time.Millisecond).Result()
 	if err != nil {
-		return false, err
+		return false, TEMPSET_FAILED
 	}
 
 	if !result {
@@ -88,7 +133,7 @@ func (q *QMQConnection) TempSet(ctx context.Context, k string, d *QMQData, timeo
 	return true, nil
 }
 
-func (q *QMQConnection) Get(ctx context.Context, k ...string) map[string]*QMQData {
+func (q *QMQConnection) Get(ctx context.Context, k ...string) (map[string]*QMQData, error) {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
@@ -96,7 +141,7 @@ func (q *QMQConnection) Get(ctx context.Context, k ...string) map[string]*QMQDat
 
 	values := q.redis.MGet(ctx, k...)
 	if values.Err() != nil {
-		log.Printf("Failed to get data from Redis: %v", values.Err())
+		return results, GET_FAILED
 	}
 
 	for i, v := range values.Args()[1:] {
@@ -105,38 +150,92 @@ func (q *QMQConnection) Get(ctx context.Context, k ...string) map[string]*QMQDat
 			results[k[i]] = &QMQData{}
 			err := proto.Unmarshal(r, results[k[i]])
 			if err != nil {
-				log.Printf("Failed to unmarshal data from Redis: %v", err)
+				return results, UNMARSHAL_FAILED
 			}
 			break
 		default:
-			log.Printf("Failed to find correct type for data from Redis: (%T - %v)", v, v)
+			return results, UNMARSHAL_FAILED
 		}
 	}
 
-	return results
+	return results, nil
 }
 
-func (q *QMQConnection) StreamAdd(ctx context.Context, k string, s *QMQStream, m proto.Message) error {
+func (q *QMQConnection) StreamAdd(ctx context.Context, s *QMQStream, m proto.Message) error {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
 	b, err := proto.Marshal(m)
 	if err != nil {
-		return err
+		return MARSHAL_FAILED
 	}
 
 	_, err = q.redis.XAdd(ctx, &redis.XAddArgs{
-		Stream: k,
-		Values: b,
-		MaxLen: s.Length,
+		Stream: s.Key(),
+		Values: []string{"data", base64.StdEncoding.EncodeToString(b)},
+		MaxLen: s.Context.Length,
+		Approx: true,
 	}).Result()
 
-	return err
+	if err != nil {
+		return STREAM_ADD_FAILED
+	}
+
+	return nil
 }
 
-func (q *QMQConnection) StreamRead(ctx context.Context, k string, s *QMQStream, m proto.Message) error {
-	q.Get(ctx, k+":data")
+func (q *QMQConnection) StreamRead(ctx context.Context, s *QMQStream, m protoreflect.ProtoMessage) error {
+	gResult, err := q.Get(ctx, s.ContextKey())
+	if err != nil {
+		return STREAM_CONTEXT_FAILED
+	}
+	_, ok := gResult[s.ContextKey()]
+	if !ok {
+		return STREAM_CONTEXT_FAILED
+	}
+
+	err = gResult[s.ContextKey()].Data.UnmarshalTo(&s.Context)
+	if err != nil {
+		return UNMARSHAL_FAILED
+	}
 
 	q.lock.Lock()
 	defer q.lock.Unlock()
+
+	xResult, err := q.redis.XRead(ctx, &redis.XReadArgs{
+		Streams: []string{s.Key(), s.Context.LastConsumedId},
+		Block:   0,
+	}).Result()
+
+	if err != nil {
+		return STREAM_READ_FAILED
+	}
+
+	for _, xMessage := range xResult {
+		for _, message := range xMessage.Messages {
+			decodedMessage := make(map[string]string)
+
+			for key, value := range message.Values {
+				if value_casted, ok := value.(string); ok {
+					decodedMessage[key] = value_casted
+				} else {
+					return CAST_FAILED
+				}
+			}
+
+			if data, ok := decodedMessage["data"]; ok {
+				protobytes, err := base64.StdEncoding.DecodeString(data)
+				if err != nil {
+					return DECODE_FAILED
+				}
+				err = proto.Unmarshal(protobytes, m)
+				if err != nil {
+					return UNMARSHAL_FAILED
+				}
+				return nil
+			}
+		}
+	}
+
+	return STREAM_EMPTY
 }

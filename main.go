@@ -18,7 +18,8 @@ func main() {
 	defer conn.Disconnect(ctx)
 
 	// Add your code here to use the QMQConnection methods
-	conn.Get(ctx, "clock-gateway:datetime")
+	// conn.Get(ctx, "clock-gateway:datetime")
+	conn.StreamRead(ctx, "clock-gateway:queue")
 
 	fmt.Println("QMQConnection operations completed")
 }
