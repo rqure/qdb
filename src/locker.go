@@ -8,7 +8,7 @@ import (
 
 type QMQLocker struct {
 	id    string
-	value string
+	token string
 	conn  *QMQConnection
 }
 
@@ -18,15 +18,42 @@ func (l *QMQLocker) LockWithTimeout(ctx context.Context, timeoutMs int64) bool {
 	if err != nil {
 		return false
 	}
-	l.value = base64.StdEncoding.EncodeToString(randomBytes)
+
+	l.token = base64.StdEncoding.EncodeToString(randomBytes)
 
 	writeRequest := &QMQData{}
-	writeRequest.Data.MarshalFrom(&QMQString{Value: l.value})
-	result, err := l.conn.TempSet(ctx, l.id, data, timeoutMs)
+	err = writeRequest.Data.MarshalFrom(&QMQString{Value: l.token})
+	if err != nil {
+		return false
+	}
 
+	result, err := l.conn.TempSet(ctx, l.id, writeRequest, timeoutMs)
 	if err != nil {
 		return false
 	}
 
 	return result
+}
+
+func (l *QMQLocker) Lock(ctx context.Context) bool {
+	return l.LockWithTimeout(ctx, 30000)
+}
+
+func (l *QMQLocker) Unlock(ctx context.Context) {
+	readRequest, err := l.conn.Get(ctx, l.id)
+	if err != nil {
+		return
+	}
+
+	token := QMQString{}
+	err = readRequest.Data.UnmarshalTo(&token)
+	if err != nil {
+		return
+	}
+
+	if l.token != token.Value {
+		return
+	}
+
+	l.conn.Unset(ctx, l.id)
 }

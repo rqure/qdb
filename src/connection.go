@@ -43,6 +43,7 @@ const (
 	CAST_FAILED
 	STREAM_CONTEXT_FAILED
 	STREAM_EMPTY
+	UNSET_FAILED
 )
 
 func (e QMQConnectionError) Error() string {
@@ -108,7 +109,7 @@ func (q *QMQConnection) Set(ctx context.Context, k string, d *QMQData) error {
 	if err != nil {
 		return MARSHAL_FAILED
 	}
-	writeRequests[k] = v
+	writeRequests[k] = base64.StdEncoding.EncodeToString(v)
 
 	if q.redis.MSet(ctx, writeRequests).Err() != nil {
 		return SET_FAILED
@@ -130,7 +131,9 @@ func (q *QMQConnection) TempSet(ctx context.Context, k string, d *QMQData, timeo
 		return false, MARSHAL_FAILED
 	}
 
-	result, err := q.redis.SetNX(ctx, k, v, time.Duration(timeoutMs)*time.Millisecond).Result()
+	result, err := q.redis.SetNX(ctx,
+		k, base64.StdEncoding.EncodeToString(v),
+		time.Duration(timeoutMs)*time.Millisecond).Result()
 	if err != nil {
 		return false, TEMPSET_FAILED
 	}
@@ -142,32 +145,37 @@ func (q *QMQConnection) TempSet(ctx context.Context, k string, d *QMQData, timeo
 	return true, nil
 }
 
-func (q *QMQConnection) Get(ctx context.Context, k ...string) (map[string]*QMQData, error) {
+func (q *QMQConnection) Unset(ctx context.Context, k string) error {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
-	results := make(map[string]*QMQData)
-
-	values := q.redis.MGet(ctx, k...)
-	if values.Err() != nil {
-		return results, GET_FAILED
+	if q.redis.Del(ctx, k).Err() != nil {
+		return UNSET_FAILED
 	}
 
-	for i, v := range values.Args()[1:] {
-		switch r := v.(type) {
-		case []byte:
-			results[k[i]] = &QMQData{}
-			err := proto.Unmarshal(r, results[k[i]])
-			if err != nil {
-				return results, UNMARSHAL_FAILED
-			}
-			break
-		default:
-			return results, UNMARSHAL_FAILED
-		}
+	return nil
+}
+
+func (q *QMQConnection) Get(ctx context.Context, k string) (*QMQData, error) {
+	q.lock.Lock()
+	defer q.lock.Unlock()
+
+	result := &QMQData{}
+
+	val, err := q.redis.Get(ctx, k).Result()
+	if err != nil {
+		return nil, GET_FAILED
+	}
+	protobytes, err := base64.StdEncoding.DecodeString(val)
+	if err != nil {
+		return nil, DECODE_FAILED
+	}
+	err = proto.Unmarshal(protobytes, result)
+	if err != nil {
+		return nil, UNMARSHAL_FAILED
 	}
 
-	return results, nil
+	return result, nil
 }
 
 func (q *QMQConnection) StreamAdd(ctx context.Context, s *QMQStream, m proto.Message) error {
@@ -198,12 +206,8 @@ func (q *QMQConnection) StreamRead(ctx context.Context, s *QMQStream, m protoref
 	if err != nil {
 		return STREAM_CONTEXT_FAILED
 	}
-	_, ok := gResult[s.ContextKey()]
-	if !ok {
-		return STREAM_CONTEXT_FAILED
-	}
 
-	err = gResult[s.ContextKey()].Data.UnmarshalTo(&s.Context)
+	err = gResult.Data.UnmarshalTo(&s.Context)
 	if err != nil {
 		return UNMARSHAL_FAILED
 	}
