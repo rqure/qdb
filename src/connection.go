@@ -11,6 +11,7 @@ import (
 	"github.com/redis/go-redis/v9"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/reflect/protoreflect"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type QMQStream struct {
@@ -98,6 +99,10 @@ func (q *QMQConnection) Set(ctx context.Context, k string, d *QMQData) error {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
+	if d.Writetime == nil {
+		d.Writetime = timestamppb.Now()
+	}
+
 	writeRequests := make(map[string]interface{})
 	v, err := proto.Marshal(d)
 	if err != nil {
@@ -115,6 +120,10 @@ func (q *QMQConnection) Set(ctx context.Context, k string, d *QMQData) error {
 func (q *QMQConnection) TempSet(ctx context.Context, k string, d *QMQData, timeoutMs int64) (bool, error) {
 	q.lock.Lock()
 	defer q.lock.Unlock()
+
+	if d.Writetime == nil {
+		d.Writetime = timestamppb.Now()
+	}
 
 	v, err := proto.Marshal(d)
 	if err != nil {
