@@ -19,3 +19,22 @@ func (a *QMQAckable) Ack(ctx context.Context) {
 func (a *QMQAckable) Dispose(ctx context.Context) {
 	a.locker.Unlock(ctx)
 }
+
+type QMQConsumer struct {
+	conn   *QMQConnection
+	stream *QMQStream
+}
+
+func NewQMQConsumer(ctx context.Context, key string, conn *QMQConnection) *QMQConsumer {
+	consumer := &QMQConsumer{
+		conn: conn,
+		stream: NewQMQStream(key, conn)
+	}
+
+	readRequest, err := conn.Get(ctx, consumer.stream.ContextKey())
+	if err == nil {
+		readRequest.Data.UnmarshalTo(&consumer.stream.Context)
+	}
+
+	return consumer
+}

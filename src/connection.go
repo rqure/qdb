@@ -14,20 +14,6 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
-type QMQStream struct {
-	key string
-
-	Context QMQStreamContext
-}
-
-func (s *QMQStream) Key() string {
-	return s.key
-}
-
-func (s *QMQStream) ContextKey() string {
-	return s.key + ":context"
-}
-
 type QMQConnectionError int
 
 const (
