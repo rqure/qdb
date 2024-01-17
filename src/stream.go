@@ -4,6 +4,7 @@ type QMQStream struct {
 	key string
 
 	Context QMQStreamContext
+	Length  int64
 	Locker  *QMQLocker
 }
 
@@ -12,8 +13,8 @@ func NewQMQStream(key string, conn *QMQConnection) *QMQStream {
 		key: key,
 		Context: QMQStreamContext{
 			LastConsumedId: "0",
-			Length:         1,
 		},
+		Length: 1,
 	}
 
 	stream.Locker = NewQMQLocker(stream.LockerKey(), conn)

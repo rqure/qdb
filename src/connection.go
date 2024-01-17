@@ -176,7 +176,7 @@ func (q *QMQConnection) StreamAdd(ctx context.Context, s *QMQStream, m proto.Mes
 	_, err = q.redis.XAdd(ctx, &redis.XAddArgs{
 		Stream: s.Key(),
 		Values: []string{"data", base64.StdEncoding.EncodeToString(b)},
-		MaxLen: s.Context.Length,
+		MaxLen: s.Length,
 		Approx: true,
 	}).Result()
 
