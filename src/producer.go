@@ -7,6 +7,11 @@ import (
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
+type QMQProducerConfig struct {
+	Key    string
+	Length int64
+}
+
 type QMQProducer struct {
 	conn   *QMQConnection
 	stream *QMQStream
@@ -28,7 +33,7 @@ func NewQMQProducer(ctx context.Context, key string, conn *QMQConnection, length
 	return producer
 }
 
-func (p *QMQProducer) push(ctx context.Context, m protoreflect.ProtoMessage) {
+func (p *QMQProducer) Push(ctx context.Context, m protoreflect.ProtoMessage) {
 	for !p.stream.Locker.Lock(ctx) {
 		time.Sleep(100 * time.Millisecond)
 	}
