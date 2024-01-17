@@ -70,7 +70,7 @@ func (q *QMQConnection) Connect(ctx context.Context) error {
 	return nil
 }
 
-func (q *QMQConnection) Disconnect(ctx context.Context) {
+func (q *QMQConnection) Disconnect() {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
