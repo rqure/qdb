@@ -27,8 +27,8 @@ type QMQConsumer struct {
 
 func NewQMQConsumer(ctx context.Context, key string, conn *QMQConnection) *QMQConsumer {
 	consumer := &QMQConsumer{
-		conn: conn,
-		stream: NewQMQStream(key, conn)
+		conn:   conn,
+		stream: NewQMQStream(key, conn),
 	}
 
 	readRequest, err := conn.Get(ctx, consumer.stream.ContextKey())
