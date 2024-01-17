@@ -37,17 +37,15 @@ func (e QMQConnectionError) Error() string {
 }
 
 type QMQConnection struct {
-	host     string
-	port     int
+	addr     string
 	password string
 	redis    *redis.Client
 	lock     sync.Mutex
 }
 
-func NewQMQConnection(host string, port int, password string) *QMQConnection {
+func NewQMQConnection(addr string, password string) *QMQConnection {
 	return &QMQConnection{
-		host:     host,
-		port:     port,
+		addr:     addr,
 		password: password,
 	}
 }
@@ -59,7 +57,7 @@ func (q *QMQConnection) Connect(ctx context.Context) error {
 	defer q.lock.Unlock()
 
 	opt := &redis.Options{
-		Addr:     q.host + ":" + strconv.Itoa(q.port),
+		Addr:     q.addr,
 		Password: q.password,
 		DB:       0, // use default DB
 	}
