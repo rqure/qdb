@@ -44,3 +44,19 @@ func (a *QMQApplication) Deinitialize(ctx context.Context) {
 	a.logger.Advise(ctx, "Application has stopped")
 	a.conn.Disconnect()
 }
+
+func (a *QMQApplication) Producer(key string) *QMQProducer {
+	return a.producers[key]
+}
+
+func (a *QMQApplication) Consumer(key string) *QMQConsumer {
+	return a.consumers[key]
+}
+
+func (a *QMQApplication) AddProducer(ctx context.Context, key string, length int64) {
+	a.producers[key] = NewQMQProducer(ctx, key, conn, length)
+}
+
+func (a *QMQApplication) AddConsumer(ctx context.Context, key string) {
+	s.consumers[key] = NewQMQConsumer(ctx, key, conn)
+}
