@@ -30,7 +30,7 @@ func NewQMQApplication(ctx context.Context, name string) *QMQApplication {
 	
 	return &QMQApplication{
 		conn: conn,
-		logger: NewQMQLogger(ctx, name, conn, logLength),
+		logger: NewQMQLogger(ctx, name, conn, int64(logLength)),
 	}
 }
 
@@ -54,9 +54,9 @@ func (a *QMQApplication) Consumer(key string) *QMQConsumer {
 }
 
 func (a *QMQApplication) AddProducer(ctx context.Context, key string, length int64) {
-	a.producers[key] = NewQMQProducer(ctx, key, conn, length)
+	a.producers[key] = NewQMQProducer(ctx, key, a.conn, length)
 }
 
 func (a *QMQApplication) AddConsumer(ctx context.Context, key string) {
-	s.consumers[key] = NewQMQConsumer(ctx, key, conn)
+	a.consumers[key] = NewQMQConsumer(ctx, key, a.conn)
 }
