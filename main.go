@@ -9,17 +9,7 @@ import (
 
 func main() {
 	ctx := context.Background()
-	conn := qmq.NewQMQConnection("localhost", 6379, "")
-
-	err := conn.Connect(ctx)
-	if err != nil {
-		log.Fatalf("Failed to connect to Redis: %v", err)
-	}
-	defer conn.Disconnect(ctx)
-
-	// Add your code here to use the QMQConnection methods
-	// conn.Get(ctx, "clock-gateway:datetime")
-	conn.StreamRead(ctx, "clock-gateway:queue")
-
-	fmt.Println("QMQConnection operations completed")
+	app := qmq.NewQMQApplication(ctx, "example")
+	app.Initialize(ctx)
+	defer app.Deinitialize(ctx)
 }
