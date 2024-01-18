@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
-	"strconv"
 	"sync"
 	"time"
 
@@ -51,7 +50,7 @@ func NewQMQConnection(addr string, password string) *QMQConnection {
 }
 
 func (q *QMQConnection) Connect(ctx context.Context) error {
-	q.Disconnect(ctx)
+	q.Disconnect()
 
 	q.lock.Lock()
 	defer q.lock.Unlock()
