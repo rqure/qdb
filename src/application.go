@@ -30,7 +30,7 @@ func NewQMQApplication(ctx context.Context, name string) *QMQApplication {
 	
 	return &QMQApplication{
 		conn: conn,
-		logger: NewQMQLogger(ctx, name, conn, logLength)
+		logger: NewQMQLogger(ctx, name, conn, logLength),
 	}
 }
 
