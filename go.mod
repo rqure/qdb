@@ -1,9 +1,9 @@
-module qmq
+module github.com/rqure/qmq
 
-go 1.18
+go 1.21.6
 
 require (
-	github.com/golang/protobuf v1.5.0
+	github.com/golang/protobuf v1.5.3
 	github.com/redis/go-redis/v9 v9.4.0
 	google.golang.org/protobuf v1.32.0
 )

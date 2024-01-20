@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	qmq "qmq/src"
+	qmq "github.com/rqure/qmq/src"
 )
 
 func main() {
