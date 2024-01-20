@@ -4,6 +4,7 @@ import (
 	"context"
 	"os"
 	"strconv"
+	"log"
 )
 
 type QMQApplication struct {
@@ -35,7 +36,11 @@ func NewQMQApplication(ctx context.Context, name string) *QMQApplication {
 }
 
 func (a *QMQApplication) Initialize(ctx context.Context) {
-	a.conn.Connect(ctx)
+	err := a.conn.Connect(ctx)
+	if err != nil {
+		log.Fatalf("Failed to connect to the database: %v", err)
+	}
+	
 	a.logger.Initialize(ctx)
 	a.logger.Advise(ctx, "Application has started")
 }
