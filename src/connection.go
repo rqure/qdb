@@ -10,6 +10,7 @@ import (
 	"github.com/redis/go-redis/v9"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/reflect/protoreflect"
+	"google.golang.org/protobuf/types/known/anypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -40,6 +41,20 @@ type QMQConnection struct {
 	password string
 	redis    *redis.Client
 	lock     sync.Mutex
+}
+
+func NewReadRequest() *QMQData {
+	return &QMQData{
+		Data: &anypb.Any{},
+	}
+}
+
+func NewWriteRequest(m protoreflect.ProtoMessage) *QMQData {
+	writeRequest := &QMQData{
+		Data: &anypb.Any{},
+	}
+	writeRequest.Data.MarshalFrom(m)
+	return writeRequest
 }
 
 func NewQMQConnection(addr string, password string) *QMQConnection {
@@ -143,7 +158,7 @@ func (q *QMQConnection) Get(ctx context.Context, k string) (*QMQData, error) {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
-	result := &QMQData{}
+	result := NewReadRequest()
 
 	val, err := q.redis.Get(ctx, k).Result()
 	if err != nil {
