@@ -28,18 +28,21 @@ type QMQConsumer struct {
 	stream *QMQStream
 }
 
-func NewQMQConsumer(ctx context.Context, key string, conn *QMQConnection) *QMQConsumer {
-	consumer := &QMQConsumer{
+func NewQMQConsumer(key string, conn *QMQConnection) *QMQConsumer {
+	return &QMQConsumer{
 		conn:   conn,
 		stream: NewQMQStream(key, conn),
 	}
+}
 
-	readRequest, err := conn.Get(ctx, consumer.stream.ContextKey())
+func (c *QMQConsumer) Initialize(ctx context.Context) {
+	c.stream.Locker.Lock(ctx)
+	defer c.stream.Locker.Unlock(ctx)
+
+	readRequest, err := c.conn.Get(ctx, c.stream.ContextKey())
 	if err == nil {
-		readRequest.Data.UnmarshalTo(&consumer.stream.Context)
+		readRequest.Data.UnmarshalTo(&c.stream.Context)
 	}
-
-	return consumer
 }
 
 func (c *QMQConsumer) ResetLastId(ctx context.Context) {
@@ -48,17 +51,18 @@ func (c *QMQConsumer) ResetLastId(ctx context.Context) {
 	writeRequest := &QMQData{}
 	writeRequest.Data.MarshalFrom(&c.stream.Context)
 
-	for !c.stream.Locker.Lock(ctx) {
-		time.Sleep(100 * time.Millisecond)
-	}
+	c.stream.Locker.Lock(ctx)
 	defer c.stream.Locker.Unlock(ctx)
 
 	c.conn.Set(ctx, c.stream.ContextKey(), writeRequest)
 }
 
 func (c *QMQConsumer) Pop(ctx context.Context, m protoreflect.ProtoMessage) *QMQAckable {
-	for !c.stream.Locker.Lock(ctx) {
-		time.Sleep(100 * time.Millisecond)
+	c.stream.Locker.Lock(ctx)
+
+	readRequest, err := c.conn.Get(ctx, c.stream.ContextKey())
+	if err == nil {
+		readRequest.Data.UnmarshalTo(&c.stream.Context)
 	}
 
 	for {

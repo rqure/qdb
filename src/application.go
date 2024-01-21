@@ -2,9 +2,9 @@ package qmq
 
 import (
 	"context"
+	"log"
 	"os"
 	"strconv"
-	"log"
 )
 
 type QMQApplication struct {
@@ -19,19 +19,14 @@ func NewQMQApplication(ctx context.Context, name string) *QMQApplication {
 	if addr == "" {
 		addr = "redis:6379"
 	}
-	
+
 	password := os.Getenv("QMQ_PASSWORD")
-	
-	logLength, err := strconv.Atoi(os.Getenv("QMQ_LOG_LENGTH"))
-	if err != nil {
-		logLength = 100
-	}
-	
+
 	conn := NewQMQConnection(addr, password)
-	
+
 	return &QMQApplication{
-		conn: conn,
-		logger: NewQMQLogger(ctx, name, conn, int64(logLength)),
+		conn:   conn,
+		logger: NewQMQLogger(name, conn),
 	}
 }
 
@@ -40,8 +35,13 @@ func (a *QMQApplication) Initialize(ctx context.Context) {
 	if err != nil {
 		log.Fatalf("Failed to connect to the database: %v", err)
 	}
-	
-	a.logger.Initialize(ctx)
+
+	logLength, err := strconv.Atoi(os.Getenv("QMQ_LOG_LENGTH"))
+	if err != nil {
+		logLength = 100
+	}
+
+	a.logger.Initialize(ctx, int64(logLength))
 	a.logger.Advise(ctx, "Application has started")
 }
 
@@ -58,10 +58,12 @@ func (a *QMQApplication) Consumer(key string) *QMQConsumer {
 	return a.consumers[key]
 }
 
-func (a *QMQApplication) AddProducer(ctx context.Context, key string, length int64) {
-	a.producers[key] = NewQMQProducer(ctx, key, a.conn, length)
+func (a *QMQApplication) AddProducer(key string) *QMQProducer {
+	a.producers[key] = NewQMQProducer(key, a.conn)
+	return a.producers[key]
 }
 
-func (a *QMQApplication) AddConsumer(ctx context.Context, key string) {
-	a.consumers[key] = NewQMQConsumer(ctx, key, a.conn)
+func (a *QMQApplication) AddConsumer(key string) *QMQConsumer {
+	a.consumers[key] = NewQMQConsumer(key, a.conn)
+	return a.consumers[key]
 }
