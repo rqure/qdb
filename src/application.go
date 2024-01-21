@@ -27,6 +27,8 @@ func NewQMQApplication(ctx context.Context, name string) *QMQApplication {
 	return &QMQApplication{
 		conn:   conn,
 		logger: NewQMQLogger(name, conn),
+		producers: make(map[string]*QMQProducer),
+		consumers: make(map[string]*QMQConsumer),
 	}
 }
 
