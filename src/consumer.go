@@ -13,8 +13,7 @@ type QMQAckable struct {
 }
 
 func (a *QMQAckable) Ack(ctx context.Context) {
-	writeRequest := &QMQData{}
-	writeRequest.Data.MarshalFrom(&a.stream.Context)
+	writeRequest := NewWriteRequest(&a.stream.Context)
 	a.conn.Set(ctx, a.stream.ContextKey(), writeRequest)
 	a.stream.Locker.Unlock(ctx)
 }
@@ -48,8 +47,7 @@ func (c *QMQConsumer) Initialize(ctx context.Context) {
 func (c *QMQConsumer) ResetLastId(ctx context.Context) {
 	c.stream.Context.LastConsumedId = "0"
 
-	writeRequest := &QMQData{}
-	writeRequest.Data.MarshalFrom(&c.stream.Context)
+	writeRequest := NewWriteRequest(&c.stream.Context)
 
 	c.stream.Locker.Lock(ctx)
 	defer c.stream.Locker.Unlock(ctx)

@@ -30,11 +30,7 @@ func (l *QMQLocker) TryLockWithTimeout(ctx context.Context, timeoutMs int64) boo
 
 	l.token = base64.StdEncoding.EncodeToString(randomBytes)
 
-	writeRequest := &QMQData{}
-	err = writeRequest.Data.MarshalFrom(&QMQString{Value: l.token})
-	if err != nil {
-		return false
-	}
+	writeRequest := NewWriteRequest(&QMQString{Value: l.token})
 
 	result, err := l.conn.TempSet(ctx, l.id, writeRequest, timeoutMs)
 	if err != nil {
