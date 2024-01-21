@@ -13,16 +13,19 @@ type QMQLogger struct {
 	producer *QMQProducer
 }
 
-func NewQMQLogger(ctx context.Context, appName string, conn *QMQConnection, length int64) *QMQLogger {
+func NewQMQLogger(appName string, conn *QMQConnection) *QMQLogger {
 	return &QMQLogger{
 		appName:  appName,
-		consumer: NewQMQConsumer(ctx, appName+":logs", conn),
-		producer: NewQMQProducer(ctx, appName+":logs", conn, length),
+		consumer: NewQMQConsumer(appName+":logs", conn),
+		producer: NewQMQProducer(appName+":logs", conn),
 	}
 }
 
-func (l *QMQLogger) Initialize(ctx context.Context) {
+func (l *QMQLogger) Initialize(ctx context.Context, length int64) {
+	l.consumer.Initialize(ctx)
 	l.consumer.ResetLastId(ctx)
+
+	l.producer.Initialize(ctx, length)
 }
 
 func (l *QMQLogger) Log(ctx context.Context, level QMQLogLevelEnum, message string) {

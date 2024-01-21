@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/rand"
 	"encoding/base64"
+	"time"
 )
 
 type QMQLocker struct {
@@ -20,7 +21,7 @@ func NewQMQLocker(id string, conn *QMQConnection) *QMQLocker {
 	}
 }
 
-func (l *QMQLocker) LockWithTimeout(ctx context.Context, timeoutMs int64) bool {
+func (l *QMQLocker) TryLockWithTimeout(ctx context.Context, timeoutMs int64) bool {
 	randomBytes := make([]byte, 8)
 	_, err := rand.Read(randomBytes)
 	if err != nil {
@@ -43,8 +44,20 @@ func (l *QMQLocker) LockWithTimeout(ctx context.Context, timeoutMs int64) bool {
 	return result
 }
 
-func (l *QMQLocker) Lock(ctx context.Context) bool {
-	return l.LockWithTimeout(ctx, 30000)
+func (l *QMQLocker) TryLock(ctx context.Context) bool {
+	return l.TryLockWithTimeout(ctx, 30000)
+}
+
+func (l *QMQLocker) Lock(ctx context.Context) {
+	for !l.TryLock(ctx) {
+		time.Sleep(100 * time.Millisecond)
+	}
+}
+
+func (l *QMQLocker) LockWithTimeout(ctx context.Context, timeoutMs int64) {
+	for !l.TryLockWithTimeout(ctx, timeoutMs) {
+		time.Sleep(100 * time.Millisecond)
+	}
 }
 
 func (l *QMQLocker) Unlock(ctx context.Context) {
