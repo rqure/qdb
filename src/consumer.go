@@ -1,8 +1,6 @@
 package qmq
 
 import (
-	"time"
-
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
@@ -64,6 +62,7 @@ func (c *QMQConsumer) Pop(m protoreflect.ProtoMessage) *QMQAckable {
 
 	for {
 		// Keep reading from the stream until we get a valid message
+		// or no more messages are available in the stream
 		err := c.conn.StreamRead(c.stream, m)
 
 		if err == nil {
@@ -71,7 +70,7 @@ func (c *QMQConsumer) Pop(m protoreflect.ProtoMessage) *QMQAckable {
 		}
 
 		if err == STREAM_EMPTY {
-			time.Sleep(100 * time.Millisecond)
+			return nil
 		}
 	}
 
