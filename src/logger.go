@@ -63,3 +63,11 @@ func (l *QMQLogger) Error(ctx context.Context, message string) {
 func (l *QMQLogger) Panic(ctx context.Context, message string) {
 	l.Log(ctx, QMQLogLevelEnum_LOG_LEVEL_PANIC, message)
 }
+
+func (l *QMQLogger) PrintNextEntry(ctx context.Context) {
+	logMsg := &QMQLog{}
+	popped := l.consumer.Pop(ctx, logMsg)
+	defer popped.Ack(ctx)
+	
+	log.Printf("%s | %s | %s | %s", logMsg.Application, logMsg.Timestamp.AsTime().String(), logMsg.Level.String(), logMsg.Message)
+}
