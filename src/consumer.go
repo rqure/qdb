@@ -1,7 +1,6 @@
 package qmq
 
 import (
-	"context"
 	"time"
 
 	"google.golang.org/protobuf/reflect/protoreflect"
@@ -12,14 +11,14 @@ type QMQAckable struct {
 	stream *QMQStream
 }
 
-func (a *QMQAckable) Ack(ctx context.Context) {
+func (a *QMQAckable) Ack() {
 	writeRequest := NewWriteRequest(&a.stream.Context)
-	a.conn.Set(ctx, a.stream.ContextKey(), writeRequest)
-	a.stream.Locker.Unlock(ctx)
+	a.conn.Set(a.stream.ContextKey(), writeRequest)
+	a.stream.Locker.Unlock()
 }
 
-func (a *QMQAckable) Dispose(ctx context.Context) {
-	a.stream.Locker.Unlock(ctx)
+func (a *QMQAckable) Dispose() {
+	a.stream.Locker.Unlock()
 }
 
 type QMQConsumer struct {
@@ -34,38 +33,38 @@ func NewQMQConsumer(key string, conn *QMQConnection) *QMQConsumer {
 	}
 }
 
-func (c *QMQConsumer) Initialize(ctx context.Context) {
-	c.stream.Locker.Lock(ctx)
-	defer c.stream.Locker.Unlock(ctx)
+func (c *QMQConsumer) Initialize() {
+	c.stream.Locker.Lock()
+	defer c.stream.Locker.Unlock()
 
-	readRequest, err := c.conn.Get(ctx, c.stream.ContextKey())
+	readRequest, err := c.conn.Get(c.stream.ContextKey())
 	if err == nil {
 		readRequest.Data.UnmarshalTo(&c.stream.Context)
 	}
 }
 
-func (c *QMQConsumer) ResetLastId(ctx context.Context) {
+func (c *QMQConsumer) ResetLastId() {
 	c.stream.Context.LastConsumedId = "0"
 
 	writeRequest := NewWriteRequest(&c.stream.Context)
 
-	c.stream.Locker.Lock(ctx)
-	defer c.stream.Locker.Unlock(ctx)
+	c.stream.Locker.Lock()
+	defer c.stream.Locker.Unlock()
 
-	c.conn.Set(ctx, c.stream.ContextKey(), writeRequest)
+	c.conn.Set(c.stream.ContextKey(), writeRequest)
 }
 
-func (c *QMQConsumer) Pop(ctx context.Context, m protoreflect.ProtoMessage) *QMQAckable {
-	c.stream.Locker.Lock(ctx)
+func (c *QMQConsumer) Pop(m protoreflect.ProtoMessage) *QMQAckable {
+	c.stream.Locker.Lock()
 
-	readRequest, err := c.conn.Get(ctx, c.stream.ContextKey())
+	readRequest, err := c.conn.Get(c.stream.ContextKey())
 	if err == nil {
 		readRequest.Data.UnmarshalTo(&c.stream.Context)
 	}
 
 	for {
 		// Keep reading from the stream until we get a valid message
-		err := c.conn.StreamRead(ctx, c.stream, m)
+		err := c.conn.StreamRead(c.stream, m)
 
 		if err == nil {
 			break

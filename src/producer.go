@@ -1,8 +1,6 @@
 package qmq
 
 import (
-	"context"
-
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
@@ -23,11 +21,11 @@ func NewQMQProducer(key string, conn *QMQConnection) *QMQProducer {
 	}
 }
 
-func  (p *QMQProducer) Initialize(ctx context.Context, length int64) {
-	p.stream.Locker.Lock(ctx)
-	defer p.stream.Locker.Unlock(ctx)
+func (p *QMQProducer) Initialize(length int64) {
+	p.stream.Locker.Lock()
+	defer p.stream.Locker.Unlock()
 
-	readRequest, err := p.conn.Get(ctx, p.stream.ContextKey())
+	readRequest, err := p.conn.Get(p.stream.ContextKey())
 	if err == nil {
 		readRequest.Data.UnmarshalTo(&p.stream.Context)
 	}
@@ -35,9 +33,9 @@ func  (p *QMQProducer) Initialize(ctx context.Context, length int64) {
 	p.stream.Length = length
 }
 
-func (p *QMQProducer) Push(ctx context.Context, m protoreflect.ProtoMessage) {
-	p.stream.Locker.Lock(ctx)
-	defer p.stream.Locker.Unlock(ctx)
+func (p *QMQProducer) Push(m protoreflect.ProtoMessage) {
+	p.stream.Locker.Lock()
+	defer p.stream.Locker.Unlock()
 
-	p.conn.StreamAdd(ctx, p.stream, m)
+	p.conn.StreamAdd(p.stream, m)
 }

@@ -1,7 +1,6 @@
 package qmq
 
 import (
-	"context"
 	"log"
 
 	"google.golang.org/protobuf/types/known/timestamppb"
@@ -21,14 +20,14 @@ func NewQMQLogger(appName string, conn *QMQConnection) *QMQLogger {
 	}
 }
 
-func (l *QMQLogger) Initialize(ctx context.Context, length int64) {
-	l.consumer.Initialize(ctx)
-	l.consumer.ResetLastId(ctx)
+func (l *QMQLogger) Initialize(length int64) {
+	l.consumer.Initialize()
+	l.consumer.ResetLastId()
 
-	l.producer.Initialize(ctx, length)
+	l.producer.Initialize(length)
 }
 
-func (l *QMQLogger) Log(ctx context.Context, level QMQLogLevelEnum, message string) {
+func (l *QMQLogger) Log(level QMQLogLevelEnum, message string) {
 	logMsg := &QMQLog{
 		Level:       level,
 		Message:     message,
@@ -37,29 +36,29 @@ func (l *QMQLogger) Log(ctx context.Context, level QMQLogLevelEnum, message stri
 	}
 
 	log.Printf("%s | %s | %s | %s", logMsg.Application, logMsg.Timestamp.AsTime().String(), logMsg.Level.String(), logMsg.Message)
-	l.producer.Push(ctx, logMsg)
+	l.producer.Push(logMsg)
 }
 
-func (l *QMQLogger) Trace(ctx context.Context, message string) {
-	l.Log(ctx, QMQLogLevelEnum_LOG_LEVEL_TRACE, message)
+func (l *QMQLogger) Trace(message string) {
+	l.Log(QMQLogLevelEnum_LOG_LEVEL_TRACE, message)
 }
 
-func (l *QMQLogger) Debug(ctx context.Context, message string) {
-	l.Log(ctx, QMQLogLevelEnum_LOG_LEVEL_DEBUG, message)
+func (l *QMQLogger) Debug(message string) {
+	l.Log(QMQLogLevelEnum_LOG_LEVEL_DEBUG, message)
 }
 
-func (l *QMQLogger) Advise(ctx context.Context, message string) {
-	l.Log(ctx, QMQLogLevelEnum_LOG_LEVEL_ADVISE, message)
+func (l *QMQLogger) Advise(message string) {
+	l.Log(QMQLogLevelEnum_LOG_LEVEL_ADVISE, message)
 }
 
-func (l *QMQLogger) Warn(ctx context.Context, message string) {
-	l.Log(ctx, QMQLogLevelEnum_LOG_LEVEL_WARN, message)
+func (l *QMQLogger) Warn(message string) {
+	l.Log(QMQLogLevelEnum_LOG_LEVEL_WARN, message)
 }
 
-func (l *QMQLogger) Error(ctx context.Context, message string) {
-	l.Log(ctx, QMQLogLevelEnum_LOG_LEVEL_ERROR, message)
+func (l *QMQLogger) Error(message string) {
+	l.Log(QMQLogLevelEnum_LOG_LEVEL_ERROR, message)
 }
 
-func (l *QMQLogger) Panic(ctx context.Context, message string) {
-	l.Log(ctx, QMQLogLevelEnum_LOG_LEVEL_PANIC, message)
+func (l *QMQLogger) Panic(message string) {
+	l.Log(QMQLogLevelEnum_LOG_LEVEL_PANIC, message)
 }
