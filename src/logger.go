@@ -36,7 +36,7 @@ func (l *QMQLogger) Log(ctx context.Context, level QMQLogLevelEnum, message stri
 		Application: l.appName,
 	}
 
-	log.Printf("%s | %s | %s | %s", logMsg.Application, logMsg.Timestamp.String(), logMsg.Level.String(), logMsg.Message)
+	log.Printf("%s | %s | %s | %s", logMsg.Application, logMsg.Timestamp.AsTime().String(), logMsg.Level.String(), logMsg.Message)
 	l.producer.Push(ctx, logMsg)
 }
 
