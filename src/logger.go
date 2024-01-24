@@ -63,10 +63,16 @@ func (l *QMQLogger) Panic(message string) {
 	l.Log(QMQLogLevelEnum_LOG_LEVEL_PANIC, message)
 }
 
-func (l *QMQLogger) PrintNextEntry(ctx context.Context) {
+func (l *QMQLogger) PrintUnreadEntries() {
 	logMsg := &QMQLog{}
-	popped := l.consumer.Pop(ctx, logMsg)
-	defer popped.Ack(ctx)
-	
-	log.Printf("%s | %s | %s | %s", logMsg.Application, logMsg.Timestamp.AsTime().String(), logMsg.Level.String(), logMsg.Message)
+
+	for {
+		popped := l.consumer.Pop(logMsg)
+		if popped == nil {
+			break
+		}
+
+		log.Printf("%s | %s | %s | %s", logMsg.Application, logMsg.Timestamp.AsTime().String(), logMsg.Level.String(), logMsg.Message)
+		popped.Ack()
+	}
 }
