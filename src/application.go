@@ -68,3 +68,7 @@ func (a *QMQApplication) AddConsumer(key string) *QMQConsumer {
 	a.consumers[key] = NewQMQConsumer(key, a.conn)
 	return a.consumers[key]
 }
+
+func (a* QMQApplication) Logger() *QMQLogger {
+	return a.logger;
+}
