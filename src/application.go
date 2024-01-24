@@ -1,7 +1,6 @@
 package qmq
 
 import (
-	"context"
 	"log"
 	"os"
 	"strconv"
@@ -14,7 +13,7 @@ type QMQApplication struct {
 	logger    *QMQLogger
 }
 
-func NewQMQApplication(ctx context.Context, name string) *QMQApplication {
+func NewQMQApplication(name string) *QMQApplication {
 	addr := os.Getenv("QMQ_ADDR")
 	if addr == "" {
 		addr = "redis:6379"
@@ -25,15 +24,15 @@ func NewQMQApplication(ctx context.Context, name string) *QMQApplication {
 	conn := NewQMQConnection(addr, password)
 
 	return &QMQApplication{
-		conn:   conn,
-		logger: NewQMQLogger(name, conn),
+		conn:      conn,
+		logger:    NewQMQLogger(name, conn),
 		producers: make(map[string]*QMQProducer),
 		consumers: make(map[string]*QMQConsumer),
 	}
 }
 
-func (a *QMQApplication) Initialize(ctx context.Context) {
-	err := a.conn.Connect(ctx)
+func (a *QMQApplication) Initialize() {
+	err := a.conn.Connect()
 	if err != nil {
 		log.Fatalf("Failed to connect to the database: %v", err)
 	}
@@ -43,12 +42,12 @@ func (a *QMQApplication) Initialize(ctx context.Context) {
 		logLength = 100
 	}
 
-	a.logger.Initialize(ctx, int64(logLength))
-	a.logger.Advise(ctx, "Application has started")
+	a.logger.Initialize(int64(logLength))
+	a.logger.Advise("Application has started")
 }
 
-func (a *QMQApplication) Deinitialize(ctx context.Context) {
-	a.logger.Advise(ctx, "Application has stopped")
+func (a *QMQApplication) Deinitialize() {
+	a.logger.Advise("Application has stopped")
 	a.conn.Disconnect()
 }
 

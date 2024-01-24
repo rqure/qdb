@@ -1,7 +1,6 @@
 package qmq
 
 import (
-	"context"
 	"crypto/rand"
 	"encoding/base64"
 	"time"
@@ -21,7 +20,7 @@ func NewQMQLocker(id string, conn *QMQConnection) *QMQLocker {
 	}
 }
 
-func (l *QMQLocker) TryLockWithTimeout(ctx context.Context, timeoutMs int64) bool {
+func (l *QMQLocker) TryLockWithTimeout(timeoutMs int64) bool {
 	randomBytes := make([]byte, 8)
 	_, err := rand.Read(randomBytes)
 	if err != nil {
@@ -32,7 +31,7 @@ func (l *QMQLocker) TryLockWithTimeout(ctx context.Context, timeoutMs int64) boo
 
 	writeRequest := NewWriteRequest(&QMQString{Value: l.token})
 
-	result, err := l.conn.TempSet(ctx, l.id, writeRequest, timeoutMs)
+	result, err := l.conn.TempSet(l.id, writeRequest, timeoutMs)
 	if err != nil {
 		return false
 	}
@@ -40,24 +39,24 @@ func (l *QMQLocker) TryLockWithTimeout(ctx context.Context, timeoutMs int64) boo
 	return result
 }
 
-func (l *QMQLocker) TryLock(ctx context.Context) bool {
-	return l.TryLockWithTimeout(ctx, 30000)
+func (l *QMQLocker) TryLock() bool {
+	return l.TryLockWithTimeout(30000)
 }
 
-func (l *QMQLocker) Lock(ctx context.Context) {
-	for !l.TryLock(ctx) {
+func (l *QMQLocker) Lock() {
+	for !l.TryLock() {
 		time.Sleep(100 * time.Millisecond)
 	}
 }
 
-func (l *QMQLocker) LockWithTimeout(ctx context.Context, timeoutMs int64) {
-	for !l.TryLockWithTimeout(ctx, timeoutMs) {
+func (l *QMQLocker) LockWithTimeout(timeoutMs int64) {
+	for !l.TryLockWithTimeout(timeoutMs) {
 		time.Sleep(100 * time.Millisecond)
 	}
 }
 
-func (l *QMQLocker) Unlock(ctx context.Context) {
-	readRequest, err := l.conn.Get(ctx, l.id)
+func (l *QMQLocker) Unlock() {
+	readRequest, err := l.conn.Get(l.id)
 	if err != nil {
 		return
 	}
@@ -72,5 +71,5 @@ func (l *QMQLocker) Unlock(ctx context.Context) {
 		return
 	}
 
-	l.conn.Unset(ctx, l.id)
+	l.conn.Unset(l.id)
 }

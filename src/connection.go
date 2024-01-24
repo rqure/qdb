@@ -64,7 +64,7 @@ func NewQMQConnection(addr string, password string) *QMQConnection {
 	}
 }
 
-func (q *QMQConnection) Connect(ctx context.Context) error {
+func (q *QMQConnection) Connect() error {
 	q.Disconnect()
 
 	q.lock.Lock()
@@ -77,7 +77,7 @@ func (q *QMQConnection) Connect(ctx context.Context) error {
 	}
 	q.redis = redis.NewClient(opt)
 
-	if q.redis.Ping(ctx).Err() != nil {
+	if q.redis.Ping(context.Background()).Err() != nil {
 		return CONNECTION_FAILED
 	}
 
@@ -94,7 +94,7 @@ func (q *QMQConnection) Disconnect() {
 	}
 }
 
-func (q *QMQConnection) Set(ctx context.Context, k string, d *QMQData) error {
+func (q *QMQConnection) Set(k string, d *QMQData) error {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
@@ -109,14 +109,14 @@ func (q *QMQConnection) Set(ctx context.Context, k string, d *QMQData) error {
 	}
 	writeRequests[k] = base64.StdEncoding.EncodeToString(v)
 
-	if q.redis.MSet(ctx, writeRequests).Err() != nil {
+	if q.redis.MSet(context.Background(), writeRequests).Err() != nil {
 		return SET_FAILED
 	}
 
 	return nil
 }
 
-func (q *QMQConnection) TempSet(ctx context.Context, k string, d *QMQData, timeoutMs int64) (bool, error) {
+func (q *QMQConnection) TempSet(k string, d *QMQData, timeoutMs int64) (bool, error) {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
@@ -129,7 +129,7 @@ func (q *QMQConnection) TempSet(ctx context.Context, k string, d *QMQData, timeo
 		return false, MARSHAL_FAILED
 	}
 
-	result, err := q.redis.SetNX(ctx,
+	result, err := q.redis.SetNX(context.Background(),
 		k, base64.StdEncoding.EncodeToString(v),
 		time.Duration(timeoutMs)*time.Millisecond).Result()
 	if err != nil {
@@ -143,24 +143,24 @@ func (q *QMQConnection) TempSet(ctx context.Context, k string, d *QMQData, timeo
 	return true, nil
 }
 
-func (q *QMQConnection) Unset(ctx context.Context, k string) error {
+func (q *QMQConnection) Unset(k string) error {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
-	if q.redis.Del(ctx, k).Err() != nil {
+	if q.redis.Del(context.Background(), k).Err() != nil {
 		return UNSET_FAILED
 	}
 
 	return nil
 }
 
-func (q *QMQConnection) Get(ctx context.Context, k string) (*QMQData, error) {
+func (q *QMQConnection) Get(k string) (*QMQData, error) {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
 	result := NewReadRequest()
 
-	val, err := q.redis.Get(ctx, k).Result()
+	val, err := q.redis.Get(context.Background(), k).Result()
 	if err != nil {
 		return nil, GET_FAILED
 	}
@@ -176,7 +176,7 @@ func (q *QMQConnection) Get(ctx context.Context, k string) (*QMQData, error) {
 	return result, nil
 }
 
-func (q *QMQConnection) StreamAdd(ctx context.Context, s *QMQStream, m proto.Message) error {
+func (q *QMQConnection) StreamAdd(s *QMQStream, m proto.Message) error {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
@@ -185,7 +185,7 @@ func (q *QMQConnection) StreamAdd(ctx context.Context, s *QMQStream, m proto.Mes
 		return MARSHAL_FAILED
 	}
 
-	_, err = q.redis.XAdd(ctx, &redis.XAddArgs{
+	_, err = q.redis.XAdd(context.Background(), &redis.XAddArgs{
 		Stream: s.Key(),
 		Values: []string{"data", base64.StdEncoding.EncodeToString(b)},
 		MaxLen: s.Length,
@@ -199,8 +199,8 @@ func (q *QMQConnection) StreamAdd(ctx context.Context, s *QMQStream, m proto.Mes
 	return nil
 }
 
-func (q *QMQConnection) StreamRead(ctx context.Context, s *QMQStream, m protoreflect.ProtoMessage) error {
-	gResult, err := q.Get(ctx, s.ContextKey())
+func (q *QMQConnection) StreamRead(s *QMQStream, m protoreflect.ProtoMessage) error {
+	gResult, err := q.Get(s.ContextKey())
 	if err != nil {
 		return STREAM_CONTEXT_FAILED
 	}
@@ -213,7 +213,7 @@ func (q *QMQConnection) StreamRead(ctx context.Context, s *QMQStream, m protoref
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
-	xResult, err := q.redis.XRead(ctx, &redis.XReadArgs{
+	xResult, err := q.redis.XRead(context.Background(), &redis.XReadArgs{
 		Streams: []string{s.Key(), s.Context.LastConsumedId},
 		Block:   0,
 	}).Result()
