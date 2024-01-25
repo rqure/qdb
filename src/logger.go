@@ -8,22 +8,17 @@ import (
 
 type QMQLogger struct {
 	appName  string
-	consumer *QMQConsumer
 	producer *QMQProducer
 }
 
 func NewQMQLogger(appName string, conn *QMQConnection) *QMQLogger {
 	return &QMQLogger{
 		appName:  appName,
-		consumer: NewQMQConsumer(appName+":logs", conn),
 		producer: NewQMQProducer(appName+":logs", conn),
 	}
 }
 
 func (l *QMQLogger) Initialize(length int64) {
-	l.consumer.Initialize()
-	l.consumer.ResetLastId()
-
 	l.producer.Initialize(length)
 }
 
@@ -61,18 +56,4 @@ func (l *QMQLogger) Error(message string) {
 
 func (l *QMQLogger) Panic(message string) {
 	l.Log(QMQLogLevelEnum_LOG_LEVEL_PANIC, message)
-}
-
-func (l *QMQLogger) PrintUnreadEntries() {
-	logMsg := &QMQLog{}
-
-	for {
-		popped := l.consumer.Pop(logMsg)
-		if popped == nil {
-			break
-		}
-
-		log.Printf("%s | %s | %s | %s", logMsg.Application, logMsg.Timestamp.AsTime().String(), logMsg.Level.String(), logMsg.Message)
-		popped.Ack()
-	}
 }
