@@ -2,7 +2,7 @@ package qmq
 
 import (
 	"log"
-
+	"strings"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -19,6 +19,7 @@ func NewQMQLogger(appName string, conn *QMQConnection) *QMQLogger {
 }
 
 func (l *QMQLogger) Initialize(length int64) {
+	log.SetFlags(log.Lmicroseconds)
 	l.producer.Initialize(length)
 }
 
@@ -30,7 +31,7 @@ func (l *QMQLogger) Log(level QMQLogLevelEnum, message string) {
 		Application: l.appName,
 	}
 
-	log.Printf("%s | %s | %s | %s", logMsg.Application, logMsg.Timestamp.AsTime().String(), logMsg.Level.String(), logMsg.Message)
+	log.Printf("%s | %s | %s", logMsg.Application, strings.Replace(logMsg.Level.String(), "LOG_LEVEL_", "", -1), logMsg.Message)
 	l.producer.Push(logMsg)
 }
 
