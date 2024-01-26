@@ -80,7 +80,7 @@ func (c *QMQConsumer) Pop(m protoreflect.ProtoMessage) *QMQAckable {
 	}
 }
 
-func (c *QMQConsumer) PopRaw(m protoreflect.ProtoMessage) (string, *QMQAckable) {
+func (c *QMQConsumer) PopRaw() (string, *QMQAckable) {
 	c.stream.Locker.Lock()
 
 	readRequest, err := c.conn.Get(c.stream.ContextKey())
