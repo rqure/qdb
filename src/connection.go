@@ -199,6 +199,24 @@ func (q *QMQConnection) StreamAdd(s *QMQStream, m proto.Message) error {
 	return nil
 }
 
+func (q *QMQConnection) StreamAddRaw(s *QMQStream, d string) error {
+	q.lock.Lock()
+	defer q.lock.Unlock()
+
+	_, err := q.redis.XAdd(context.Background(), &redis.XAddArgs{
+		Stream: s.Key(),
+		Values: []string{"data", d},
+		MaxLen: s.Length,
+		Approx: true,
+	}).Result()
+
+	if err != nil {
+		return STREAM_ADD_FAILED
+	}
+
+	return nil
+}
+
 func (q *QMQConnection) StreamRead(s *QMQStream, m protoreflect.ProtoMessage) error {
 	gResult, err := q.Get(s.ContextKey())
 	if err != nil {
@@ -250,4 +268,49 @@ func (q *QMQConnection) StreamRead(s *QMQStream, m protoreflect.ProtoMessage) er
 	}
 
 	return STREAM_EMPTY
+}
+
+func (q *QMQConnection) StreamReadRaw(s *QMQStream) (string, error) {
+	gResult, err := q.Get(s.ContextKey())
+	if err != nil {
+		return "", STREAM_CONTEXT_FAILED
+	}
+
+	err = gResult.Data.UnmarshalTo(&s.Context)
+	if err != nil {
+		return "", UNMARSHAL_FAILED
+	}
+
+	q.lock.Lock()
+	defer q.lock.Unlock()
+
+	xResult, err := q.redis.XRead(context.Background(), &redis.XReadArgs{
+		Streams: []string{s.Key(), s.Context.LastConsumedId},
+		Block:   0,
+	}).Result()
+
+	if err != nil {
+		return "", STREAM_READ_FAILED
+	}
+
+	for _, xMessage := range xResult {
+		for _, message := range xMessage.Messages {
+			decodedMessage := make(map[string]string)
+
+			for key, value := range message.Values {
+				if value_casted, ok := value.(string); ok {
+					decodedMessage[key] = value_casted
+				} else {
+					return "", CAST_FAILED
+				}
+			}
+
+			if data, ok := decodedMessage["data"]; ok {
+				s.Context.LastConsumedId = message.ID
+				return data, nil
+			}
+		}
+	}
+
+	return "", STREAM_EMPTY
 }
