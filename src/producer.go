@@ -39,3 +39,10 @@ func (p *QMQProducer) Push(m protoreflect.ProtoMessage) {
 
 	p.conn.StreamAdd(p.stream, m)
 }
+
+func (p *QMQProducer) PushRaw(d string) {
+	p.stream.Locker.Lock()
+	defer p.stream.Locker.Unlock()
+
+	p.conn.StreamAddRaw(p.stream, d)
+}

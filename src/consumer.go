@@ -79,3 +79,33 @@ func (c *QMQConsumer) Pop(m protoreflect.ProtoMessage) *QMQAckable {
 		stream: c.stream,
 	}
 }
+
+func (c *QMQConsumer) PopRaw(m protoreflect.ProtoMessage) (string, *QMQAckable) {
+	c.stream.Locker.Lock()
+
+	readRequest, err := c.conn.Get(c.stream.ContextKey())
+	if err == nil {
+		readRequest.Data.UnmarshalTo(&c.stream.Context)
+	}
+
+	d := ""
+
+	for {
+		// Keep reading from the stream until we get a valid message
+		// or no more messages are available in the stream
+		d, err = c.conn.StreamReadRaw(c.stream)
+
+		if err == nil {
+			break
+		}
+
+		if err == STREAM_EMPTY {
+			return d, nil
+		}
+	}
+
+	return d, &QMQAckable{
+		conn:   c.conn,
+		stream: c.stream,
+	}
+}
