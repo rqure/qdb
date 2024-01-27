@@ -219,13 +219,8 @@ func (q *QMQConnection) StreamAddRaw(s *QMQStream, d string) error {
 
 func (q *QMQConnection) StreamRead(s *QMQStream, m protoreflect.ProtoMessage) error {
 	gResult, err := q.Get(s.ContextKey())
-	if err != nil {
-		return STREAM_CONTEXT_FAILED
-	}
-
-	err = gResult.Data.UnmarshalTo(&s.Context)
-	if err != nil {
-		return UNMARSHAL_FAILED
+	if err == nil {
+		gResult.Data.UnmarshalTo(&s.Context)
 	}
 
 	q.lock.Lock()
@@ -272,13 +267,8 @@ func (q *QMQConnection) StreamRead(s *QMQStream, m protoreflect.ProtoMessage) er
 
 func (q *QMQConnection) StreamReadRaw(s *QMQStream) (string, error) {
 	gResult, err := q.Get(s.ContextKey())
-	if err != nil {
-		return "", STREAM_CONTEXT_FAILED
-	}
-
-	err = gResult.Data.UnmarshalTo(&s.Context)
-	if err != nil {
-		return "", UNMARSHAL_FAILED
+	if err == nil {
+		gResult.Data.UnmarshalTo(&s.Context)
 	}
 
 	q.lock.Lock()
