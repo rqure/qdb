@@ -226,10 +226,9 @@ func (q *QMQConnection) StreamRead(s *QMQStream, m protoreflect.ProtoMessage) er
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
-	ctx, _ := context.WithTimeout(context.Background(), 188*time.Millisecond)
-	xResult, err := q.redis.XRead(ctx, &redis.XReadArgs{
+	xResult, err := q.redis.XRead(context.Background(), &redis.XReadArgs{
 		Streams: []string{s.Key(), s.Context.LastConsumedId},
-		Block:   0,
+		Block:   100,
 	}).Result()
 
 	if err != nil {
@@ -275,10 +274,9 @@ func (q *QMQConnection) StreamReadRaw(s *QMQStream) (string, error) {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
-	ctx, _ := context.WithTimeout(context.Background(), 188*time.Millisecond)
-	xResult, err := q.redis.XRead(ctx, &redis.XReadArgs{
+	xResult, err := q.redis.XRead(context.Background(), &redis.XReadArgs{
 		Streams: []string{s.Key(), s.Context.LastConsumedId},
-		Block:   0,
+		Block:   100,
 	}).Result()
 
 	if err != nil {
