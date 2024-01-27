@@ -228,7 +228,7 @@ func (q *QMQConnection) StreamRead(s *QMQStream, m protoreflect.ProtoMessage) er
 
 	xResult, err := q.redis.XRead(context.Background(), &redis.XReadArgs{
 		Streams: []string{s.Key(), s.Context.LastConsumedId},
-		Block:   100,
+		Block:   -1,
 	}).Result()
 
 	if err != nil {
@@ -276,7 +276,7 @@ func (q *QMQConnection) StreamReadRaw(s *QMQStream) (string, error) {
 
 	xResult, err := q.redis.XRead(context.Background(), &redis.XReadArgs{
 		Streams: []string{s.Key(), s.Context.LastConsumedId},
-		Block:   100,
+		Block:   -1,
 	}).Result()
 
 	if err != nil {
