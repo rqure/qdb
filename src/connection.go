@@ -245,8 +245,8 @@ func (q *QMQConnection) StreamRead(s *QMQStream, m protoreflect.ProtoMessage) er
 			decodedMessage := make(map[string]string)
 
 			for key, value := range message.Values {
-				if value_casted, ok := value.(string); ok {
-					decodedMessage[key] = value_casted
+				if castedValue, ok := value.(string); ok {
+					decodedMessage[key] = castedValue
 				} else {
 					return CAST_FAILED
 				}
