@@ -55,11 +55,6 @@ func (c *QMQConsumer) ResetLastId() {
 func (c *QMQConsumer) Pop(m protoreflect.ProtoMessage) *QMQAckable {
 	c.stream.Locker.Lock()
 
-	readRequest, err := c.conn.Get(c.stream.ContextKey())
-	if err == nil {
-		readRequest.Data.UnmarshalTo(&c.stream.Context)
-	}
-
 	for {
 		// Keep reading from the stream until we get a valid message
 		// or no more messages are available in the stream
@@ -83,13 +78,7 @@ func (c *QMQConsumer) Pop(m protoreflect.ProtoMessage) *QMQAckable {
 func (c *QMQConsumer) PopRaw() (string, *QMQAckable) {
 	c.stream.Locker.Lock()
 
-	readRequest, err := c.conn.Get(c.stream.ContextKey())
-	if err == nil {
-		readRequest.Data.UnmarshalTo(&c.stream.Context)
-	}
-
 	d := ""
-
 	for {
 		// Keep reading from the stream until we get a valid message
 		// or no more messages are available in the stream
