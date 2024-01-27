@@ -61,8 +61,9 @@ func (c *QMQConsumer) Pop(m protoreflect.ProtoMessage) *QMQAckable {
 			conn:   c.conn,
 			stream: c.stream,
 		}
-	} 
+	}
 
+	c.stream.Locker.Unlock()
 	return nil
 }
 
@@ -76,6 +77,7 @@ func (c *QMQConsumer) PopRaw() (string, *QMQAckable) {
 			stream: c.stream,
 		}
 	}
-	
+
+	c.stream.Locker.Unlock()
 	return "", nil
 }
