@@ -221,6 +221,9 @@ func (q *QMQConnection) StreamRead(s *QMQStream, m protoreflect.ProtoMessage) er
 	gResult, err := q.Get(s.ContextKey())
 	if err == nil {
 		gResult.Data.UnmarshalTo(&s.Context)
+	} else {
+		writeRequest := NewWriteRequest(s.Context)
+		q.Set(s.ContextKey(), writeRequest)
 	}
 
 	q.lock.Lock()
