@@ -269,6 +269,9 @@ func (q *QMQConnection) StreamReadRaw(s *QMQStream) (string, error) {
 	gResult, err := q.Get(s.ContextKey())
 	if err == nil {
 		gResult.Data.UnmarshalTo(&s.Context)
+	} else {
+		writeRequest := NewWriteRequest(s.Context)
+		q.Set(s.ContextKey(), writeRequest)
 	}
 
 	q.lock.Lock()
