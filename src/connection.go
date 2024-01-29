@@ -222,7 +222,7 @@ func (q *QMQConnection) StreamRead(s *QMQStream, m protoreflect.ProtoMessage) er
 	if err == nil {
 		gResult.Data.UnmarshalTo(&s.Context)
 	} else {
-		writeRequest := NewWriteRequest(s.Context)
+		writeRequest := NewWriteRequest(&s.Context)
 		q.Set(s.ContextKey(), writeRequest)
 	}
 
@@ -273,7 +273,7 @@ func (q *QMQConnection) StreamReadRaw(s *QMQStream) (string, error) {
 	if err == nil {
 		gResult.Data.UnmarshalTo(&s.Context)
 	} else {
-		writeRequest := NewWriteRequest(s.Context)
+		writeRequest := NewWriteRequest(&s.Context)
 		q.Set(s.ContextKey(), writeRequest)
 	}
 
