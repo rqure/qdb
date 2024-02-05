@@ -72,3 +72,7 @@ func (a *QMQApplication) AddConsumer(key string) *QMQConsumer {
 func (a* QMQApplication) Logger() *QMQLogger {
 	return a.logger;
 }
+
+func (a *QMQApplication) Db() *QMQConnection {
+	return a.conn;
+}
