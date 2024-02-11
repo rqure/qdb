@@ -55,57 +55,29 @@ func (c *QMQConsumer) ResetLastId() {
 func (c *QMQConsumer) Pop(m protoreflect.ProtoMessage) *QMQAckable {
 	c.stream.Locker.Lock()
 
-	readRequest, err := c.conn.Get(c.stream.ContextKey())
+	err := c.conn.StreamRead(c.stream, m)
 	if err == nil {
-		readRequest.Data.UnmarshalTo(&c.stream.Context)
-	}
-
-	for {
-		// Keep reading from the stream until we get a valid message
-		// or no more messages are available in the stream
-		err := c.conn.StreamRead(c.stream, m)
-
-		if err == nil {
-			break
-		}
-
-		if err == STREAM_EMPTY {
-			return nil
+		return &QMQAckable{
+			conn:   c.conn,
+			stream: c.stream,
 		}
 	}
 
-	return &QMQAckable{
-		conn:   c.conn,
-		stream: c.stream,
-	}
+	c.stream.Locker.Unlock()
+	return nil
 }
 
 func (c *QMQConsumer) PopRaw() (string, *QMQAckable) {
 	c.stream.Locker.Lock()
 
-	readRequest, err := c.conn.Get(c.stream.ContextKey())
+	d, err := c.conn.StreamReadRaw(c.stream)
 	if err == nil {
-		readRequest.Data.UnmarshalTo(&c.stream.Context)
-	}
-
-	d := ""
-
-	for {
-		// Keep reading from the stream until we get a valid message
-		// or no more messages are available in the stream
-		d, err = c.conn.StreamReadRaw(c.stream)
-
-		if err == nil {
-			break
-		}
-
-		if err == STREAM_EMPTY {
-			return d, nil
+		return d, &QMQAckable{
+			conn:   c.conn,
+			stream: c.stream,
 		}
 	}
 
-	return d, &QMQAckable{
-		conn:   c.conn,
-		stream: c.stream,
-	}
+	c.stream.Locker.Unlock()
+	return "", nil
 }

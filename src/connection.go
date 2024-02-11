@@ -269,13 +269,11 @@ func (q *QMQConnection) StreamAddRaw(s *QMQStream, d string) error {
 
 func (q *QMQConnection) StreamRead(s *QMQStream, m protoreflect.ProtoMessage) error {
 	gResult, err := q.Get(s.ContextKey())
-	if err != nil {
-		return STREAM_CONTEXT_FAILED
-	}
-
-	err = gResult.Data.UnmarshalTo(&s.Context)
-	if err != nil {
-		return UNMARSHAL_FAILED
+	if err == nil {
+		gResult.Data.UnmarshalTo(&s.Context)
+	} else {
+		writeRequest := NewWriteRequest(&s.Context)
+		q.Set(s.ContextKey(), writeRequest)
 	}
 
 	q.lock.Lock()
@@ -283,7 +281,7 @@ func (q *QMQConnection) StreamRead(s *QMQStream, m protoreflect.ProtoMessage) er
 
 	xResult, err := q.redis.XRead(context.Background(), &redis.XReadArgs{
 		Streams: []string{s.Key(), s.Context.LastConsumedId},
-		Block:   0,
+		Block:   -1,
 	}).Result()
 
 	if err != nil {
@@ -295,8 +293,8 @@ func (q *QMQConnection) StreamRead(s *QMQStream, m protoreflect.ProtoMessage) er
 			decodedMessage := make(map[string]string)
 
 			for key, value := range message.Values {
-				if value_casted, ok := value.(string); ok {
-					decodedMessage[key] = value_casted
+				if castedValue, ok := value.(string); ok {
+					decodedMessage[key] = castedValue
 				} else {
 					return CAST_FAILED
 				}
@@ -322,13 +320,11 @@ func (q *QMQConnection) StreamRead(s *QMQStream, m protoreflect.ProtoMessage) er
 
 func (q *QMQConnection) StreamReadRaw(s *QMQStream) (string, error) {
 	gResult, err := q.Get(s.ContextKey())
-	if err != nil {
-		return "", STREAM_CONTEXT_FAILED
-	}
-
-	err = gResult.Data.UnmarshalTo(&s.Context)
-	if err != nil {
-		return "", UNMARSHAL_FAILED
+	if err == nil {
+		gResult.Data.UnmarshalTo(&s.Context)
+	} else {
+		writeRequest := NewWriteRequest(&s.Context)
+		q.Set(s.ContextKey(), writeRequest)
 	}
 
 	q.lock.Lock()
@@ -336,7 +332,7 @@ func (q *QMQConnection) StreamReadRaw(s *QMQStream) (string, error) {
 
 	xResult, err := q.redis.XRead(context.Background(), &redis.XReadArgs{
 		Streams: []string{s.Key(), s.Context.LastConsumedId},
-		Block:   0,
+		Block:   -1,
 	}).Result()
 
 	if err != nil {
@@ -348,8 +344,8 @@ func (q *QMQConnection) StreamReadRaw(s *QMQStream) (string, error) {
 			decodedMessage := make(map[string]string)
 
 			for key, value := range message.Values {
-				if value_casted, ok := value.(string); ok {
-					decodedMessage[key] = value_casted
+				if castedValue, ok := value.(string); ok {
+					decodedMessage[key] = castedValue
 				} else {
 					return "", CAST_FAILED
 				}
