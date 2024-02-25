@@ -65,26 +65,11 @@ message QMQAudioRequest {
     string filename = 1;
 }
 
-enum QMQLightBulbStateEnum {
-    LIGHT_BULB_STATE_UNSPECIFIED = 0;
-    LIGHT_BULB_STATE_UNKNOWN = 1;
-    LIGHT_BULB_STATE_ON = 2;
-    LIGHT_BULB_STATE_OFF = 3;
-}
-
-message QMQLightBulb {
-    QMQLightBulbStateEnum current_state = 1;
-    QMQLightBulbStateEnum requested_state = 2;
-}
-
-enum QMQDoorLockStateEnum {
-    DOOR_LOCK_STATE_UNSPECIFIED = 0;
-    DOOR_LOCK_STATE_UNKNOWN = 1;
-    DOOR_LOCK_STATE_LOCKED = 2;
-    DOOR_LOCK_STATE_UNLOCKED = 3;
-}
-
-message QMQDoorLock {
-    QMQDoorLockStateEnum current_state = 1;
-    QMQDoorLockStateEnum requested_state = 2;
+message QMQMqttMessage {
+    uint32 id = 1;
+    int32 qos = 2;
+    string topic = 3;
+    bytes payload = 4;
+    bool retained = 5;
+    bool deplicate = 6;
 }
