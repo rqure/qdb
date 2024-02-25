@@ -71,5 +71,5 @@ message QMQMqttMessage {
     string topic = 3;
     bytes payload = 4;
     bool retained = 5;
-    bool deplicate = 6;
+    bool duplicate = 6;
 }
