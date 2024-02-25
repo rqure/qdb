@@ -66,10 +66,10 @@ message QMQAudioRequest {
 }
 
 message QMQMqttMessage {
-    uint16 id = 1;
-    int8 qos = 2;
+    uint32 id = 1;
+    int32 qos = 2;
     string topic = 3;
-    string payload = 4;
+    bytes payload = 4;
     bool retained = 5;
     bool deplicate = 6;
 }
