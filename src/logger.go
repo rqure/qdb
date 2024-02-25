@@ -1,20 +1,29 @@
 package qmq
 
 import (
+	"os"
 	"fmt"
 	"strings"
+	"strconv"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type QMQLogger struct {
 	appName  string
 	producer *QMQProducer
+	logLevel int
 }
 
 func NewQMQLogger(appName string, conn *QMQConnection) *QMQLogger {
+	logLevel, err := strconv.Atoi(os.Getenv("QMQ_LOG_LEVEL"))
+	if err != nil {
+		logLevel = 1
+	}
+	
 	return &QMQLogger{
 		appName:  appName,
 		producer: NewQMQProducer(appName+":logs", conn),
+		logLevel: logLevel,
 	}
 }
 
@@ -23,6 +32,10 @@ func (l *QMQLogger) Initialize(length int64) {
 }
 
 func (l *QMQLogger) Log(level QMQLogLevelEnum, message string) {
+	if int(level) < l.logLevel {
+		return
+	}
+	
 	logMsg := &QMQLog{
 		Level:       level,
 		Message:     message,
