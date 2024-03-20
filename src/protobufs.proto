@@ -73,3 +73,9 @@ message QMQMqttMessage {
     bool retained = 5;
     bool duplicate = 6;
 }
+
+enum QMQGarageDoorStateEnum {
+    GARAGE_DOOR_STATE_UNSPECIFIED = 0;
+    GARAGE_DOOR_STATE_OPEN = 1;
+    GARAGE_DOOR_STATE_CLOSED = 2;
+}
