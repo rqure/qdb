@@ -73,6 +73,8 @@ func (wsc *WebSocketClient) DoPendingReads() {
 			}
 
 			wsc.readCh <- data
+		} else if messageType == websocket.CloseMessage {
+			break
 		}
 	}
 
