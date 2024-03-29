@@ -79,3 +79,7 @@ enum QMQGarageDoorStateEnum {
     GARAGE_DOOR_STATE_OPEN = 1;
     GARAGE_DOOR_STATE_CLOSED = 2;
 }
+
+message QMQGarageDoorState {
+    QMQGarageDoorStateEnum value = 1;
+}
