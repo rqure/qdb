@@ -109,11 +109,11 @@ type WebServiceContext interface {
 }
 
 type WebServiceTickHandler interface {
-	onTick(c WebServiceContext)
+	OnTick(c WebServiceContext)
 }
 
 type WebServiceSetHandler interface {
-	onSet(c WebServiceContext, key string, value interface{})
+	OnSet(c WebServiceContext, key string, value interface{})
 }
 
 type WebService struct {
@@ -194,7 +194,7 @@ func (w *WebService) Tick() {
 	defer w.schemaMutex.Unlock()
 
 	for _, handler := range w.tickHandlers {
-		handler.onTick(w)
+		handler.OnTick(w)
 	}
 }
 
@@ -288,7 +288,7 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 							writeRequest := NewWriteRequest(field.Interface().(proto.Message))
 							w.app.Db().Set(key, writeRequest)
 							for _, handler := range w.setHandlers {
-								handler.onSet(w, key, value)
+								handler.OnSet(w, key, value)
 							}
 							w.schemaMutex.Unlock()
 
