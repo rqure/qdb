@@ -136,9 +136,6 @@ func NewWebService() *WebService {
 func (w *WebService) Initialize(schema interface{}) {
 	w.app.Initialize()
 
-	w.app.AddConsumer("garage:notifications:state").Initialize()
-	w.app.AddConsumer("garage:notifications:shelly:connected").Initialize()
-
 	// Serve static files from the "static" directory
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./web/css"))))
 	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("./web/img"))))
