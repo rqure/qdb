@@ -156,8 +156,8 @@ func (w *WebService) Initialize(schema interface{}) {
 
 	w.schemaMutex.Lock()
 	w.schema = schema
-	w.app.Db().GetSchema(&w.schema)
-	w.app.Db().SetSchema(&w.schema)
+	w.app.Db().GetSchema(w.schema)
+	w.app.Db().SetSchema(w.schema)
 	w.schemaMutex.Unlock()
 }
 
