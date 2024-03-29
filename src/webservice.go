@@ -238,8 +238,6 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 	for data := range client.ReadJSON() {
 		if cmd, ok := data["cmd"].(string); ok && cmd == "get" {
 			if key, ok := data["key"].(string); ok {
-				response := DataUpdateResponse{}
-
 				schemaWrapper := reflect.ValueOf(&w.schema).Elem()
 				schemaType := schemaWrapper.Type()
 
@@ -248,6 +246,7 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 					tag := schemaType.Field(i).Tag.Get("qmq")
 
 					if tag == key {
+						response := DataUpdateResponse{}
 						response.Data.Key = key
 						w.schemaMutex.Lock()
 						response.Data.Value = reflect.ValueOf(field.Interface()).FieldByName("Value").Interface()
