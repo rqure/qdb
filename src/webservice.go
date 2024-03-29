@@ -229,9 +229,9 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 		w.app.Logger().Error(fmt.Sprintf("Error upgrading to WebSocket: %v", err))
 		return
 	}
-	defer conn.Close()
 
 	client := w.addClient(conn)
+	defer w.removeClient(conn)
 
 	for data := range client.ReadJSON() {
 		if cmd, ok := data["cmd"].(string); ok && cmd == "get" {
@@ -307,8 +307,6 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 			w.app.Logger().Error("Invalid WebSocket command")
 		}
 	}
-
-	w.removeClient(conn)
 }
 
 func (w *WebService) addClient(conn *websocket.Conn) *WebSocketClient {
