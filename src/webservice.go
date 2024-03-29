@@ -260,7 +260,23 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 					}
 				}
 			} else {
-				w.app.Logger().Error("Invalid 'get' command: missing 'key'")
+				schemaWrapper := reflect.ValueOf(&w.schema).Elem()
+				schemaType := schemaWrapper.Type()
+
+				for i := 0; i < schemaWrapper.NumField(); i++ {
+					field := schemaWrapper.Field(i)
+					tag := schemaType.Field(i).Tag.Get("qmq")
+
+					response := DataUpdateResponse{}
+					response.Data.Key = tag
+					w.schemaMutex.Lock()
+					response.Data.Value = reflect.ValueOf(field.Interface()).FieldByName("Value").Interface()
+					w.schemaMutex.Unlock()
+
+					if err := conn.WriteJSON(response); err != nil {
+						w.app.Logger().Error(fmt.Sprintf("Error sending WebSocket message: %v", err))
+					}
+				}
 			}
 		} else if cmd, ok := data["cmd"].(string); ok && cmd == "set" {
 			if key, ok := data["key"].(string); ok {
