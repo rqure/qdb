@@ -72,6 +72,8 @@ func (wsc *WebSocketClient) DoPendingReads() {
 				continue
 			}
 
+			wsc.app.Logger().Trace(fmt.Sprintf("Received WebSocket message: %v", data))
+
 			wsc.readCh <- data
 		} else if messageType == websocket.CloseMessage {
 			break
@@ -88,9 +90,13 @@ func (wsc *WebSocketClient) DoPendingWrites() {
 
 	for v := range wsc.writeCh {
 		wsc.connMutex.Lock()
+		
+		wsc.app.Logger().Trace(fmt.Sprintf("Sending WebSocket message: %v", v))
+		
 		if err := wsc.conn.WriteJSON(v); err != nil {
 			wsc.app.Logger().Error(fmt.Sprintf("Error sending WebSocket message: %v", err))
 		}
+		
 		wsc.connMutex.Unlock()
 	}
 }
