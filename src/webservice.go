@@ -30,8 +30,8 @@ func NewWebSocketClient(conn *websocket.Conn, app *QMQApplication, onClose func(
 
 	wsc := &WebSocketClient{
 		clientId: newClientId,
-		readCh:   make(chan map[string]interface{}, 1),
-		writeCh:  make(chan interface{}, 1),
+		readCh:   make(chan map[string]interface{}),
+		writeCh:  make(chan interface{}),
 		conn:     conn,
 		app:      app,
 		onClose:  onClose,
@@ -50,6 +50,7 @@ func (wsc *WebSocketClient) ReadJSON() chan map[string]interface{} {
 }
 
 func (wsc *WebSocketClient) WriteJSON(v interface{}) {
+	wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] queued new message", wsc.clientId))
 	wsc.writeCh <- v
 }
 
@@ -190,7 +191,7 @@ func (w *WebService) NotifyClients(data interface{}) {
 	w.clientsMutex.Lock()
 	defer w.clientsMutex.Unlock()
 	for clientId := range w.clients {
-		go w.clients[clientId].WriteJSON(data)
+		w.clients[clientId].WriteJSON(data)
 	}
 }
 
@@ -211,6 +212,8 @@ func (w *WebService) AddSetHandler(handler WebServiceSetHandler) {
 }
 
 func (w *WebService) Tick() {
+	w.app.Logger().Trace("WebService tick")
+
 	w.schemaMutex.Lock()
 	defer w.schemaMutex.Unlock()
 
@@ -273,7 +276,7 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 						response.Data.Value = reflect.ValueOf(field.Interface()).FieldByName("Value").Interface()
 						w.schemaMutex.Unlock()
 
-						go client.WriteJSON(response)
+						client.WriteJSON(response)
 
 						break
 					}
@@ -292,7 +295,7 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 					response.Data.Value = reflect.ValueOf(field.Interface()).FieldByName("Value").Interface()
 					w.schemaMutex.Unlock()
 
-					go client.WriteJSON(response)
+					client.WriteJSON(response)
 				}
 			}
 		} else if cmd, ok := data["cmd"].(string); ok && cmd == "set" {
@@ -349,8 +352,8 @@ func (w *WebService) addClient(conn *websocket.Conn) *WebSocketClient {
 
 	onClientDisconnect := func(clientId uint64) {
 		w.clientsMutex.Lock()
-		defer w.clientsMutex.Unlock()
 		delete(w.clients, clientId)
+		w.clientsMutex.Unlock()
 	}
 
 	client := NewWebSocketClient(conn, w.app, onClientDisconnect)
