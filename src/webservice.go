@@ -47,7 +47,7 @@ func (wsc *WebSocketClient) Close() {
 
 	wsc.wg.Wait()
 
-	wsc.app.Logger().Trace(fmt.Sprintf("WebSocket '%v' closed successfully", conn))
+	wsc.app.Logger().Trace(fmt.Sprintf("WebSocket '%v' closed successfully", wsc.conn))
 }
 
 func (wsc *WebSocketClient) DoPendingReads() {
