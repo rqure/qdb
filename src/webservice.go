@@ -252,7 +252,7 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 						response.Data.Value = reflect.ValueOf(field.Interface()).FieldByName("Value").Interface()
 						w.schemaMutex.Unlock()
 
-						if err := conn.WriteJSON(response); err != nil {
+						if err := client.WriteJSON(response); err != nil {
 							w.app.Logger().Error(fmt.Sprintf("Error sending WebSocket message: %v", err))
 						}
 
@@ -273,7 +273,7 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 					response.Data.Value = reflect.ValueOf(field.Interface()).FieldByName("Value").Interface()
 					w.schemaMutex.Unlock()
 
-					if err := conn.WriteJSON(response); err != nil {
+					if err := client.WriteJSON(response); err != nil {
 						w.app.Logger().Error(fmt.Sprintf("Error sending WebSocket message: %v", err))
 					}
 				}
