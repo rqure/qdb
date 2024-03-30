@@ -74,6 +74,9 @@ func (wsc *WebSocketClient) DoPendingReads() {
 	wsc.wg.Add(1)
 	defer wsc.wg.Done()
 
+	wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] is listening for pending reads", wsc.clientId))
+	defer wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] is no longer listening for pending reads", wsc.clientId))
+
 	for {
 		messageType, p, err := wsc.conn.ReadMessage()
 
@@ -101,6 +104,9 @@ func (wsc *WebSocketClient) DoPendingReads() {
 func (wsc *WebSocketClient) DoPendingWrites() {
 	wsc.wg.Add(1)
 	defer wsc.wg.Done()
+
+	wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] is listening for pending writes", wsc.clientId))
+	defer wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] is no longer listening for pending writes", wsc.clientId))
 
 	for v := range wsc.writeCh {
 		wsc.app.Logger().Trace(fmt.Sprintf("Sending WebSocket [%d] message: %v", wsc.clientId, v))
@@ -184,7 +190,7 @@ func (w *WebService) NotifyClients(data interface{}) {
 	w.clientsMutex.Lock()
 	defer w.clientsMutex.Unlock()
 	for clientId := range w.clients {
-		w.clients[clientId].WriteJSON(data)
+		go w.clients[clientId].WriteJSON(data)
 	}
 }
 
@@ -267,7 +273,7 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 						response.Data.Value = reflect.ValueOf(field.Interface()).FieldByName("Value").Interface()
 						w.schemaMutex.Unlock()
 
-						client.WriteJSON(response)
+						go client.WriteJSON(response)
 
 						break
 					}
@@ -286,7 +292,7 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 					response.Data.Value = reflect.ValueOf(field.Interface()).FieldByName("Value").Interface()
 					w.schemaMutex.Unlock()
 
-					client.WriteJSON(response)
+					go client.WriteJSON(response)
 				}
 			}
 		} else if cmd, ok := data["cmd"].(string); ok && cmd == "set" {
