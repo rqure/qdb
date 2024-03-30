@@ -183,8 +183,8 @@ func (w *WebService) Deinitialize() {
 func (w *WebService) NotifyClients(data interface{}) {
 	w.clientsMutex.Lock()
 	defer w.clientsMutex.Unlock()
-	for conn := range w.clients {
-		w.clients[conn].WriteJSON(data)
+	for clientId := range w.clients {
+		w.clients[clientId].WriteJSON(data)
 	}
 }
 
