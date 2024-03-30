@@ -82,18 +82,18 @@ func (wsc *WebSocketClient) DoPendingReads() {
 		messageType, p, err := wsc.conn.ReadMessage()
 
 		if err != nil {
-			wsc.app.Logger().Error(fmt.Sprintf("Error reading WebSocket [%d] message: %v", wsc.clientId, err))
+			wsc.app.Logger().Error(fmt.Sprintf("WebSocket [%d] error reading message: %v", wsc.clientId, err))
 			break
 		}
 
 		if messageType == websocket.TextMessage {
 			var data map[string]interface{}
 			if err := json.Unmarshal(p, &data); err != nil {
-				wsc.app.Logger().Error(fmt.Sprintf("Error decoding WebSocket [%d] message: %v", wsc.clientId, err))
+				wsc.app.Logger().Error(fmt.Sprintf("WebSocket [%d] error decoding message: %v", wsc.clientId, err))
 				continue
 			}
 
-			wsc.app.Logger().Trace(fmt.Sprintf("Received WebSocket [%d] message: %v", wsc.clientId, data))
+			wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] received message: %v", wsc.clientId, data))
 
 			wsc.readCh <- data
 		} else if messageType == websocket.CloseMessage {
@@ -110,10 +110,10 @@ func (wsc *WebSocketClient) DoPendingWrites() {
 	defer wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] is no longer listening for pending writes", wsc.clientId))
 
 	for v := range wsc.writeCh {
-		wsc.app.Logger().Trace(fmt.Sprintf("Sending WebSocket [%d] message: %v", wsc.clientId, v))
+		wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] sending message: %v", wsc.clientId, v))
 
 		if err := wsc.conn.WriteJSON(v); err != nil {
-			wsc.app.Logger().Error(fmt.Sprintf("Error sending WebSocket [%d] message: %v", wsc.clientId, err))
+			wsc.app.Logger().Error(fmt.Sprintf("WebSocket [%d] error sending message: %v", wsc.clientId, err))
 		}
 	}
 }
