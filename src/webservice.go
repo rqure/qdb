@@ -16,7 +16,6 @@ type WebSocketClient struct {
 	readCh    chan map[string]interface{}
 	writeCh   chan interface{}
 	conn      *websocket.Conn
-	connMutex sync.Mutex
 	app       *QMQApplication
 	wg        sync.WaitGroup
 }
@@ -44,11 +43,11 @@ func (wsc *WebSocketClient) WriteJSON(v interface{}) {
 }
 
 func (wsc *WebSocketClient) Close() {
-	wsc.connMutex.Lock()
 	wsc.conn.Close()
-	wsc.connMutex.Unlock()
 
 	wsc.wg.Wait()
+
+	wsc.app.Logger().Trace(fmt.Sprintf("WebSocket '%v' closed successfully", conn))
 }
 
 func (wsc *WebSocketClient) DoPendingReads() {
@@ -56,9 +55,7 @@ func (wsc *WebSocketClient) DoPendingReads() {
 	defer wsc.wg.Done()
 
 	for {
-		wsc.connMutex.Lock()
 		messageType, p, err := wsc.conn.ReadMessage()
-		wsc.connMutex.Unlock()
 
 		if err != nil {
 			wsc.app.Logger().Error(fmt.Sprintf("Error reading WebSocket message: %v", err))
@@ -89,15 +86,11 @@ func (wsc *WebSocketClient) DoPendingWrites() {
 	defer wsc.wg.Done()
 
 	for v := range wsc.writeCh {
-		wsc.connMutex.Lock()
-		
 		wsc.app.Logger().Trace(fmt.Sprintf("Sending WebSocket message: %v", v))
 		
 		if err := wsc.conn.WriteJSON(v); err != nil {
 			wsc.app.Logger().Error(fmt.Sprintf("Error sending WebSocket message: %v", err))
 		}
-		
-		wsc.connMutex.Unlock()
 	}
 }
 
