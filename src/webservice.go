@@ -26,10 +26,10 @@ type WebSocketClient struct {
 }
 
 func NewWebSocketClient(conn *websocket.Conn, app *QMQApplication, onClose func(uint64)) *WebSocketClient {
-	atomic.AddUint64(&webSocketClientIdCounter, 1)
+	newClientId := atomic.AddUint64(&webSocketClientIdCounter, 1)
 
 	wsc := &WebSocketClient{
-		clientId: webSocketClientIdCounter,
+		clientId: newClientId,
 		readCh:   make(chan map[string]interface{}, 1),
 		writeCh:  make(chan interface{}, 1),
 		conn:     conn,
