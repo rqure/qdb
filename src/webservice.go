@@ -258,9 +258,7 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 						response.Data.Value = reflect.ValueOf(field.Interface()).FieldByName("Value").Interface()
 						w.schemaMutex.Unlock()
 
-						if err := client.WriteJSON(response); err != nil {
-							w.app.Logger().Error(fmt.Sprintf("Error sending WebSocket message: %v", err))
-						}
+						client.WriteJSON(response)
 
 						break
 					}
@@ -279,9 +277,7 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 					response.Data.Value = reflect.ValueOf(field.Interface()).FieldByName("Value").Interface()
 					w.schemaMutex.Unlock()
 
-					if err := client.WriteJSON(response); err != nil {
-						w.app.Logger().Error(fmt.Sprintf("Error sending WebSocket message: %v", err))
-					}
+					client.WriteJSON(response)
 				}
 			}
 		} else if cmd, ok := data["cmd"].(string); ok && cmd == "set" {
