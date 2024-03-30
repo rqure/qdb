@@ -7,26 +7,37 @@ import (
 	"os"
 	"reflect"
 	"sync"
+	"sync/atomic"
 
 	"github.com/gorilla/websocket"
 	"google.golang.org/protobuf/proto"
 )
 
+var webSocketClientIdCounter uint64
+
 type WebSocketClient struct {
-	readCh    chan map[string]interface{}
-	writeCh   chan interface{}
-	conn      *websocket.Conn
-	app       *QMQApplication
-	wg        sync.WaitGroup
+	clientId uint64
+	readCh   chan map[string]interface{}
+	writeCh  chan interface{}
+	conn     *websocket.Conn
+	app      *QMQApplication
+	wg       sync.WaitGroup
+	onClose  func(uint64)
 }
 
-func NewWebSocketClient(conn *websocket.Conn, app *QMQApplication) *WebSocketClient {
+func NewWebSocketClient(conn *websocket.Conn, app *QMQApplication, onClose func(uint64)) *WebSocketClient {
+	atomic.AddUint64(&webSocketClientIdCounter, 1)
+
 	wsc := &WebSocketClient{
-		readCh:  make(chan map[string]interface{}, 1),
-		writeCh: make(chan interface{}, 1),
-		conn:    conn,
-		app:     app,
+		clientId: webSocketClientIdCounter,
+		readCh:   make(chan map[string]interface{}, 1),
+		writeCh:  make(chan interface{}, 1),
+		conn:     conn,
+		app:      app,
+		onClose:  onClose,
 	}
+
+	app.Logger().Trace(fmt.Sprintf("WebSocket [%d] connected", wsc.clientId))
 
 	go wsc.DoPendingWrites()
 	go wsc.DoPendingReads()
@@ -47,7 +58,11 @@ func (wsc *WebSocketClient) Close() {
 
 	wsc.wg.Wait()
 
-	wsc.app.Logger().Trace(fmt.Sprintf("WebSocket '%v' closed successfully", wsc.conn))
+	if wsc.onClose != nil {
+		wsc.onClose(wsc.clientId)
+	}
+
+	wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] disconnected", wsc.clientId))
 }
 
 func (wsc *WebSocketClient) DoPendingReads() {
@@ -58,18 +73,18 @@ func (wsc *WebSocketClient) DoPendingReads() {
 		messageType, p, err := wsc.conn.ReadMessage()
 
 		if err != nil {
-			wsc.app.Logger().Error(fmt.Sprintf("Error reading WebSocket message: %v", err))
+			wsc.app.Logger().Error(fmt.Sprintf("Error reading WebSocket [%d] message: %v", wsc.clientId, err))
 			break
 		}
 
 		if messageType == websocket.TextMessage {
 			var data map[string]interface{}
 			if err := json.Unmarshal(p, &data); err != nil {
-				wsc.app.Logger().Error(fmt.Sprintf("Error decoding WebSocket message: %v", err))
+				wsc.app.Logger().Error(fmt.Sprintf("Error decoding WebSocket [%d] message: %v", wsc.clientId, err))
 				continue
 			}
 
-			wsc.app.Logger().Trace(fmt.Sprintf("Received WebSocket message: %v", data))
+			wsc.app.Logger().Trace(fmt.Sprintf("Received WebSocket [%d] message: %v", wsc.clientId, data))
 
 			wsc.readCh <- data
 		} else if messageType == websocket.CloseMessage {
@@ -86,10 +101,10 @@ func (wsc *WebSocketClient) DoPendingWrites() {
 	defer wsc.wg.Done()
 
 	for v := range wsc.writeCh {
-		wsc.app.Logger().Trace(fmt.Sprintf("Sending WebSocket message: %v", v))
-		
+		wsc.app.Logger().Trace(fmt.Sprintf("Sending WebSocket [%d] message: %v", wsc.clientId, v))
+
 		if err := wsc.conn.WriteJSON(v); err != nil {
-			wsc.app.Logger().Error(fmt.Sprintf("Error sending WebSocket message: %v", err))
+			wsc.app.Logger().Error(fmt.Sprintf("Error sending WebSocket [%d] message: %v", wsc.clientId, err))
 		}
 	}
 }
@@ -118,7 +133,7 @@ type WebServiceSetHandler interface {
 }
 
 type WebService struct {
-	clients      map[*websocket.Conn]*WebSocketClient
+	clients      map[uint64]*WebSocketClient
 	clientsMutex sync.Mutex
 	app          *QMQApplication
 	schema       interface{}
@@ -129,7 +144,7 @@ type WebService struct {
 
 func NewWebService() *WebService {
 	return &WebService{
-		clients: make(map[*websocket.Conn]*WebSocketClient),
+		clients: make(map[uint64]*WebSocketClient),
 		app:     NewQMQApplication("garage"),
 	}
 }
@@ -232,7 +247,6 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 	}
 
 	client := w.addClient(conn)
-	defer w.removeClient(conn)
 
 	for data := range client.ReadJSON() {
 		if cmd, ok := data["cmd"].(string); ok && cmd == "get" {
@@ -324,13 +338,15 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 func (w *WebService) addClient(conn *websocket.Conn) *WebSocketClient {
 	w.clientsMutex.Lock()
 	defer w.clientsMutex.Unlock()
-	w.clients[conn] = NewWebSocketClient(conn, w.app)
-	return w.clients[conn]
-}
 
-func (w *WebService) removeClient(conn *websocket.Conn) {
-	w.clientsMutex.Lock()
-	defer w.clientsMutex.Unlock()
-	w.clients[conn].Close()
-	delete(w.clients, conn)
+	onClientDisconnect := func(clientId uint64) {
+		w.clientsMutex.Lock()
+		defer w.clientsMutex.Unlock()
+		delete(w.clients, clientId)
+	}
+
+	client := NewWebSocketClient(conn, w.app, onClientDisconnect)
+	w.clients[client.clientId] = client
+
+	return client
 }
