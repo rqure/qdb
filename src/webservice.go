@@ -54,6 +54,9 @@ func (wsc *WebSocketClient) WriteJSON(v interface{}) {
 }
 
 func (wsc *WebSocketClient) Close() {
+	close(wsc.writeCh)
+	close(wsc.readCh)
+
 	wsc.conn.Close()
 
 	wsc.wg.Wait()
@@ -66,6 +69,8 @@ func (wsc *WebSocketClient) Close() {
 }
 
 func (wsc *WebSocketClient) DoPendingReads() {
+	defer wsc.Close()
+
 	wsc.wg.Add(1)
 	defer wsc.wg.Done()
 
@@ -91,9 +96,6 @@ func (wsc *WebSocketClient) DoPendingReads() {
 			break
 		}
 	}
-
-	close(wsc.writeCh)
-	close(wsc.readCh)
 }
 
 func (wsc *WebSocketClient) DoPendingWrites() {
