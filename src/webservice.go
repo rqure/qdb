@@ -212,8 +212,6 @@ func (w *WebService) AddSetHandler(handler WebServiceSetHandler) {
 }
 
 func (w *WebService) Tick() {
-	w.app.Logger().Trace("WebService tick")
-
 	w.schemaMutex.Lock()
 	defer w.schemaMutex.Unlock()
 
@@ -262,7 +260,7 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 	for data := range client.ReadJSON() {
 		if cmd, ok := data["cmd"].(string); ok && cmd == "get" {
 			if key, ok := data["key"].(string); ok {
-				schemaWrapper := reflect.ValueOf(&w.schema).Elem()
+				schemaWrapper := reflect.ValueOf(w.schema).Elem()
 				schemaType := schemaWrapper.Type()
 
 				for i := 0; i < schemaWrapper.NumField(); i++ {
@@ -282,7 +280,7 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 					}
 				}
 			} else {
-				schemaWrapper := reflect.ValueOf(&w.schema).Elem()
+				schemaWrapper := reflect.ValueOf(w.schema).Elem()
 				schemaType := schemaWrapper.Type()
 
 				for i := 0; i < schemaWrapper.NumField(); i++ {
@@ -303,7 +301,7 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 				if value, ok := data["value"]; ok {
 					response := DataUpdateResponse{}
 
-					schemaWrapper := reflect.ValueOf(&w.schema).Elem()
+					schemaWrapper := reflect.ValueOf(w.schema).Elem()
 					schemaType := schemaWrapper.Type()
 
 					for i := 0; i < schemaWrapper.NumField(); i++ {
