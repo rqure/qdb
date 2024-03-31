@@ -4,13 +4,17 @@ import (
 	"crypto/rand"
 	"encoding/base64"
 	mrand "math/rand"
+	"sync"
+	"sync/atomic"
 	"time"
 )
 
 type QMQLocker struct {
-	id    string
-	token string
-	conn  *QMQConnection
+	id       string
+	token    string
+	conn     *QMQConnection
+	mutex    sync.Mutex
+	isLocked atomic.Bool
 }
 
 func NewQMQLocker(id string, conn *QMQConnection) *QMQLocker {
@@ -41,19 +45,25 @@ func (l *QMQLocker) TryLockWithTimeout(timeoutMs int64) bool {
 }
 
 func (l *QMQLocker) TryLock() bool {
-	return l.TryLockWithTimeout(30000)
+	return l.TryLockWithTimeout(10000)
 }
 
 func (l *QMQLocker) Lock() {
+	l.mutex.Lock()
 	for !l.TryLock() {
 		time.Sleep(time.Duration(mrand.Intn(95)+5) * time.Millisecond)
 	}
+
+	l.isLocked.Store(true)
 }
 
 func (l *QMQLocker) LockWithTimeout(timeoutMs int64) {
+	l.mutex.Lock()
 	for !l.TryLockWithTimeout(timeoutMs) {
 		time.Sleep(time.Duration(mrand.Intn(95)+5) * time.Millisecond)
 	}
+
+	l.isLocked.Store(true)
 }
 
 func (l *QMQLocker) Unlock() {
@@ -73,4 +83,13 @@ func (l *QMQLocker) Unlock() {
 	}
 
 	l.conn.Unset(l.id)
+
+	if l.isLocked.Load() {
+		l.isLocked.Store(false)
+		l.mutex.Unlock()
+	}
+}
+
+func (l *QMQLocker) IsLocked() bool {
+	return l.isLocked.Load()
 }
