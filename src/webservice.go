@@ -283,6 +283,8 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 				schemaWrapper := reflect.ValueOf(w.schema).Elem()
 				schemaType := schemaWrapper.Type()
 
+				w.app.Logger().Trace(fmt.Sprintf("NumFields: %d", schemaWrapper.NumField()))
+
 				for i := 0; i < schemaWrapper.NumField(); i++ {
 					field := schemaWrapper.Field(i)
 					tag := schemaType.Field(i).Tag.Get("qmq")

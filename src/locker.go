@@ -3,6 +3,7 @@ package qmq
 import (
 	"crypto/rand"
 	"encoding/base64"
+	mrand "math/rand"
 	"time"
 )
 
@@ -45,13 +46,13 @@ func (l *QMQLocker) TryLock() bool {
 
 func (l *QMQLocker) Lock() {
 	for !l.TryLock() {
-		time.Sleep(100 * time.Millisecond)
+		time.Sleep(time.Duration(mrand.Intn(95)+5) * time.Millisecond)
 	}
 }
 
 func (l *QMQLocker) LockWithTimeout(timeoutMs int64) {
 	for !l.TryLockWithTimeout(timeoutMs) {
-		time.Sleep(100 * time.Millisecond)
+		time.Sleep(time.Duration(mrand.Intn(95)+5) * time.Millisecond)
 	}
 }
 
