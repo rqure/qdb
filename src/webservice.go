@@ -317,20 +317,29 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 								break
 							}
 
+							w.app.Logger().Trace("1")
+
 							w.schemaMutex.Lock()
+							w.app.Logger().Trace("2")
 							fieldValue.FieldByName("Value").Set(reflect.ValueOf(value))
+							w.schemaMutex.Unlock()
+							w.app.Logger().Trace("3")
 							writeRequest := NewWriteRequest(field.Interface().(proto.Message))
+							w.app.Logger().Trace("4")
 							w.app.Db().Set(key, writeRequest)
+							w.app.Logger().Trace("5")
 							for _, handler := range w.setHandlers {
 								handler.OnSet(w, key, value)
 							}
-							w.schemaMutex.Unlock()
+							w.app.Logger().Trace("6")
 
 							response.Data.Key = key
 							response.Data.Value = value
 
+							w.app.Logger().Trace("7")
 							w.NotifyClients(response)
 
+							w.app.Logger().Trace("8")
 							break
 						}
 					}
