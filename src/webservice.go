@@ -267,11 +267,16 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 					field := schemaWrapper.Field(i)
 					tag := schemaType.Field(i).Tag.Get("qmq")
 
+					if reflect.ValueOf(field.Interface()).Kind() != reflect.Ptr {
+						w.app.Logger().Warn(fmt.Sprintf("Field '%s' should be a pointer (please update the schema)", tag))
+						continue
+					}
+					
 					if tag == key {
 						response := DataUpdateResponse{}
 						response.Data.Key = key
 						w.schemaMutex.Lock()
-						response.Data.Value = reflect.ValueOf(field.Interface()).FieldByName("Value").Interface()
+						response.Data.Value = reflect.Indirect(reflect.ValueOf(field.Interface())).FieldByName("Value").Interface()
 						w.schemaMutex.Unlock()
 
 						client.WriteJSON(response)
@@ -284,19 +289,18 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 				schemaType := schemaWrapper.Type()
 
 				for i := 0; i < schemaWrapper.NumField(); i++ {
+					if reflect.ValueOf(field.Interface()).Kind() != reflect.Ptr {
+						w.app.Logger().Warn(fmt.Sprintf("Field '%s' should be a pointer (please update the schema)", tag))
+						continue
+					}
+					
 					field := schemaWrapper.Field(i)
 					tag := schemaType.Field(i).Tag.Get("qmq")
-
-					w.app.Logger().Trace(fmt.Sprintf("Field: %s", tag))
 
 					response := DataUpdateResponse{}
 					response.Data.Key = tag
 					w.schemaMutex.Lock()
-					if reflect.ValueOf(field.Interface()).Kind() == reflect.Ptr {
-						response.Data.Value = reflect.Indirect(reflect.ValueOf(field.Interface())).FieldByName("Value").Interface()
-					} else {
-						response.Data.Value = reflect.ValueOf(field.Interface()).FieldByName("Value").Interface()
-					}
+					response.Data.Value = reflect.Indirect(reflect.ValueOf(field.Interface())).FieldByName("Value").Interface()
 					w.schemaMutex.Unlock()
 
 					client.WriteJSON(response)
@@ -314,15 +318,21 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 						field := schemaWrapper.Field(i)
 						tag := schemaType.Field(i).Tag.Get("qmq")
 
+						if reflect.ValueOf(field.Interface()).Kind() != reflect.Ptr {
+							w.app.Logger().Warn(fmt.Sprintf("Field '%s' should be a pointer (please update the schema)", tag))
+							continue
+						}
+						
 						if tag == key {
-							fieldValue := reflect.ValueOf(field.Interface())
+							fieldValue := reflect.Indirect(reflect.ValueOf(field.Interface())).FieldByName("Value")
 							if fieldValue.Kind() != reflect.ValueOf(value).Kind() {
 								w.app.Logger().Error("Invalid 'set' command: value type mismatch")
 								break
 							}
 
 							w.schemaMutex.Lock()
-							fieldValue.FieldByName("Value").Set(reflect.ValueOf(value))
+							fieldValue.Set(reflect.ValueOf(value))
+							w.schemaMutex.Unlock()
 							writeRequest := NewWriteRequest(field.Interface().(proto.Message))
 							w.app.Db().Set(key, writeRequest)
 							for _, handler := range w.setHandlers {
