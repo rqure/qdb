@@ -288,15 +288,15 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 				schemaWrapper := reflect.ValueOf(w.schema).Elem()
 				schemaType := schemaWrapper.Type()
 
-				for i := 0; i < schemaWrapper.NumField(); i++ {
+				for i := 0; i < schemaWrapper.NumField(); i++ {					
+					field := schemaWrapper.Field(i)
+					tag := schemaType.Field(i).Tag.Get("qmq")
+
 					if reflect.ValueOf(field.Interface()).Kind() != reflect.Ptr {
 						w.app.Logger().Warn(fmt.Sprintf("Field '%s' should be a pointer (please update the schema)", tag))
 						continue
 					}
 					
-					field := schemaWrapper.Field(i)
-					tag := schemaType.Field(i).Tag.Get("qmq")
-
 					response := DataUpdateResponse{}
 					response.Data.Key = tag
 					w.schemaMutex.Lock()
