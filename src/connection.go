@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
-	"reflect"
 	"sync"
 	"time"
 
@@ -177,53 +176,23 @@ func (q *QMQConnection) Get(k string) (*QMQData, error) {
 	return result, nil
 }
 
-func (q *QMQConnection) GetSchema(schema interface{}) {
-	schemaWrapper := reflect.ValueOf(schema).Elem()
-	schemaType := schemaWrapper.Type()
-
-	for i := 0; i < schemaWrapper.NumField(); i++ {
-		field := schemaWrapper.Field(i)
-
-		tag := schemaType.Field(i).Tag.Get("qmq")
-		if tag == "" {
-			continue
-		}
-
-		readRequest, err := q.Get(tag)
-		if err != nil {
-			continue
-		}
-
-		fieldType := field.Type()
-		if fieldType.Kind() == reflect.Ptr {
-			fieldType = fieldType.Elem()
-		}
-
-		fieldValue := reflect.New(fieldType).Interface()
-		err = readRequest.Data.UnmarshalTo(fieldValue.(proto.Message))
-		if err != nil {
-			continue
-		}
-
-		field.Set(reflect.ValueOf(fieldValue))
+func (q *QMQConnection) GetValue(k string, v proto.Message) error {
+	readRequest, err := q.Get(k)
+	if err != nil {
+		return err
 	}
+
+	err = readRequest.Data.UnmarshalTo(v)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
-func (q *QMQConnection) SetSchema(schema interface{}) {
-	schemaWrapper := reflect.ValueOf(schema).Elem()
-	schemaType := schemaWrapper.Type()
-
-	for i := 0; i < schemaWrapper.NumField(); i++ {
-		field := schemaWrapper.Field(i)
-
-		tag := schemaType.Field(i).Tag.Get("qmq")
-		if tag == "" {
-			continue
-		}
-
-		writeRequest := NewWriteRequest(field.Interface().(proto.Message))
-		q.Set(tag, writeRequest)
-	}
+func (q *QMQConnection) SetValue(k string, v proto.Message) error {
+	writeRequest := NewWriteRequest(v)
+	return q.Set(k, writeRequest)
 }
 
 func (q *QMQConnection) StreamAdd(s *QMQStream, m proto.Message) error {

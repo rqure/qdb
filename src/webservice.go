@@ -1,7 +1,6 @@
 package qmq
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"os"
@@ -10,6 +9,7 @@ import (
 	"sync/atomic"
 
 	"github.com/gorilla/websocket"
+	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -17,8 +17,8 @@ var webSocketClientIdCounter uint64
 
 type WebSocketClient struct {
 	clientId uint64
-	readCh   chan map[string]interface{}
-	writeCh  chan interface{}
+	readCh   chan proto.Message
+	writeCh  chan proto.Message
 	conn     *websocket.Conn
 	app      *QMQApplication
 	wg       sync.WaitGroup
@@ -30,8 +30,8 @@ func NewWebSocketClient(conn *websocket.Conn, app *QMQApplication, onClose func(
 
 	wsc := &WebSocketClient{
 		clientId: newClientId,
-		readCh:   make(chan map[string]interface{}),
-		writeCh:  make(chan interface{}),
+		readCh:   make(chan proto.Message),
+		writeCh:  make(chan proto.Message),
 		conn:     conn,
 		app:      app,
 		onClose:  onClose,
@@ -45,12 +45,11 @@ func NewWebSocketClient(conn *websocket.Conn, app *QMQApplication, onClose func(
 	return wsc
 }
 
-func (wsc *WebSocketClient) ReadJSON() chan map[string]interface{} {
+func (wsc *WebSocketClient) Read() chan proto.Message {
 	return wsc.readCh
 }
 
-func (wsc *WebSocketClient) WriteJSON(v interface{}) {
-	wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] queued new message", wsc.clientId))
+func (wsc *WebSocketClient) Write(v proto.Message) {
 	wsc.writeCh <- v
 }
 
@@ -87,15 +86,21 @@ func (wsc *WebSocketClient) DoPendingReads() {
 		}
 
 		if messageType == websocket.TextMessage {
-			var data map[string]interface{}
-			if err := json.Unmarshal(p, &data); err != nil {
-				wsc.app.Logger().Error(fmt.Sprintf("WebSocket [%d] error decoding message: %v", wsc.clientId, err))
+			var request proto.Message = new(QMQWebServiceGetRequest)
+			if err := protojson.Unmarshal(p, request); err == nil {
+				wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] received get message: %v", wsc.clientId, request))
+				wsc.readCh <- request
 				continue
 			}
 
-			wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] received message: %v", wsc.clientId, data))
+			request = new(QMQWebServiceSetRequest)
+			if err := protojson.Unmarshal(p, request); err == nil {
+				wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] received set message: %v", wsc.clientId, request))
+				wsc.readCh <- request
+				continue
+			}
 
-			wsc.readCh <- data
+			wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] received unknown message: %v", wsc.clientId, p))
 		} else if messageType == websocket.CloseMessage {
 			break
 		}
@@ -118,18 +123,9 @@ func (wsc *WebSocketClient) DoPendingWrites() {
 	}
 }
 
-type KeyValueResponse struct {
-	Key   string      `json:"key"`
-	Value interface{} `json:"value"`
-}
-
-type DataUpdateResponse struct {
-	Data KeyValueResponse `json:"data"`
-}
-
 type WebServiceContext interface {
 	App() *QMQApplication
-	Schema() interface{}
+	Schema() WebServiceSchema
 	NotifyClients(data interface{})
 }
 
@@ -141,12 +137,18 @@ type WebServiceSetHandler interface {
 	OnSet(c WebServiceContext, key string, value interface{})
 }
 
+type WebServiceSchema interface {
+	Get(key string) proto.Message
+	Set(key string, value proto.Message)
+	GetAllData(db *QMQConnection)
+	SetAllData(db *QMQConnection)
+}
+
 type WebService struct {
 	clients      map[uint64]*WebSocketClient
 	clientsMutex sync.Mutex
 	app          *QMQApplication
-	schema       interface{}
-	schemaMutex  sync.Mutex
+	schema       WebServiceSchema
 	tickHandlers []WebServiceTickHandler
 	setHandlers  []WebServiceSetHandler
 }
@@ -158,7 +160,7 @@ func NewWebService() *WebService {
 	}
 }
 
-func (w *WebService) Initialize(schema interface{}) {
+func (w *WebService) Initialize(schema WebServiceSchema) {
 	w.app.Initialize()
 
 	// Serve static files from the "static" directory
@@ -176,22 +178,20 @@ func (w *WebService) Initialize(schema interface{}) {
 		}
 	}()
 
-	w.schemaMutex.Lock()
 	w.schema = schema
-	w.app.Db().GetSchema(w.schema)
-	w.app.Db().SetSchema(w.schema)
-	w.schemaMutex.Unlock()
 }
 
 func (w *WebService) Deinitialize() {
 	w.app.Deinitialize()
 }
 
-func (w *WebService) NotifyClients(data interface{}) {
+func (w *WebService) NotifyClients(keys []string) {
 	w.clientsMutex.Lock()
 	defer w.clientsMutex.Unlock()
 	for clientId := range w.clients {
-		w.clients[clientId].WriteJSON(data)
+		for _, key := range keys {
+			w.clients[clientId].Write(key)
+		}
 	}
 }
 
@@ -212,9 +212,6 @@ func (w *WebService) AddSetHandler(handler WebServiceSetHandler) {
 }
 
 func (w *WebService) Tick() {
-	w.schemaMutex.Lock()
-	defer w.schemaMutex.Unlock()
-
 	for _, handler := range w.tickHandlers {
 		handler.OnTick(w)
 	}
@@ -257,9 +254,26 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 
 	client := w.addClient(conn)
 
-	for data := range client.ReadJSON() {
+	for request := range client.Read() {
+		switch request.(type) {
+		case *QMQWebServiceGetRequest:
+			request := request.(*QMQWebServiceGetRequest)
+			response := new(QMQWebServiceGetResponse)
+			break
+		case *QMQWebServiceSetRequest:
+			request := request.(*QMQWebServiceGetRequest)
+
+			break
+		}
+
 		if cmd, ok := data["cmd"].(string); ok && cmd == "get" {
 			if key, ok := data["key"].(string); ok {
+				response := DataUpdateResponse{}
+				response.Data.Key = key
+				response.Data.Value = w.schema.Get(key)
+
+				client.WriteJSON(response)
+			} else {
 				schemaWrapper := reflect.ValueOf(w.schema).Elem()
 				schemaType := schemaWrapper.Type()
 
@@ -271,37 +285,10 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 						w.app.Logger().Warn(fmt.Sprintf("Field '%s' should be a pointer (please update the schema)", tag))
 						continue
 					}
-					
-					if tag == key {
-						response := DataUpdateResponse{}
-						response.Data.Key = key
-						w.schemaMutex.Lock()
-						response.Data.Value = reflect.Indirect(reflect.ValueOf(field.Interface())).FieldByName("Value").Interface()
-						w.schemaMutex.Unlock()
 
-						client.WriteJSON(response)
-
-						break
-					}
-				}
-			} else {
-				schemaWrapper := reflect.ValueOf(w.schema).Elem()
-				schemaType := schemaWrapper.Type()
-
-				for i := 0; i < schemaWrapper.NumField(); i++ {					
-					field := schemaWrapper.Field(i)
-					tag := schemaType.Field(i).Tag.Get("qmq")
-
-					if reflect.ValueOf(field.Interface()).Kind() != reflect.Ptr {
-						w.app.Logger().Warn(fmt.Sprintf("Field '%s' should be a pointer (please update the schema)", tag))
-						continue
-					}
-					
 					response := DataUpdateResponse{}
 					response.Data.Key = tag
-					w.schemaMutex.Lock()
 					response.Data.Value = reflect.Indirect(reflect.ValueOf(field.Interface())).FieldByName("Value").Interface()
-					w.schemaMutex.Unlock()
 
 					client.WriteJSON(response)
 				}
@@ -322,17 +309,16 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 							w.app.Logger().Warn(fmt.Sprintf("Field '%s' should be a pointer (please update the schema)", tag))
 							continue
 						}
-						
+
 						if tag == key {
 							fieldValue := reflect.Indirect(reflect.ValueOf(field.Interface())).FieldByName("Value")
 							if fieldValue.Kind() != reflect.ValueOf(value).Kind() {
-								w.app.Logger().Error("Invalid 'set' command: value type mismatch")
+								w.app.Logger().Error(fmt.Sprintf("Invalid 'set' command: expected type '%s' for key '%s' but got type '%s'",
+									fieldValue.Kind(), key, reflect.ValueOf(value).Kind()))
 								break
 							}
 
-							w.schemaMutex.Lock()
 							fieldValue.Set(reflect.ValueOf(value))
-							w.schemaMutex.Unlock()
 							writeRequest := NewWriteRequest(field.Interface().(proto.Message))
 							w.app.Db().Set(key, writeRequest)
 							for _, handler := range w.setHandlers {
