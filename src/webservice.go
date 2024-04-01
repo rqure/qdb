@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"reflect"
 	"sync"
 	"sync/atomic"
 
 	"github.com/gorilla/websocket"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/anypb"
 )
 
 var webSocketClientIdCounter uint64
@@ -117,7 +117,13 @@ func (wsc *WebSocketClient) DoPendingWrites() {
 	for v := range wsc.writeCh {
 		wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] sending message: %v", wsc.clientId, v))
 
-		if err := wsc.conn.WriteJSON(v); err != nil {
+		b, err := protojson.Marshal(v)
+		if err != nil {
+			wsc.app.Logger().Error(fmt.Sprintf("WebSocket [%d] error marshalling message: %v", wsc.clientId, err))
+			continue
+		}
+
+		if err := wsc.conn.WriteMessage(websocket.TextMessage, b); err != nil {
 			wsc.app.Logger().Error(fmt.Sprintf("WebSocket [%d] error sending message: %v", wsc.clientId, err))
 		}
 	}
@@ -126,15 +132,11 @@ func (wsc *WebSocketClient) DoPendingWrites() {
 type WebServiceContext interface {
 	App() *QMQApplication
 	Schema() WebServiceSchema
-	NotifyClients(data interface{})
+	NotifyClients(keys []string)
 }
 
 type WebServiceTickHandler interface {
 	OnTick(c WebServiceContext)
-}
-
-type WebServiceSetHandler interface {
-	OnSet(c WebServiceContext, key string, value interface{})
 }
 
 type WebServiceSchema interface {
@@ -150,7 +152,6 @@ type WebService struct {
 	app          *QMQApplication
 	schema       WebServiceSchema
 	tickHandlers []WebServiceTickHandler
-	setHandlers  []WebServiceSetHandler
 }
 
 func NewWebService() *WebService {
@@ -190,7 +191,17 @@ func (w *WebService) NotifyClients(keys []string) {
 	defer w.clientsMutex.Unlock()
 	for clientId := range w.clients {
 		for _, key := range keys {
-			w.clients[clientId].Write(key)
+			value, err := anypb.New(w.schema.Get(key))
+
+			if err != nil {
+				w.app.Logger().Error(fmt.Sprintf("Error marshalling value for key '%s': %v", key, err))
+				continue
+			}
+
+			w.clients[clientId].Write(&QMQWebServiceNotification{
+				Key:   key,
+				Value: value,
+			})
 		}
 	}
 }
@@ -199,16 +210,12 @@ func (w *WebService) App() *QMQApplication {
 	return w.app
 }
 
-func (w *WebService) Schema() interface{} {
+func (w *WebService) Schema() WebServiceSchema {
 	return w.schema
 }
 
 func (w *WebService) AddTickHandler(handler WebServiceTickHandler) {
 	w.tickHandlers = append(w.tickHandlers, handler)
-}
-
-func (w *WebService) AddSetHandler(handler WebServiceSetHandler) {
-	w.setHandlers = append(w.setHandlers, handler)
 }
 
 func (w *WebService) Tick() {
@@ -255,92 +262,27 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 	client := w.addClient(conn)
 
 	for request := range client.Read() {
-		switch request.(type) {
+		switch request := request.(type) {
 		case *QMQWebServiceGetRequest:
-			request := request.(*QMQWebServiceGetRequest)
 			response := new(QMQWebServiceGetResponse)
-			break
+			value, err := anypb.New(w.schema.Get(request.Key))
+
+			if err != nil {
+				w.app.Logger().Error(fmt.Sprintf("Error marshalling value for key '%s': %v", request.Key, err))
+				break
+			}
+
+			response.Key = request.Key
+			response.Value = value
+
+			client.Write(response)
 		case *QMQWebServiceSetRequest:
-			request := request.(*QMQWebServiceGetRequest)
+			response := new(QMQWebServiceSetResponse)
+			w.schema.Set(request.Key, request.Value)
 
+			client.Write(response)
+		default:
 			break
-		}
-
-		if cmd, ok := data["cmd"].(string); ok && cmd == "get" {
-			if key, ok := data["key"].(string); ok {
-				response := DataUpdateResponse{}
-				response.Data.Key = key
-				response.Data.Value = w.schema.Get(key)
-
-				client.WriteJSON(response)
-			} else {
-				schemaWrapper := reflect.ValueOf(w.schema).Elem()
-				schemaType := schemaWrapper.Type()
-
-				for i := 0; i < schemaWrapper.NumField(); i++ {
-					field := schemaWrapper.Field(i)
-					tag := schemaType.Field(i).Tag.Get("qmq")
-
-					if reflect.ValueOf(field.Interface()).Kind() != reflect.Ptr {
-						w.app.Logger().Warn(fmt.Sprintf("Field '%s' should be a pointer (please update the schema)", tag))
-						continue
-					}
-
-					response := DataUpdateResponse{}
-					response.Data.Key = tag
-					response.Data.Value = reflect.Indirect(reflect.ValueOf(field.Interface())).FieldByName("Value").Interface()
-
-					client.WriteJSON(response)
-				}
-			}
-		} else if cmd, ok := data["cmd"].(string); ok && cmd == "set" {
-			if key, ok := data["key"].(string); ok {
-				if value, ok := data["value"]; ok {
-					response := DataUpdateResponse{}
-
-					schemaWrapper := reflect.ValueOf(w.schema).Elem()
-					schemaType := schemaWrapper.Type()
-
-					for i := 0; i < schemaWrapper.NumField(); i++ {
-						field := schemaWrapper.Field(i)
-						tag := schemaType.Field(i).Tag.Get("qmq")
-
-						if reflect.ValueOf(field.Interface()).Kind() != reflect.Ptr {
-							w.app.Logger().Warn(fmt.Sprintf("Field '%s' should be a pointer (please update the schema)", tag))
-							continue
-						}
-
-						if tag == key {
-							fieldValue := reflect.Indirect(reflect.ValueOf(field.Interface())).FieldByName("Value")
-							if fieldValue.Kind() != reflect.ValueOf(value).Kind() {
-								w.app.Logger().Error(fmt.Sprintf("Invalid 'set' command: expected type '%s' for key '%s' but got type '%s'",
-									fieldValue.Kind(), key, reflect.ValueOf(value).Kind()))
-								break
-							}
-
-							fieldValue.Set(reflect.ValueOf(value))
-							writeRequest := NewWriteRequest(field.Interface().(proto.Message))
-							w.app.Db().Set(key, writeRequest)
-							for _, handler := range w.setHandlers {
-								handler.OnSet(w, key, value)
-							}
-
-							response.Data.Key = key
-							response.Data.Value = value
-
-							w.NotifyClients(response)
-
-							break
-						}
-					}
-				} else {
-					w.app.Logger().Error("Invalid 'set' command: missing 'value'")
-				}
-			} else {
-				w.app.Logger().Error("Invalid 'set' command: missing 'key'")
-			}
-		} else {
-			w.app.Logger().Error("Invalid WebSocket command")
 		}
 	}
 }
