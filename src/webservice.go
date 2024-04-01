@@ -139,6 +139,10 @@ type WebServiceTickHandler interface {
 	OnTick(c WebServiceContext)
 }
 
+type WebServiceSetHandler interface {
+	OnSet(c WebServiceContext, key string, value proto.Message)
+}
+
 type WebServiceSchema interface {
 	Get(key string) proto.Message
 	Set(key string, value proto.Message)
@@ -152,6 +156,7 @@ type WebService struct {
 	app          *QMQApplication
 	schema       WebServiceSchema
 	tickHandlers []WebServiceTickHandler
+	setHandlers  []WebServiceSetHandler
 }
 
 func NewWebService() *WebService {
@@ -218,6 +223,10 @@ func (w *WebService) AddTickHandler(handler WebServiceTickHandler) {
 	w.tickHandlers = append(w.tickHandlers, handler)
 }
 
+func (w *WebService) AddSetHandler(handler WebServiceSetHandler) {
+	w.setHandlers = append(w.setHandlers, handler)
+}
+
 func (w *WebService) Tick() {
 	for _, handler := range w.tickHandlers {
 		handler.OnTick(w)
@@ -279,8 +288,11 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 		case *QMQWebServiceSetRequest:
 			response := new(QMQWebServiceSetResponse)
 			w.schema.Set(request.Key, request.Value)
-
 			client.Write(response)
+
+			for _, handler := range w.setHandlers {
+				handler.OnSet(w, request.Key, request.Value)
+			}
 		default:
 			break
 		}
