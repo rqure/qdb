@@ -13,10 +13,10 @@ class NotificationManager {
         return this;
     }
 
-    notifyListeners(data, context) {
-        if (data.key in this._topics) {
-            this._topics[data.key].forEach(listener => {
-                listener.onNotification(data.key, data, context);
+    notifyListeners(message, context) {
+        if (message.getKey() in this._topics) {
+            this._topics[message.getKey()].forEach(listener => {
+                listener.onNotification(message.getKey(), message, context);
             });
         }
     }

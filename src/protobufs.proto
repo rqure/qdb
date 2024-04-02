@@ -96,6 +96,12 @@ message QMQMqttMessage {
     bool duplicate = 6;
 }
 
+enum QMQConnectionStateEnum {
+    CONNECTION_STATE_UNSPECIFIED = 0;
+    CONNECTION_STATE_CONNECTED = 1;
+    CONNECTION_STATE_DISCONNECTED = 2;
+}
+
 enum QMQGarageDoorStateEnum {
     GARAGE_DOOR_STATE_UNSPECIFIED = 0;
     GARAGE_DOOR_STATE_OPEN = 1;
@@ -104,4 +110,8 @@ enum QMQGarageDoorStateEnum {
 
 message QMQGarageDoorState {
     QMQGarageDoorStateEnum value = 1;
+}
+
+message QMQConnectionState {
+    QMQConnectionStateEnum value = 1;
 }

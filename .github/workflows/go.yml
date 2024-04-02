@@ -36,9 +36,10 @@ jobs:
         protoc --go_out=. --go_opt=paths=source_relative src/protobufs.proto
         protoc --js_out=import_style=commonjs,binary:. src/protobufs.proto
         mkdir -p web_build/
-        echo "const pb = require('./protobufs_pb');" >  web_build/pb.js
+        echo "const pb = require('./protobufs_pb');" >  web_build/entrypoint.js
+        echo "main();" >>  web_build/entrypoint.js
         mv src/protobufs_pb.js web_build/
-        browserify web_build/pb.js > web/pb.js
+        browserify web_build/entrypoint.js > web/app.js
         rm -rf web_build
         git config --global user.name 'Git bot'
         git config --global user.email 'bot@noreply.github.com'
