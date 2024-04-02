@@ -82,6 +82,7 @@ func Register_web_handler_server_interactor() {
         request.setKey(key);
 
         const message = new proto.qmq.QMQWebServiceMessage();
+        message.setContent(new proto.google.protobuf.Any());
         message.getContent().pack(request.serializeBinary(), 'proto.qmq.QMQWebServiceGetRequest');
 
         this._ws.send(message.serializeBinary());
@@ -96,6 +97,7 @@ func Register_web_handler_server_interactor() {
         request.setValue(value);
 
         const message = new proto.qmq.QMQWebServiceMessage();
+        message.setContent(new proto.google.protobuf.Any());
         message.getContent().pack(request.serializeBinary(), 'proto.qmq.QMQWebServiceSetRequest');
 
         this._ws.send(request.serializeBinary());
