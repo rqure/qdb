@@ -30,6 +30,7 @@ jobs:
     - name: Update Protobuf
       run: |
         go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+        npm install google-protobuf
         npm install -g protoc-gen-js
         npm install -g browserify
         protoc --go_out=. --go_opt=paths=source_relative src/protobufs.proto
