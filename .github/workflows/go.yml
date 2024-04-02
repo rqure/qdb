@@ -23,13 +23,22 @@ jobs:
 
     - name: Install Protoc
       uses: arduino/setup-protoc@v2
+
+    - name: Install NPM
+      uses: actions/setup-node@v4
     
     - name: Update Protobuf
       run: |
         go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+        npm install -g protoc-gen-js
+        npm install -g browserify
         protoc --go_out=. --go_opt=paths=source_relative src/protobufs.proto
         protoc --js_out=import_style=commonjs,binary:. src/protobufs.proto
-        mv src/protobufs_pb.js web/
+        mkdir -p web_build/
+        echo "const pb = require('./protobufs_pb');" >  web_build/pb.js
+        mv src/protobufs_pb.js web_build/
+        browserify web_build/pb.js > web/pb.js
+        rm -rf web_build
         git config --global user.name 'Git bot'
         git config --global user.email 'bot@noreply.github.com'
         git remote set-url origin https://x-access-token:${{ secrets.CI_TOKEN }}@github.com/${{ github.repository }}
