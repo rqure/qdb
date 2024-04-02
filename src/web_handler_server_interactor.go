@@ -57,8 +57,6 @@ func Register_web_handler_server_interactor() {
     onOpen(event) {
         this._connectionStatus.setValue(proto.qmq.QMQConnectionStateEnum.CONNECTION_STATE_CONNECTED);
         this.notifyConnectionStatus();
-
-        this.sendCommand('get');
     }
 
     onClose(event) {
