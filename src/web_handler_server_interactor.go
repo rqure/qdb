@@ -26,7 +26,7 @@ func Register_web_handler_server_interactor() {
 
     notifyConnectionStatus() {
         const value = new proto.google.protobuf.Any();
-        value.pack(this._connectionStatus.serializeBinary(), 'proto.qmq.QMQConnectionState');
+        value.pack(this._connectionStatus.serializeBinary(), 'qmq.QMQConnectionState');
         const notification = new proto.qmq.QMQWebServiceNotification();
         notification.setKey('connected');
         notification.setValue(value);
@@ -38,8 +38,8 @@ func Register_web_handler_server_interactor() {
         const message = proto.qmq.QMQWebServiceMessage.deserializeBinary(event.data);
 
         const responseTypes = {
-            "proto.qmq.QMQWebServiceGetResponse": proto.qmq.QMQWebServiceGetResponse,
-            "proto.qmq.QMQWebServiceNotification": proto.qmq.QMQWebServiceNotification,
+            "qmq.QMQWebServiceGetResponse": proto.qmq.QMQWebServiceGetResponse,
+            "qmq.QMQWebServiceNotification": proto.qmq.QMQWebServiceNotification,
         }
 
         for (const responseType in responseTypes) {
@@ -83,7 +83,7 @@ func Register_web_handler_server_interactor() {
 
         const message = new proto.qmq.QMQWebServiceMessage();
         message.setContent(new proto.google.protobuf.Any());
-        message.getContent().pack(request.serializeBinary(), 'proto.qmq.QMQWebServiceGetRequest');
+        message.getContent().pack(request.serializeBinary(), 'qmq.QMQWebServiceGetRequest');
 
         this._ws.send(message.serializeBinary());
     }
@@ -98,7 +98,7 @@ func Register_web_handler_server_interactor() {
 
         const message = new proto.qmq.QMQWebServiceMessage();
         message.setContent(new proto.google.protobuf.Any());
-        message.getContent().pack(request.serializeBinary(), 'proto.qmq.QMQWebServiceSetRequest');
+        message.getContent().pack(request.serializeBinary(), 'qmq.QMQWebServiceSetRequest');
 
         this._ws.send(message.serializeBinary());
     }
