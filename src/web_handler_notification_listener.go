@@ -10,7 +10,7 @@ func Register_web_handler_notification_listener() {
 
     http.HandleFunc("/js/qmq/notification_listener.js", func(w http.ResponseWriter, r *http.Request) {
         w.Header().Set("Content-Type", "application/javascript")
-        fmt.Fprintf(w, `class NotificationListener {
+        fmt.Fprint(w, `class NotificationListener {
     constructor() {}
     listenTo(topic, manager) {
         manager.addListener(topic, this);
