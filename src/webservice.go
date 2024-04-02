@@ -8,7 +8,6 @@ import (
 	"sync/atomic"
 
 	"github.com/gorilla/websocket"
-	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
 )
@@ -87,14 +86,14 @@ func (wsc *WebSocketClient) DoPendingReads() {
 
 		if messageType == websocket.TextMessage {
 			var request proto.Message = new(QMQWebServiceGetRequest)
-			if err := protojson.Unmarshal(p, request); err == nil {
+			if err := proto.Unmarshal(p, request); err == nil {
 				wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] received get message: %v", wsc.clientId, request))
 				wsc.readCh <- request
 				continue
 			}
 
 			request = new(QMQWebServiceSetRequest)
-			if err := protojson.Unmarshal(p, request); err == nil {
+			if err := proto.Unmarshal(p, request); err == nil {
 				wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] received set message: %v", wsc.clientId, request))
 				wsc.readCh <- request
 				continue
