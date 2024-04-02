@@ -325,6 +325,7 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 
 	for message := range client.Read() {
 		if request := new(QMQWebServiceGetRequest); message.Content.MessageIs(request) {
+			message.Content.UnmarshalTo(request)
 			response := new(QMQWebServiceGetResponse)
 			value, err := anypb.New(w.schema.Get(request.Key))
 
@@ -338,6 +339,7 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 
 			client.Write(response)
 		} else if request := new(QMQWebServiceSetRequest); message.Content.MessageIs(request) {
+			message.Content.UnmarshalTo(request)
 			response := new(QMQWebServiceSetResponse)
 			w.schema.Set(request.Key, request.Value)
 			client.Write(response)
