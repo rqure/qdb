@@ -16,38 +16,33 @@ func Register_web_handler_server_interactor() {
         this._notificationManager = notificationManager;
         this._url = url;
         this._ws = null;
-        this._isConnected = false;
+        this._connectionStatus = new pb.QMQConnectionState();
 
-        this._notificationManager.notifyListeners({
-            key: "connected",
-            value: false
-        }, this._context);
+        this._connectionStatus.setValue(pb.QMQConnectionStateEnum.CONNECTION_STATE_DISCONNECTED);
+        this._notificationManager.notifyListeners(this._connectionStatus, this._context);
     }
 
     get notificationManager() { return this._notificationManager; }
 
     onMessage(event) {
-        this._notificationManager.notifyListeners(JSON.parse(event.data), this._context);
+        const response = pb.QMQWebServiceGetResponse.deserializeBinary(event.data);
+        
+        if (!response)
+            return;
+
+        this._notificationManager.notifyListeners(response, this._context);
     }
 
     onOpen(event) {
-        this._isConnected = true;
-
-        this._notificationManager.notifyListeners({
-            key: "connected",
-            value: true
-        }, this._context);
+        this._connectionStatus.setValue(pb.QMQConnectionStateEnum.CONNECTION_STATE_CONNECTED);
+        this._notificationManager.notifyListeners(this._connectionStatus, this._context);
 
         this.sendCommand('get');
     }
 
     onClose(event) {
-        this._isConnected = false;
-
-        this._notificationManager.notifyListeners({
-            key: "connected",
-            value: false
-        }, this._context);
+        this._connectionStatus.setValue(pb.QMQConnectionStateEnum.CONNECTION_STATE_DISCONNECTED);
+        this._notificationManager.notifyListeners(this._connectionStatus, this._context);
 
         this.connect();
     }
@@ -60,26 +55,28 @@ func Register_web_handler_server_interactor() {
         this._ws.addEventListener('close', this.onClose.bind(this));
     }
 
-    sendCommand(command) {
-        if (!this._isConnected) {
+    get(key) {
+        if (this._connectionStatus.getValue() !== pb.QMQConnectionStateEnum.CONNECTION_STATE_CONNECTED)
             return;
-        }
         
-        this._ws.send(JSON.stringify({
-            cmd: command
-        }));
+        const request = new pb.QMQWebServiceGetRequest();
+        request.setKey(key);
+
+        this._ws.send(request.serializeBinary());
     }
 
     set(key, value) {
-        if (!this._isConnected) {
+        if (this._connectionStatus.getValue() !== pb.QMQConnectionStateEnum.CONNECTION_STATE_CONNECTED)
             return;
-        }
 
-        this._ws.send(JSON.stringify({
-            cmd: "set",
-            key: key,
-            value: value
-        }));
+        const anyValue = new pb.google.protobuf.Any();
+        anyValue.pack(value.serializeBinary(), value.constructor.name);
+
+        const request = new pb.QMQWebServiceSetRequest();
+        request.setKey(key);
+        request.setValue(anyValue);
+
+        this._ws.send(request.serializeBinary());
     }
 }`)
     })
