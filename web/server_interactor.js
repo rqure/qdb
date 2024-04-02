@@ -70,6 +70,7 @@ class ServerInteractor {
         request.setKey(key);
 
         const message = new proto.qmq.QMQWebServiceMessage();
+        message.setContent(new proto.google.protobuf.Any());
         message.getContent().pack(request.serializeBinary(), 'proto.qmq.QMQWebServiceGetRequest');
 
         this._ws.send(message.serializeBinary());
@@ -84,6 +85,7 @@ class ServerInteractor {
         request.setValue(value);
 
         const message = new proto.qmq.QMQWebServiceMessage();
+        message.setContent(new proto.google.protobuf.Any());
         message.getContent().pack(request.serializeBinary(), 'proto.qmq.QMQWebServiceSetRequest');
 
         this._ws.send(request.serializeBinary());
