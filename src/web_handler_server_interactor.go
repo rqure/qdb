@@ -2,14 +2,14 @@
 package qmq
 
 import (
-    "net/http"
-    "fmt"
+	"fmt"
+	"net/http"
 )
 
 func Register_web_handler_server_interactor() {
 
-    http.HandleFunc("js/qmq/server_interactor.js", func(w http.ResponseWriter, r *http.Request) {
-        fmt.Fprintf(w, `class ServerInteractor {
+	http.HandleFunc("js/qmq/server_interactor.js", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, `class ServerInteractor {
     constructor(url, notificationManager, context) {
         this._context = context;
         this._notificationManager = notificationManager;
@@ -81,5 +81,5 @@ func Register_web_handler_server_interactor() {
         }));
     }
 }`)
-    })
+	})
 }

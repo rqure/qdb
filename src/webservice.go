@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	reflect "reflect"
 	"sync"
 	"sync/atomic"
 
@@ -150,8 +151,51 @@ type WebServiceSetHandler interface {
 type WebServiceSchema interface {
 	Get(key string) proto.Message
 	Set(key string, value proto.Message)
-	GetAllData(db *QMQConnection)
-	SetAllData(db *QMQConnection)
+	Initialize(db *QMQConnection)
+}
+
+type Schema struct {
+	db *QMQConnection
+	kv map[string]proto.Message
+}
+
+func NewSchema(kv map[string]proto.Message) *Schema {
+	s := new(Schema)
+	s.kv = kv
+
+	return s
+}
+
+func (s *Schema) Get(key string) proto.Message {
+	v := s.kv[key]
+
+	if v != nil {
+		s.db.GetValue(key, v)
+	}
+
+	return v
+}
+
+func (s *Schema) Set(key string, value proto.Message) {
+	v := s.kv[key]
+	if v != nil && reflect.TypeOf(v) != reflect.TypeOf(value) {
+		return
+	}
+
+	s.kv[key] = value
+	s.db.SetValue(key, value)
+}
+
+func (s *Schema) Initialize(db *QMQConnection) {
+	s.db = db
+
+	for key := range s.kv {
+		s.Get(key)
+	}
+
+	for key := range s.kv {
+		s.Set(key, s.kv[key])
+	}
 }
 
 type WebService struct {
@@ -195,6 +239,7 @@ func (w *WebService) Initialize(schema WebServiceSchema) {
 	}()
 
 	w.schema = schema
+	w.schema.Initialize(w.app.Db())
 }
 
 func (w *WebService) Deinitialize() {
