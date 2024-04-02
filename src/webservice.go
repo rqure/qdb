@@ -85,21 +85,26 @@ func (wsc *WebSocketClient) DoPendingReads() {
 		}
 
 		if messageType == websocket.TextMessage {
-			var request proto.Message = new(QMQWebServiceGetRequest)
-			if err := proto.Unmarshal(p, request); err == nil {
-				wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] received get message: %v", wsc.clientId, request))
-				wsc.readCh <- request
-				continue
+			possibleRequests := []proto.Message{
+				new(QMQWebServiceGetRequest),
+				new(QMQWebServiceSetRequest),
 			}
 
-			request = new(QMQWebServiceSetRequest)
-			if err := proto.Unmarshal(p, request); err == nil {
-				wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] received set message: %v", wsc.clientId, request))
+			requestHandled := false
+			for _, request := range possibleRequests {
+				if err := proto.Unmarshal(p, request); err != nil {
+					continue
+				}
+
+				wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] received message: %v", wsc.clientId, request))
 				wsc.readCh <- request
-				continue
+				requestHandled = true
+				break
 			}
 
-			wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] received unknown message: %v", wsc.clientId, p))
+			if !requestHandled {
+				wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] received unknown message: %v", wsc.clientId, p))
+			}
 		} else if messageType == websocket.CloseMessage {
 			break
 		}
@@ -116,7 +121,7 @@ func (wsc *WebSocketClient) DoPendingWrites() {
 	for v := range wsc.writeCh {
 		wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] sending message: %v", wsc.clientId, v))
 
-		b, err := protojson.Marshal(v)
+		b, err := proto.Marshal(v)
 		if err != nil {
 			wsc.app.Logger().Error(fmt.Sprintf("WebSocket [%d] error marshalling message: %v", wsc.clientId, err))
 			continue
