@@ -35,7 +35,6 @@ func Register_web_handler_notification_manager() {
 
     get topics() {
         return Object.keys(this._topics);
-    }
-};`)
+    }`)
     })
 }
