@@ -45,8 +45,6 @@ class ServerInteractor {
     onOpen(event) {
         this._connectionStatus.setValue(proto.qmq.QMQConnectionStateEnum.CONNECTION_STATE_CONNECTED);
         this.notifyConnectionStatus();
-
-        this.sendCommand('get');
     }
 
     onClose(event) {
