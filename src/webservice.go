@@ -98,6 +98,7 @@ func (wsc *WebSocketClient) DoPendingReads() {
 			request := new(QMQWebServiceMessage)
 
 			if err := proto.Unmarshal(p, request); err != nil {
+				wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] received invalid message: %v", wsc.clientId, request))
 				continue
 			}
 
