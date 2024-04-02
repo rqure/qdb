@@ -9,7 +9,7 @@ WEB_DIR="web/"
 for FILE in $(find $WEB_DIR -type f -name "*.js"); do
     # Extract the file name without extension
     FILENAME=$(basename $FILE .js)
-    CONTENT=$(cat $FILE | while IFS= read -r line; do printf '%s\n' "$line"; done | sed 's/`/` + "`" + `/g')
+    CONTENT=$(cat $FILE | sed 's/`/` + "`" + `/g')
     
     # Define the output file path
     OUTPUT_FILE="src/web_handler_$FILENAME.go"
