@@ -80,6 +80,7 @@ func Register_web_handler_server_interactor() {
             key: key,
             value: value
         }));
-    }`)
+    }
+}`)
     })
 }

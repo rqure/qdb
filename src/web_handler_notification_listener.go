@@ -16,6 +16,7 @@ func Register_web_handler_notification_listener() {
         manager.addListener(topic, this);
         return this;
     }
-    onNotification(topic, data, context) {}`)
+    onNotification(topic, data, context) {}
+};`)
     })
 }
