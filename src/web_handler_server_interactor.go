@@ -100,7 +100,7 @@ func Register_web_handler_server_interactor() {
         message.setContent(new proto.google.protobuf.Any());
         message.getContent().pack(request.serializeBinary(), 'proto.qmq.QMQWebServiceSetRequest');
 
-        this._ws.send(request.serializeBinary());
+        this._ws.send(message.serializeBinary());
     }
 }`)
     })
