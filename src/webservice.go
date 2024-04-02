@@ -94,7 +94,7 @@ func (wsc *WebSocketClient) DoPendingReads() {
 			break
 		}
 
-		if messageType == websocket.TextMessage {
+		if messageType == websocket.BinaryMessage {
 			request := new(QMQWebServiceMessage)
 
 			if err := proto.Unmarshal(p, request); err != nil {
@@ -126,7 +126,7 @@ func (wsc *WebSocketClient) DoPendingWrites() {
 			continue
 		}
 
-		if err := wsc.conn.WriteMessage(websocket.TextMessage, b); err != nil {
+		if err := wsc.conn.WriteMessage(websocket.BinaryMessage, b); err != nil {
 			wsc.app.Logger().Error(fmt.Sprintf("WebSocket [%d] error sending message: %v", wsc.clientId, err))
 		}
 	}
