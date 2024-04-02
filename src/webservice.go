@@ -181,6 +181,7 @@ func (w *WebService) Initialize(schema WebServiceSchema) {
 	Register_web_handler_notification_listener()
 	Register_web_handler_notification_manager()
 	Register_web_handler_server_interactor()
+	Register_web_handler_pb()
 
 	go func() {
 		err := http.ListenAndServe("0.0.0.0:20000", nil)
