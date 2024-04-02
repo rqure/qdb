@@ -8,7 +8,8 @@ import (
 
 func Register_web_handler_notification_manager() {
 
-    http.HandleFunc("js/qmq/notification_manager.js", func(w http.ResponseWriter, r *http.Request) {
+    http.HandleFunc("/js/qmq/notification_manager.js", func(w http.ResponseWriter, r *http.Request) {
+        w.Header().Set("Content-Type", "application/javascript")
         fmt.Fprintf(w, `class NotificationManager {
     constructor() {
         this._topics = {};
