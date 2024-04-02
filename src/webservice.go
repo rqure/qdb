@@ -177,6 +177,11 @@ func (w *WebService) Initialize(schema WebServiceSchema) {
 	// Handle WebSocket and other routes
 	http.Handle("/", w)
 
+	// Handle generated files
+	Register_web_handler_notification_listener()
+	Register_web_handler_notification_manager()
+	Register_web_handler_server_interactor()
+
 	go func() {
 		err := http.ListenAndServe("0.0.0.0:20000", nil)
 		if err != nil {
