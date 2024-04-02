@@ -86,26 +86,14 @@ func (wsc *WebSocketClient) DoPendingReads() {
 		}
 
 		if messageType == websocket.TextMessage {
-			possibleRequests := []proto.Message{
-				new(QMQWebServiceGetRequest),
-				new(QMQWebServiceSetRequest),
+			request := new(QMQWebServiceRequest)
+
+			if err := proto.Unmarshal(p, request); err != nil {
+				continue
 			}
 
-			requestHandled := false
-			for _, request := range possibleRequests {
-				if err := proto.Unmarshal(p, request); err != nil {
-					continue
-				}
-
-				wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] received message: %v", wsc.clientId, request))
-				wsc.readCh <- request
-				requestHandled = true
-				break
-			}
-
-			if !requestHandled {
-				wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] received unknown message: %v", wsc.clientId, p))
-			}
+			wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] received message: %v", wsc.clientId, request))
+			wsc.readCh <- request
 		} else if messageType == websocket.CloseMessage {
 			break
 		}

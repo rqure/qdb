@@ -4,33 +4,54 @@ class ServerInteractor {
         this._notificationManager = notificationManager;
         this._url = url;
         this._ws = null;
-        this._connectionStatus = new pb.QMQConnectionState();
+        this._connectionStatus = new proto.qmq.QMQConnectionState();
 
-        this._connectionStatus.setValue(pb.QMQConnectionStateEnum.CONNECTION_STATE_DISCONNECTED);
-        this._notificationManager.notifyListeners(this._connectionStatus, this._context);
+        this._connectionStatus.setValue(proto.qmq.QMQConnectionStateEnum.CONNECTION_STATE_DISCONNECTED);
+        this.notifyConnectionStatus();
     }
 
     get notificationManager() { return this._notificationManager; }
 
-    onMessage(event) {
-        const response = pb.QMQWebServiceGetResponse.deserializeBinary(event.data);
-        
-        if (!response)
-            return;
+    notifyConnectionStatus() {
+        const value = new proto.google.protobuf.Any();
+        value.pack(this._connectionStatus.serializeBinary(), 'proto.qmq.QMQConnectionState');
+        const notification = new proto.qmq.QMQWebServiceNotification();
+        notification.setKey('connected');
+        notification.setValue(value);
 
-        this._notificationManager.notifyListeners(response, this._context);
+        this._notificationManager.notifyListeners(notification, this._context);
+    }
+
+    onMessage(event) {
+        const message = proto.qmq.QMQWebServiceMessage.deserializeBinary(event.data);
+
+        const responseTypes = {
+            "proto.qmq.QMQWebServiceGetResponse": proto.qmq.QMQWebServiceGetResponse,
+            "proto.qmq.QMQWebServiceNotification": proto.qmq.QMQWebServiceNotification,
+        }
+
+        for (const responseType in responseTypes) {
+            const deserializer = responseTypes[responseType].deserializeBinary;
+            const response = message.getContent().unpack(deserializer, responseType);
+
+            if (!response)
+                continue;
+
+            this._notificationManager.notifyListeners(response, this._context);
+            return
+        }
     }
 
     onOpen(event) {
-        this._connectionStatus.setValue(pb.QMQConnectionStateEnum.CONNECTION_STATE_CONNECTED);
-        this._notificationManager.notifyListeners(this._connectionStatus, this._context);
+        this._connectionStatus.setValue(proto.qmq.QMQConnectionStateEnum.CONNECTION_STATE_CONNECTED);
+        this.notifyConnectionStatus();
 
         this.sendCommand('get');
     }
 
     onClose(event) {
-        this._connectionStatus.setValue(pb.QMQConnectionStateEnum.CONNECTION_STATE_DISCONNECTED);
-        this._notificationManager.notifyListeners(this._connectionStatus, this._context);
+        this._connectionStatus.setValue(proto.qmq.QMQConnectionStateEnum.CONNECTION_STATE_DISCONNECTED);
+        this.notifyConnectionStatus();
 
         this.connect();
     }
@@ -44,25 +65,28 @@ class ServerInteractor {
     }
 
     get(key) {
-        if (this._connectionStatus.getValue() !== pb.QMQConnectionStateEnum.CONNECTION_STATE_CONNECTED)
+        if (this._connectionStatus.getValue() !== proto.qmq.QMQConnectionStateEnum.CONNECTION_STATE_CONNECTED)
             return;
         
-        const request = new pb.QMQWebServiceGetRequest();
+        const request = new proto.qmq.QMQWebServiceGetRequest();
         request.setKey(key);
 
-        this._ws.send(request.serializeBinary());
+        const message = new proto.qmq.QMQWebServiceMessage();
+        message.getContent().pack(request.serializeBinary(), 'proto.qmq.QMQWebServiceGetRequest');
+
+        this._ws.send(message.serializeBinary());
     }
 
     set(key, value) {
-        if (this._connectionStatus.getValue() !== pb.QMQConnectionStateEnum.CONNECTION_STATE_CONNECTED)
+        if (this._connectionStatus.getValue() !== proto.qmq.QMQConnectionStateEnum.CONNECTION_STATE_CONNECTED)
             return;
 
-        const anyValue = new pb.google.protobuf.Any();
-        anyValue.pack(value.serializeBinary(), value.constructor.name);
-
-        const request = new pb.QMQWebServiceSetRequest();
+        const request = new proto.qmq.QMQWebServiceSetRequest();
         request.setKey(key);
-        request.setValue(anyValue);
+        request.setValue(value);
+
+        const message = new proto.qmq.QMQWebServiceMessage();
+        message.getContent().pack(request.serializeBinary(), 'proto.qmq.QMQWebServiceSetRequest');
 
         this._ws.send(request.serializeBinary());
     }

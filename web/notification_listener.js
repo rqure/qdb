@@ -4,5 +4,5 @@ class NotificationListener {
         manager.addListener(topic, this);
         return this;
     }
-    onNotification(topic, data, context) {}
+    onNotification(topic, message, context) {}
 };
