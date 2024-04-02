@@ -17,8 +17,8 @@ var webSocketClientIdCounter uint64
 
 type WebSocketClient struct {
 	clientId uint64
-	readCh   chan proto.Message
-	writeCh  chan proto.Message
+	readCh   chan *QMQWebServiceMessage
+	writeCh  chan *QMQWebServiceMessage
 	conn     *websocket.Conn
 	app      *QMQApplication
 	wg       sync.WaitGroup
@@ -30,8 +30,8 @@ func NewWebSocketClient(conn *websocket.Conn, app *QMQApplication, onClose func(
 
 	wsc := &WebSocketClient{
 		clientId: newClientId,
-		readCh:   make(chan proto.Message),
-		writeCh:  make(chan proto.Message),
+		readCh:   make(chan *QMQWebServiceMessage),
+		writeCh:  make(chan *QMQWebServiceMessage),
 		conn:     conn,
 		app:      app,
 		onClose:  onClose,
@@ -45,12 +45,21 @@ func NewWebSocketClient(conn *websocket.Conn, app *QMQApplication, onClose func(
 	return wsc
 }
 
-func (wsc *WebSocketClient) Read() chan proto.Message {
+func (wsc *WebSocketClient) Read() chan *QMQWebServiceMessage {
 	return wsc.readCh
 }
 
 func (wsc *WebSocketClient) Write(v proto.Message) {
-	wsc.writeCh <- v
+	content, err := anypb.New(v)
+
+	if err != nil {
+		wsc.app.Logger().Error(fmt.Sprintf("Failed to marshal message before send: %v", err))
+		return
+	}
+
+	message := new(QMQWebServiceMessage)
+	message.Content = content
+	wsc.writeCh <- message
 }
 
 func (wsc *WebSocketClient) Close() {
@@ -86,7 +95,7 @@ func (wsc *WebSocketClient) DoPendingReads() {
 		}
 
 		if messageType == websocket.TextMessage {
-			request := new(QMQWebServiceRequest)
+			request := new(QMQWebServiceMessage)
 
 			if err := proto.Unmarshal(p, request); err != nil {
 				continue
@@ -313,9 +322,8 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 
 	client := w.addClient(conn)
 
-	for request := range client.Read() {
-		switch request := request.(type) {
-		case *QMQWebServiceGetRequest:
+	for message := range client.Read() {
+		if request := new(QMQWebServiceGetRequest); message.Content.MessageIs(request) {
 			response := new(QMQWebServiceGetResponse)
 			value, err := anypb.New(w.schema.Get(request.Key))
 
@@ -328,7 +336,7 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 			response.Value = value
 
 			client.Write(response)
-		case *QMQWebServiceSetRequest:
+		} else if request := new(QMQWebServiceSetRequest); message.Content.MessageIs(request) {
 			response := new(QMQWebServiceSetResponse)
 			w.schema.Set(request.Key, request.Value)
 			client.Write(response)
@@ -336,8 +344,6 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 			for _, handler := range w.setHandlers {
 				handler.OnSet(w, request.Key, request.Value)
 			}
-		default:
-			break
 		}
 	}
 }
