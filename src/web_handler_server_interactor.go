@@ -35,23 +35,28 @@ func Register_web_handler_server_interactor() {
     }
 
     onMessage(event) {
-        const message = proto.qmq.QMQWebServiceMessage.deserializeBinary(event.data);
-
-        const responseTypes = {
-            "qmq.QMQWebServiceGetResponse": proto.qmq.QMQWebServiceGetResponse,
-            "qmq.QMQWebServiceNotification": proto.qmq.QMQWebServiceNotification,
+        const fileReader = new FileReader();
+        const me = this;
+        fileReader.onload = function(event) {
+            const message = proto.qmq.QMQWebServiceMessage.deserializeBinary(new Uint8Array(event.target.result));
+            console.log(message);
+            const responseTypes = {
+                "qmq.QMQWebServiceGetResponse": proto.qmq.QMQWebServiceGetResponse,
+                "qmq.QMQWebServiceNotification": proto.qmq.QMQWebServiceNotification,
+            }
+    
+            for (const responseType in responseTypes) {
+                const deserializer = responseTypes[responseType].deserializeBinary;
+                const response = message.getContent().unpack(deserializer, responseType);
+    
+                if (!response)
+                    continue;
+    
+                me._notificationManager.notifyListeners(response, me._context);
+                return
+            }            
         }
-
-        for (const responseType in responseTypes) {
-            const deserializer = responseTypes[responseType].deserializeBinary;
-            const response = message.getContent().unpack(deserializer, responseType);
-
-            if (!response)
-                continue;
-
-            this._notificationManager.notifyListeners(response, this._context);
-            return
-        }
+        fileReader.readAsArrayBuffer(event.data);
     }
 
     onOpen(event) {
