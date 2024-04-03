@@ -39,7 +39,7 @@ func Register_web_handler_server_interactor() {
         const me = this;
         fileReader.onload = function(event) {
             const message = proto.qmq.QMQWebServiceMessage.deserializeBinary(new Uint8Array(event.target.result));
-            console.log(message);
+            
             const responseTypes = {
                 "qmq.QMQWebServiceGetResponse": proto.qmq.QMQWebServiceGetResponse,
                 "qmq.QMQWebServiceNotification": proto.qmq.QMQWebServiceNotification,
