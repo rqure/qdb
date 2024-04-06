@@ -21,7 +21,7 @@ func NewRedisLogger(name string, connection *RedisConnection, logLevel int, maxL
 	}
 }
 
-func (l *RedisLogger) Log(level LogLevelEnum, message string) {
+func (l *RedisLogger) Log(level Log_LogLevelEnum, message string) {
 	if int(level) < l.logLevel {
 		return
 	}
@@ -45,25 +45,25 @@ func (l *RedisLogger) Log(level LogLevelEnum, message string) {
 }
 
 func (l *RedisLogger) Trace(message string) {
-	l.Log(LogLevelEnum_LOG_LEVEL_TRACE, message)
+	l.Log(Log_TRACE, message)
 }
 
 func (l *RedisLogger) Debug(message string) {
-	l.Log(LogLevelEnum_LOG_LEVEL_DEBUG, message)
+	l.Log(Log_DEBUG, message)
 }
 
 func (l *RedisLogger) Advise(message string) {
-	l.Log(LogLevelEnum_LOG_LEVEL_ADVISE, message)
+	l.Log(Log_ADVISE, message)
 }
 
 func (l *RedisLogger) Warn(message string) {
-	l.Log(LogLevelEnum_LOG_LEVEL_WARN, message)
+	l.Log(Log_WARN, message)
 }
 
 func (l *RedisLogger) Error(message string) {
-	l.Log(LogLevelEnum_LOG_LEVEL_ERROR, message)
+	l.Log(Log_ERROR, message)
 }
 
 func (l *RedisLogger) Panic(message string) {
-	l.Log(LogLevelEnum_LOG_LEVEL_PANIC, message)
+	l.Log(Log_PANIC, message)
 }
