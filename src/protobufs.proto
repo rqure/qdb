@@ -62,17 +62,17 @@ message Bool {
     bool value = 1;
 }
 
-enum LogLevelEnum {
-    LOG_LEVEL_UNSPECIFIED = 0;
-    LOG_LEVEL_TRACE = 1;
-    LOG_LEVEL_DEBUG = 2;
-    LOG_LEVEL_ADVISE = 3;
-    LOG_LEVEL_WARN = 4;
-    LOG_LEVEL_ERROR = 5;
-    LOG_LEVEL_PANIC = 6;
-}
-
 message Log {
+    enum LogLevelEnum {
+        UNSPECIFIED = 0;
+        TRACE = 1;
+        DEBUG = 2;
+        ADVISE = 3;
+        WARN = 4;
+        ERROR = 5;
+        PANIC = 6;
+    }
+
     string application = 1;
     LogLevelEnum level = 2;
     string message = 3;

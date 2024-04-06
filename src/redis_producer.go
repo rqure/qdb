@@ -1,7 +1,5 @@
 package qmq
 
-import "google.golang.org/protobuf/reflect/protoreflect"
-
 type RedisProducer struct {
 	conn   *RedisConnection
 	stream *RedisStream
@@ -30,16 +28,9 @@ func (p *RedisProducer) Initialize(length int64) {
 	p.stream.Length = length
 }
 
-func (p *RedisProducer) Push(m protoreflect.ProtoMessage) {
+func (p *RedisProducer) Push(m *Message) {
 	p.stream.Locker.Lock()
 	defer p.stream.Locker.Unlock()
 
 	p.conn.StreamAdd(p.stream, m)
-}
-
-func (p *RedisProducer) PushRaw(d string) {
-	p.stream.Locker.Lock()
-	defer p.stream.Locker.Unlock()
-
-	p.conn.StreamAddRaw(p.stream, d)
 }

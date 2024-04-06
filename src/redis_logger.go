@@ -2,8 +2,8 @@ package qmq
 
 import (
 	"fmt"
-	"strings"
 
+	"google.golang.org/protobuf/types/known/anypb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -33,8 +33,15 @@ func (l *RedisLogger) Log(level LogLevelEnum, message string) {
 		Application: l.name,
 	}
 
-	fmt.Printf("%s | %s | %s | %s\n", logMsg.Timestamp.AsTime().String(), logMsg.Application, strings.Replace(logMsg.Level.String(), "LOG_LEVEL_", "", -1), logMsg.Message)
-	l.producer.Push(logMsg)
+	fmt.Printf("%s | %s | %s | %s\n", logMsg.Timestamp.AsTime().String(), logMsg.Application, logMsg.Level.String(), logMsg.Message)
+
+	content, _ := anypb.New(logMsg)
+	l.producer.Push(&Message{
+		From:    l.name,
+		To:      l.name + ":logs",
+		Subject: "Log",
+		Content: content,
+	})
 }
 
 func (l *RedisLogger) Trace(message string) {

@@ -1,13 +1,9 @@
 package qmq
 
-import (
-	"google.golang.org/protobuf/proto"
-)
-
 type RedisConsumable struct {
 	conn   *RedisConnection
 	stream *RedisStream
-	Data   proto.Message
+	data   *Message
 }
 
 func (a *RedisConsumable) Ack() {
@@ -18,6 +14,10 @@ func (a *RedisConsumable) Ack() {
 
 func (a *RedisConsumable) Nack() {
 	a.stream.Locker.Unlock()
+}
+
+func (a *RedisConsumable) Data() *Message {
+	return a.data
 }
 
 type RedisConsumer struct {
@@ -60,11 +60,13 @@ func (c *RedisConsumer) ResetLastId() {
 func (c *RedisConsumer) Pop() Consumable {
 	c.stream.Locker.Lock()
 
+	m := &Message{}
 	err := c.conn.StreamRead(c.stream, m)
 	if err == nil {
 		return &RedisConsumable{
 			conn:   c.conn,
 			stream: c.stream,
+			data:   m,
 		}
 	}
 

@@ -1,13 +1,9 @@
 package qmq
 
-import (
-	"google.golang.org/protobuf/proto"
-)
-
 type Consumable interface {
 	Ack()
 	Nack()
-	Data() proto.Message
+	Data() *Message
 }
 
 type Consumer interface {

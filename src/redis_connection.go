@@ -43,14 +43,14 @@ type RedisConnection struct {
 	lock     sync.Mutex
 }
 
-func NewReadRequest() *Data {
-	return &Data{
+func NewReadRequest() *SchemaData {
+	return &SchemaData{
 		Data: &anypb.Any{},
 	}
 }
 
-func NewWriteRequest(m protoreflect.ProtoMessage) *Data {
-	writeRequest := &Data{
+func NewWriteRequest(m protoreflect.ProtoMessage) *SchemaData {
+	writeRequest := &SchemaData{
 		Data: &anypb.Any{},
 	}
 	writeRequest.Data.MarshalFrom(m)
@@ -94,7 +94,7 @@ func (q *RedisConnection) Disconnect() {
 	}
 }
 
-func (q *RedisConnection) Set(k string, d *Data) error {
+func (q *RedisConnection) Set(k string, d *SchemaData) error {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
@@ -116,7 +116,7 @@ func (q *RedisConnection) Set(k string, d *Data) error {
 	return nil
 }
 
-func (q *RedisConnection) TempSet(k string, d *Data, timeoutMs int64) (bool, error) {
+func (q *RedisConnection) TempSet(k string, d *SchemaData, timeoutMs int64) (bool, error) {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
@@ -154,7 +154,7 @@ func (q *RedisConnection) Unset(k string) error {
 	return nil
 }
 
-func (q *RedisConnection) Get(k string) (*Data, error) {
+func (q *RedisConnection) Get(k string) (*SchemaData, error) {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 

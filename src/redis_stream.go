@@ -3,7 +3,7 @@ package qmq
 type RedisStream struct {
 	key string
 
-	Context StreamContext
+	Context RedisStreamContext
 	Length  int64
 	Locker  *RedisLocker
 }
@@ -11,7 +11,7 @@ type RedisStream struct {
 func NewRedisStream(key string, conn *RedisConnection) *RedisStream {
 	stream := &RedisStream{
 		key: key,
-		Context: StreamContext{
+		Context: RedisStreamContext{
 			LastConsumedId: "0",
 		},
 		Length: 1,
