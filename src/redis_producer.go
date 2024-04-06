@@ -42,6 +42,11 @@ func (p *RedisProducer) Push(i interface{}) {
 		}
 	}
 
-	m := i.(*Message)
+	m, ok := i.(*Message)
+
+	if !ok {
+		return
+	}
+
 	p.conn.StreamAdd(p.stream, m)
 }
