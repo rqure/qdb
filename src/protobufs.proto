@@ -95,6 +95,10 @@ message AudioRequest {
     string filename = 1;
 }
 
+message QMQTextToSpeechRequest {
+    string text = 1;
+}
+
 message MqttMessage {
     uint32 id = 1;
     int32 qos = 2;
