@@ -1136,7 +1136,7 @@ goog.exportSymbol('proto.qmq.GarageDoorState', null, global);
 goog.exportSymbol('proto.qmq.GarageDoorState.GarageDoorStateEnum', null, global);
 goog.exportSymbol('proto.qmq.Int', null, global);
 goog.exportSymbol('proto.qmq.Log', null, global);
-goog.exportSymbol('proto.qmq.LogLevelEnum', null, global);
+goog.exportSymbol('proto.qmq.Log.LogLevelEnum', null, global);
 goog.exportSymbol('proto.qmq.Message', null, global);
 goog.exportSymbol('proto.qmq.MqttMessage', null, global);
 goog.exportSymbol('proto.qmq.Prayer', null, global);
@@ -3595,7 +3595,7 @@ proto.qmq.Log.deserializeBinaryFromReader = function(msg, reader) {
       msg.setApplication(value);
       break;
     case 2:
-      var value = /** @type {!proto.qmq.LogLevelEnum} */ (reader.readEnum());
+      var value = /** @type {!proto.qmq.Log.LogLevelEnum} */ (reader.readEnum());
       msg.setLevel(value);
       break;
     case 3:
@@ -3669,6 +3669,19 @@ proto.qmq.Log.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
+ * @enum {number}
+ */
+proto.qmq.Log.LogLevelEnum = {
+  UNSPECIFIED: 0,
+  TRACE: 1,
+  DEBUG: 2,
+  ADVISE: 3,
+  WARN: 4,
+  ERROR: 5,
+  PANIC: 6
+};
+
+/**
  * optional string application = 1;
  * @return {string}
  */
@@ -3688,15 +3701,15 @@ proto.qmq.Log.prototype.setApplication = function(value) {
 
 /**
  * optional LogLevelEnum level = 2;
- * @return {!proto.qmq.LogLevelEnum}
+ * @return {!proto.qmq.Log.LogLevelEnum}
  */
 proto.qmq.Log.prototype.getLevel = function() {
-  return /** @type {!proto.qmq.LogLevelEnum} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+  return /** @type {!proto.qmq.Log.LogLevelEnum} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
 
 /**
- * @param {!proto.qmq.LogLevelEnum} value
+ * @param {!proto.qmq.Log.LogLevelEnum} value
  * @return {!proto.qmq.Log} returns this
  */
 proto.qmq.Log.prototype.setLevel = function(value) {
@@ -5001,19 +5014,6 @@ proto.qmq.ConnectionState.prototype.setValue = function(value) {
   return jspb.Message.setProto3EnumField(this, 1, value);
 };
 
-
-/**
- * @enum {number}
- */
-proto.qmq.LogLevelEnum = {
-  LOG_LEVEL_UNSPECIFIED: 0,
-  LOG_LEVEL_TRACE: 1,
-  LOG_LEVEL_DEBUG: 2,
-  LOG_LEVEL_ADVISE: 3,
-  LOG_LEVEL_WARN: 4,
-  LOG_LEVEL_ERROR: 5,
-  LOG_LEVEL_PANIC: 6
-};
 
 goog.object.extend(exports, proto.qmq);
 
