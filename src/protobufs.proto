@@ -36,7 +36,7 @@ message WebServiceSetRequest {
 message WebServiceSetResponse {
 }
 
-message Data {
+message SchemaData {
     google.protobuf.Any data = 1;
     string writer = 2;
     google.protobuf.Timestamp writetime = 3;
@@ -79,7 +79,7 @@ message Log {
     google.protobuf.Timestamp timestamp = 4;
 }
 
-message StreamContext {
+message RedisStreamContext {
     string last_consumed_id = 1;
     string last_produced_id = 2;
     int64 total_consumed = 3;
@@ -95,7 +95,7 @@ message AudioRequest {
     string filename = 1;
 }
 
-message QMQTextToSpeechRequest {
+message TextToSpeechRequest {
     string text = 1;
 }
 
@@ -108,22 +108,22 @@ message MqttMessage {
     bool duplicate = 6;
 }
 
-enum ConnectionStateEnum {
-    CONNECTION_STATE_UNSPECIFIED = 0;
-    CONNECTION_STATE_CONNECTED = 1;
-    CONNECTION_STATE_DISCONNECTED = 2;
-}
-
-enum GarageDoorStateEnum {
-    GARAGE_DOOR_STATE_UNSPECIFIED = 0;
-    GARAGE_DOOR_STATE_OPEN = 1;
-    GARAGE_DOOR_STATE_CLOSED = 2;
-}
-
 message GarageDoorState {
+    enum GarageDoorStateEnum {
+        UNSPECIFIED = 0;
+        OPEN = 1;
+        CLOSED = 2;
+    }
+
     GarageDoorStateEnum value = 1;
 }
 
 message ConnectionState {
+    enum ConnectionStateEnum {
+        UNSPECIFIED = 0;
+        CONNECTED = 1;
+        DISCONNECTED = 2;
+    }
+
     ConnectionStateEnum value = 1;
 }
