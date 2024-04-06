@@ -7,13 +7,13 @@ import (
 
 type DefaultLoggerFactory struct{}
 
-func (a *DefaultLoggerFactory) Make(nameProvider NameProvider, connectionProvider ConnectionProvider) Logger {
-	logLength, err := strconv.Atoi(os.Getenv("_LOG_LENGTH"))
+func (a *DefaultLoggerFactory) Create(nameProvider NameProvider, connectionProvider ConnectionProvider) Logger {
+	logLength, err := strconv.Atoi(os.Getenv("QMQ_LOG_LENGTH"))
 	if err != nil {
 		logLength = 100
 	}
 
-	logLevel, err := strconv.Atoi(os.Getenv("_LOG_LEVEL"))
+	logLevel, err := strconv.Atoi(os.Getenv("QMQ_LOG_LEVEL"))
 	if err != nil {
 		logLevel = 1
 	}

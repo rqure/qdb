@@ -42,8 +42,8 @@ func NewDefaultEngine(config DefaultEngineConfig) Engine {
 		config.ConnectionProviderFactory = &DefaultConnectionProviderFactory{}
 	}
 
-	connectionProvider := config.ConnectionProviderFactory.Make()
-	logger := config.LoggerFactory.Make(config.NameProvider, connectionProvider)
+	connectionProvider := config.ConnectionProviderFactory.Create()
+	logger := config.LoggerFactory.Create(config.NameProvider, connectionProvider)
 
 	return &DefaultEngine{
 		connectionProvider: connectionProvider,
@@ -76,7 +76,7 @@ func (e *DefaultEngine) Deinitialize() {
 
 func (e *DefaultEngine) WithProducer(key string) Producer {
 	if e.producers[key] == nil {
-		e.producers[key] = e.config.ProducerFactory.Make(key, e.connectionProvider)
+		e.producers[key] = e.config.ProducerFactory.Create(key, e.connectionProvider)
 	}
 
 	return e.producers[key]
@@ -84,7 +84,7 @@ func (e *DefaultEngine) WithProducer(key string) Producer {
 
 func (e *DefaultEngine) WithConsumer(key string) Consumer {
 	if e.consumers[key] == nil {
-		e.consumers[key] = e.config.ConsumerFactory.Make(key, e.connectionProvider)
+		e.consumers[key] = e.config.ConsumerFactory.Create(key, e.connectionProvider)
 	}
 
 	return e.consumers[key]

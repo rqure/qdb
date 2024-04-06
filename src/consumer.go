@@ -7,5 +7,5 @@ type Consumable interface {
 }
 
 type Consumer interface {
-	Pop() Consumable
+	Pop() chan Consumable
 }

@@ -5,7 +5,7 @@ import "os"
 type DefaultRedisConnectionDetailsProvider struct{}
 
 func (a *DefaultRedisConnectionDetailsProvider) Address() string {
-	addr := os.Getenv("_ADDR")
+	addr := os.Getenv("QMQ_ADDR")
 	if addr == "" {
 		addr = "redis:6379"
 	}
@@ -13,5 +13,5 @@ func (a *DefaultRedisConnectionDetailsProvider) Address() string {
 }
 
 func (a *DefaultRedisConnectionDetailsProvider) Password() string {
-	return os.Getenv("_PASSWORD")
+	return os.Getenv("QMQ_PASSWORD")
 }

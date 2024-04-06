@@ -1,5 +1,7 @@
 package qmq
 
+import "time"
+
 type RedisConsumable struct {
 	conn   *RedisConnection
 	stream *RedisStream
@@ -21,17 +23,21 @@ func (a *RedisConsumable) Data() *Message {
 }
 
 type RedisConsumer struct {
-	conn   *RedisConnection
-	stream *RedisStream
+	conn    *RedisConnection
+	stream  *RedisStream
+	channel chan Consumable
 }
 
 func NewRedisConsumer(key string, conn *RedisConnection) Consumer {
 	consumer := &RedisConsumer{
-		conn:   conn,
-		stream: NewRedisStream(key, conn),
+		conn:    conn,
+		stream:  NewRedisStream(key, conn),
+		channel: make(chan Consumable),
 	}
 
 	consumer.Initialize()
+
+	go consumer.Process()
 
 	return consumer
 }
@@ -57,7 +63,7 @@ func (c *RedisConsumer) ResetLastId() {
 	c.conn.Set(c.stream.ContextKey(), writeRequest)
 }
 
-func (c *RedisConsumer) Pop() Consumable {
+func (c *RedisConsumer) PopItem() Consumable {
 	c.stream.Locker.Lock()
 
 	m := &Message{}
@@ -72,4 +78,25 @@ func (c *RedisConsumer) Pop() Consumable {
 
 	c.stream.Locker.Unlock()
 	return nil
+}
+
+func (c *RedisConsumer) Pop() chan Consumable {
+	return c.channel
+}
+
+func (c *RedisConsumer) Process() {
+	ticker := time.NewTicker(100 * time.Millisecond)
+
+	for {
+		select {
+		case <-ticker.C:
+			for {
+				consumable := c.PopItem()
+				if consumable == nil {
+					break
+				}
+				c.channel <- consumable
+			}
+		}
+	}
 }

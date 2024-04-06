@@ -1,5 +1,5 @@
 package qmq
 
 type ConnectionProviderFactory interface {
-	Make() ConnectionProvider
+	Create() ConnectionProvider
 }
