@@ -2,15 +2,15 @@
 package qmq
 
 import (
-	"fmt"
-	"net/http"
+    "net/http"
+    "fmt"
 )
 
 func Register_web_handler_app() {
 
-	http.HandleFunc("/js/qmq/app.js", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/javascript")
-		fmt.Fprint(w, `(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+    http.HandleFunc("/js/qmq/app.js", func(w http.ResponseWriter, r *http.Request) {
+        w.Header().Set("Content-Type", "application/javascript")
+        fmt.Fprint(w, `(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 (function (global){(function (){
 /*
 
@@ -216,7 +216,7 @@ goog.html.SafeUrl.unwrap=function(a){if(a instanceof goog.html.SafeUrl&&a.constr
 goog.html.SAFE_MIME_TYPE_PATTERN_=/^(?:audio\/(?:3gpp2|3gpp|aac|L16|midi|mp3|mp4|mpeg|oga|ogg|opus|x-m4a|x-matroska|x-wav|wav|webm)|image\/(?:bmp|gif|jpeg|jpg|png|tiff|webp|x-icon)|text\/csv|video\/(?:mpeg|mp4|ogg|webm|quicktime|x-matroska))(?:;\w+=(?:\w+|"[\w;,= ]+"))*$/i;goog.html.SafeUrl.isSafeMimeType=function(a){return goog.html.SAFE_MIME_TYPE_PATTERN_.test(a)};
 goog.html.SafeUrl.fromBlob=function(a){a=goog.html.SafeUrl.isSafeMimeType(a.type)?goog.fs.url.createObjectUrl(a):goog.html.SafeUrl.INNOCUOUS_STRING;return goog.html.SafeUrl.createSafeUrlSecurityPrivateDoNotAccessOrElse(a)};goog.html.SafeUrl.fromMediaSource=function(a){goog.asserts.assert("MediaSource"in goog.global,"No support for MediaSource");a=a instanceof MediaSource?goog.fs.url.createObjectUrl(a):goog.html.SafeUrl.INNOCUOUS_STRING;return goog.html.SafeUrl.createSafeUrlSecurityPrivateDoNotAccessOrElse(a)};
 goog.html.DATA_URL_PATTERN_=/^data:(.*);base64,[a-z0-9+\/]+=*$/i;goog.html.SafeUrl.fromDataUrl=function(a){a=a.replace(/(%0A|%0D)/g,"");var b=a.match(goog.html.DATA_URL_PATTERN_);b=b&&goog.html.SafeUrl.isSafeMimeType(b[1]);return goog.html.SafeUrl.createSafeUrlSecurityPrivateDoNotAccessOrElse(b?a:goog.html.SafeUrl.INNOCUOUS_STRING)};goog.html.SafeUrl.fromTelUrl=function(a){goog.string.internal.caseInsensitiveStartsWith(a,"tel:")||(a=goog.html.SafeUrl.INNOCUOUS_STRING);return goog.html.SafeUrl.createSafeUrlSecurityPrivateDoNotAccessOrElse(a)};
-goog.html.SIP_URL_PATTERN_=/^sip[s]?:[+a-z0-9_.!$%&'*\/=^`+"`"+`{|}~-]+@([a-z0-9-]+\.)+[a-z0-9]{2,63}$/i;goog.html.SafeUrl.fromSipUrl=function(a){goog.html.SIP_URL_PATTERN_.test(decodeURIComponent(a))||(a=goog.html.SafeUrl.INNOCUOUS_STRING);return goog.html.SafeUrl.createSafeUrlSecurityPrivateDoNotAccessOrElse(a)};goog.html.SafeUrl.fromFacebookMessengerUrl=function(a){goog.string.internal.caseInsensitiveStartsWith(a,"fb-messenger://share")||(a=goog.html.SafeUrl.INNOCUOUS_STRING);return goog.html.SafeUrl.createSafeUrlSecurityPrivateDoNotAccessOrElse(a)};
+goog.html.SIP_URL_PATTERN_=/^sip[s]?:[+a-z0-9_.!$%&'*\/=^` + "`" + `{|}~-]+@([a-z0-9-]+\.)+[a-z0-9]{2,63}$/i;goog.html.SafeUrl.fromSipUrl=function(a){goog.html.SIP_URL_PATTERN_.test(decodeURIComponent(a))||(a=goog.html.SafeUrl.INNOCUOUS_STRING);return goog.html.SafeUrl.createSafeUrlSecurityPrivateDoNotAccessOrElse(a)};goog.html.SafeUrl.fromFacebookMessengerUrl=function(a){goog.string.internal.caseInsensitiveStartsWith(a,"fb-messenger://share")||(a=goog.html.SafeUrl.INNOCUOUS_STRING);return goog.html.SafeUrl.createSafeUrlSecurityPrivateDoNotAccessOrElse(a)};
 goog.html.SafeUrl.fromWhatsAppUrl=function(a){goog.string.internal.caseInsensitiveStartsWith(a,"whatsapp://send")||(a=goog.html.SafeUrl.INNOCUOUS_STRING);return goog.html.SafeUrl.createSafeUrlSecurityPrivateDoNotAccessOrElse(a)};goog.html.SafeUrl.fromSmsUrl=function(a){goog.string.internal.caseInsensitiveStartsWith(a,"sms:")&&goog.html.SafeUrl.isSmsUrlBodyValid_(a)||(a=goog.html.SafeUrl.INNOCUOUS_STRING);return goog.html.SafeUrl.createSafeUrlSecurityPrivateDoNotAccessOrElse(a)};
 goog.html.SafeUrl.isSmsUrlBodyValid_=function(a){var b=a.indexOf("#");0<b&&(a=a.substring(0,b));b=a.match(/[?&]body=/gi);if(!b)return!0;if(1<b.length)return!1;a=a.match(/[?&]body=([^&]*)/)[1];if(!a)return!0;try{decodeURIComponent(a)}catch(c){return!1}return/^(?:[a-z0-9\-_.~]|%[0-9a-f]{2})+$/i.test(a)};goog.html.SafeUrl.fromSshUrl=function(a){goog.string.internal.caseInsensitiveStartsWith(a,"ssh://")||(a=goog.html.SafeUrl.INNOCUOUS_STRING);return goog.html.SafeUrl.createSafeUrlSecurityPrivateDoNotAccessOrElse(a)};
 goog.html.SafeUrl.sanitizeChromeExtensionUrl=function(a,b){return goog.html.SafeUrl.sanitizeExtensionUrl_(/^chrome-extension:\/\/([^\/]+)\//,a,b)};goog.html.SafeUrl.sanitizeFirefoxExtensionUrl=function(a,b){return goog.html.SafeUrl.sanitizeExtensionUrl_(/^moz-extension:\/\/([^\/]+)\//,a,b)};goog.html.SafeUrl.sanitizeEdgeExtensionUrl=function(a,b){return goog.html.SafeUrl.sanitizeExtensionUrl_(/^ms-browser-extension:\/\/([^\/]+)\//,a,b)};
@@ -779,7 +779,7 @@ proto.google.protobuf.Any.prototype.getValue = function() {
 
 /**
  * optional bytes value = 2;
- * This is a type-conversion wrapper around `+"`"+`getValue()`+"`"+`
+ * This is a type-conversion wrapper around ` + "`" + `getValue()` + "`" + `
  * @return {string}
  */
 proto.google.protobuf.Any.prototype.getValue_asB64 = function() {
@@ -792,7 +792,7 @@ proto.google.protobuf.Any.prototype.getValue_asB64 = function() {
  * optional bytes value = 2;
  * Note that Uint8Array is not supported on all browsers.
  * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `+"`"+`getValue()`+"`"+`
+ * This is a type-conversion wrapper around ` + "`" + `getValue()` + "`" + `
  * @return {!Uint8Array}
  */
 proto.google.protobuf.Any.prototype.getValue_asU8 = function() {
@@ -1139,7 +1139,6 @@ var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/time
 goog.object.extend(proto, google_protobuf_timestamp_pb);
 var google_protobuf_any_pb = require('google-protobuf/google/protobuf/any_pb.js');
 goog.object.extend(proto, google_protobuf_any_pb);
-<<<<<<< HEAD
 goog.exportSymbol('proto.qmq.AudioRequest', null, global);
 goog.exportSymbol('proto.qmq.Bool', null, global);
 goog.exportSymbol('proto.qmq.ConnectionState', null, global);
@@ -1151,42 +1150,18 @@ goog.exportSymbol('proto.qmq.GarageDoorStateEnum', null, global);
 goog.exportSymbol('proto.qmq.Int', null, global);
 goog.exportSymbol('proto.qmq.Log', null, global);
 goog.exportSymbol('proto.qmq.LogLevelEnum', null, global);
+goog.exportSymbol('proto.qmq.Message', null, global);
 goog.exportSymbol('proto.qmq.MqttMessage', null, global);
 goog.exportSymbol('proto.qmq.Prayer', null, global);
+goog.exportSymbol('proto.qmq.QMQTextToSpeechRequest', null, global);
 goog.exportSymbol('proto.qmq.StreamContext', null, global);
 goog.exportSymbol('proto.qmq.String', null, global);
 goog.exportSymbol('proto.qmq.Timestamp', null, global);
 goog.exportSymbol('proto.qmq.WebServiceGetRequest', null, global);
 goog.exportSymbol('proto.qmq.WebServiceGetResponse', null, global);
-goog.exportSymbol('proto.qmq.WebServiceMessage', null, global);
 goog.exportSymbol('proto.qmq.WebServiceNotification', null, global);
 goog.exportSymbol('proto.qmq.WebServiceSetRequest', null, global);
 goog.exportSymbol('proto.qmq.WebServiceSetResponse', null, global);
-=======
-goog.exportSymbol('proto.qmq.QMQAudioRequest', null, global);
-goog.exportSymbol('proto.qmq.QMQBool', null, global);
-goog.exportSymbol('proto.qmq.QMQConnectionState', null, global);
-goog.exportSymbol('proto.qmq.QMQConnectionStateEnum', null, global);
-goog.exportSymbol('proto.qmq.QMQData', null, global);
-goog.exportSymbol('proto.qmq.QMQFloat', null, global);
-goog.exportSymbol('proto.qmq.QMQGarageDoorState', null, global);
-goog.exportSymbol('proto.qmq.QMQGarageDoorStateEnum', null, global);
-goog.exportSymbol('proto.qmq.QMQInt', null, global);
-goog.exportSymbol('proto.qmq.QMQLog', null, global);
-goog.exportSymbol('proto.qmq.QMQLogLevelEnum', null, global);
-goog.exportSymbol('proto.qmq.QMQMqttMessage', null, global);
-goog.exportSymbol('proto.qmq.QMQPrayer', null, global);
-goog.exportSymbol('proto.qmq.QMQStreamContext', null, global);
-goog.exportSymbol('proto.qmq.QMQString', null, global);
-goog.exportSymbol('proto.qmq.QMQTextToSpeechRequest', null, global);
-goog.exportSymbol('proto.qmq.QMQTimestamp', null, global);
-goog.exportSymbol('proto.qmq.QMQWebServiceGetRequest', null, global);
-goog.exportSymbol('proto.qmq.QMQWebServiceGetResponse', null, global);
-goog.exportSymbol('proto.qmq.QMQWebServiceMessage', null, global);
-goog.exportSymbol('proto.qmq.QMQWebServiceNotification', null, global);
-goog.exportSymbol('proto.qmq.QMQWebServiceSetRequest', null, global);
-goog.exportSymbol('proto.qmq.QMQWebServiceSetResponse', null, global);
->>>>>>> 7e185fd4228aabd1be2d9518083878999a359505
 /**
  * Generated by JsPbCodeGenerator.
  * @param {Array=} opt_data Optional initial data array, typically from a
@@ -1197,16 +1172,16 @@ goog.exportSymbol('proto.qmq.QMQWebServiceSetResponse', null, global);
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebServiceMessage = function(opt_data) {
+proto.qmq.Message = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebServiceMessage, jspb.Message);
+goog.inherits(proto.qmq.Message, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebServiceMessage.displayName = 'proto.qmq.WebServiceMessage';
+  proto.qmq.Message.displayName = 'proto.qmq.Message';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1533,9 +1508,6 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-<<<<<<< HEAD
-proto.qmq.MqttMessage = function(opt_data) {
-=======
 proto.qmq.QMQTextToSpeechRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
@@ -1557,8 +1529,7 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.QMQMqttMessage = function(opt_data) {
->>>>>>> 7e185fd4228aabd1be2d9518083878999a359505
+proto.qmq.MqttMessage = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
 goog.inherits(proto.qmq.MqttMessage, jspb.Message);
@@ -1627,8 +1598,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebServiceMessage.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebServiceMessage.toObject(opt_includeInstance, this);
+proto.qmq.Message.prototype.toObject = function(opt_includeInstance) {
+  return proto.qmq.Message.toObject(opt_includeInstance, this);
 };
 
 
@@ -1637,12 +1608,16 @@ proto.qmq.WebServiceMessage.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebServiceMessage} msg The msg instance to transform.
+ * @param {!proto.qmq.Message} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebServiceMessage.toObject = function(includeInstance, msg) {
+proto.qmq.Message.toObject = function(includeInstance, msg) {
   var f, obj = {
+    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    from: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    to: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    subject: jspb.Message.getFieldWithDefault(msg, 4, ""),
     content: (f = msg.getContent()) && google_protobuf_any_pb.Any.toObject(includeInstance, f)
   };
 
@@ -1657,23 +1632,23 @@ proto.qmq.WebServiceMessage.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebServiceMessage}
+ * @return {!proto.qmq.Message}
  */
-proto.qmq.WebServiceMessage.deserializeBinary = function(bytes) {
+proto.qmq.Message.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebServiceMessage;
-  return proto.qmq.WebServiceMessage.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qmq.Message;
+  return proto.qmq.Message.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebServiceMessage} msg The message object to deserialize into.
+ * @param {!proto.qmq.Message} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebServiceMessage}
+ * @return {!proto.qmq.Message}
  */
-proto.qmq.WebServiceMessage.deserializeBinaryFromReader = function(msg, reader) {
+proto.qmq.Message.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -1681,6 +1656,22 @@ proto.qmq.WebServiceMessage.deserializeBinaryFromReader = function(msg, reader) 
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setId(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setFrom(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTo(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setSubject(value);
+      break;
+    case 5:
       var value = new google_protobuf_any_pb.Any;
       reader.readMessage(value,google_protobuf_any_pb.Any.deserializeBinaryFromReader);
       msg.setContent(value);
@@ -1698,9 +1689,9 @@ proto.qmq.WebServiceMessage.deserializeBinaryFromReader = function(msg, reader) 
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebServiceMessage.prototype.serializeBinary = function() {
+proto.qmq.Message.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebServiceMessage.serializeBinaryToWriter(this, writer);
+  proto.qmq.Message.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -1708,16 +1699,44 @@ proto.qmq.WebServiceMessage.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebServiceMessage} message
+ * @param {!proto.qmq.Message} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebServiceMessage.serializeBinaryToWriter = function(message, writer) {
+proto.qmq.Message.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getId();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getFrom();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getTo();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getSubject();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
   f = message.getContent();
   if (f != null) {
     writer.writeMessage(
-      1,
+      5,
       f,
       google_protobuf_any_pb.Any.serializeBinaryToWriter
     );
@@ -1726,29 +1745,101 @@ proto.qmq.WebServiceMessage.serializeBinaryToWriter = function(message, writer) 
 
 
 /**
- * optional google.protobuf.Any content = 1;
+ * optional string id = 1;
+ * @return {string}
+ */
+proto.qmq.Message.prototype.getId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.qmq.Message} returns this
+ */
+proto.qmq.Message.prototype.setId = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string from = 2;
+ * @return {string}
+ */
+proto.qmq.Message.prototype.getFrom = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.qmq.Message} returns this
+ */
+proto.qmq.Message.prototype.setFrom = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string to = 3;
+ * @return {string}
+ */
+proto.qmq.Message.prototype.getTo = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.qmq.Message} returns this
+ */
+proto.qmq.Message.prototype.setTo = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string subject = 4;
+ * @return {string}
+ */
+proto.qmq.Message.prototype.getSubject = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.qmq.Message} returns this
+ */
+proto.qmq.Message.prototype.setSubject = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional google.protobuf.Any content = 5;
  * @return {?proto.google.protobuf.Any}
  */
-proto.qmq.WebServiceMessage.prototype.getContent = function() {
+proto.qmq.Message.prototype.getContent = function() {
   return /** @type{?proto.google.protobuf.Any} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_any_pb.Any, 1));
+    jspb.Message.getWrapperField(this, google_protobuf_any_pb.Any, 5));
 };
 
 
 /**
  * @param {?proto.google.protobuf.Any|undefined} value
- * @return {!proto.qmq.WebServiceMessage} returns this
+ * @return {!proto.qmq.Message} returns this
 */
-proto.qmq.WebServiceMessage.prototype.setContent = function(value) {
-  return jspb.Message.setWrapperField(this, 1, value);
+proto.qmq.Message.prototype.setContent = function(value) {
+  return jspb.Message.setWrapperField(this, 5, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.WebServiceMessage} returns this
+ * @return {!proto.qmq.Message} returns this
  */
-proto.qmq.WebServiceMessage.prototype.clearContent = function() {
+proto.qmq.Message.prototype.clearContent = function() {
   return this.setContent(undefined);
 };
 
@@ -1757,8 +1848,8 @@ proto.qmq.WebServiceMessage.prototype.clearContent = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.WebServiceMessage.prototype.hasContent = function() {
-  return jspb.Message.getField(this, 1) != null;
+proto.qmq.Message.prototype.hasContent = function() {
+  return jspb.Message.getField(this, 5) != null;
 };
 
 
@@ -4227,10 +4318,6 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-<<<<<<< HEAD
-proto.qmq.MqttMessage.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.MqttMessage.toObject(opt_includeInstance, this);
-=======
 proto.qmq.QMQTextToSpeechRequest.prototype.toObject = function(opt_includeInstance) {
   return proto.qmq.QMQTextToSpeechRequest.toObject(opt_includeInstance, this);
 };
@@ -4361,9 +4448,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.QMQMqttMessage.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.QMQMqttMessage.toObject(opt_includeInstance, this);
->>>>>>> 7e185fd4228aabd1be2d9518083878999a359505
+proto.qmq.MqttMessage.prototype.toObject = function(opt_includeInstance) {
+  return proto.qmq.MqttMessage.toObject(opt_includeInstance, this);
 };
 
 
@@ -4583,7 +4669,7 @@ proto.qmq.MqttMessage.prototype.getPayload = function() {
 
 /**
  * optional bytes payload = 4;
- * This is a type-conversion wrapper around `+"`"+`getPayload()`+"`"+`
+ * This is a type-conversion wrapper around ` + "`" + `getPayload()` + "`" + `
  * @return {string}
  */
 proto.qmq.MqttMessage.prototype.getPayload_asB64 = function() {
@@ -4596,7 +4682,7 @@ proto.qmq.MqttMessage.prototype.getPayload_asB64 = function() {
  * optional bytes payload = 4;
  * Note that Uint8Array is not supported on all browsers.
  * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `+"`"+`getPayload()`+"`"+`
+ * This is a type-conversion wrapper around ` + "`" + `getPayload()` + "`" + `
  * @return {!Uint8Array}
  */
 proto.qmq.MqttMessage.prototype.getPayload_asU8 = function() {
@@ -4944,5 +5030,5 @@ proto.qmq.GarageDoorStateEnum = {
 goog.object.extend(exports, proto.qmq);
 
 },{"google-protobuf":1,"google-protobuf/google/protobuf/any_pb.js":2,"google-protobuf/google/protobuf/timestamp_pb.js":3}]},{},[4]);`)
-	})
+    })
 }
