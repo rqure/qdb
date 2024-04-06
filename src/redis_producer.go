@@ -1,14 +1,16 @@
 package qmq
 
 type RedisProducer struct {
-	conn   *RedisConnection
-	stream *RedisStream
+	conn         *RedisConnection
+	stream       *RedisStream
+	transformers []Transformer
 }
 
-func NewRedisProducer(key string, conn *RedisConnection, length int64) Producer {
+func NewRedisProducer(key string, conn *RedisConnection, length int64, transformers []Transformer) Producer {
 	producer := &RedisProducer{
-		conn:   conn,
-		stream: NewRedisStream(key, conn),
+		conn:         conn,
+		stream:       NewRedisStream(key, conn),
+		transformers: transformers,
 	}
 
 	producer.Initialize(length)
@@ -28,9 +30,18 @@ func (p *RedisProducer) Initialize(length int64) {
 	p.stream.Length = length
 }
 
-func (p *RedisProducer) Push(m *Message) {
+func (p *RedisProducer) Push(i interface{}) {
 	p.stream.Locker.Lock()
 	defer p.stream.Locker.Unlock()
 
+	for _, transformer := range p.transformers {
+		i = transformer.Transform(i)
+
+		if i == nil {
+			return
+		}
+	}
+
+	m := i.(*Message)
 	p.conn.StreamAdd(p.stream, m)
 }
