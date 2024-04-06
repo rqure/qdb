@@ -1,5 +1,5 @@
 package qmq
 
 type TransformerProviderFactory interface {
-	Create() TransformerProvider
+	Create(components EngineComponentProvider) TransformerProvider
 }

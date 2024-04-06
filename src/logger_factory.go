@@ -1,5 +1,5 @@
 package qmq
 
 type LoggerFactory interface {
-	Create(nameProvider NameProvider, connectionProvider ConnectionProvider) Logger
+	Create(components EngineComponentProvider) Logger
 }

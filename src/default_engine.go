@@ -5,20 +5,22 @@ import (
 )
 
 type DefaultEngine struct {
-	connectionProvider ConnectionProvider
-	producers          map[string]Producer
-	consumers          map[string]Consumer
-	logger             Logger
-	config             DefaultEngineConfig
+	transformerProvider TransformerProvider
+	connectionProvider  ConnectionProvider
+	producers           map[string]Producer
+	consumers           map[string]Consumer
+	logger              Logger
+	config              DefaultEngineConfig
 }
 
 type DefaultEngineConfig struct {
-	NameProvider              NameProvider
-	ConnectionProviderFactory ConnectionProviderFactory
-	ConsumerFactory           ConsumerFactory
-	ProducerFactory           ProducerFactory
-	LoggerFactory             LoggerFactory
-	EngineProcessor           EngineProcessor
+	NameProvider               NameProvider
+	TransformerProviderFactory TransformerProviderFactory
+	ConnectionProviderFactory  ConnectionProviderFactory
+	ConsumerFactory            ConsumerFactory
+	ProducerFactory            ProducerFactory
+	LoggerFactory              LoggerFactory
+	EngineProcessor            EngineProcessor
 }
 
 func NewDefaultEngine(config DefaultEngineConfig) Engine {
@@ -42,16 +44,21 @@ func NewDefaultEngine(config DefaultEngineConfig) Engine {
 		config.ConnectionProviderFactory = &DefaultConnectionProviderFactory{}
 	}
 
-	connectionProvider := config.ConnectionProviderFactory.Create()
-	logger := config.LoggerFactory.Create(config.NameProvider, connectionProvider)
-
-	return &DefaultEngine{
-		connectionProvider: connectionProvider,
-		logger:             logger,
-		producers:          make(map[string]Producer),
-		consumers:          make(map[string]Consumer),
-		config:             config,
+	if config.TransformerProviderFactory == nil {
+		config.TransformerProviderFactory = &DefaultTransformerProviderFactory{}
 	}
+
+	e := &DefaultEngine{
+		producers: make(map[string]Producer),
+		consumers: make(map[string]Consumer),
+		config:    config,
+	}
+
+	e.connectionProvider = config.ConnectionProviderFactory.Create()
+	e.logger = config.LoggerFactory.Create(e)
+	e.transformerProvider = config.TransformerProviderFactory.Create(e)
+
+	return e
 }
 
 func (e *DefaultEngine) Initialize() {
@@ -76,7 +83,7 @@ func (e *DefaultEngine) Deinitialize() {
 
 func (e *DefaultEngine) WithProducer(key string) Producer {
 	if e.producers[key] == nil {
-		e.producers[key] = e.config.ProducerFactory.Create(key, e.connectionProvider)
+		e.producers[key] = e.config.ProducerFactory.Create(key, e)
 	}
 
 	return e.producers[key]
@@ -84,7 +91,7 @@ func (e *DefaultEngine) WithProducer(key string) Producer {
 
 func (e *DefaultEngine) WithConsumer(key string) Consumer {
 	if e.consumers[key] == nil {
-		e.consumers[key] = e.config.ConsumerFactory.Create(key, e.connectionProvider)
+		e.consumers[key] = e.config.ConsumerFactory.Create(key, e)
 	}
 
 	return e.consumers[key]
@@ -96,6 +103,14 @@ func (e *DefaultEngine) WithLogger() Logger {
 
 func (e *DefaultEngine) WithConnectionProvider() ConnectionProvider {
 	return e.connectionProvider
+}
+
+func (e *DefaultEngine) WithTransformerProvider() TransformerProvider {
+	return e.transformerProvider
+}
+
+func (e *DefaultEngine) WithNameProvider() NameProvider {
+	return e.config.NameProvider
 }
 
 func (e *DefaultEngine) Run() {
