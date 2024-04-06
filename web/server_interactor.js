@@ -4,9 +4,9 @@ class ServerInteractor {
         this._notificationManager = notificationManager;
         this._url = url;
         this._ws = null;
-        this._connectionStatus = new proto.qmq.QMQConnectionState();
+        this._connectionStatus = new proto.qmq.ConnectionState();
 
-        this._connectionStatus.setValue(proto.qmq.QMQConnectionStateEnum.CONNECTION_STATE_DISCONNECTED);
+        this._connectionStatus.setValue(proto.qmq.ConnectionStateEnum.CONNECTION_STATE_DISCONNECTED);
         this.notifyConnectionStatus();
     }
 
@@ -14,8 +14,8 @@ class ServerInteractor {
 
     notifyConnectionStatus() {
         const value = new proto.google.protobuf.Any();
-        value.pack(this._connectionStatus.serializeBinary(), 'qmq.QMQConnectionState');
-        const notification = new proto.qmq.QMQWebServiceNotification();
+        value.pack(this._connectionStatus.serializeBinary(), 'qmq.ConnectionState');
+        const notification = new proto.qmq.WebServiceNotification();
         notification.setKey('connected');
         notification.setValue(value);
 
@@ -26,11 +26,11 @@ class ServerInteractor {
         const fileReader = new FileReader();
         const me = this;
         fileReader.onload = function(event) {
-            const message = proto.qmq.QMQWebServiceMessage.deserializeBinary(new Uint8Array(event.target.result));
+            const message = proto.qmq.WebServiceMessage.deserializeBinary(new Uint8Array(event.target.result));
             
             const responseTypes = {
-                "qmq.QMQWebServiceGetResponse": proto.qmq.QMQWebServiceGetResponse,
-                "qmq.QMQWebServiceNotification": proto.qmq.QMQWebServiceNotification,
+                "qmq.WebServiceGetResponse": proto.qmq.WebServiceGetResponse,
+                "qmq.WebServiceNotification": proto.qmq.WebServiceNotification,
             }
     
             for (const responseType in responseTypes) {
@@ -48,12 +48,12 @@ class ServerInteractor {
     }
 
     onOpen(event) {
-        this._connectionStatus.setValue(proto.qmq.QMQConnectionStateEnum.CONNECTION_STATE_CONNECTED);
+        this._connectionStatus.setValue(proto.qmq.ConnectionStateEnum.CONNECTION_STATE_CONNECTED);
         this.notifyConnectionStatus();
     }
 
     onClose(event) {
-        this._connectionStatus.setValue(proto.qmq.QMQConnectionStateEnum.CONNECTION_STATE_DISCONNECTED);
+        this._connectionStatus.setValue(proto.qmq.ConnectionStateEnum.CONNECTION_STATE_DISCONNECTED);
         this.notifyConnectionStatus();
 
         this.connect();
@@ -68,30 +68,30 @@ class ServerInteractor {
     }
 
     get(key) {
-        if (this._connectionStatus.getValue() !== proto.qmq.QMQConnectionStateEnum.CONNECTION_STATE_CONNECTED)
+        if (this._connectionStatus.getValue() !== proto.qmq.ConnectionStateEnum.CONNECTION_STATE_CONNECTED)
             return;
         
-        const request = new proto.qmq.QMQWebServiceGetRequest();
+        const request = new proto.qmq.WebServiceGetRequest();
         request.setKey(key);
 
-        const message = new proto.qmq.QMQWebServiceMessage();
+        const message = new proto.qmq.WebServiceMessage();
         message.setContent(new proto.google.protobuf.Any());
-        message.getContent().pack(request.serializeBinary(), 'qmq.QMQWebServiceGetRequest');
+        message.getContent().pack(request.serializeBinary(), 'qmq.WebServiceGetRequest');
 
         this._ws.send(message.serializeBinary());
     }
 
     set(key, value) {
-        if (this._connectionStatus.getValue() !== proto.qmq.QMQConnectionStateEnum.CONNECTION_STATE_CONNECTED)
+        if (this._connectionStatus.getValue() !== proto.qmq.ConnectionStateEnum.CONNECTION_STATE_CONNECTED)
             return;
 
-        const request = new proto.qmq.QMQWebServiceSetRequest();
+        const request = new proto.qmq.WebServiceSetRequest();
         request.setKey(key);
         request.setValue(value);
 
-        const message = new proto.qmq.QMQWebServiceMessage();
+        const message = new proto.qmq.WebServiceMessage();
         message.setContent(new proto.google.protobuf.Any());
-        message.getContent().pack(request.serializeBinary(), 'qmq.QMQWebServiceSetRequest');
+        message.getContent().pack(request.serializeBinary(), 'qmq.WebServiceSetRequest');
 
         this._ws.send(message.serializeBinary());
     }

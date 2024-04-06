@@ -17,21 +17,21 @@ var webSocketClientIdCounter uint64
 
 type WebSocketClient struct {
 	clientId uint64
-	readCh   chan *QMQWebServiceMessage
-	writeCh  chan *QMQWebServiceMessage
+	readCh   chan *WebServiceMessage
+	writeCh  chan *WebServiceMessage
 	conn     *websocket.Conn
-	app      *QMQApplication
+	app      *DefaultEngine
 	wg       sync.WaitGroup
 	onClose  func(uint64)
 }
 
-func NewWebSocketClient(conn *websocket.Conn, app *QMQApplication, onClose func(uint64)) *WebSocketClient {
+func NewWebSocketClient(conn *websocket.Conn, app *DefaultEngine, onClose func(uint64)) *WebSocketClient {
 	newClientId := atomic.AddUint64(&webSocketClientIdCounter, 1)
 
 	wsc := &WebSocketClient{
 		clientId: newClientId,
-		readCh:   make(chan *QMQWebServiceMessage),
-		writeCh:  make(chan *QMQWebServiceMessage),
+		readCh:   make(chan *WebServiceMessage),
+		writeCh:  make(chan *WebServiceMessage),
 		conn:     conn,
 		app:      app,
 		onClose:  onClose,
@@ -45,7 +45,7 @@ func NewWebSocketClient(conn *websocket.Conn, app *QMQApplication, onClose func(
 	return wsc
 }
 
-func (wsc *WebSocketClient) Read() chan *QMQWebServiceMessage {
+func (wsc *WebSocketClient) Read() chan *WebServiceMessage {
 	return wsc.readCh
 }
 
@@ -57,7 +57,7 @@ func (wsc *WebSocketClient) Write(v proto.Message) {
 		return
 	}
 
-	message := new(QMQWebServiceMessage)
+	message := new(WebServiceMessage)
 	message.Content = content
 	wsc.writeCh <- message
 }
@@ -95,7 +95,7 @@ func (wsc *WebSocketClient) DoPendingReads() {
 		}
 
 		if messageType == websocket.BinaryMessage {
-			request := new(QMQWebServiceMessage)
+			request := new(WebServiceMessage)
 
 			if err := proto.Unmarshal(p, request); err != nil {
 				wsc.app.Logger().Trace(fmt.Sprintf("WebSocket [%d] received invalid message: %v", wsc.clientId, request))
@@ -133,7 +133,7 @@ func (wsc *WebSocketClient) DoPendingWrites() {
 }
 
 type WebServiceContext interface {
-	App() *QMQApplication
+	App() *DefaultEngine
 	Schema() WebServiceSchema
 	NotifyClients(keys []string)
 }
@@ -149,11 +149,11 @@ type WebServiceSetHandler interface {
 type WebServiceSchema interface {
 	Get(key string) proto.Message
 	Set(key string, value proto.Message)
-	Initialize(db *QMQConnection)
+	Initialize(db *RedisConnection)
 }
 
 type Schema struct {
-	db *QMQConnection
+	db *RedisConnection
 	kv map[string]proto.Message
 }
 
@@ -184,7 +184,7 @@ func (s *Schema) Set(key string, value proto.Message) {
 	s.db.SetValue(key, value)
 }
 
-func (s *Schema) Initialize(db *QMQConnection) {
+func (s *Schema) Initialize(db *RedisConnection) {
 	s.db = db
 
 	for key := range s.kv {
@@ -199,7 +199,7 @@ func (s *Schema) Initialize(db *QMQConnection) {
 type WebService struct {
 	clients      map[uint64]*WebSocketClient
 	clientsMutex sync.Mutex
-	app          *QMQApplication
+	app          *DefaultEngine
 	schema       WebServiceSchema
 	tickHandlers []WebServiceTickHandler
 	setHandlers  []WebServiceSetHandler
@@ -208,7 +208,7 @@ type WebService struct {
 func NewWebService() *WebService {
 	return &WebService{
 		clients: make(map[uint64]*WebSocketClient),
-		app:     NewQMQApplication("garage"),
+		app:     NewDefaultEngine("garage"),
 	}
 }
 
@@ -256,7 +256,7 @@ func (w *WebService) NotifyClients(keys []string) {
 				continue
 			}
 
-			w.clients[clientId].Write(&QMQWebServiceNotification{
+			w.clients[clientId].Write(&WebServiceNotification{
 				Key:   key,
 				Value: value,
 			})
@@ -264,7 +264,7 @@ func (w *WebService) NotifyClients(keys []string) {
 	}
 }
 
-func (w *WebService) App() *QMQApplication {
+func (w *WebService) App() *DefaultEngine {
 	return w.app
 }
 
@@ -324,9 +324,9 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 	client := w.addClient(conn)
 
 	for message := range client.Read() {
-		if request := new(QMQWebServiceGetRequest); message.Content.MessageIs(request) {
+		if request := new(WebServiceGetRequest); message.Content.MessageIs(request) {
 			message.Content.UnmarshalTo(request)
-			response := new(QMQWebServiceGetResponse)
+			response := new(WebServiceGetResponse)
 			value, err := anypb.New(w.schema.Get(request.Key))
 
 			if err != nil {
@@ -338,9 +338,9 @@ func (w *WebService) onWSRequest(wr http.ResponseWriter, req *http.Request) {
 			response.Value = value
 
 			client.Write(response)
-		} else if request := new(QMQWebServiceSetRequest); message.Content.MessageIs(request) {
+		} else if request := new(WebServiceSetRequest); message.Content.MessageIs(request) {
 			message.Content.UnmarshalTo(request)
-			response := new(QMQWebServiceSetResponse)
+			response := new(WebServiceSetResponse)
 			w.schema.Set(request.Key, request.Value)
 			client.Write(response)
 

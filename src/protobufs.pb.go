@@ -22,21 +22,21 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type QMQLogLevelEnum int32
+type LogLevelEnum int32
 
 const (
-	QMQLogLevelEnum_LOG_LEVEL_UNSPECIFIED QMQLogLevelEnum = 0
-	QMQLogLevelEnum_LOG_LEVEL_TRACE       QMQLogLevelEnum = 1
-	QMQLogLevelEnum_LOG_LEVEL_DEBUG       QMQLogLevelEnum = 2
-	QMQLogLevelEnum_LOG_LEVEL_ADVISE      QMQLogLevelEnum = 3
-	QMQLogLevelEnum_LOG_LEVEL_WARN        QMQLogLevelEnum = 4
-	QMQLogLevelEnum_LOG_LEVEL_ERROR       QMQLogLevelEnum = 5
-	QMQLogLevelEnum_LOG_LEVEL_PANIC       QMQLogLevelEnum = 6
+	LogLevelEnum_LOG_LEVEL_UNSPECIFIED LogLevelEnum = 0
+	LogLevelEnum_LOG_LEVEL_TRACE       LogLevelEnum = 1
+	LogLevelEnum_LOG_LEVEL_DEBUG       LogLevelEnum = 2
+	LogLevelEnum_LOG_LEVEL_ADVISE      LogLevelEnum = 3
+	LogLevelEnum_LOG_LEVEL_WARN        LogLevelEnum = 4
+	LogLevelEnum_LOG_LEVEL_ERROR       LogLevelEnum = 5
+	LogLevelEnum_LOG_LEVEL_PANIC       LogLevelEnum = 6
 )
 
-// Enum value maps for QMQLogLevelEnum.
+// Enum value maps for LogLevelEnum.
 var (
-	QMQLogLevelEnum_name = map[int32]string{
+	LogLevelEnum_name = map[int32]string{
 		0: "LOG_LEVEL_UNSPECIFIED",
 		1: "LOG_LEVEL_TRACE",
 		2: "LOG_LEVEL_DEBUG",
@@ -45,7 +45,7 @@ var (
 		5: "LOG_LEVEL_ERROR",
 		6: "LOG_LEVEL_PANIC",
 	}
-	QMQLogLevelEnum_value = map[string]int32{
+	LogLevelEnum_value = map[string]int32{
 		"LOG_LEVEL_UNSPECIFIED": 0,
 		"LOG_LEVEL_TRACE":       1,
 		"LOG_LEVEL_DEBUG":       2,
@@ -56,132 +56,132 @@ var (
 	}
 )
 
-func (x QMQLogLevelEnum) Enum() *QMQLogLevelEnum {
-	p := new(QMQLogLevelEnum)
+func (x LogLevelEnum) Enum() *LogLevelEnum {
+	p := new(LogLevelEnum)
 	*p = x
 	return p
 }
 
-func (x QMQLogLevelEnum) String() string {
+func (x LogLevelEnum) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (QMQLogLevelEnum) Descriptor() protoreflect.EnumDescriptor {
+func (LogLevelEnum) Descriptor() protoreflect.EnumDescriptor {
 	return file_src_protobufs_proto_enumTypes[0].Descriptor()
 }
 
-func (QMQLogLevelEnum) Type() protoreflect.EnumType {
+func (LogLevelEnum) Type() protoreflect.EnumType {
 	return &file_src_protobufs_proto_enumTypes[0]
 }
 
-func (x QMQLogLevelEnum) Number() protoreflect.EnumNumber {
+func (x LogLevelEnum) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use QMQLogLevelEnum.Descriptor instead.
-func (QMQLogLevelEnum) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use LogLevelEnum.Descriptor instead.
+func (LogLevelEnum) EnumDescriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{0}
 }
 
-type QMQConnectionStateEnum int32
+type ConnectionStateEnum int32
 
 const (
-	QMQConnectionStateEnum_CONNECTION_STATE_UNSPECIFIED  QMQConnectionStateEnum = 0
-	QMQConnectionStateEnum_CONNECTION_STATE_CONNECTED    QMQConnectionStateEnum = 1
-	QMQConnectionStateEnum_CONNECTION_STATE_DISCONNECTED QMQConnectionStateEnum = 2
+	ConnectionStateEnum_CONNECTION_STATE_UNSPECIFIED  ConnectionStateEnum = 0
+	ConnectionStateEnum_CONNECTION_STATE_CONNECTED    ConnectionStateEnum = 1
+	ConnectionStateEnum_CONNECTION_STATE_DISCONNECTED ConnectionStateEnum = 2
 )
 
-// Enum value maps for QMQConnectionStateEnum.
+// Enum value maps for ConnectionStateEnum.
 var (
-	QMQConnectionStateEnum_name = map[int32]string{
+	ConnectionStateEnum_name = map[int32]string{
 		0: "CONNECTION_STATE_UNSPECIFIED",
 		1: "CONNECTION_STATE_CONNECTED",
 		2: "CONNECTION_STATE_DISCONNECTED",
 	}
-	QMQConnectionStateEnum_value = map[string]int32{
+	ConnectionStateEnum_value = map[string]int32{
 		"CONNECTION_STATE_UNSPECIFIED":  0,
 		"CONNECTION_STATE_CONNECTED":    1,
 		"CONNECTION_STATE_DISCONNECTED": 2,
 	}
 )
 
-func (x QMQConnectionStateEnum) Enum() *QMQConnectionStateEnum {
-	p := new(QMQConnectionStateEnum)
+func (x ConnectionStateEnum) Enum() *ConnectionStateEnum {
+	p := new(ConnectionStateEnum)
 	*p = x
 	return p
 }
 
-func (x QMQConnectionStateEnum) String() string {
+func (x ConnectionStateEnum) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (QMQConnectionStateEnum) Descriptor() protoreflect.EnumDescriptor {
+func (ConnectionStateEnum) Descriptor() protoreflect.EnumDescriptor {
 	return file_src_protobufs_proto_enumTypes[1].Descriptor()
 }
 
-func (QMQConnectionStateEnum) Type() protoreflect.EnumType {
+func (ConnectionStateEnum) Type() protoreflect.EnumType {
 	return &file_src_protobufs_proto_enumTypes[1]
 }
 
-func (x QMQConnectionStateEnum) Number() protoreflect.EnumNumber {
+func (x ConnectionStateEnum) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use QMQConnectionStateEnum.Descriptor instead.
-func (QMQConnectionStateEnum) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use ConnectionStateEnum.Descriptor instead.
+func (ConnectionStateEnum) EnumDescriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{1}
 }
 
-type QMQGarageDoorStateEnum int32
+type GarageDoorStateEnum int32
 
 const (
-	QMQGarageDoorStateEnum_GARAGE_DOOR_STATE_UNSPECIFIED QMQGarageDoorStateEnum = 0
-	QMQGarageDoorStateEnum_GARAGE_DOOR_STATE_OPEN        QMQGarageDoorStateEnum = 1
-	QMQGarageDoorStateEnum_GARAGE_DOOR_STATE_CLOSED      QMQGarageDoorStateEnum = 2
+	GarageDoorStateEnum_GARAGE_DOOR_STATE_UNSPECIFIED GarageDoorStateEnum = 0
+	GarageDoorStateEnum_GARAGE_DOOR_STATE_OPEN        GarageDoorStateEnum = 1
+	GarageDoorStateEnum_GARAGE_DOOR_STATE_CLOSED      GarageDoorStateEnum = 2
 )
 
-// Enum value maps for QMQGarageDoorStateEnum.
+// Enum value maps for GarageDoorStateEnum.
 var (
-	QMQGarageDoorStateEnum_name = map[int32]string{
+	GarageDoorStateEnum_name = map[int32]string{
 		0: "GARAGE_DOOR_STATE_UNSPECIFIED",
 		1: "GARAGE_DOOR_STATE_OPEN",
 		2: "GARAGE_DOOR_STATE_CLOSED",
 	}
-	QMQGarageDoorStateEnum_value = map[string]int32{
+	GarageDoorStateEnum_value = map[string]int32{
 		"GARAGE_DOOR_STATE_UNSPECIFIED": 0,
 		"GARAGE_DOOR_STATE_OPEN":        1,
 		"GARAGE_DOOR_STATE_CLOSED":      2,
 	}
 )
 
-func (x QMQGarageDoorStateEnum) Enum() *QMQGarageDoorStateEnum {
-	p := new(QMQGarageDoorStateEnum)
+func (x GarageDoorStateEnum) Enum() *GarageDoorStateEnum {
+	p := new(GarageDoorStateEnum)
 	*p = x
 	return p
 }
 
-func (x QMQGarageDoorStateEnum) String() string {
+func (x GarageDoorStateEnum) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (QMQGarageDoorStateEnum) Descriptor() protoreflect.EnumDescriptor {
+func (GarageDoorStateEnum) Descriptor() protoreflect.EnumDescriptor {
 	return file_src_protobufs_proto_enumTypes[2].Descriptor()
 }
 
-func (QMQGarageDoorStateEnum) Type() protoreflect.EnumType {
+func (GarageDoorStateEnum) Type() protoreflect.EnumType {
 	return &file_src_protobufs_proto_enumTypes[2]
 }
 
-func (x QMQGarageDoorStateEnum) Number() protoreflect.EnumNumber {
+func (x GarageDoorStateEnum) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use QMQGarageDoorStateEnum.Descriptor instead.
-func (QMQGarageDoorStateEnum) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use GarageDoorStateEnum.Descriptor instead.
+func (GarageDoorStateEnum) EnumDescriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{2}
 }
 
-type QMQWebServiceMessage struct {
+type WebServiceMessage struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -189,8 +189,8 @@ type QMQWebServiceMessage struct {
 	Content *anypb.Any `protobuf:"bytes,1,opt,name=content,proto3" json:"content,omitempty"`
 }
 
-func (x *QMQWebServiceMessage) Reset() {
-	*x = QMQWebServiceMessage{}
+func (x *WebServiceMessage) Reset() {
+	*x = WebServiceMessage{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_src_protobufs_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -198,13 +198,13 @@ func (x *QMQWebServiceMessage) Reset() {
 	}
 }
 
-func (x *QMQWebServiceMessage) String() string {
+func (x *WebServiceMessage) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QMQWebServiceMessage) ProtoMessage() {}
+func (*WebServiceMessage) ProtoMessage() {}
 
-func (x *QMQWebServiceMessage) ProtoReflect() protoreflect.Message {
+func (x *WebServiceMessage) ProtoReflect() protoreflect.Message {
 	mi := &file_src_protobufs_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -216,19 +216,19 @@ func (x *QMQWebServiceMessage) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QMQWebServiceMessage.ProtoReflect.Descriptor instead.
-func (*QMQWebServiceMessage) Descriptor() ([]byte, []int) {
+// Deprecated: Use WebServiceMessage.ProtoReflect.Descriptor instead.
+func (*WebServiceMessage) Descriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *QMQWebServiceMessage) GetContent() *anypb.Any {
+func (x *WebServiceMessage) GetContent() *anypb.Any {
 	if x != nil {
 		return x.Content
 	}
 	return nil
 }
 
-type QMQWebServiceGetRequest struct {
+type WebServiceGetRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -236,8 +236,8 @@ type QMQWebServiceGetRequest struct {
 	Key string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
 }
 
-func (x *QMQWebServiceGetRequest) Reset() {
-	*x = QMQWebServiceGetRequest{}
+func (x *WebServiceGetRequest) Reset() {
+	*x = WebServiceGetRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_src_protobufs_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -245,13 +245,13 @@ func (x *QMQWebServiceGetRequest) Reset() {
 	}
 }
 
-func (x *QMQWebServiceGetRequest) String() string {
+func (x *WebServiceGetRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QMQWebServiceGetRequest) ProtoMessage() {}
+func (*WebServiceGetRequest) ProtoMessage() {}
 
-func (x *QMQWebServiceGetRequest) ProtoReflect() protoreflect.Message {
+func (x *WebServiceGetRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_src_protobufs_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -263,19 +263,19 @@ func (x *QMQWebServiceGetRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QMQWebServiceGetRequest.ProtoReflect.Descriptor instead.
-func (*QMQWebServiceGetRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use WebServiceGetRequest.ProtoReflect.Descriptor instead.
+func (*WebServiceGetRequest) Descriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *QMQWebServiceGetRequest) GetKey() string {
+func (x *WebServiceGetRequest) GetKey() string {
 	if x != nil {
 		return x.Key
 	}
 	return ""
 }
 
-type QMQWebServiceGetResponse struct {
+type WebServiceGetResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -284,8 +284,8 @@ type QMQWebServiceGetResponse struct {
 	Value *anypb.Any `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
 }
 
-func (x *QMQWebServiceGetResponse) Reset() {
-	*x = QMQWebServiceGetResponse{}
+func (x *WebServiceGetResponse) Reset() {
+	*x = WebServiceGetResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_src_protobufs_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -293,13 +293,13 @@ func (x *QMQWebServiceGetResponse) Reset() {
 	}
 }
 
-func (x *QMQWebServiceGetResponse) String() string {
+func (x *WebServiceGetResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QMQWebServiceGetResponse) ProtoMessage() {}
+func (*WebServiceGetResponse) ProtoMessage() {}
 
-func (x *QMQWebServiceGetResponse) ProtoReflect() protoreflect.Message {
+func (x *WebServiceGetResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_src_protobufs_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -311,26 +311,26 @@ func (x *QMQWebServiceGetResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QMQWebServiceGetResponse.ProtoReflect.Descriptor instead.
-func (*QMQWebServiceGetResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use WebServiceGetResponse.ProtoReflect.Descriptor instead.
+func (*WebServiceGetResponse) Descriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *QMQWebServiceGetResponse) GetKey() string {
+func (x *WebServiceGetResponse) GetKey() string {
 	if x != nil {
 		return x.Key
 	}
 	return ""
 }
 
-func (x *QMQWebServiceGetResponse) GetValue() *anypb.Any {
+func (x *WebServiceGetResponse) GetValue() *anypb.Any {
 	if x != nil {
 		return x.Value
 	}
 	return nil
 }
 
-type QMQWebServiceNotification struct {
+type WebServiceNotification struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -339,8 +339,8 @@ type QMQWebServiceNotification struct {
 	Value *anypb.Any `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
 }
 
-func (x *QMQWebServiceNotification) Reset() {
-	*x = QMQWebServiceNotification{}
+func (x *WebServiceNotification) Reset() {
+	*x = WebServiceNotification{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_src_protobufs_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -348,13 +348,13 @@ func (x *QMQWebServiceNotification) Reset() {
 	}
 }
 
-func (x *QMQWebServiceNotification) String() string {
+func (x *WebServiceNotification) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QMQWebServiceNotification) ProtoMessage() {}
+func (*WebServiceNotification) ProtoMessage() {}
 
-func (x *QMQWebServiceNotification) ProtoReflect() protoreflect.Message {
+func (x *WebServiceNotification) ProtoReflect() protoreflect.Message {
 	mi := &file_src_protobufs_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -366,26 +366,26 @@ func (x *QMQWebServiceNotification) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QMQWebServiceNotification.ProtoReflect.Descriptor instead.
-func (*QMQWebServiceNotification) Descriptor() ([]byte, []int) {
+// Deprecated: Use WebServiceNotification.ProtoReflect.Descriptor instead.
+func (*WebServiceNotification) Descriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *QMQWebServiceNotification) GetKey() string {
+func (x *WebServiceNotification) GetKey() string {
 	if x != nil {
 		return x.Key
 	}
 	return ""
 }
 
-func (x *QMQWebServiceNotification) GetValue() *anypb.Any {
+func (x *WebServiceNotification) GetValue() *anypb.Any {
 	if x != nil {
 		return x.Value
 	}
 	return nil
 }
 
-type QMQWebServiceSetRequest struct {
+type WebServiceSetRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -394,8 +394,8 @@ type QMQWebServiceSetRequest struct {
 	Value *anypb.Any `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
 }
 
-func (x *QMQWebServiceSetRequest) Reset() {
-	*x = QMQWebServiceSetRequest{}
+func (x *WebServiceSetRequest) Reset() {
+	*x = WebServiceSetRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_src_protobufs_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -403,13 +403,13 @@ func (x *QMQWebServiceSetRequest) Reset() {
 	}
 }
 
-func (x *QMQWebServiceSetRequest) String() string {
+func (x *WebServiceSetRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QMQWebServiceSetRequest) ProtoMessage() {}
+func (*WebServiceSetRequest) ProtoMessage() {}
 
-func (x *QMQWebServiceSetRequest) ProtoReflect() protoreflect.Message {
+func (x *WebServiceSetRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_src_protobufs_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -421,33 +421,33 @@ func (x *QMQWebServiceSetRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QMQWebServiceSetRequest.ProtoReflect.Descriptor instead.
-func (*QMQWebServiceSetRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use WebServiceSetRequest.ProtoReflect.Descriptor instead.
+func (*WebServiceSetRequest) Descriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *QMQWebServiceSetRequest) GetKey() string {
+func (x *WebServiceSetRequest) GetKey() string {
 	if x != nil {
 		return x.Key
 	}
 	return ""
 }
 
-func (x *QMQWebServiceSetRequest) GetValue() *anypb.Any {
+func (x *WebServiceSetRequest) GetValue() *anypb.Any {
 	if x != nil {
 		return x.Value
 	}
 	return nil
 }
 
-type QMQWebServiceSetResponse struct {
+type WebServiceSetResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *QMQWebServiceSetResponse) Reset() {
-	*x = QMQWebServiceSetResponse{}
+func (x *WebServiceSetResponse) Reset() {
+	*x = WebServiceSetResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_src_protobufs_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -455,13 +455,13 @@ func (x *QMQWebServiceSetResponse) Reset() {
 	}
 }
 
-func (x *QMQWebServiceSetResponse) String() string {
+func (x *WebServiceSetResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QMQWebServiceSetResponse) ProtoMessage() {}
+func (*WebServiceSetResponse) ProtoMessage() {}
 
-func (x *QMQWebServiceSetResponse) ProtoReflect() protoreflect.Message {
+func (x *WebServiceSetResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_src_protobufs_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -473,12 +473,12 @@ func (x *QMQWebServiceSetResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QMQWebServiceSetResponse.ProtoReflect.Descriptor instead.
-func (*QMQWebServiceSetResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use WebServiceSetResponse.ProtoReflect.Descriptor instead.
+func (*WebServiceSetResponse) Descriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{5}
 }
 
-type QMQData struct {
+type Data struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -488,8 +488,8 @@ type QMQData struct {
 	Writetime *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=writetime,proto3" json:"writetime,omitempty"`
 }
 
-func (x *QMQData) Reset() {
-	*x = QMQData{}
+func (x *Data) Reset() {
+	*x = Data{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_src_protobufs_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -497,13 +497,13 @@ func (x *QMQData) Reset() {
 	}
 }
 
-func (x *QMQData) String() string {
+func (x *Data) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QMQData) ProtoMessage() {}
+func (*Data) ProtoMessage() {}
 
-func (x *QMQData) ProtoReflect() protoreflect.Message {
+func (x *Data) ProtoReflect() protoreflect.Message {
 	mi := &file_src_protobufs_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -515,33 +515,33 @@ func (x *QMQData) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QMQData.ProtoReflect.Descriptor instead.
-func (*QMQData) Descriptor() ([]byte, []int) {
+// Deprecated: Use Data.ProtoReflect.Descriptor instead.
+func (*Data) Descriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *QMQData) GetData() *anypb.Any {
+func (x *Data) GetData() *anypb.Any {
 	if x != nil {
 		return x.Data
 	}
 	return nil
 }
 
-func (x *QMQData) GetWriter() string {
+func (x *Data) GetWriter() string {
 	if x != nil {
 		return x.Writer
 	}
 	return ""
 }
 
-func (x *QMQData) GetWritetime() *timestamppb.Timestamp {
+func (x *Data) GetWritetime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.Writetime
 	}
 	return nil
 }
 
-type QMQInt struct {
+type Int struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -549,8 +549,8 @@ type QMQInt struct {
 	Value int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
-func (x *QMQInt) Reset() {
-	*x = QMQInt{}
+func (x *Int) Reset() {
+	*x = Int{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_src_protobufs_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -558,13 +558,13 @@ func (x *QMQInt) Reset() {
 	}
 }
 
-func (x *QMQInt) String() string {
+func (x *Int) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QMQInt) ProtoMessage() {}
+func (*Int) ProtoMessage() {}
 
-func (x *QMQInt) ProtoReflect() protoreflect.Message {
+func (x *Int) ProtoReflect() protoreflect.Message {
 	mi := &file_src_protobufs_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -576,19 +576,19 @@ func (x *QMQInt) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QMQInt.ProtoReflect.Descriptor instead.
-func (*QMQInt) Descriptor() ([]byte, []int) {
+// Deprecated: Use Int.ProtoReflect.Descriptor instead.
+func (*Int) Descriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *QMQInt) GetValue() int64 {
+func (x *Int) GetValue() int64 {
 	if x != nil {
 		return x.Value
 	}
 	return 0
 }
 
-type QMQString struct {
+type String struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -596,8 +596,8 @@ type QMQString struct {
 	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
-func (x *QMQString) Reset() {
-	*x = QMQString{}
+func (x *String) Reset() {
+	*x = String{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_src_protobufs_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -605,13 +605,13 @@ func (x *QMQString) Reset() {
 	}
 }
 
-func (x *QMQString) String() string {
+func (x *String) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QMQString) ProtoMessage() {}
+func (*String) ProtoMessage() {}
 
-func (x *QMQString) ProtoReflect() protoreflect.Message {
+func (x *String) ProtoReflect() protoreflect.Message {
 	mi := &file_src_protobufs_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -623,19 +623,19 @@ func (x *QMQString) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QMQString.ProtoReflect.Descriptor instead.
-func (*QMQString) Descriptor() ([]byte, []int) {
+// Deprecated: Use String.ProtoReflect.Descriptor instead.
+func (*String) Descriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *QMQString) GetValue() string {
+func (x *String) GetValue() string {
 	if x != nil {
 		return x.Value
 	}
 	return ""
 }
 
-type QMQTimestamp struct {
+type Timestamp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -643,8 +643,8 @@ type QMQTimestamp struct {
 	Value *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
-func (x *QMQTimestamp) Reset() {
-	*x = QMQTimestamp{}
+func (x *Timestamp) Reset() {
+	*x = Timestamp{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_src_protobufs_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -652,13 +652,13 @@ func (x *QMQTimestamp) Reset() {
 	}
 }
 
-func (x *QMQTimestamp) String() string {
+func (x *Timestamp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QMQTimestamp) ProtoMessage() {}
+func (*Timestamp) ProtoMessage() {}
 
-func (x *QMQTimestamp) ProtoReflect() protoreflect.Message {
+func (x *Timestamp) ProtoReflect() protoreflect.Message {
 	mi := &file_src_protobufs_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -670,19 +670,19 @@ func (x *QMQTimestamp) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QMQTimestamp.ProtoReflect.Descriptor instead.
-func (*QMQTimestamp) Descriptor() ([]byte, []int) {
+// Deprecated: Use Timestamp.ProtoReflect.Descriptor instead.
+func (*Timestamp) Descriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *QMQTimestamp) GetValue() *timestamppb.Timestamp {
+func (x *Timestamp) GetValue() *timestamppb.Timestamp {
 	if x != nil {
 		return x.Value
 	}
 	return nil
 }
 
-type QMQFloat struct {
+type Float struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -690,8 +690,8 @@ type QMQFloat struct {
 	Value float64 `protobuf:"fixed64,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
-func (x *QMQFloat) Reset() {
-	*x = QMQFloat{}
+func (x *Float) Reset() {
+	*x = Float{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_src_protobufs_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -699,13 +699,13 @@ func (x *QMQFloat) Reset() {
 	}
 }
 
-func (x *QMQFloat) String() string {
+func (x *Float) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QMQFloat) ProtoMessage() {}
+func (*Float) ProtoMessage() {}
 
-func (x *QMQFloat) ProtoReflect() protoreflect.Message {
+func (x *Float) ProtoReflect() protoreflect.Message {
 	mi := &file_src_protobufs_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -717,19 +717,19 @@ func (x *QMQFloat) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QMQFloat.ProtoReflect.Descriptor instead.
-func (*QMQFloat) Descriptor() ([]byte, []int) {
+// Deprecated: Use Float.ProtoReflect.Descriptor instead.
+func (*Float) Descriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *QMQFloat) GetValue() float64 {
+func (x *Float) GetValue() float64 {
 	if x != nil {
 		return x.Value
 	}
 	return 0
 }
 
-type QMQBool struct {
+type Bool struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -737,8 +737,8 @@ type QMQBool struct {
 	Value bool `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 }
 
-func (x *QMQBool) Reset() {
-	*x = QMQBool{}
+func (x *Bool) Reset() {
+	*x = Bool{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_src_protobufs_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -746,13 +746,13 @@ func (x *QMQBool) Reset() {
 	}
 }
 
-func (x *QMQBool) String() string {
+func (x *Bool) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QMQBool) ProtoMessage() {}
+func (*Bool) ProtoMessage() {}
 
-func (x *QMQBool) ProtoReflect() protoreflect.Message {
+func (x *Bool) ProtoReflect() protoreflect.Message {
 	mi := &file_src_protobufs_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -764,31 +764,31 @@ func (x *QMQBool) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QMQBool.ProtoReflect.Descriptor instead.
-func (*QMQBool) Descriptor() ([]byte, []int) {
+// Deprecated: Use Bool.ProtoReflect.Descriptor instead.
+func (*Bool) Descriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *QMQBool) GetValue() bool {
+func (x *Bool) GetValue() bool {
 	if x != nil {
 		return x.Value
 	}
 	return false
 }
 
-type QMQLog struct {
+type Log struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	Application string                 `protobuf:"bytes,1,opt,name=application,proto3" json:"application,omitempty"`
-	Level       QMQLogLevelEnum        `protobuf:"varint,2,opt,name=level,proto3,enum=qmq.QMQLogLevelEnum" json:"level,omitempty"`
+	Level       LogLevelEnum        `protobuf:"varint,2,opt,name=level,proto3,enum=qmq.LogLevelEnum" json:"level,omitempty"`
 	Message     string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
 	Timestamp   *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
 }
 
-func (x *QMQLog) Reset() {
-	*x = QMQLog{}
+func (x *Log) Reset() {
+	*x = Log{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_src_protobufs_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -796,13 +796,13 @@ func (x *QMQLog) Reset() {
 	}
 }
 
-func (x *QMQLog) String() string {
+func (x *Log) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QMQLog) ProtoMessage() {}
+func (*Log) ProtoMessage() {}
 
-func (x *QMQLog) ProtoReflect() protoreflect.Message {
+func (x *Log) ProtoReflect() protoreflect.Message {
 	mi := &file_src_protobufs_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -814,40 +814,40 @@ func (x *QMQLog) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QMQLog.ProtoReflect.Descriptor instead.
-func (*QMQLog) Descriptor() ([]byte, []int) {
+// Deprecated: Use Log.ProtoReflect.Descriptor instead.
+func (*Log) Descriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *QMQLog) GetApplication() string {
+func (x *Log) GetApplication() string {
 	if x != nil {
 		return x.Application
 	}
 	return ""
 }
 
-func (x *QMQLog) GetLevel() QMQLogLevelEnum {
+func (x *Log) GetLevel() LogLevelEnum {
 	if x != nil {
 		return x.Level
 	}
-	return QMQLogLevelEnum_LOG_LEVEL_UNSPECIFIED
+	return LogLevelEnum_LOG_LEVEL_UNSPECIFIED
 }
 
-func (x *QMQLog) GetMessage() string {
+func (x *Log) GetMessage() string {
 	if x != nil {
 		return x.Message
 	}
 	return ""
 }
 
-func (x *QMQLog) GetTimestamp() *timestamppb.Timestamp {
+func (x *Log) GetTimestamp() *timestamppb.Timestamp {
 	if x != nil {
 		return x.Timestamp
 	}
 	return nil
 }
 
-type QMQStreamContext struct {
+type StreamContext struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -858,8 +858,8 @@ type QMQStreamContext struct {
 	TotalProduced  int64  `protobuf:"varint,4,opt,name=total_produced,json=totalProduced,proto3" json:"total_produced,omitempty"`
 }
 
-func (x *QMQStreamContext) Reset() {
-	*x = QMQStreamContext{}
+func (x *StreamContext) Reset() {
+	*x = StreamContext{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_src_protobufs_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -867,13 +867,13 @@ func (x *QMQStreamContext) Reset() {
 	}
 }
 
-func (x *QMQStreamContext) String() string {
+func (x *StreamContext) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QMQStreamContext) ProtoMessage() {}
+func (*StreamContext) ProtoMessage() {}
 
-func (x *QMQStreamContext) ProtoReflect() protoreflect.Message {
+func (x *StreamContext) ProtoReflect() protoreflect.Message {
 	mi := &file_src_protobufs_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -885,40 +885,40 @@ func (x *QMQStreamContext) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QMQStreamContext.ProtoReflect.Descriptor instead.
-func (*QMQStreamContext) Descriptor() ([]byte, []int) {
+// Deprecated: Use StreamContext.ProtoReflect.Descriptor instead.
+func (*StreamContext) Descriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *QMQStreamContext) GetLastConsumedId() string {
+func (x *StreamContext) GetLastConsumedId() string {
 	if x != nil {
 		return x.LastConsumedId
 	}
 	return ""
 }
 
-func (x *QMQStreamContext) GetLastProducedId() string {
+func (x *StreamContext) GetLastProducedId() string {
 	if x != nil {
 		return x.LastProducedId
 	}
 	return ""
 }
 
-func (x *QMQStreamContext) GetTotalConsumed() int64 {
+func (x *StreamContext) GetTotalConsumed() int64 {
 	if x != nil {
 		return x.TotalConsumed
 	}
 	return 0
 }
 
-func (x *QMQStreamContext) GetTotalProduced() int64 {
+func (x *StreamContext) GetTotalProduced() int64 {
 	if x != nil {
 		return x.TotalProduced
 	}
 	return 0
 }
 
-type QMQPrayer struct {
+type Prayer struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -927,8 +927,8 @@ type QMQPrayer struct {
 	Time *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=time,proto3" json:"time,omitempty"`
 }
 
-func (x *QMQPrayer) Reset() {
-	*x = QMQPrayer{}
+func (x *Prayer) Reset() {
+	*x = Prayer{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_src_protobufs_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -936,13 +936,13 @@ func (x *QMQPrayer) Reset() {
 	}
 }
 
-func (x *QMQPrayer) String() string {
+func (x *Prayer) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QMQPrayer) ProtoMessage() {}
+func (*Prayer) ProtoMessage() {}
 
-func (x *QMQPrayer) ProtoReflect() protoreflect.Message {
+func (x *Prayer) ProtoReflect() protoreflect.Message {
 	mi := &file_src_protobufs_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -954,26 +954,26 @@ func (x *QMQPrayer) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QMQPrayer.ProtoReflect.Descriptor instead.
-func (*QMQPrayer) Descriptor() ([]byte, []int) {
+// Deprecated: Use Prayer.ProtoReflect.Descriptor instead.
+func (*Prayer) Descriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *QMQPrayer) GetName() string {
+func (x *Prayer) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *QMQPrayer) GetTime() *timestamppb.Timestamp {
+func (x *Prayer) GetTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.Time
 	}
 	return nil
 }
 
-type QMQAudioRequest struct {
+type AudioRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -981,8 +981,8 @@ type QMQAudioRequest struct {
 	Filename string `protobuf:"bytes,1,opt,name=filename,proto3" json:"filename,omitempty"`
 }
 
-func (x *QMQAudioRequest) Reset() {
-	*x = QMQAudioRequest{}
+func (x *AudioRequest) Reset() {
+	*x = AudioRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_src_protobufs_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -990,13 +990,13 @@ func (x *QMQAudioRequest) Reset() {
 	}
 }
 
-func (x *QMQAudioRequest) String() string {
+func (x *AudioRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QMQAudioRequest) ProtoMessage() {}
+func (*AudioRequest) ProtoMessage() {}
 
-func (x *QMQAudioRequest) ProtoReflect() protoreflect.Message {
+func (x *AudioRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_src_protobufs_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1008,19 +1008,19 @@ func (x *QMQAudioRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QMQAudioRequest.ProtoReflect.Descriptor instead.
-func (*QMQAudioRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use AudioRequest.ProtoReflect.Descriptor instead.
+func (*AudioRequest) Descriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{15}
 }
 
-func (x *QMQAudioRequest) GetFilename() string {
+func (x *AudioRequest) GetFilename() string {
 	if x != nil {
 		return x.Filename
 	}
 	return ""
 }
 
-type QMQMqttMessage struct {
+type MqttMessage struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1033,8 +1033,8 @@ type QMQMqttMessage struct {
 	Duplicate bool   `protobuf:"varint,6,opt,name=duplicate,proto3" json:"duplicate,omitempty"`
 }
 
-func (x *QMQMqttMessage) Reset() {
-	*x = QMQMqttMessage{}
+func (x *MqttMessage) Reset() {
+	*x = MqttMessage{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_src_protobufs_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1042,13 +1042,13 @@ func (x *QMQMqttMessage) Reset() {
 	}
 }
 
-func (x *QMQMqttMessage) String() string {
+func (x *MqttMessage) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QMQMqttMessage) ProtoMessage() {}
+func (*MqttMessage) ProtoMessage() {}
 
-func (x *QMQMqttMessage) ProtoReflect() protoreflect.Message {
+func (x *MqttMessage) ProtoReflect() protoreflect.Message {
 	mi := &file_src_protobufs_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1060,63 +1060,63 @@ func (x *QMQMqttMessage) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QMQMqttMessage.ProtoReflect.Descriptor instead.
-func (*QMQMqttMessage) Descriptor() ([]byte, []int) {
+// Deprecated: Use MqttMessage.ProtoReflect.Descriptor instead.
+func (*MqttMessage) Descriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{16}
 }
 
-func (x *QMQMqttMessage) GetId() uint32 {
+func (x *MqttMessage) GetId() uint32 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *QMQMqttMessage) GetQos() int32 {
+func (x *MqttMessage) GetQos() int32 {
 	if x != nil {
 		return x.Qos
 	}
 	return 0
 }
 
-func (x *QMQMqttMessage) GetTopic() string {
+func (x *MqttMessage) GetTopic() string {
 	if x != nil {
 		return x.Topic
 	}
 	return ""
 }
 
-func (x *QMQMqttMessage) GetPayload() []byte {
+func (x *MqttMessage) GetPayload() []byte {
 	if x != nil {
 		return x.Payload
 	}
 	return nil
 }
 
-func (x *QMQMqttMessage) GetRetained() bool {
+func (x *MqttMessage) GetRetained() bool {
 	if x != nil {
 		return x.Retained
 	}
 	return false
 }
 
-func (x *QMQMqttMessage) GetDuplicate() bool {
+func (x *MqttMessage) GetDuplicate() bool {
 	if x != nil {
 		return x.Duplicate
 	}
 	return false
 }
 
-type QMQGarageDoorState struct {
+type GarageDoorState struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Value QMQGarageDoorStateEnum `protobuf:"varint,1,opt,name=value,proto3,enum=qmq.QMQGarageDoorStateEnum" json:"value,omitempty"`
+	Value GarageDoorStateEnum `protobuf:"varint,1,opt,name=value,proto3,enum=qmq.GarageDoorStateEnum" json:"value,omitempty"`
 }
 
-func (x *QMQGarageDoorState) Reset() {
-	*x = QMQGarageDoorState{}
+func (x *GarageDoorState) Reset() {
+	*x = GarageDoorState{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_src_protobufs_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1124,13 +1124,13 @@ func (x *QMQGarageDoorState) Reset() {
 	}
 }
 
-func (x *QMQGarageDoorState) String() string {
+func (x *GarageDoorState) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QMQGarageDoorState) ProtoMessage() {}
+func (*GarageDoorState) ProtoMessage() {}
 
-func (x *QMQGarageDoorState) ProtoReflect() protoreflect.Message {
+func (x *GarageDoorState) ProtoReflect() protoreflect.Message {
 	mi := &file_src_protobufs_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1142,28 +1142,28 @@ func (x *QMQGarageDoorState) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QMQGarageDoorState.ProtoReflect.Descriptor instead.
-func (*QMQGarageDoorState) Descriptor() ([]byte, []int) {
+// Deprecated: Use GarageDoorState.ProtoReflect.Descriptor instead.
+func (*GarageDoorState) Descriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{17}
 }
 
-func (x *QMQGarageDoorState) GetValue() QMQGarageDoorStateEnum {
+func (x *GarageDoorState) GetValue() GarageDoorStateEnum {
 	if x != nil {
 		return x.Value
 	}
-	return QMQGarageDoorStateEnum_GARAGE_DOOR_STATE_UNSPECIFIED
+	return GarageDoorStateEnum_GARAGE_DOOR_STATE_UNSPECIFIED
 }
 
-type QMQConnectionState struct {
+type ConnectionState struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Value QMQConnectionStateEnum `protobuf:"varint,1,opt,name=value,proto3,enum=qmq.QMQConnectionStateEnum" json:"value,omitempty"`
+	Value ConnectionStateEnum `protobuf:"varint,1,opt,name=value,proto3,enum=qmq.ConnectionStateEnum" json:"value,omitempty"`
 }
 
-func (x *QMQConnectionState) Reset() {
-	*x = QMQConnectionState{}
+func (x *ConnectionState) Reset() {
+	*x = ConnectionState{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_src_protobufs_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1171,13 +1171,13 @@ func (x *QMQConnectionState) Reset() {
 	}
 }
 
-func (x *QMQConnectionState) String() string {
+func (x *ConnectionState) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QMQConnectionState) ProtoMessage() {}
+func (*ConnectionState) ProtoMessage() {}
 
-func (x *QMQConnectionState) ProtoReflect() protoreflect.Message {
+func (x *ConnectionState) ProtoReflect() protoreflect.Message {
 	mi := &file_src_protobufs_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1189,16 +1189,16 @@ func (x *QMQConnectionState) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QMQConnectionState.ProtoReflect.Descriptor instead.
-func (*QMQConnectionState) Descriptor() ([]byte, []int) {
+// Deprecated: Use ConnectionState.ProtoReflect.Descriptor instead.
+func (*ConnectionState) Descriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{18}
 }
 
-func (x *QMQConnectionState) GetValue() QMQConnectionStateEnum {
+func (x *ConnectionState) GetValue() ConnectionStateEnum {
 	if x != nil {
 		return x.Value
 	}
-	return QMQConnectionStateEnum_CONNECTION_STATE_UNSPECIFIED
+	return ConnectionStateEnum_CONNECTION_STATE_UNSPECIFIED
 }
 
 var File_src_protobufs_proto protoreflect.FileDescriptor
@@ -1350,44 +1350,44 @@ func file_src_protobufs_proto_rawDescGZIP() []byte {
 var file_src_protobufs_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_src_protobufs_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_src_protobufs_proto_goTypes = []interface{}{
-	(QMQLogLevelEnum)(0),              // 0: qmq.QMQLogLevelEnum
-	(QMQConnectionStateEnum)(0),       // 1: qmq.QMQConnectionStateEnum
-	(QMQGarageDoorStateEnum)(0),       // 2: qmq.QMQGarageDoorStateEnum
-	(*QMQWebServiceMessage)(nil),      // 3: qmq.QMQWebServiceMessage
-	(*QMQWebServiceGetRequest)(nil),   // 4: qmq.QMQWebServiceGetRequest
-	(*QMQWebServiceGetResponse)(nil),  // 5: qmq.QMQWebServiceGetResponse
-	(*QMQWebServiceNotification)(nil), // 6: qmq.QMQWebServiceNotification
-	(*QMQWebServiceSetRequest)(nil),   // 7: qmq.QMQWebServiceSetRequest
-	(*QMQWebServiceSetResponse)(nil),  // 8: qmq.QMQWebServiceSetResponse
-	(*QMQData)(nil),                   // 9: qmq.QMQData
-	(*QMQInt)(nil),                    // 10: qmq.QMQInt
-	(*QMQString)(nil),                 // 11: qmq.QMQString
-	(*QMQTimestamp)(nil),              // 12: qmq.QMQTimestamp
-	(*QMQFloat)(nil),                  // 13: qmq.QMQFloat
-	(*QMQBool)(nil),                   // 14: qmq.QMQBool
-	(*QMQLog)(nil),                    // 15: qmq.QMQLog
-	(*QMQStreamContext)(nil),          // 16: qmq.QMQStreamContext
-	(*QMQPrayer)(nil),                 // 17: qmq.QMQPrayer
-	(*QMQAudioRequest)(nil),           // 18: qmq.QMQAudioRequest
-	(*QMQMqttMessage)(nil),            // 19: qmq.QMQMqttMessage
-	(*QMQGarageDoorState)(nil),        // 20: qmq.QMQGarageDoorState
-	(*QMQConnectionState)(nil),        // 21: qmq.QMQConnectionState
+	(LogLevelEnum)(0),              // 0: qmq.LogLevelEnum
+	(ConnectionStateEnum)(0),       // 1: qmq.ConnectionStateEnum
+	(GarageDoorStateEnum)(0),       // 2: qmq.GarageDoorStateEnum
+	(*WebServiceMessage)(nil),      // 3: qmq.WebServiceMessage
+	(*WebServiceGetRequest)(nil),   // 4: qmq.WebServiceGetRequest
+	(*WebServiceGetResponse)(nil),  // 5: qmq.WebServiceGetResponse
+	(*WebServiceNotification)(nil), // 6: qmq.WebServiceNotification
+	(*WebServiceSetRequest)(nil),   // 7: qmq.WebServiceSetRequest
+	(*WebServiceSetResponse)(nil),  // 8: qmq.WebServiceSetResponse
+	(*Data)(nil),                   // 9: qmq.Data
+	(*Int)(nil),                    // 10: qmq.Int
+	(*String)(nil),                 // 11: qmq.String
+	(*Timestamp)(nil),              // 12: qmq.Timestamp
+	(*Float)(nil),                  // 13: qmq.Float
+	(*Bool)(nil),                   // 14: qmq.Bool
+	(*Log)(nil),                    // 15: qmq.Log
+	(*StreamContext)(nil),          // 16: qmq.StreamContext
+	(*Prayer)(nil),                 // 17: qmq.Prayer
+	(*AudioRequest)(nil),           // 18: qmq.AudioRequest
+	(*MqttMessage)(nil),            // 19: qmq.MqttMessage
+	(*GarageDoorState)(nil),        // 20: qmq.GarageDoorState
+	(*ConnectionState)(nil),        // 21: qmq.ConnectionState
 	(*anypb.Any)(nil),                 // 22: google.protobuf.Any
 	(*timestamppb.Timestamp)(nil),     // 23: google.protobuf.Timestamp
 }
 var file_src_protobufs_proto_depIdxs = []int32{
-	22, // 0: qmq.QMQWebServiceMessage.content:type_name -> google.protobuf.Any
-	22, // 1: qmq.QMQWebServiceGetResponse.value:type_name -> google.protobuf.Any
-	22, // 2: qmq.QMQWebServiceNotification.value:type_name -> google.protobuf.Any
-	22, // 3: qmq.QMQWebServiceSetRequest.value:type_name -> google.protobuf.Any
-	22, // 4: qmq.QMQData.data:type_name -> google.protobuf.Any
-	23, // 5: qmq.QMQData.writetime:type_name -> google.protobuf.Timestamp
-	23, // 6: qmq.QMQTimestamp.value:type_name -> google.protobuf.Timestamp
-	0,  // 7: qmq.QMQLog.level:type_name -> qmq.QMQLogLevelEnum
-	23, // 8: qmq.QMQLog.timestamp:type_name -> google.protobuf.Timestamp
-	23, // 9: qmq.QMQPrayer.time:type_name -> google.protobuf.Timestamp
-	2,  // 10: qmq.QMQGarageDoorState.value:type_name -> qmq.QMQGarageDoorStateEnum
-	1,  // 11: qmq.QMQConnectionState.value:type_name -> qmq.QMQConnectionStateEnum
+	22, // 0: qmq.WebServiceMessage.content:type_name -> google.protobuf.Any
+	22, // 1: qmq.WebServiceGetResponse.value:type_name -> google.protobuf.Any
+	22, // 2: qmq.WebServiceNotification.value:type_name -> google.protobuf.Any
+	22, // 3: qmq.WebServiceSetRequest.value:type_name -> google.protobuf.Any
+	22, // 4: qmq.Data.data:type_name -> google.protobuf.Any
+	23, // 5: qmq.Data.writetime:type_name -> google.protobuf.Timestamp
+	23, // 6: qmq.Timestamp.value:type_name -> google.protobuf.Timestamp
+	0,  // 7: qmq.Log.level:type_name -> qmq.LogLevelEnum
+	23, // 8: qmq.Log.timestamp:type_name -> google.protobuf.Timestamp
+	23, // 9: qmq.Prayer.time:type_name -> google.protobuf.Timestamp
+	2,  // 10: qmq.GarageDoorState.value:type_name -> qmq.GarageDoorStateEnum
+	1,  // 11: qmq.ConnectionState.value:type_name -> qmq.ConnectionStateEnum
 	12, // [12:12] is the sub-list for method output_type
 	12, // [12:12] is the sub-list for method input_type
 	12, // [12:12] is the sub-list for extension type_name
@@ -1402,7 +1402,7 @@ func file_src_protobufs_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_src_protobufs_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QMQWebServiceMessage); i {
+			switch v := v.(*WebServiceMessage); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1414,7 +1414,7 @@ func file_src_protobufs_proto_init() {
 			}
 		}
 		file_src_protobufs_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QMQWebServiceGetRequest); i {
+			switch v := v.(*WebServiceGetRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1426,7 +1426,7 @@ func file_src_protobufs_proto_init() {
 			}
 		}
 		file_src_protobufs_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QMQWebServiceGetResponse); i {
+			switch v := v.(*WebServiceGetResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1438,7 +1438,7 @@ func file_src_protobufs_proto_init() {
 			}
 		}
 		file_src_protobufs_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QMQWebServiceNotification); i {
+			switch v := v.(*WebServiceNotification); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1450,7 +1450,7 @@ func file_src_protobufs_proto_init() {
 			}
 		}
 		file_src_protobufs_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QMQWebServiceSetRequest); i {
+			switch v := v.(*WebServiceSetRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1462,7 +1462,7 @@ func file_src_protobufs_proto_init() {
 			}
 		}
 		file_src_protobufs_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QMQWebServiceSetResponse); i {
+			switch v := v.(*WebServiceSetResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1474,7 +1474,7 @@ func file_src_protobufs_proto_init() {
 			}
 		}
 		file_src_protobufs_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QMQData); i {
+			switch v := v.(*Data); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1486,7 +1486,7 @@ func file_src_protobufs_proto_init() {
 			}
 		}
 		file_src_protobufs_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QMQInt); i {
+			switch v := v.(*Int); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1498,7 +1498,7 @@ func file_src_protobufs_proto_init() {
 			}
 		}
 		file_src_protobufs_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QMQString); i {
+			switch v := v.(*String); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1510,7 +1510,7 @@ func file_src_protobufs_proto_init() {
 			}
 		}
 		file_src_protobufs_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QMQTimestamp); i {
+			switch v := v.(*Timestamp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1522,7 +1522,7 @@ func file_src_protobufs_proto_init() {
 			}
 		}
 		file_src_protobufs_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QMQFloat); i {
+			switch v := v.(*Float); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1534,7 +1534,7 @@ func file_src_protobufs_proto_init() {
 			}
 		}
 		file_src_protobufs_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QMQBool); i {
+			switch v := v.(*Bool); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1546,7 +1546,7 @@ func file_src_protobufs_proto_init() {
 			}
 		}
 		file_src_protobufs_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QMQLog); i {
+			switch v := v.(*Log); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1558,7 +1558,7 @@ func file_src_protobufs_proto_init() {
 			}
 		}
 		file_src_protobufs_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QMQStreamContext); i {
+			switch v := v.(*StreamContext); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1570,7 +1570,7 @@ func file_src_protobufs_proto_init() {
 			}
 		}
 		file_src_protobufs_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QMQPrayer); i {
+			switch v := v.(*Prayer); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1582,7 +1582,7 @@ func file_src_protobufs_proto_init() {
 			}
 		}
 		file_src_protobufs_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QMQAudioRequest); i {
+			switch v := v.(*AudioRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1594,7 +1594,7 @@ func file_src_protobufs_proto_init() {
 			}
 		}
 		file_src_protobufs_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QMQMqttMessage); i {
+			switch v := v.(*MqttMessage); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1606,7 +1606,7 @@ func file_src_protobufs_proto_init() {
 			}
 		}
 		file_src_protobufs_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QMQGarageDoorState); i {
+			switch v := v.(*GarageDoorState); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1618,7 +1618,7 @@ func file_src_protobufs_proto_init() {
 			}
 		}
 		file_src_protobufs_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QMQConnectionState); i {
+			switch v := v.(*ConnectionState); i {
 			case 0:
 				return &v.state
 			case 1:

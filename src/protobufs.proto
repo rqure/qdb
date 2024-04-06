@@ -6,59 +6,63 @@ package qmq;
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/any.proto";
 
-message QMQWebServiceMessage {
-    google.protobuf.Any content = 1;    
+message Message {
+    string id = 1;
+    string from = 2;
+    string to = 3;
+    string subject = 4;
+    google.protobuf.Any content = 5;
 }
 
-message QMQWebServiceGetRequest {
+message WebServiceGetRequest {
     string key = 1;
 }
 
-message QMQWebServiceGetResponse {
-    string key = 1;
-    google.protobuf.Any value = 2;
-}
-
-message QMQWebServiceNotification {
-    string key = 1;
-    google.protobuf.Any value = 2;
-}
-
-message QMQWebServiceSetRequest {
+message WebServiceGetResponse {
     string key = 1;
     google.protobuf.Any value = 2;
 }
 
-message QMQWebServiceSetResponse {
+message WebServiceNotification {
+    string key = 1;
+    google.protobuf.Any value = 2;
 }
 
-message QMQData {
+message WebServiceSetRequest {
+    string key = 1;
+    google.protobuf.Any value = 2;
+}
+
+message WebServiceSetResponse {
+}
+
+message Data {
     google.protobuf.Any data = 1;
     string writer = 2;
     google.protobuf.Timestamp writetime = 3;
 }
 
-message QMQInt {
+message Int {
     int64 value = 1;
 }
 
-message QMQString {
+message String {
     string value = 1;
 }
 
-message QMQTimestamp {
+message Timestamp {
     google.protobuf.Timestamp value = 1;
 }
 
-message QMQFloat {
+message Float {
     double value = 1;
 }
 
-message QMQBool {
+message Bool {
     bool value = 1;
 }
 
-enum QMQLogLevelEnum {
+enum LogLevelEnum {
     LOG_LEVEL_UNSPECIFIED = 0;
     LOG_LEVEL_TRACE = 1;
     LOG_LEVEL_DEBUG = 2;
@@ -68,30 +72,30 @@ enum QMQLogLevelEnum {
     LOG_LEVEL_PANIC = 6;
 }
 
-message QMQLog {
+message Log {
     string application = 1;
-    QMQLogLevelEnum level = 2;
+    LogLevelEnum level = 2;
     string message = 3;
     google.protobuf.Timestamp timestamp = 4;
 }
 
-message QMQStreamContext {
+message StreamContext {
     string last_consumed_id = 1;
     string last_produced_id = 2;
     int64 total_consumed = 3;
     int64 total_produced = 4;
 }
 
-message QMQPrayer {
+message Prayer {
     string name = 1;
     google.protobuf.Timestamp time = 2;
 }
 
-message QMQAudioRequest {
+message AudioRequest {
     string filename = 1;
 }
 
-message QMQMqttMessage {
+message MqttMessage {
     uint32 id = 1;
     int32 qos = 2;
     string topic = 3;
@@ -100,22 +104,22 @@ message QMQMqttMessage {
     bool duplicate = 6;
 }
 
-enum QMQConnectionStateEnum {
+enum ConnectionStateEnum {
     CONNECTION_STATE_UNSPECIFIED = 0;
     CONNECTION_STATE_CONNECTED = 1;
     CONNECTION_STATE_DISCONNECTED = 2;
 }
 
-enum QMQGarageDoorStateEnum {
+enum GarageDoorStateEnum {
     GARAGE_DOOR_STATE_UNSPECIFIED = 0;
     GARAGE_DOOR_STATE_OPEN = 1;
     GARAGE_DOOR_STATE_CLOSED = 2;
 }
 
-message QMQGarageDoorState {
-    QMQGarageDoorStateEnum value = 1;
+message GarageDoorState {
+    GarageDoorStateEnum value = 1;
 }
 
-message QMQConnectionState {
-    QMQConnectionStateEnum value = 1;
+message ConnectionState {
+    ConnectionStateEnum value = 1;
 }

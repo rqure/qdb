@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	app := qmq.NewQMQApplication("example")
+	app := qmq.NewDefaultEngine("example")
 	app.Initialize()
 	defer app.Deinitialize()
 }

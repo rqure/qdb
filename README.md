@@ -1,6 +1,6 @@
-# Qureshi Messaging Queue (QMQ)
+# Qureshi Messaging Queue ()
 
-QMQ is a lightweight, high-performance messaging queue system designed for efficient communication between distributed services. Built with Go, QMQ facilitates asynchronous message processing, allowing for scalable and decoupled architectures.
+ is a lightweight, high-performance messaging queue system designed for efficient communication between distributed services. Built with Go,  facilitates asynchronous message processing, allowing for scalable and decoupled architectures.
 
 ## Key Features
 
@@ -21,7 +21,7 @@ QMQ is a lightweight, high-performance messaging queue system designed for effic
 
 ## Getting Started
 
-To set up QMQ, ensure you have Go installed and follow these steps:
+To set up , ensure you have Go installed and follow these steps:
 
 1. Clone the repository.
 2. Navigate to the project directory and build the application using go build.
