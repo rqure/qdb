@@ -7,5 +7,10 @@ func NewDefaultWebServiceFactory() WebServiceFactory {
 }
 
 func (f *DefaultWebServiceFactory) Create(schema Schema, componentProvider EngineComponentProvider) WebService {
-	return NewDefaultWebService(componentProvider.WithLogger(), schema)
+	return NewDefaultWebService(&DefaultWebServiceConfig{
+		Schema:               schema,
+		Logger:               componentProvider.WithLogger(),
+		RequestTransformers:  []Transformer{},
+		ResponseTransformers: []Transformer{},
+	})
 }

@@ -10,18 +10,38 @@ import (
 	anypb "google.golang.org/protobuf/types/known/anypb"
 )
 
-type DefaultWebService struct {
-	logger       Logger
-	schema       Schema
-	clients      map[uint64]*WebClient
-	clientsMutex sync.Mutex
+type DefaultWebServiceConfig struct {
+	Logger                  Logger
+	Schema                  Schema
+	WebClientHandlerFactory WebClientHandlerFactory
+	RequestTransformers     []Transformer
+	ResponseTransformers    []Transformer
 }
 
-func NewDefaultWebService(logger Logger, schema Schema) WebService {
+type DefaultWebService struct {
+	config        *DefaultWebServiceConfig
+	clientHandler WebClientHandler
+	clients       map[uint64]WebClient
+	clientsMutex  sync.Mutex
+}
+
+func NewDefaultWebService(config *DefaultWebServiceConfig) WebService {
+	if config.WebClientHandlerFactory == nil {
+		config.WebClientHandlerFactory = NewDefaultWebClientHandlerFactory()
+	}
+
+	if config.RequestTransformers == nil {
+		config.RequestTransformers = []Transformer{}
+	}
+
+	if config.ResponseTransformers == nil {
+		config.ResponseTransformers = []Transformer{}
+	}
+
 	return &DefaultWebService{
-		logger:  logger,
-		schema:  schema,
-		clients: make(map[uint64]*WebClient),
+		config:        config,
+		clientHandler: config.WebClientHandlerFactory.Create(),
+		clients:       make(map[uint64]WebClient),
 	}
 }
 
@@ -56,38 +76,12 @@ func (w *DefaultWebService) onWSRequest(wr http.ResponseWriter, req *http.Reques
 
 	conn, err := upgrader.Upgrade(wr, req, nil)
 	if err != nil {
-		w.logger.Error(fmt.Sprintf("Error upgrading to WebSocket: %v", err))
+		w.config.Logger.Error(fmt.Sprintf("Error upgrading to WebSocket: %v", err))
 		return
 	}
 
 	client := w.addClient(conn)
-
-	for message := range client.Read() {
-		if request := new(WebServiceGetRequest); message.Content.MessageIs(request) {
-			message.Content.UnmarshalTo(request)
-			response := new(WebServiceGetResponse)
-			value, err := anypb.New(w.schema.Get(request.Key))
-
-			if err != nil {
-				w.logger.Error(fmt.Sprintf("Error marshalling value for key '%s': %v", request.Key, err))
-				break
-			}
-
-			response.Key = request.Key
-			response.Value = value
-
-			client.Write(response)
-		} else if request := new(WebServiceSetRequest); message.Content.MessageIs(request) {
-			message.Content.UnmarshalTo(request)
-			response := new(WebServiceSetResponse)
-			w.schema.Set(request.Key, request.Value)
-			client.Write(response)
-
-			for _, handler := range w.setHandlers {
-				handler.OnSet(w, request.Key, request.Value)
-			}
-		}
-	}
+	w.clientHandler.Handle(client, w)
 }
 
 func (w *DefaultWebService) ServeHTTP(wr http.ResponseWriter, req *http.Request) {
@@ -105,10 +99,10 @@ func (w *DefaultWebService) NotifyAll(keys []string) {
 	defer w.clientsMutex.Unlock()
 	for clientId := range w.clients {
 		for _, key := range keys {
-			value, err := anypb.New(w.schema.Get(key))
+			value, err := anypb.New(w.config.Schema.Get(key))
 
 			if err != nil {
-				w.logger.Error(fmt.Sprintf("Error marshalling value for key '%s': %v", key, err))
+				w.config.Logger.Error(fmt.Sprintf("Error marshalling value for key '%s': %v", key, err))
 				continue
 			}
 
@@ -124,7 +118,7 @@ func (w *DefaultWebService) onIndexRequest(wr http.ResponseWriter, req *http.Req
 	index, err := os.ReadFile("web/index.html")
 
 	if err != nil {
-		w.logger.Error(fmt.Sprintf("Error while reading file for path '/': %v", err))
+		w.config.Logger.Error(fmt.Sprintf("Error while reading file for path '/': %v", err))
 		return
 	}
 
@@ -132,7 +126,7 @@ func (w *DefaultWebService) onIndexRequest(wr http.ResponseWriter, req *http.Req
 	wr.Write(index)
 }
 
-func (w *DefaultWebService) addClient(conn *websocket.Conn) *WebClient {
+func (w *DefaultWebService) addClient(conn *websocket.Conn) WebClient {
 	w.clientsMutex.Lock()
 	defer w.clientsMutex.Unlock()
 
@@ -142,18 +136,25 @@ func (w *DefaultWebService) addClient(conn *websocket.Conn) *WebClient {
 		w.clientsMutex.Unlock()
 	}
 
-	client := NewWebClient(conn, w, onClientDisconnect)
+	client := NewDefaultWebClient(&DefaultWebClientConfig{
+		Connection:                  conn,
+		WebServiceComponentProvider: w,
+		OnClose:                     onClientDisconnect,
+		RequestTransformers:         w.config.RequestTransformers,
+		ResponseTransformers:        w.config.ResponseTransformers,
+	})
+
 	w.clients[client.clientId] = client
 
 	return client
 }
 
 func (w *DefaultWebService) WithLogger() Logger {
-	return w.logger
+	return w.config.Logger
 }
 
 func (w *DefaultWebService) WithSchema() Schema {
-	return w.schema
+	return w.config.Schema
 }
 
 func (w *DefaultWebService) WithWebClientNotifier() WebClientNotifier {
