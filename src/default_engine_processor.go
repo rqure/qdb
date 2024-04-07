@@ -2,6 +2,10 @@ package qmq
 
 type DefaultEngineProcessor struct{}
 
-func (a *DefaultEngineProcessor) Process(componentProvider EngineComponentProvider) {
+func NewDefaultEngineProcessor() EngineProcessor {
+	return &DefaultEngineProcessor{}
+}
+
+func (p *DefaultEngineProcessor) Process(componentProvider EngineComponentProvider) {
 
 }
