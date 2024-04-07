@@ -7,4 +7,6 @@ type Logger interface {
 	Warn(message string)
 	Error(message string)
 	Panic(message string)
+
+	Close()
 }

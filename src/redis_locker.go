@@ -15,13 +15,15 @@ type RedisLocker struct {
 	conn     *RedisConnection
 	mutex    sync.Mutex
 	isLocked atomic.Bool
+	unlockCh chan interface{}
 }
 
 func NewRedisLocker(id string, conn *RedisConnection) *RedisLocker {
 	return &RedisLocker{
-		id:    id,
-		token: "",
-		conn:  conn,
+		id:       id,
+		token:    "",
+		conn:     conn,
+		unlockCh: make(chan interface{}),
 	}
 }
 
@@ -55,6 +57,8 @@ func (l *RedisLocker) Lock() {
 	}
 
 	l.isLocked.Store(true)
+
+	go l.UpdateExpiryTimeout(10000)
 }
 
 func (l *RedisLocker) LockWithTimeout(timeoutMs int64) {
@@ -64,6 +68,8 @@ func (l *RedisLocker) LockWithTimeout(timeoutMs int64) {
 	}
 
 	l.isLocked.Store(true)
+
+	go l.UpdateExpiryTimeout(timeoutMs)
 }
 
 func (l *RedisLocker) Unlock() {
@@ -82,6 +88,7 @@ func (l *RedisLocker) Unlock() {
 		return
 	}
 
+	l.unlockCh <- nil
 	l.conn.Unset(l.id)
 
 	if l.isLocked.Load() {
@@ -92,4 +99,15 @@ func (l *RedisLocker) Unlock() {
 
 func (l *RedisLocker) IsLocked() bool {
 	return l.isLocked.Load()
+}
+
+func (l *RedisLocker) UpdateExpiryTimeout(timeoutMs int64) {
+	for {
+		select {
+		case <-l.unlockCh:
+			return
+		case <-time.After(time.Duration(timeoutMs/2) * time.Millisecond):
+			l.conn.TempUpdateExpiry(l.id, timeoutMs)
+		}
+	}
 }

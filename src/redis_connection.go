@@ -143,6 +143,20 @@ func (q *RedisConnection) TempSet(k string, d *SchemaData, timeoutMs int64) (boo
 	return true, nil
 }
 
+func (q *RedisConnection) TempUpdateExpiry(k string, timeoutMs int64) error {
+	q.lock.Lock()
+	defer q.lock.Unlock()
+
+	_, err := q.redis.Expire(context.Background(),
+		k, time.Duration(timeoutMs)*time.Millisecond).Result()
+
+	if err != nil {
+		return TEMPSET_FAILED
+	}
+
+	return nil
+}
+
 func (q *RedisConnection) Unset(k string) error {
 	q.lock.Lock()
 	defer q.lock.Unlock()

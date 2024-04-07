@@ -74,7 +74,18 @@ func (e *DefaultEngine) Initialize() {
 }
 
 func (e *DefaultEngine) Deinitialize() {
+	for key, producer := range e.producers {
+		e.logger.Trace("Closing producer: " + key)
+		producer.Close()
+	}
+
+	for key, consumer := range e.consumers {
+		e.logger.Trace("Closing consumer: " + key)
+		consumer.Close()
+	}
+
 	e.logger.Advise("Application has stopped")
+	e.logger.Close()
 
 	e.connectionProvider.ForEach(func(key string, connection Connection) {
 		connection.Disconnect()

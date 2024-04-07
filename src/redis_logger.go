@@ -16,7 +16,7 @@ type RedisLogger struct {
 func NewRedisLogger(name string, connection *RedisConnection, logLevel int, maxLength int64) Logger {
 	return &RedisLogger{
 		name:     name,
-		producer: NewRedisProducer(name+":logs", connection, maxLength),
+		producer: NewRedisProducer(name+":logs", connection, maxLength, []Transformer{}),
 		logLevel: logLevel,
 	}
 }
@@ -66,4 +66,8 @@ func (l *RedisLogger) Error(message string) {
 
 func (l *RedisLogger) Panic(message string) {
 	l.Log(Log_PANIC, message)
+}
+
+func (l *RedisLogger) Close() {
+	l.producer.Close()
 }

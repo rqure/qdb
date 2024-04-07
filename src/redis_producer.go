@@ -1,16 +1,18 @@
 package qmq
 
 type RedisProducer struct {
-	conn         *RedisConnection
+	connection   *RedisConnection
 	stream       *RedisStream
 	transformers []Transformer
+	channel      chan interface{}
 }
 
-func NewRedisProducer(key string, conn *RedisConnection, length int64, transformers []Transformer) Producer {
+func NewRedisProducer(key string, connection *RedisConnection, length int64, transformers []Transformer) Producer {
 	producer := &RedisProducer{
-		conn:         conn,
-		stream:       NewRedisStream(key, conn),
+		connection:   connection,
+		stream:       NewRedisStream(key, connection),
 		transformers: transformers,
+		channel:      make(chan interface{}),
 	}
 
 	producer.Initialize(length)
@@ -22,7 +24,7 @@ func (p *RedisProducer) Initialize(length int64) {
 	p.stream.Locker.Lock()
 	defer p.stream.Locker.Unlock()
 
-	readRequest, err := p.conn.Get(p.stream.ContextKey())
+	readRequest, err := p.connection.Get(p.stream.ContextKey())
 	if err == nil {
 		readRequest.Data.UnmarshalTo(&p.stream.Context)
 	}
@@ -31,22 +33,36 @@ func (p *RedisProducer) Initialize(length int64) {
 }
 
 func (p *RedisProducer) Push(i interface{}) {
-	p.stream.Locker.Lock()
-	defer p.stream.Locker.Unlock()
+	p.channel <- i
+}
 
-	for _, transformer := range p.transformers {
-		i = transformer.Transform(i)
+func (p *RedisProducer) Close() {
+	close(p.channel)
+}
 
-		if i == nil {
+func (p *RedisProducer) Process() {
+	push := func(i interface{}) {
+		p.stream.Locker.Lock()
+		defer p.stream.Locker.Unlock()
+
+		for _, transformer := range p.transformers {
+			i = transformer.Transform(i)
+
+			if i == nil {
+				return
+			}
+		}
+
+		m, ok := i.(*Message)
+
+		if !ok {
 			return
 		}
+
+		p.connection.StreamAdd(p.stream, m)
 	}
 
-	m, ok := i.(*Message)
-
-	if !ok {
-		return
+	for i := range p.channel {
+		push(i)
 	}
-
-	p.conn.StreamAdd(p.stream, m)
 }

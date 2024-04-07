@@ -2,37 +2,21 @@ package qmq
 
 import "time"
 
-type RedisConsumable struct {
-	conn   *RedisConnection
-	stream *RedisStream
-	data   *Message
-}
-
-func (a *RedisConsumable) Ack() {
-	writeRequest := NewWriteRequest(&a.stream.Context)
-	a.conn.Set(a.stream.ContextKey(), writeRequest)
-	a.stream.Locker.Unlock()
-}
-
-func (a *RedisConsumable) Nack() {
-	a.stream.Locker.Unlock()
-}
-
-func (a *RedisConsumable) Data() *Message {
-	return a.data
-}
-
 type RedisConsumer struct {
-	conn    *RedisConnection
-	stream  *RedisStream
-	channel chan Consumable
+	connection   *RedisConnection
+	stream       *RedisStream
+	readCh       chan Consumable
+	closeCh      chan interface{}
+	transformers []Transformer
 }
 
-func NewRedisConsumer(key string, conn *RedisConnection) Consumer {
+func NewRedisConsumer(key string, connection *RedisConnection, transformers []Transformer) Consumer {
 	consumer := &RedisConsumer{
-		conn:    conn,
-		stream:  NewRedisStream(key, conn),
-		channel: make(chan Consumable),
+		connection:   connection,
+		stream:       NewRedisStream(key, connection),
+		readCh:       make(chan Consumable),
+		closeCh:      make(chan interface{}),
+		transformers: transformers,
 	}
 
 	consumer.Initialize()
@@ -46,7 +30,7 @@ func (c *RedisConsumer) Initialize() {
 	c.stream.Locker.Lock()
 	defer c.stream.Locker.Unlock()
 
-	readRequest, err := c.conn.Get(c.stream.ContextKey())
+	readRequest, err := c.connection.Get(c.stream.ContextKey())
 	if err == nil {
 		readRequest.Data.UnmarshalTo(&c.stream.Context)
 	}
@@ -60,20 +44,37 @@ func (c *RedisConsumer) ResetLastId() {
 	c.stream.Locker.Lock()
 	defer c.stream.Locker.Unlock()
 
-	c.conn.Set(c.stream.ContextKey(), writeRequest)
+	c.connection.Set(c.stream.ContextKey(), writeRequest)
 }
 
 func (c *RedisConsumer) PopItem() Consumable {
 	c.stream.Locker.Lock()
 
 	m := &Message{}
-	err := c.conn.StreamRead(c.stream, m)
+	err := c.connection.StreamRead(c.stream, m)
 	if err == nil {
-		return &RedisConsumable{
-			conn:   c.conn,
-			stream: c.stream,
-			data:   m,
+		var i interface{} = m
+		for _, transformer := range c.transformers {
+			i = transformer.Transform(i)
+			if i == nil {
+				break
+			}
 		}
+
+		consumable := &RedisConsumable{
+			conn:   c.connection,
+			stream: c.stream,
+			data:   i,
+		}
+
+		// If the message was transformed into nil, we should ack it
+		// so it doesn't get read again.
+		if i == nil {
+			consumable.Ack()
+			return nil
+		}
+
+		return consumable
 	}
 
 	c.stream.Locker.Unlock()
@@ -81,21 +82,35 @@ func (c *RedisConsumer) PopItem() Consumable {
 }
 
 func (c *RedisConsumer) Pop() chan Consumable {
-	return c.channel
+	return c.readCh
+}
+
+func (c *RedisConsumer) Close() {
+	c.closeCh <- nil
 }
 
 func (c *RedisConsumer) Process() {
 	ticker := time.NewTicker(100 * time.Millisecond)
+	defer ticker.Stop()
+	defer close(c.readCh)
+	defer close(c.closeCh)
 
 	for {
 		select {
+		case <-c.closeCh:
+			return
 		case <-ticker.C:
 			for {
 				consumable := c.PopItem()
 				if consumable == nil {
 					break
 				}
-				c.channel <- consumable
+
+				select {
+				case <-c.closeCh:
+					return
+				case c.readCh <- consumable:
+				}
 			}
 		}
 	}

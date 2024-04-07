@@ -1,5 +1,6 @@
 package qmq
 
 type Producer interface {
-	Push(m *Message)
+	Push(i interface{})
+	Close()
 }
