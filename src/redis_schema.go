@@ -9,12 +9,14 @@ import (
 type RedisSchema struct {
 	db *RedisConnection
 	kv map[string]proto.Message
+	ch chan string
 }
 
 func NewRedisSchema(conn *RedisConnection, kv map[string]proto.Message) Schema {
 	s := &RedisSchema{
 		db: conn,
 		kv: kv,
+		ch: make(chan string),
 	}
 
 	s.Initialize()
@@ -40,6 +42,11 @@ func (s *RedisSchema) Set(key string, value proto.Message) {
 
 	s.kv[key] = value
 	s.db.SetValue(key, value)
+	s.ch <- key
+}
+
+func (s *RedisSchema) Ch() chan string {
+	return s.ch
 }
 
 func (s *RedisSchema) Initialize() {

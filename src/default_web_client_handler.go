@@ -35,10 +35,6 @@ func (h *DefaultWebClientHandler) Handle(client WebClient, componentProvider Web
 			response := new(WebServiceSetResponse)
 			componentProvider.WithSchema().Set(request.Key, request.Value)
 			client.Write(response)
-
-			for _, handler := range w.setHandlers {
-				handler.OnSet(w, request.Key, request.Value)
-			}
 		}
 	}
 }
