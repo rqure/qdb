@@ -12,7 +12,7 @@ func NewDefaultTransformerProvider() *DefaultTransformerProvider {
 
 func (p *DefaultTransformerProvider) Get(key string) []Transformer {
 	if p.transformers[key] == nil {
-		return []Transformer{&DefaultTransformer{}}
+		return []Transformer{}
 	}
 
 	return p.transformers[key]
