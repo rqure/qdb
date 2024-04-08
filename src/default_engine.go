@@ -2,6 +2,7 @@ package qmq
 
 import (
 	"log"
+	"sync"
 )
 
 type DefaultEngine struct {
@@ -11,6 +12,9 @@ type DefaultEngine struct {
 	consumers           map[string]Consumer
 	logger              Logger
 	config              DefaultEngineConfig
+
+	consumerMutex sync.Mutex
+	producerMutex sync.Mutex
 }
 
 type DefaultEngineConfig struct {
@@ -94,6 +98,9 @@ func (e *DefaultEngine) Deinitialize() {
 }
 
 func (e *DefaultEngine) WithProducer(key string) Producer {
+	e.producerMutex.Lock()
+	defer e.producerMutex.Unlock()
+
 	if e.producers[key] == nil {
 		e.producers[key] = e.config.ProducerFactory.Create(key, e)
 	}
@@ -102,6 +109,9 @@ func (e *DefaultEngine) WithProducer(key string) Producer {
 }
 
 func (e *DefaultEngine) WithConsumer(key string) Consumer {
+	e.consumerMutex.Lock()
+	defer e.consumerMutex.Unlock()
+
 	if e.consumers[key] == nil {
 		e.consumers[key] = e.config.ConsumerFactory.Create(key, e)
 	}
