@@ -13,11 +13,13 @@ func NewDefaultWebClientHandler() WebClientHandler {
 }
 
 func (h *DefaultWebClientHandler) Handle(client WebClient, componentProvider WebServiceComponentProvider) {
-	for message := range client.Read() {
+	for i := range client.Read() {
+		message := i.(*Message)
+
 		if request := new(WebServiceGetRequest); message.Content.MessageIs(request) {
 			message.Content.UnmarshalTo(request)
 			response := new(WebServiceGetResponse)
-			value, err := anypb.New(w.schema.Get(request.Key))
+			value, err := anypb.New(componentProvider.WithSchema().Get(request.Key))
 
 			if err != nil {
 				componentProvider.WithLogger().Error(fmt.Sprintf("Error marshalling value for key '%s': %v", request.Key, err))
@@ -31,7 +33,7 @@ func (h *DefaultWebClientHandler) Handle(client WebClient, componentProvider Web
 		} else if request := new(WebServiceSetRequest); message.Content.MessageIs(request) {
 			message.Content.UnmarshalTo(request)
 			response := new(WebServiceSetResponse)
-			w.schema.Set(request.Key, request.Value)
+			componentProvider.WithSchema().Set(request.Key, request.Value)
 			client.Write(response)
 
 			for _, handler := range w.setHandlers {

@@ -6,8 +6,6 @@ import (
 	"sync/atomic"
 
 	"github.com/gorilla/websocket"
-	"google.golang.org/protobuf/proto"
-	anypb "google.golang.org/protobuf/types/known/anypb"
 )
 
 var defaultWebClientIdCounter uint64
@@ -63,16 +61,7 @@ func (w *DefaultWebClient) Read() chan interface{} {
 }
 
 func (w *DefaultWebClient) Write(v interface{}) {
-	content, err := anypb.New(v)
-
-	if err != nil {
-		w.config.WebServiceComponentProvider.WithLogger().Error(fmt.Sprintf("Failed to marshal message before send: %v", err))
-		return
-	}
-
-	message := new(Message)
-	message.Content = content
-	w.writeCh <- message
+	w.writeCh <- v
 }
 
 func (w *DefaultWebClient) Close() {
@@ -105,15 +94,20 @@ func (w *DefaultWebClient) DoPendingReads() {
 		}
 
 		if messageType == websocket.BinaryMessage {
-			request := new(Message)
+			var i interface{} = p
+			for _, transformer := range w.config.RequestTransformers {
+				i = transformer.Transform(i)
 
-			if err := proto.Unmarshal(p, request); err != nil {
-				w.config.WebServiceComponentProvider.WithLogger().Trace(fmt.Sprintf("WebSocket [%d] received invalid message: %v", w.clientId, request))
+				if i == nil {
+					break
+				}
+			}
+
+			if i == nil {
 				continue
 			}
 
-			w.config.WebServiceComponentProvider.WithLogger().Trace(fmt.Sprintf("WebSocket [%d] received message: %v", w.clientId, request))
-			w.readCh <- request
+			w.readCh <- i
 		} else if messageType == websocket.CloseMessage {
 			break
 		}
@@ -127,12 +121,22 @@ func (w *DefaultWebClient) DoPendingWrites() {
 	w.config.WebServiceComponentProvider.WithLogger().Trace(fmt.Sprintf("WebSocket [%d] is listening for pending writes", w.clientId))
 	defer w.config.WebServiceComponentProvider.WithLogger().Trace(fmt.Sprintf("WebSocket [%d] is no longer listening for pending writes", w.clientId))
 
-	for v := range w.writeCh {
-		w.config.WebServiceComponentProvider.WithLogger().Trace(fmt.Sprintf("WebSocket [%d] sending message: %v", w.clientId, v))
+	for i := range w.writeCh {
+		for _, transformer := range w.config.ResponseTransformers {
+			i = transformer.Transform(i)
 
-		b, err := proto.Marshal(v)
-		if err != nil {
-			w.config.WebServiceComponentProvider.WithLogger().Error(fmt.Sprintf("WebSocket [%d] error marshalling message: %v", w.clientId, err))
+			if i == nil {
+				break
+			}
+		}
+
+		if i == nil {
+			continue
+		}
+
+		b, ok := i.([]byte)
+		if !ok {
+			w.config.WebServiceComponentProvider.WithLogger().Error(fmt.Sprintf("WebSocket [%d] error marshalling message into bytes", w.clientId))
 			continue
 		}
 
