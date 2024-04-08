@@ -18,7 +18,7 @@ func Register_web_handler_server_interactor() {
         this._ws = null;
         this._connectionStatus = new proto.qmq.ConnectionState();
 
-        this._connectionStatus.setValue(proto.qmq.ConnectionStateEnum.CONNECTION_STATE_DISCONNECTED);
+        this._connectionStatus.setValue(proto.qmq.ConnectionState.ConnectionStateEnum.DISCONNECTED);
         this.notifyConnectionStatus();
     }
 
@@ -60,12 +60,12 @@ func Register_web_handler_server_interactor() {
     }
 
     onOpen(event) {
-        this._connectionStatus.setValue(proto.qmq.ConnectionStateEnum.CONNECTION_STATE_CONNECTED);
+        this._connectionStatus.setValue(proto.qmq.ConnectionState.ConnectionStateEnum.CONNECTED);
         this.notifyConnectionStatus();
     }
 
     onClose(event) {
-        this._connectionStatus.setValue(proto.qmq.ConnectionStateEnum.CONNECTION_STATE_DISCONNECTED);
+        this._connectionStatus.setValue(proto.qmq.ConnectionState.ConnectionStateEnum.DISCONNECTED);
         this.notifyConnectionStatus();
 
         this.connect();
@@ -80,7 +80,7 @@ func Register_web_handler_server_interactor() {
     }
 
     get(key) {
-        if (this._connectionStatus.getValue() !== proto.qmq.ConnectionStateEnum.CONNECTION_STATE_CONNECTED)
+        if (this._connectionStatus.getValue() !== proto.qmq.ConnectionState.ConnectionStateEnum.CONNECTED)
             return;
         
         const request = new proto.qmq.WebServiceGetRequest();
@@ -94,7 +94,7 @@ func Register_web_handler_server_interactor() {
     }
 
     set(key, value) {
-        if (this._connectionStatus.getValue() !== proto.qmq.ConnectionStateEnum.CONNECTION_STATE_CONNECTED)
+        if (this._connectionStatus.getValue() !== proto.qmq.ConnectionState.ConnectionStateEnum.CONNECTED)
             return;
 
         const request = new proto.qmq.WebServiceSetRequest();

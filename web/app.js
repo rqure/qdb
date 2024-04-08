@@ -4854,7 +4854,7 @@ proto.qmq.GarageDoorState.serializeBinaryToWriter = function(message, writer) {
  */
 proto.qmq.GarageDoorState.GarageDoorStateEnum = {
   UNSPECIFIED: 0,
-  OPEN: 1,
+  OPENED: 1,
   CLOSED: 2
 };
 
