@@ -55,8 +55,6 @@ func NewDefaultEngine(config DefaultEngineConfig) Engine {
 	}
 
 	e.connectionProvider = config.ConnectionProviderFactory.Create()
-	e.logger = config.LoggerFactory.Create(e)
-	e.transformerProvider = config.TransformerProviderFactory.Create(e)
 
 	return e
 }
@@ -69,6 +67,9 @@ func (e *DefaultEngine) Initialize() {
 			log.Fatalf("'%s' failed to connect: %v", key, err)
 		}
 	})
+
+	e.logger = e.config.LoggerFactory.Create(e)
+	e.transformerProvider = e.config.TransformerProviderFactory.Create(e)
 
 	e.logger.Advise("Application has started")
 }

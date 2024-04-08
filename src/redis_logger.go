@@ -66,6 +66,7 @@ func (l *RedisLogger) Error(message string) {
 
 func (l *RedisLogger) Panic(message string) {
 	l.Log(Log_PANIC, message)
+	panic(message)
 }
 
 func (l *RedisLogger) Close() {
