@@ -1,8 +1,6 @@
 package qmq
 
 import (
-	reflect "reflect"
-
 	"google.golang.org/protobuf/proto"
 )
 
@@ -35,14 +33,14 @@ func (s *RedisSchema) Get(key string) proto.Message {
 }
 
 func (s *RedisSchema) Set(key string, value proto.Message) {
-	v := s.kv[key]
-	if v != nil && reflect.TypeOf(v) != reflect.TypeOf(value) {
-		return
-	}
-
 	s.kv[key] = value
 	s.db.SetValue(key, value)
 	s.ch <- key
+}
+
+func (s *RedisSchema) SetNoNotify(key string, value proto.Message) {
+	s.kv[key] = value
+	s.db.SetValue(key, value)
 }
 
 func (s *RedisSchema) Ch() chan string {
@@ -55,6 +53,6 @@ func (s *RedisSchema) Initialize() {
 	}
 
 	for key := range s.kv {
-		s.Set(key, s.kv[key])
+		s.SetNoNotify(key, s.kv[key])
 	}
 }
