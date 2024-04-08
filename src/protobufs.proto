@@ -111,7 +111,7 @@ message MqttMessage {
 message GarageDoorState {
     enum GarageDoorStateEnum {
         UNSPECIFIED = 0;
-        OPEN = 1;
+        OPENED = 1;
         CLOSED = 2;
     }
 
