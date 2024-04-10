@@ -32,6 +32,26 @@ func (s *RedisSchema) Get(key string) proto.Message {
 	return v
 }
 
+func (s *RedisSchema) GetFull(key string) (proto.Message, *SchemaData) {
+	v := s.kv[key]
+
+	if v == nil {
+		return nil, nil
+	}
+
+	d, err := s.db.Get(key)
+	if err != nil {
+		return nil, nil
+	}
+
+	err = d.Data.UnmarshalTo(v)
+	if err != nil {
+		return nil, nil
+	}
+
+	return v, d
+}
+
 func (s *RedisSchema) Set(key string, value proto.Message) {
 	s.kv[key] = value
 	s.db.SetValue(key, value)
