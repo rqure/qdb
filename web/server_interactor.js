@@ -26,7 +26,7 @@ class ServerInteractor {
         const fileReader = new FileReader();
         const me = this;
         fileReader.onload = function(event) {
-            const message = proto.qmq.WebServiceMessage.deserializeBinary(new Uint8Array(event.target.result));
+            const message = proto.qmq.Message.deserializeBinary(new Uint8Array(event.target.result));
             
             const responseTypes = {
                 "qmq.WebServiceGetResponse": proto.qmq.WebServiceGetResponse,
@@ -74,7 +74,7 @@ class ServerInteractor {
         const request = new proto.qmq.WebServiceGetRequest();
         request.setKey(key);
 
-        const message = new proto.qmq.WebServiceMessage();
+        const message = new proto.qmq.Message();
         message.setContent(new proto.google.protobuf.Any());
         message.getContent().pack(request.serializeBinary(), 'qmq.WebServiceGetRequest');
 
@@ -89,7 +89,7 @@ class ServerInteractor {
         request.setKey(key);
         request.setValue(value);
 
-        const message = new proto.qmq.WebServiceMessage();
+        const message = new proto.qmq.Message();
         message.setContent(new proto.google.protobuf.Any());
         message.getContent().pack(request.serializeBinary(), 'qmq.WebServiceSetRequest');
 
