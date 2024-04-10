@@ -20,5 +20,5 @@ func (a *DefaultLoggerFactory) Create(components EngineComponentProvider) Logger
 
 	name := components.WithNameProvider().Get()
 	redisConnection := components.WithConnectionProvider().Get("redis").(*RedisConnection)
-	return NewRedisLogger(name, redisConnection, logLength, int64(logLevel))
+	return NewRedisLogger(name, redisConnection, logLevel, int64(logLength))
 }
