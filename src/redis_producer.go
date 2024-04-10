@@ -30,6 +30,8 @@ func (p *RedisProducer) Initialize(length int64) {
 	}
 
 	p.stream.Length = length
+
+	go p.Process()
 }
 
 func (p *RedisProducer) Push(i interface{}) {
