@@ -77,7 +77,15 @@ func (c *RedisConsumer) PopItem() Consumable {
 		return consumable
 	}
 
-	c.stream.Locker.Unlock()
+	// If we couldn't read the message due to an error, we should ack the message
+	// to move on to the next one.
+	consumable := &RedisConsumable{
+		conn:   c.connection,
+		stream: c.stream,
+		data:   nil,
+	}
+	consumable.Ack()
+
 	return nil
 }
 

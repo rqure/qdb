@@ -273,6 +273,7 @@ func (q *RedisConnection) StreamRead(s *RedisStream, m protoreflect.ProtoMessage
 
 	for _, xMessage := range xResult {
 		for _, message := range xMessage.Messages {
+			s.Context.LastConsumedId = message.ID
 			decodedMessage := make(map[string]string)
 
 			for key, value := range message.Values {
@@ -292,7 +293,6 @@ func (q *RedisConnection) StreamRead(s *RedisStream, m protoreflect.ProtoMessage
 				if err != nil {
 					return UNMARSHAL_FAILED
 				}
-				s.Context.LastConsumedId = message.ID
 				return nil
 			}
 		}
