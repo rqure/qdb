@@ -74,8 +74,10 @@ func (l *RedisLocker) LockWithTimeout(timeoutMs int64) {
 
 func (l *RedisLocker) Unlock() {
 	if l.isLocked.CompareAndSwap(true, false) {
-		l.unlockCh <- nil
-		l.mutex.Unlock()
+		defer func() {
+			l.unlockCh <- nil
+			l.mutex.Unlock()
+		}()
 	}
 
 	readRequest, err := l.conn.Get(l.id)
