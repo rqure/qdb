@@ -91,8 +91,7 @@ func (l *RedisLocker) Unlock() {
 	l.unlockCh <- nil
 	l.conn.Unset(l.id)
 
-	if l.isLocked.Load() {
-		l.isLocked.Store(false)
+	if l.isLocked.CompareAndSwap(true, false) {
 		l.mutex.Unlock()
 	}
 }

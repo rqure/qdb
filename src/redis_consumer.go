@@ -37,13 +37,12 @@ func (c *RedisConsumer) Initialize() {
 }
 
 func (c *RedisConsumer) ResetLastId() {
-	c.stream.Context.LastConsumedId = "0"
-
-	writeRequest := NewWriteRequest(&c.stream.Context)
-
 	c.stream.Locker.Lock()
 	defer c.stream.Locker.Unlock()
 
+	c.stream.Context.LastConsumedId = "0"
+
+	writeRequest := NewWriteRequest(&c.stream.Context)
 	c.connection.Set(c.stream.ContextKey(), writeRequest)
 }
 
