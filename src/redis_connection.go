@@ -41,6 +41,7 @@ type RedisConnection struct {
 	password string
 	redis    *redis.Client
 	lock     sync.Mutex
+	wg       sync.WaitGroup
 }
 
 func NewReadRequest() *SchemaData {
@@ -85,6 +86,8 @@ func (q *RedisConnection) Connect() error {
 }
 
 func (q *RedisConnection) Disconnect() {
+	q.wg.Wait()
+
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
@@ -92,6 +95,20 @@ func (q *RedisConnection) Disconnect() {
 		q.redis.Close()
 		q.redis = nil
 	}
+}
+
+func (q *RedisConnection) WgAdd() {
+	q.lock.Lock()
+	defer q.lock.Unlock()
+
+	q.wg.Add(1)
+}
+
+func (q *RedisConnection) WgDone() {
+	q.lock.Lock()
+	defer q.lock.Unlock()
+
+	q.wg.Done()
 }
 
 func (q *RedisConnection) Set(k string, d *SchemaData) error {

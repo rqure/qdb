@@ -103,6 +103,9 @@ func (l *RedisLocker) IsLocked() bool {
 }
 
 func (l *RedisLocker) UpdateExpiryTimeout(timeoutMs int64) {
+	l.conn.WgAdd()
+	defer l.conn.WgDone()
+
 	for {
 		select {
 		case <-l.unlockCh:

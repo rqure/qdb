@@ -97,6 +97,9 @@ func (c *RedisConsumer) Close() {
 }
 
 func (c *RedisConsumer) Process() {
+	c.connection.WgAdd()
+	defer c.connection.WgDone()
+
 	ticker := time.NewTicker(100 * time.Millisecond)
 	defer ticker.Stop()
 	defer close(c.readCh)

@@ -43,6 +43,9 @@ func (p *RedisProducer) Close() {
 }
 
 func (p *RedisProducer) Process() {
+	p.connection.WgAdd()
+	defer p.connection.WgDone()
+
 	push := func(i interface{}) {
 		p.stream.Locker.Lock()
 		defer p.stream.Locker.Unlock()
