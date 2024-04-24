@@ -6,12 +6,16 @@ package qmq;
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/any.proto";
 
-message Message {
+message Header {
     string id = 1;
     string from = 2;
     string to = 3;
     string subject = 4;
-    google.protobuf.Any content = 5;
+}
+
+message Message {
+    Header header = 1;
+    google.protobuf.Any content = 2;
 }
 
 message WebServiceGetRequest {
