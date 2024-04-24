@@ -3,6 +3,7 @@ package qmq
 import (
 	"fmt"
 
+	"github.com/google/uuid"
 	"google.golang.org/protobuf/types/known/anypb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
@@ -37,9 +38,12 @@ func (l *RedisLogger) Log(level Log_LogLevelEnum, message string) {
 
 	content, _ := anypb.New(logMsg)
 	l.producer.Push(&Message{
-		From:    l.name,
-		To:      l.name + ":logs",
-		Subject: "Log",
+		Header: &Header{
+			Id:      uuid.New().String(),
+			From:    l.name,
+			To:      l.name + ":logs",
+			Subject: content.TypeUrl,
+		},
 		Content: content,
 	})
 }

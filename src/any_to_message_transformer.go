@@ -3,11 +3,12 @@ package qmq
 import anypb "google.golang.org/protobuf/types/known/anypb"
 
 type AnyToMessageTransformer struct {
-	logger Logger
+	l Logger
+	np    NameProvider
 }
 
-func NewAnyToMessageTransformer(logger Logger) Transformer {
-	return &AnyToMessageTransformer{logger: logger}
+func NewAnyToMessageTransformer(l Logger, np NameProvider) Transformer {
+	return &AnyToMessageTransformer{l: l, np: np}
 }
 
 func (t *AnyToMessageTransformer) Transform(i interface{}) interface{} {
@@ -17,5 +18,5 @@ func (t *AnyToMessageTransformer) Transform(i interface{}) interface{} {
 		return nil
 	}
 
-	return &Message{Content: content}
+	return &Message{Header: Content: content}
 }
