@@ -6,5 +6,9 @@ func (a *DefaultProducerFactory) Create(key string, components EngineComponentPr
 	maxLength := 10
 	redisConnection := components.WithConnectionProvider().Get("redis").(*RedisConnection)
 	transformerKey := "producer:" + key
-	return NewRedisProducer(key, redisConnection, int64(maxLength), components.WithTransformerProvider().Get(transformerKey))
+	return NewRedisProducer(redisConnection, &RedisProducerConfig{
+		Topic:        key,
+		Length:       int64(maxLength),
+		Transformers: components.WithTransformerProvider().Get(transformerKey),
+	})
 }
