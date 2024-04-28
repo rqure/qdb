@@ -1625,8 +1625,8 @@ proto.qmq.Header.prototype.toObject = function(opt_includeInstance) {
 proto.qmq.Header.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    from: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    to: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    source: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    destination: jspb.Message.getFieldWithDefault(msg, 3, ""),
     subject: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
@@ -1670,11 +1670,11 @@ proto.qmq.Header.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setFrom(value);
+      msg.setSource(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setTo(value);
+      msg.setDestination(value);
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
@@ -1716,14 +1716,14 @@ proto.qmq.Header.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getFrom();
+  f = message.getSource();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getTo();
+  f = message.getDestination();
   if (f.length > 0) {
     writer.writeString(
       3,
@@ -1759,10 +1759,10 @@ proto.qmq.Header.prototype.setId = function(value) {
 
 
 /**
- * optional string from = 2;
+ * optional string source = 2;
  * @return {string}
  */
-proto.qmq.Header.prototype.getFrom = function() {
+proto.qmq.Header.prototype.getSource = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -1771,16 +1771,16 @@ proto.qmq.Header.prototype.getFrom = function() {
  * @param {string} value
  * @return {!proto.qmq.Header} returns this
  */
-proto.qmq.Header.prototype.setFrom = function(value) {
+proto.qmq.Header.prototype.setSource = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional string to = 3;
+ * optional string destination = 3;
  * @return {string}
  */
-proto.qmq.Header.prototype.getTo = function() {
+proto.qmq.Header.prototype.getDestination = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -1789,7 +1789,7 @@ proto.qmq.Header.prototype.getTo = function() {
  * @param {string} value
  * @return {!proto.qmq.Header} returns this
  */
-proto.qmq.Header.prototype.setTo = function(value) {
+proto.qmq.Header.prototype.setDestination = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
