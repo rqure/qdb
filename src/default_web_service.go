@@ -21,7 +21,7 @@ type DefaultWebServiceConfig struct {
 type DefaultWebService struct {
 	config        *DefaultWebServiceConfig
 	clientHandler WebClientHandler
-	clients       map[uint64]WebClient
+	clients       map[string]WebClient
 	clientsMutex  sync.Mutex
 }
 
@@ -41,7 +41,7 @@ func NewDefaultWebService(config *DefaultWebServiceConfig) WebService {
 	return &DefaultWebService{
 		config:        config,
 		clientHandler: config.WebClientHandlerFactory.Create(),
-		clients:       make(map[uint64]WebClient),
+		clients:       make(map[string]WebClient),
 	}
 }
 
@@ -114,7 +114,7 @@ func (w *DefaultWebService) NotifyAll(keys []string) {
 	}
 }
 
-func (w *DefaultWebService) onIndexRequest(wr http.ResponseWriter, req *http.Request) {
+func (w *DefaultWebService) onIndexRequest(wr http.ResponseWriter, _ *http.Request) {
 	index, err := os.ReadFile("web/index.html")
 
 	if err != nil {
@@ -130,13 +130,13 @@ func (w *DefaultWebService) addClient(conn *websocket.Conn) WebClient {
 	w.clientsMutex.Lock()
 	defer w.clientsMutex.Unlock()
 
-	onClientDisconnect := func(clientId uint64) {
+	onClientDisconnect := func(clientId string) {
 		w.clientsMutex.Lock()
 		delete(w.clients, clientId)
 		w.clientsMutex.Unlock()
 	}
 
-	client := NewDefaultWebClient(&DefaultWebClientConfig{
+	client := NewDefaultWebClient(DefaultWebClientConfig{
 		Connection:                  conn,
 		WebServiceComponentProvider: w,
 		OnClose:                     onClientDisconnect,
@@ -144,7 +144,7 @@ func (w *DefaultWebService) addClient(conn *websocket.Conn) WebClient {
 		ResponseTransformers:        w.config.ResponseTransformers,
 	})
 
-	w.clients[client.clientId] = client
+	w.clients[client.Id()] = client
 
 	return client
 }

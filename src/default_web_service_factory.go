@@ -15,7 +15,9 @@ func (f *DefaultWebServiceFactory) Create(schema Schema, componentProvider Engin
 		},
 		ResponseTransformers: []Transformer{
 			NewProtoToAnyTransformer(componentProvider.WithLogger()),
-			NewAnyToMessageTransformer(componentProvider.WithLogger()),
+			NewAnyToMessageTransformer(componentProvider.WithLogger(), AnyToMessageTransformerConfig{
+				SourceProvider: NewDefaultSourceProvider(componentProvider.WithNameProvider().Get()),
+			}),
 			NewMessageToBytesTransformer(componentProvider.WithLogger()),
 		},
 	})

@@ -3,7 +3,6 @@ package qmq
 import (
 	"fmt"
 
-	"github.com/google/uuid"
 	"google.golang.org/protobuf/types/known/anypb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
@@ -22,14 +21,14 @@ func NewRedisLogger(name string, connection *RedisConnection, logLevel int, maxL
 	}
 }
 
-func (l *RedisLogger) Log(level Log_LogLevelEnum, message string) {
+func (l *RedisLogger) Log(level Log_LogLevelEnum, message string, args ...interface{}) {
 	if int(level) < l.logLevel {
 		return
 	}
 
 	logMsg := &Log{
 		Level:       level,
-		Message:     message,
+		Message:     fmt.Sprintf(message, args...),
 		Timestamp:   timestamppb.Now(),
 		Application: l.name,
 	}
@@ -39,37 +38,37 @@ func (l *RedisLogger) Log(level Log_LogLevelEnum, message string) {
 	content, _ := anypb.New(logMsg)
 	l.producer.Push(&Message{
 		Header: &Header{
-			Id:      uuid.New().String(),
-			From:    l.name,
-			To:      l.name + ":logs",
-			Subject: content.TypeUrl,
+			Id:          new(DefaultMessageIdGenerator).Generate(),
+			Source:      l.name,
+			Destination: l.name + ":logs",
+			Subject:     content.TypeUrl,
 		},
 		Content: content,
 	})
 }
 
-func (l *RedisLogger) Trace(message string) {
-	l.Log(Log_TRACE, message)
+func (l *RedisLogger) Trace(message string, args ...interface{}) {
+	l.Log(Log_TRACE, message, args...)
 }
 
-func (l *RedisLogger) Debug(message string) {
-	l.Log(Log_DEBUG, message)
+func (l *RedisLogger) Debug(message string, args ...interface{}) {
+	l.Log(Log_DEBUG, message, args...)
 }
 
-func (l *RedisLogger) Advise(message string) {
-	l.Log(Log_ADVISE, message)
+func (l *RedisLogger) Advise(message string, args ...interface{}) {
+	l.Log(Log_ADVISE, message, args...)
 }
 
-func (l *RedisLogger) Warn(message string) {
-	l.Log(Log_WARN, message)
+func (l *RedisLogger) Warn(message string, args ...interface{}) {
+	l.Log(Log_WARN, message, args...)
 }
 
-func (l *RedisLogger) Error(message string) {
-	l.Log(Log_ERROR, message)
+func (l *RedisLogger) Error(message string, args ...interface{}) {
+	l.Log(Log_ERROR, message, args...)
 }
 
-func (l *RedisLogger) Panic(message string) {
-	l.Log(Log_PANIC, message)
+func (l *RedisLogger) Panic(message string, args ...interface{}) {
+	l.Log(Log_PANIC, message, args...)
 	panic(message)
 }
 

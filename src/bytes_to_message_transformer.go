@@ -19,7 +19,7 @@ func NewBytesToMessageTransformer(logger Logger) Transformer {
 func (t *BytesToMessageTransformer) Transform(i interface{}) interface{} {
 	b, ok := i.([]byte)
 	if !ok {
-		t.logger.Error("BytesToMessageTransformer.Transform: invalid input type")
+		t.logger.Error("BytesToMessageTransformer.Transform: invalid input type %T", i)
 		return nil
 	}
 

@@ -1,12 +1,12 @@
 package qmq
 
 type Logger interface {
-	Trace(message string)
-	Debug(message string)
-	Advise(message string)
-	Warn(message string)
-	Error(message string)
-	Panic(message string)
+	Trace(message string, args ...interface{})
+	Debug(message string, args ...interface{})
+	Advise(message string, args ...interface{})
+	Warn(message string, args ...interface{})
+	Error(message string, args ...interface{})
+	Panic(message string, args ...interface{})
 
 	Close()
 }
