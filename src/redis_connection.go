@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
+	"strings"
 	"sync"
 	"time"
 
@@ -223,6 +224,24 @@ func (q *RedisConnection) GetValue(k string, v proto.Message) error {
 func (q *RedisConnection) SetValue(k string, v proto.Message) error {
 	writeRequest := NewWriteRequest(v)
 	return q.Set(k, writeRequest)
+}
+
+func (q *RedisConnection) StreamScan(k string) map[string]bool {
+	result := map[string]bool{}
+
+	q.lock.Lock()
+	defer q.lock.Unlock()
+
+	iter := q.redis.Scan(context.Background(), 0, k, 0).Iterator()
+	for iter.Next(context.Background()) {
+		if strings.HasSuffix(iter.Val(), ":context") || strings.HasSuffix(iter.Val(), ":lock") {
+			continue
+		}
+
+		result[iter.Val()] = true
+	}
+
+	return result
 }
 
 func (q *RedisConnection) StreamAdd(s *RedisStream, m proto.Message) error {

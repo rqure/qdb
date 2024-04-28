@@ -1,37 +1,31 @@
 package qmq
 
 type RedisProducer struct {
-	connection   *RedisConnection
-	stream       *RedisStream
-	transformers []Transformer
-	channel      chan interface{}
+	connection *RedisConnection
+	config     *RedisProducerConfig
+	channel    chan interface{}
 }
 
-func NewRedisProducer(key string, connection *RedisConnection, length int64, transformers []Transformer) Producer {
-	producer := &RedisProducer{
-		connection:   connection,
-		stream:       NewRedisStream(key, connection),
-		transformers: transformers,
-		channel:      make(chan interface{}),
+type RedisProducerConfig struct {
+	Topic        string
+	Length       int64
+	Transformers []Transformer
+}
+
+func NewRedisProducer(connection *RedisConnection, config *RedisProducerConfig) Producer {
+	if config.Length <= 0 {
+		config.Length = 10
 	}
 
-	producer.Initialize(length)
+	producer := &RedisProducer{
+		connection: connection,
+		config:     config,
+		channel:    make(chan interface{}),
+	}
+
+	go producer.Process()
 
 	return producer
-}
-
-func (p *RedisProducer) Initialize(length int64) {
-	p.stream.Locker.Lock()
-	defer p.stream.Locker.Unlock()
-
-	readRequest, err := p.connection.Get(p.stream.ContextKey())
-	if err == nil {
-		readRequest.Data.UnmarshalTo(&p.stream.Context)
-	}
-
-	p.stream.Length = length
-
-	go p.Process()
 }
 
 func (p *RedisProducer) Push(i interface{}) {
@@ -46,11 +40,14 @@ func (p *RedisProducer) Process() {
 	p.connection.WgAdd()
 	defer p.connection.WgDone()
 
-	push := func(i interface{}) {
-		p.stream.Locker.Lock()
-		defer p.stream.Locker.Unlock()
+	pushToStream := func(s *RedisStream, m *Message) {
+		s.Locker.Lock()
+		defer s.Locker.Unlock()
+		p.connection.StreamAdd(s, m)
+	}
 
-		for _, transformer := range p.transformers {
+	push := func(i interface{}) {
+		for _, transformer := range p.config.Transformers {
 			i = transformer.Transform(i)
 
 			if i == nil {
@@ -64,7 +61,11 @@ func (p *RedisProducer) Process() {
 			return
 		}
 
-		p.connection.StreamAdd(p.stream, m)
+		for q := range p.connection.StreamScan(p.config.Topic) {
+			s := NewRedisStream(q, p.connection)
+			s.Length = p.config.Length
+			pushToStream(s, m)
+		}
 	}
 
 	for i := range p.channel {
