@@ -61,8 +61,12 @@ func (p *RedisProducer) Process() {
 			return
 		}
 
-		for q := range p.connection.StreamScan(p.config.Topic) {
-			s := NewRedisStream(q, p.connection)
+		s := NewRedisStream(p.config.Topic, p.connection)
+		s.Length = p.config.Length
+		pushToStream(s, m)
+
+		for q := range p.connection.StreamScan(p.config.Topic + ":*") {
+			s = NewRedisStream(q, p.connection)
 			s.Length = p.config.Length
 			pushToStream(s, m)
 		}
