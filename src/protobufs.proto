@@ -8,8 +8,8 @@ import "google/protobuf/any.proto";
 
 message Header {
     string id = 1;
-    string from = 2;
-    string to = 3;
+    string source = 2;
+    string destination = 3;
     string subject = 4;
 }
 
