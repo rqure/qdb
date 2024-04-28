@@ -15,8 +15,12 @@ type RedisLogger struct {
 
 func NewRedisLogger(name string, connection *RedisConnection, logLevel int, maxLength int64) Logger {
 	return &RedisLogger{
-		name:     name,
-		producer: NewRedisProducer(name+":logs", connection, maxLength, []Transformer{}),
+		name: name,
+		producer: NewRedisProducer(connection, &RedisProducerConfig{
+			Topic:        name + ":logs",
+			Length:       maxLength,
+			Transformers: []Transformer{},
+		}),
 		logLevel: logLevel,
 	}
 }
