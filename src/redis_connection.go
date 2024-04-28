@@ -133,7 +133,7 @@ func (q *RedisConnection) Set(k string, d *SchemaData) error {
 	return nil
 }
 
-func (q *RedisConnection) TempSet(k string, d *SchemaData, timeoutMs int64) (bool, error) {
+func (q *RedisConnection) TempSet(k string, d *SchemaData, t time.Duration) (bool, error) {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
@@ -147,8 +147,7 @@ func (q *RedisConnection) TempSet(k string, d *SchemaData, timeoutMs int64) (boo
 	}
 
 	result, err := q.redis.SetNX(context.Background(),
-		k, base64.StdEncoding.EncodeToString(v),
-		time.Duration(timeoutMs)*time.Millisecond).Result()
+		k, base64.StdEncoding.EncodeToString(v), t).Result()
 	if err != nil {
 		return false, TEMPSET_FAILED
 	}
@@ -160,12 +159,12 @@ func (q *RedisConnection) TempSet(k string, d *SchemaData, timeoutMs int64) (boo
 	return true, nil
 }
 
-func (q *RedisConnection) TempUpdateExpiry(k string, timeoutMs int64) error {
+func (q *RedisConnection) TempUpdateExpiry(k string, d time.Duration) error {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
 	_, err := q.redis.Expire(context.Background(),
-		k, time.Duration(timeoutMs)*time.Millisecond).Result()
+		k, d).Result()
 
 	if err != nil {
 		return TEMPSET_FAILED

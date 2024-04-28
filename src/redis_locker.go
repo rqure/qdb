@@ -27,7 +27,7 @@ func NewRedisLocker(id string, conn *RedisConnection) *RedisLocker {
 	}
 }
 
-func (l *RedisLocker) TryLockWithTimeout(timeoutMs int64) bool {
+func (l *RedisLocker) TryLockWithTimeout(d time.Duration) bool {
 	randomBytes := make([]byte, 8)
 	_, err := rand.Read(randomBytes)
 	if err != nil {
@@ -38,7 +38,7 @@ func (l *RedisLocker) TryLockWithTimeout(timeoutMs int64) bool {
 
 	writeRequest := NewWriteRequest(&String{Value: l.token})
 
-	result, err := l.conn.TempSet(l.id, writeRequest, timeoutMs)
+	result, err := l.conn.TempSet(l.id, writeRequest, d)
 	if err != nil {
 		return false
 	}
@@ -47,7 +47,7 @@ func (l *RedisLocker) TryLockWithTimeout(timeoutMs int64) bool {
 }
 
 func (l *RedisLocker) TryLock() bool {
-	return l.TryLockWithTimeout(10000)
+	return l.TryLockWithTimeout(10 * time.Second)
 }
 
 func (l *RedisLocker) Lock() {
@@ -58,18 +58,18 @@ func (l *RedisLocker) Lock() {
 
 	l.isLocked.Store(true)
 
-	go l.UpdateExpiryTimeout(10000)
+	go l.UpdateExpiryTimeout(10 * time.Second)
 }
 
-func (l *RedisLocker) LockWithTimeout(timeoutMs int64) {
+func (l *RedisLocker) LockWithTimeout(d time.Duration) {
 	l.mutex.Lock()
-	for !l.TryLockWithTimeout(timeoutMs) {
+	for !l.TryLockWithTimeout(d) {
 		time.Sleep(time.Duration(mrand.Intn(95)+5) * time.Millisecond)
 	}
 
 	l.isLocked.Store(true)
 
-	go l.UpdateExpiryTimeout(timeoutMs)
+	go l.UpdateExpiryTimeout(d)
 }
 
 func (l *RedisLocker) Unlock() {
@@ -102,7 +102,7 @@ func (l *RedisLocker) IsLocked() bool {
 	return l.isLocked.Load()
 }
 
-func (l *RedisLocker) UpdateExpiryTimeout(timeoutMs int64) {
+func (l *RedisLocker) UpdateExpiryTimeout(d time.Duration) {
 	l.conn.WgAdd()
 	defer l.conn.WgDone()
 
@@ -110,8 +110,8 @@ func (l *RedisLocker) UpdateExpiryTimeout(timeoutMs int64) {
 		select {
 		case <-l.unlockCh:
 			return
-		case <-time.After(time.Duration(timeoutMs/2) * time.Millisecond):
-			l.conn.TempUpdateExpiry(l.id, timeoutMs)
+		case <-time.After(d / 2):
+			l.conn.TempUpdateExpiry(l.id, d)
 		}
 	}
 }
