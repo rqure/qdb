@@ -46,6 +46,10 @@ func (c *RedisConsumer) Initialize() {
 	c.stream.Locker.Lock()
 	defer c.stream.Locker.Unlock()
 
+	if c.config.CopyOriginal {
+		c.connection.Copy()
+	}
+
 	readRequest, err := c.connection.Get(c.stream.ContextKey())
 	if err == nil {
 		readRequest.Data.UnmarshalTo(&c.stream.Context)
