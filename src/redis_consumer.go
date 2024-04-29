@@ -1,22 +1,38 @@
 package qmq
 
-import "time"
+import (
+	"crypto/rand"
+	"encoding/base64"
+	"time"
+)
 
 type RedisConsumer struct {
-	connection   *RedisConnection
-	stream       *RedisStream
-	readCh       chan Consumable
-	closeCh      chan interface{}
-	transformers []Transformer
+	connection *RedisConnection
+	stream     *RedisStream
+	config     *RedisConsumerConfig
+	key        string
+	readCh     chan Consumable
+	closeCh    chan interface{}
 }
 
-func NewRedisConsumer(key string, connection *RedisConnection, transformers []Transformer) Consumer {
+type RedisConsumerConfig struct {
+	Topic        string
+	Transformers []Transformer
+	CopyOriginal bool
+}
+
+func NewRedisConsumer(connection *RedisConnection, config *RedisConsumerConfig) Consumer {
+	randomBytes := make([]byte, 8)
+	rand.Read(randomBytes)
+	key := config.Topic + ":" + base64.StdEncoding.EncodeToString(randomBytes)
+
 	consumer := &RedisConsumer{
-		connection:   connection,
-		stream:       NewRedisStream(key, connection),
-		readCh:       make(chan Consumable),
-		closeCh:      make(chan interface{}),
-		transformers: transformers,
+		connection: connection,
+		key:        key,
+		stream:     NewRedisStream(key, connection),
+		config:     config,
+		readCh:     make(chan Consumable),
+		closeCh:    make(chan interface{}),
 	}
 
 	consumer.Initialize()
@@ -36,16 +52,6 @@ func (c *RedisConsumer) Initialize() {
 	}
 }
 
-func (c *RedisConsumer) ResetLastId() {
-	c.stream.Locker.Lock()
-	defer c.stream.Locker.Unlock()
-
-	c.stream.Context.LastConsumedId = "0"
-
-	writeRequest := NewWriteRequest(&c.stream.Context)
-	c.connection.Set(c.stream.ContextKey(), writeRequest)
-}
-
 func (c *RedisConsumer) PopItem() Consumable {
 	c.stream.Locker.Lock()
 
@@ -53,7 +59,7 @@ func (c *RedisConsumer) PopItem() Consumable {
 	err := c.connection.StreamRead(c.stream, m)
 	if err == nil {
 		var i interface{} = m
-		for _, transformer := range c.transformers {
+		for _, transformer := range c.config.Transformers {
 			i = transformer.Transform(i)
 			if i == nil {
 				break
