@@ -10,7 +10,15 @@ type RedisProducerConfig struct {
 	Topic        string
 	Length       int64
 	Transformers []Transformer
+	Distribution RedisProducerDistribution
 }
+
+type RedisProducerDistribution int64
+
+const (
+	Duplicate RedisProducerDistribution = iota
+	RoundRobin
+)
 
 func NewRedisProducer(connection *RedisConnection, config *RedisProducerConfig) Producer {
 	if config.Length <= 0 {
@@ -40,6 +48,8 @@ func (p *RedisProducer) Process() {
 	p.connection.WgAdd()
 	defer p.connection.WgDone()
 
+	queues := map[string]bool{}
+
 	pushToStream := func(s *RedisStream, m *Message) {
 		s.Locker.Lock()
 		defer s.Locker.Unlock()
@@ -65,10 +75,29 @@ func (p *RedisProducer) Process() {
 		s.Length = p.config.Length
 		pushToStream(s, m)
 
-		for q := range p.connection.StreamScan(p.config.Topic + ":*") {
-			s = NewRedisStream(q, p.connection)
-			s.Length = p.config.Length
-			pushToStream(s, m)
+		switch p.config.Distribution {
+		case Duplicate:
+			for q := range p.connection.StreamScan(p.config.Topic + ":*") {
+				s = NewRedisStream(q, p.connection)
+				s.Length = p.config.Length
+				pushToStream(s, m)
+			}
+		case RoundRobin:
+			found := false
+			for q := range p.connection.StreamScan(p.config.Topic + ":*") {
+				if _, ok := queues[q]; !ok {
+					queues[q] = true
+					s = NewRedisStream(q, p.connection)
+					s.Length = p.config.Length
+					pushToStream(s, m)
+					found = true
+					break
+				}
+			}
+
+			if !found {
+				queues = map[string]bool{}
+			}
 		}
 	}
 
