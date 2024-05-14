@@ -112,6 +112,13 @@ func (q *RedisConnection) WgDone() {
 	q.wg.Done()
 }
 
+func (q *RedisConnection) Copy(s, d string) {
+	q.lock.Lock()
+	defer q.lock.Unlock()
+
+	q.redis.Copy(context.Background(), s, d, 0, true)
+}
+
 func (q *RedisConnection) Set(k string, d *SchemaData) error {
 	q.lock.Lock()
 	defer q.lock.Unlock()

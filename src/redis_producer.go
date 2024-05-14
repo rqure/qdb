@@ -83,19 +83,18 @@ func (p *RedisProducer) Process() {
 				pushToStream(s, m)
 			}
 		case RoundRobin:
-			found := false
-			for q := range p.connection.StreamScan(p.config.Topic + ":*") {
+			scanned := p.connection.StreamScan(p.config.Topic + ":*")
+			for q := range scanned {
 				if _, ok := queues[q]; !ok {
 					queues[q] = true
 					s = NewRedisStream(q, p.connection)
 					s.Length = p.config.Length
 					pushToStream(s, m)
-					found = true
 					break
 				}
 			}
 
-			if !found {
+			if len(queues) == len(scanned) {
 				queues = map[string]bool{}
 			}
 		}

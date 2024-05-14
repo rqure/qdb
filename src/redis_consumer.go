@@ -47,7 +47,7 @@ func (c *RedisConsumer) Initialize() {
 	defer c.stream.Locker.Unlock()
 
 	if c.config.CopyOriginal {
-		c.connection.Copy()
+		c.connection.Copy(c.config.Topic, c.key)
 	}
 
 	readRequest, err := c.connection.Get(c.stream.ContextKey())
@@ -110,26 +110,45 @@ func (c *RedisConsumer) Process() {
 	c.connection.WgAdd()
 	defer c.connection.WgDone()
 
-	ticker := time.NewTicker(100 * time.Millisecond)
-	defer ticker.Stop()
+	readTicker := time.NewTicker(100 * time.Millisecond)
+	defer readTicker.Stop()
+
+	heartbeatTicker := time.NewTicker(10 * time.Second)
+	defer heartbeatTicker.Stop()
+
 	defer close(c.readCh)
 	defer close(c.closeCh)
+
+	defer c.connection.Unset(c.stream.Key())
+	defer c.connection.Unset(c.stream.ContextKey())
+	defer c.connection.Unset(c.stream.LockerKey())
 
 	for {
 		select {
 		case <-c.closeCh:
 			return
-		case <-ticker.C:
+		case <-heartbeatTicker.C:
+			c.connection.TempUpdateExpiry(c.stream.Key(), 5*time.Second)
+			c.connection.TempUpdateExpiry(c.stream.ContextKey(), 5*time.Second)
+			c.connection.TempUpdateExpiry(c.stream.LockerKey(), 5*time.Second)
+		case <-readTicker.C:
 			for {
 				consumable := c.PopItem()
 				if consumable == nil {
 					break
 				}
 
-				select {
-				case <-c.closeCh:
-					return
-				case c.readCh <- consumable:
+				for {
+					select {
+					case <-c.closeCh:
+						return
+					case <-heartbeatTicker.C:
+						c.connection.TempUpdateExpiry(c.stream.Key(), 5*time.Second)
+						c.connection.TempUpdateExpiry(c.stream.ContextKey(), 5*time.Second)
+						c.connection.TempUpdateExpiry(c.stream.LockerKey(), 5*time.Second)
+					case c.readCh <- consumable:
+						break
+					}
 				}
 			}
 		}
