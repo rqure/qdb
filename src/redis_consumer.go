@@ -128,9 +128,9 @@ func (c *RedisConsumer) Process() {
 		case <-c.closeCh:
 			return
 		case <-heartbeatTicker.C:
-			c.connection.TempUpdateExpiry(c.stream.Key(), 5*time.Second)
-			c.connection.TempUpdateExpiry(c.stream.ContextKey(), 5*time.Second)
-			c.connection.TempUpdateExpiry(c.stream.LockerKey(), 5*time.Second)
+			c.connection.TempUpdateExpiry(c.stream.Key(), 20*time.Second)
+			c.connection.TempUpdateExpiry(c.stream.ContextKey(), 20*time.Second)
+			c.connection.TempUpdateExpiry(c.stream.LockerKey(), 20*time.Second)
 		case <-readTicker.C:
 		outer:
 			for {
@@ -145,9 +145,9 @@ func (c *RedisConsumer) Process() {
 					case <-c.closeCh:
 						return
 					case <-heartbeatTicker.C:
-						c.connection.TempUpdateExpiry(c.stream.Key(), 5*time.Second)
-						c.connection.TempUpdateExpiry(c.stream.ContextKey(), 5*time.Second)
-						c.connection.TempUpdateExpiry(c.stream.LockerKey(), 5*time.Second)
+						c.connection.TempUpdateExpiry(c.stream.Key(), 20*time.Second)
+						c.connection.TempUpdateExpiry(c.stream.ContextKey(), 20*time.Second)
+						c.connection.TempUpdateExpiry(c.stream.LockerKey(), 20*time.Second)
 					case c.readCh <- consumable:
 						break inner
 					default:
