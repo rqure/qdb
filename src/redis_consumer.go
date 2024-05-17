@@ -132,12 +132,14 @@ func (c *RedisConsumer) Process() {
 			c.connection.TempUpdateExpiry(c.stream.ContextKey(), 5*time.Second)
 			c.connection.TempUpdateExpiry(c.stream.LockerKey(), 5*time.Second)
 		case <-readTicker.C:
+		outer:
 			for {
 				consumable := c.PopItem()
 				if consumable == nil {
-					break
+					break outer
 				}
 
+			inner:
 				for {
 					select {
 					case <-c.closeCh:
@@ -147,7 +149,11 @@ func (c *RedisConsumer) Process() {
 						c.connection.TempUpdateExpiry(c.stream.ContextKey(), 5*time.Second)
 						c.connection.TempUpdateExpiry(c.stream.LockerKey(), 5*time.Second)
 					case c.readCh <- consumable:
-						break
+						break inner
+					default:
+						// Nobody is ready to read the message, nack it to free stream lock
+						consumable.Nack()
+						break outer
 					}
 				}
 			}
