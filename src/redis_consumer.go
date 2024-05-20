@@ -48,6 +48,9 @@ func (c *RedisConsumer) Initialize() {
 
 	if c.config.CopyOriginal {
 		c.connection.Copy(c.config.Topic, c.key)
+	} else {
+		// Add an empty message to create the stream
+		c.connection.StreamAdd(c.stream, &Message{})
 	}
 
 	readRequest, err := c.connection.Get(c.stream.ContextKey())
