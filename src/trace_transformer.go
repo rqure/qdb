@@ -12,6 +12,14 @@ func NewTraceTransformer(l Logger, c string) Transformer {
 	}
 }
 
+func NewTracePushTransformer(l Logger) Transformer {
+	return NewTraceTransformer(l, "PUSHING")
+}
+
+func NewTracePopTransformer(l Logger) Transformer {
+	return NewTraceTransformer(l, "POPPED")
+}
+
 func (t *TraceTransformer) Transform(i interface{}) interface{} {
 	t.l.Trace("TraceTransformer.Transform: %s %v", t.c, i)
 
