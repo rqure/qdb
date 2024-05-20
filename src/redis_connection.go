@@ -242,6 +242,10 @@ func (q *RedisConnection) StreamScan(k string) map[string]bool {
 	iter := q.redis.Scan(context.Background(), 0, k, 0).Iterator()
 	for iter.Next(context.Background()) {
 		if strings.HasSuffix(iter.Val(), ":lock") {
+			// remove :lock suffix to find the key of the stream
+			// This is because the stream may not be created until we publish to it
+			// however since the lock is guaranteed to exist before we publish to it
+			// this is a safe way to find the stream
 			result[strings.TrimSuffix(iter.Val(), ":lock")] = true
 		}
 	}
