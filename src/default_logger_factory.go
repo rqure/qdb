@@ -15,7 +15,7 @@ func (a *DefaultLoggerFactory) Create(components EngineComponentProvider) Logger
 
 	logLevel, err := strconv.Atoi(os.Getenv("QMQ_LOG_LEVEL"))
 	if err != nil {
-		logLevel = 1
+		logLevel = 2
 	}
 
 	name := components.WithNameProvider().Get()
