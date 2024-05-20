@@ -242,7 +242,6 @@ func (q *RedisConnection) StreamScan(k string) map[string]bool {
 	iter := q.redis.Scan(context.Background(), 0, k, 0).Iterator()
 	for iter.Next(context.Background()) {
 		if strings.HasSuffix(iter.Val(), ":lock") {
-			// remove :lock from the key
 			result[strings.TrimSuffix(iter.Val(), ":lock")] = true
 		}
 	}
