@@ -7,18 +7,19 @@ import (
 )
 
 type RedisConsumer struct {
-	connection *RedisConnection
-	stream     *RedisStream
-	config     *RedisConsumerConfig
-	key        string
-	readCh     chan Consumable
-	closeCh    chan interface{}
+	connection     *RedisConnection
+	stream         *RedisStream
+	originalStream *RedisStream
+	config         *RedisConsumerConfig
+	key            string
+	readCh         chan Consumable
+	closeCh        chan interface{}
 }
 
 type RedisConsumerConfig struct {
 	Topic        string
 	Transformers []Transformer
-	CopyOriginal bool
+	AckOriginal  bool
 }
 
 func NewRedisConsumer(connection *RedisConnection, config *RedisConsumerConfig) Consumer {
@@ -27,12 +28,13 @@ func NewRedisConsumer(connection *RedisConnection, config *RedisConsumerConfig) 
 	key := config.Topic + ":" + base64.StdEncoding.EncodeToString(randomBytes)
 
 	consumer := &RedisConsumer{
-		connection: connection,
-		key:        key,
-		stream:     NewRedisStream(key, connection),
-		config:     config,
-		readCh:     make(chan Consumable),
-		closeCh:    make(chan interface{}),
+		connection:     connection,
+		key:            key,
+		stream:         NewRedisStream(key, connection),
+		originalStream: NewRedisStream(config.Topic, connection),
+		config:         config,
+		readCh:         make(chan Consumable),
+		closeCh:        make(chan interface{}),
 	}
 
 	consumer.Initialize()
@@ -43,12 +45,13 @@ func NewRedisConsumer(connection *RedisConnection, config *RedisConsumerConfig) 
 }
 
 func (c *RedisConsumer) Initialize() {
+	c.originalStream.Locker.Lock()
+	defer c.originalStream.Locker.Unlock()
+
 	c.stream.Locker.Lock()
 	defer c.stream.Locker.Unlock()
 
-	if c.config.CopyOriginal {
-		c.connection.Copy(c.config.Topic, c.key)
-	}
+	c.connection.Copy(c.config.Topic, c.key)
 
 	readRequest, err := c.connection.Get(c.stream.ContextKey())
 	if err == nil {
@@ -58,6 +61,12 @@ func (c *RedisConsumer) Initialize() {
 
 func (c *RedisConsumer) PopItem() Consumable {
 	c.stream.Locker.Lock()
+
+	streams := []*RedisStream{c.stream}
+	if c.config.AckOriginal {
+		c.originalStream.Locker.Lock()
+		streams = append(streams, c.originalStream)
+	}
 
 	m := &Message{}
 	err := c.connection.StreamRead(c.stream, m)
@@ -71,9 +80,9 @@ func (c *RedisConsumer) PopItem() Consumable {
 		}
 
 		consumable := &RedisConsumable{
-			conn:   c.connection,
-			stream: c.stream,
-			data:   i,
+			conn:    c.connection,
+			streams: streams,
+			data:    i,
 		}
 
 		// If the message was transformed into nil, we should ack it
@@ -89,9 +98,9 @@ func (c *RedisConsumer) PopItem() Consumable {
 	// If we couldn't read the message due to an error, we should ack the message
 	// to move on to the next one.
 	consumable := &RedisConsumable{
-		conn:   c.connection,
-		stream: c.stream,
-		data:   nil,
+		conn:    c.connection,
+		streams: streams,
+		data:    nil,
 	}
 	consumable.Ack()
 

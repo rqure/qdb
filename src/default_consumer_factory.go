@@ -7,6 +7,7 @@ func (a *DefaultConsumerFactory) Create(key string, components EngineComponentPr
 	transformerKey := "consumer:" + key
 	return NewRedisConsumer(redisConnection, &RedisConsumerConfig{
 		Topic:        key,
+		AckOriginal:  true,
 		Transformers: components.WithTransformerProvider().Get(transformerKey),
 	})
 }
