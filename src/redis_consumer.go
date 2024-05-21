@@ -57,6 +57,8 @@ func (c *RedisConsumer) Initialize() {
 	readRequest, err := c.connection.Get(c.stream.ContextKey())
 	if err == nil {
 		readRequest.Data.UnmarshalTo(&c.stream.Context)
+	} else {
+		c.connection.Set(c.stream.ContextKey(), NewWriteRequest(&c.stream.Context))
 	}
 
 	// wait for the stream to be scannable
