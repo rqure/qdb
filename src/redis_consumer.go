@@ -52,6 +52,7 @@ func (c *RedisConsumer) Initialize() {
 	defer c.stream.Locker.Unlock()
 
 	c.connection.Copy(c.config.Topic, c.key)
+	c.connection.Copy(c.originalStream.ContextKey(), c.stream.ContextKey())
 
 	readRequest, err := c.connection.Get(c.stream.ContextKey())
 	if err == nil {
