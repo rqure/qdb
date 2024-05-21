@@ -57,6 +57,17 @@ func (c *RedisConsumer) Initialize() {
 	if err == nil {
 		readRequest.Data.UnmarshalTo(&c.stream.Context)
 	}
+
+	// wait for the stream to be scannable
+	for {
+		streams := c.connection.StreamScan(c.config.Topic + ":*")
+
+		if _, ok := streams[c.key]; ok {
+			break
+		}
+
+		<-time.After(100 * time.Millisecond)
+	}
 }
 
 func (c *RedisConsumer) PopItem() Consumable {
