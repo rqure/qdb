@@ -241,7 +241,7 @@ func (q *RedisConnection) StreamScan(k string) map[string]bool {
 
 	iter := q.redis.Scan(context.Background(), 0, k, 0).Iterator()
 	for iter.Next(context.Background()) {
-		if strings.HasSuffix(iter.Val(), ":context") && strings.TrimSuffix(iter.Val(), ":context") != k {
+		if strings.HasSuffix(iter.Val(), ":context") {
 			// remove :context suffix to find the key of the stream
 			// This is because the stream may not be created until we publish to it
 			// however since the context key is guaranteed to exist before we publish to it
