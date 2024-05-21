@@ -78,12 +78,17 @@ func (p *RedisProducer) Process() {
 		switch p.config.Distribution {
 		case Duplicate:
 			for q := range p.connection.StreamScan(p.config.Topic + ":*") {
+				if q == p.config.Topic {
+					continue
+				}
+
 				s = NewRedisStream(q, p.connection)
 				s.Length = p.config.Length
 				pushToStream(s, m)
 			}
 		case RoundRobin:
 			scanned := p.connection.StreamScan(p.config.Topic + ":*")
+			queues[p.config.Topic] = true
 			for q := range scanned {
 				if _, ok := queues[q]; !ok {
 					queues[q] = true
