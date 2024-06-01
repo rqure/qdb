@@ -9,12 +9,13 @@ import (
 
 type IApplication interface {
 	Execute()
+	Quit()
 }
 
 type IWorker interface {
-	Init()
 	Deinit()
 	DoWork()
+	Init()
 }
 
 type ApplicationConfig struct {
@@ -24,8 +25,10 @@ type ApplicationConfig struct {
 type Application struct {
 	config ApplicationConfig
 
-	init   Signal
+	quit bool
+
 	deinit Signal
+	init   Signal
 	tick   Signal
 }
 
@@ -49,18 +52,26 @@ func (a *Application) Execute() {
 	a.init.Emit()
 	defer a.deinit.Emit()
 
-	quit := make(chan os.Signal, 1)
-	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	interrupt := make(chan os.Signal, 1)
+	signal.Notify(interrupt, syscall.SIGINT, syscall.SIGTERM)
 
 	ticker := time.NewTicker(100 * time.Millisecond)
 	defer ticker.Stop()
 
 	for {
 		select {
-		case <-quit:
+		case <-interrupt:
 			return
 		case <-ticker.C:
+			if a.quit {
+				return
+			}
+
 			a.tick.Emit()
 		}
 	}
+}
+
+func (a *Application) Quit() {
+	a.quit = true
 }
