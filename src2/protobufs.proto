@@ -1,0 +1,133 @@
+syntax = "proto3";
+
+option go_package = "qmq/qmq";
+package qmq;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/any.proto";
+
+message Header {
+    string id = 1;
+    string source = 2;
+    string destination = 3;
+    string subject = 4;
+}
+
+message Message {
+    Header header = 1;
+    google.protobuf.Any content = 2;
+}
+
+message WebServiceGetRequest {
+    string key = 1;
+}
+
+message WebServiceGetResponse {
+    string key = 1;
+    google.protobuf.Any value = 2;
+}
+
+message WebServiceNotification {
+    string key = 1;
+    google.protobuf.Any value = 2;
+}
+
+message WebServiceSetRequest {
+    string key = 1;
+    google.protobuf.Any value = 2;
+}
+
+message WebServiceSetResponse {
+}
+
+message SchemaData {
+    google.protobuf.Any data = 1;
+    string writer = 2;
+    google.protobuf.Timestamp writetime = 3;
+}
+
+message Int {
+    int64 value = 1;
+}
+
+message String {
+    string value = 1;
+}
+
+message Timestamp {
+    google.protobuf.Timestamp value = 1;
+}
+
+message Float {
+    double value = 1;
+}
+
+message Bool {
+    bool value = 1;
+}
+
+message Log {
+    enum LogLevelEnum {
+        UNSPECIFIED = 0;
+        TRACE = 1;
+        DEBUG = 2;
+        ADVISE = 3;
+        WARN = 4;
+        ERROR = 5;
+        PANIC = 6;
+    }
+
+    string application = 1;
+    LogLevelEnum level = 2;
+    string message = 3;
+    google.protobuf.Timestamp timestamp = 4;
+}
+
+message RedisStreamContext {
+    string last_consumed_id = 1;
+    string last_produced_id = 2;
+    int64 total_consumed = 3;
+    int64 total_produced = 4;
+}
+
+message Prayer {
+    string name = 1;
+    google.protobuf.Timestamp time = 2;
+}
+
+message AudioRequest {
+    string filename = 1;
+}
+
+message TextToSpeechRequest {
+    string text = 1;
+}
+
+message MqttMessage {
+    uint32 id = 1;
+    int32 qos = 2;
+    string topic = 3;
+    bytes payload = 4;
+    bool retained = 5;
+    bool duplicate = 6;
+}
+
+message GarageDoorState {
+    enum GarageDoorStateEnum {
+        UNSPECIFIED = 0;
+        OPENED = 1;
+        CLOSED = 2;
+    }
+
+    GarageDoorStateEnum value = 1;
+}
+
+message ConnectionState {
+    enum ConnectionStateEnum {
+        UNSPECIFIED = 0;
+        CONNECTED = 1;
+        DISCONNECTED = 2;
+    }
+
+    ConnectionStateEnum value = 1;
+}
