@@ -20,6 +20,9 @@ type IDatabase interface {
 
 	FindEntities(entityType string) []string
 
+	EntityExists(entityId string) bool
+	FieldExists(fieldName, entityType string) bool
+
 	GetFieldSchema(fieldName string) *DatabaseFieldSchema
 	SetFieldSchema(fieldName string, value *DatabaseFieldSchema)
 
@@ -104,16 +107,16 @@ func (db *RedisDatabase) Disconnect() {
 func (db *RedisDatabase) CreateEntity(entityType, parentId, name string) {
 	entityId := uuid.New().String()
 
-	requests := []*EntityRequest{}
-	for _, fieldName := range db.GetEntitySchema(entityType).EntityFieldNames {
-		requests = append(requests, &EntityRequest{
-			EntityId:  entityId,
-			FieldName: fieldName,
+	requests := []*DatabaseRequest{}
+	for _, fieldName := range db.GetEntitySchema(entityType).Fields {
+		requests = append(requests, &DatabaseRequest{
+			Id:    entityId,
+			Field: fieldName,
 		})
 	}
 	db.Write(requests)
 
-	p := &Entity{
+	p := &DatabaseEntity{
 		Id:          entityId,
 		Name:        name,
 		ParentId:    parentId,
@@ -138,7 +141,7 @@ func (db *RedisDatabase) DeleteEntity(entityId string) {
 	if err != nil {
 		return
 	}
-	p := &Entity{}
+	p := &DatabaseEntity{}
 	err = proto.Unmarshal(b, p)
 	if err != nil {
 		return
@@ -148,7 +151,7 @@ func (db *RedisDatabase) DeleteEntity(entityId string) {
 		db.DeleteEntity(childrenId)
 	}
 
-	for _, fieldName := range db.GetEntitySchema(p.Type).EntityFieldNames {
+	for _, fieldName := range db.GetEntitySchema(p.Type).Fields {
 		db.client.Del(context.Background(), db.keygen.GetFieldKey(fieldName, entityId))
 	}
 
@@ -160,18 +163,48 @@ func (db *RedisDatabase) FindEntities(entityType string) []string {
 	return db.client.SMembers(context.Background(), db.keygen.GetEntityTypeKey(entityType)).Val()
 }
 
+func (db *RedisDatabase) EntityExists(entityId string) bool {
+	e, err := db.client.Get(context.Background(), db.keygen.GetEntityKey(entityId)).Result()
+	if err != nil {
+		return false
+	}
+
+	return e != ""
+}
+
+func (db *RedisDatabase) FieldExists(fieldName, entityTypeOrId string) bool {
+	schema := db.GetEntitySchema(entityTypeOrId)
+	if schema != nil {
+		for _, field := range schema.Fields {
+			if field == fieldName {
+				return true
+			}
+		}
+
+		return false
+	}
+
+	request := &DatabaseRequest{
+		Id:    entityTypeOrId,
+		Field: fieldName,
+	}
+	db.Read([]*DatabaseRequest{request})
+
+	return request.Success
+}
+
 func (db *RedisDatabase) GetFieldSchema(fieldName string) *DatabaseFieldSchema {
-	a := &anypb.Any{}
 	e, err := db.client.Get(context.Background(), db.keygen.GetFieldSchemaKey(fieldName)).Result()
 	if err != nil {
-		return a
+		return nil
 	}
 
 	b, err := base64.StdEncoding.DecodeString(e)
 	if err != nil {
-		return a
+		return nil
 	}
 
+	a := &DatabaseFieldSchema{}
 	err = proto.Unmarshal(b, a)
 	if err != nil {
 		return nil
@@ -225,6 +258,8 @@ func (db *RedisDatabase) SetEntitySchema(entityType string, value *DatabaseEntit
 
 func (db *RedisDatabase) Read(requests []*DatabaseRequest) {
 	for _, request := range requests {
+		request.Success = false
+
 		e, err := db.client.Get(context.Background(), db.keygen.GetFieldKey(request.Field, request.Id)).Result()
 		if err != nil {
 			continue
@@ -235,7 +270,7 @@ func (db *RedisDatabase) Read(requests []*DatabaseRequest) {
 			continue
 		}
 
-		p := &EntityField{}
+		p := &DatabaseField{}
 		err = proto.Unmarshal(b, p)
 		if err != nil {
 			continue
@@ -244,14 +279,20 @@ func (db *RedisDatabase) Read(requests []*DatabaseRequest) {
 		request.Value = p.Value
 		request.WriteTime.Raw = p.WriteTime
 		request.WriterId.Raw = p.WriterId
+		request.Success = true
 	}
 }
 
 func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 	for _, request := range requests {
-		valueDef := db.GetFieldSchema(request.FieldName)
-		if request.Value == nil || request.Value.TypeUrl != valueDef.Type {
-			request.Value = valueDef
+		request.Success = false
+
+		schema := db.GetFieldSchema(request.Field)
+		if request.Value == nil || request.Value.TypeUrl != schema.Type {
+			request.Value = &anypb.Any{
+				TypeUrl: schema.Type,
+				Value:   []byte{},
+			}
 		}
 
 		if request.WriteTime == nil {
@@ -262,9 +303,9 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 			request.WriterId = &String{Raw: ""}
 		}
 
-		p := &EntityField{
-			EntityId:  request.EntityId,
-			Name:      request.FieldName,
+		p := &DatabaseField{
+			Id:        request.Id,
+			Name:      request.Field,
 			Value:     request.Value,
 			WriteTime: request.WriteTime.Raw,
 			WriterId:  request.WriterId.Raw,
@@ -275,30 +316,30 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 			continue
 		}
 
-		db.client.Set(context.Background(), db.keygen.GetFieldKey(request.Field, request.Id), base64.StdEncoding.EncodeToString(b), 0)
+		_, err = db.client.Set(context.Background(), db.keygen.GetFieldKey(request.Field, request.Id), base64.StdEncoding.EncodeToString(b), 0).Result()
+		if err != nil {
+			continue
+		}
+		request.Success = true
 	}
 }
 
-func (db *RedisDatabase) Notify(config *DatabaseNotificationConfig, callback func(*DatabaseNotification)) string {
-	if db.GetFieldSchema(config.Field) == nil {
-		return ""
-	}
-
-	b, err := proto.Marshal(config)
+func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callback func(*DatabaseNotification)) string {
+	b, err := proto.Marshal(notification)
 	if err != nil {
 		return ""
 	}
 
 	e := base64.StdEncoding.EncodeToString(b)
 
-	if config.Id != "" {
-		db.client.SAdd(context.Background(), db.keygen.GetEntityIdNotificationKey(config.Id, config.Field), e)
+	if db.FieldExists(notification.Field, notification.Id) {
+		db.client.SAdd(context.Background(), db.keygen.GetEntityIdNotificationKey(notification.Id, notification.Field), e)
 		db.callbacks[e] = callback
 		return e
 	}
 
-	if config.Type != "" {
-		db.client.SAdd(context.Background(), db.keygen.GetEntityTypeNotificationKey(config.Type, config.Field), e)
+	if db.FieldExists(notification.Field, notification.Type) {
+		db.client.SAdd(context.Background(), db.keygen.GetEntityTypeNotificationKey(notification.Type, notification.Field), e)
 		db.callbacks[e] = callback
 		return e
 	}

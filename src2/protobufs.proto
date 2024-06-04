@@ -52,6 +52,7 @@ message DatabaseRequest {
     google.protobuf.Any value = 3;
     Timestamp writeTime = 4;
     String writerId = 5;
+    bool success = 6;
 }
 
 message Int {
