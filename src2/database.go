@@ -22,3 +22,7 @@ type IDatabase interface {
 	SubscribeOnFieldChanges(entityId string, entityField string, change bool, contextFields []string, callback func(EntityFieldNotification)) string
 	UnsubscribeFromFieldChanges(subscriptionId string)
 }
+
+type RedisDatabase struct {
+	
+}
