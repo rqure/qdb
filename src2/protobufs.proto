@@ -6,7 +6,7 @@ package qmq;
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/any.proto";
 
-message Entity {
+message DatabaseEntity {
     string id = 1;
     string type = 2;
     string name = 3;
@@ -14,28 +14,41 @@ message Entity {
     repeated string childrenIds = 5;
 }
 
-message EntityField {
-    string entityId = 1;
+message DatabaseField {
+    string id = 1;
     string name = 2;
     google.protobuf.Any value = 3;
     google.protobuf.Timestamp writeTime = 4;
     string writerId = 5;
 }
 
-message EntityFieldNotification {
-    EntityField current = 1;
-    EntityField previous = 2;
-    repeated EntityField context = 3;
+message DatabaseNotificationConfig {
+    string id = 1;
+    string type = 2;
+    string field = 3;
+    repeated string contextFields = 4;
+    bool notifyOnChange = 5;
 }
 
-message EntityDefinition {
-    string entityName = 1;
-    repeated string entityFieldNames = 2;
+message DatabaseNotification {
+    DatabaseField current = 1;
+    DatabaseField previous = 2;
+    repeated DatabaseField context = 3;
 }
 
-message EntityRequest {
-    string entityId = 1;
-    string fieldName = 2;
+message DatabaseEntitySchema {
+    string name = 1;
+    repeated string fields = 2;
+}
+
+message DatabaseFieldSchema {
+    string name = 1;
+    string type = 2;
+}
+
+message DatabaseRequest {
+    string id = 1;
+    string field = 2;
     google.protobuf.Any value = 3;
     Timestamp writeTime = 4;
     String writerId = 5;
