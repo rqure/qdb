@@ -8,9 +8,10 @@ import "google/protobuf/any.proto";
 
 message Entity {
     string id = 1;
-    string name = 2;
-    string parentId = 3;
-    repeated string childrenIds = 4;
+    string type = 2;
+    string name = 3;
+    string parentId = 4;
+    repeated string childrenIds = 5;
 }
 
 message EntityField {
