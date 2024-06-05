@@ -1,5 +1,7 @@
 package qmq
 
+import "time"
+
 type DatabaseWorkerSignals struct {
 	Connected    Signal
 	Disconnected Signal
@@ -8,8 +10,9 @@ type DatabaseWorkerSignals struct {
 type DatabaseWorker struct {
 	Signals DatabaseWorkerSignals
 
-	db          IDatabase
-	isConnected bool
+	db                      IDatabase
+	isConnected             bool
+	lastConnectionCheckTime time.Time
 }
 
 func NewDatabaseWorker(db IDatabase) IWorker {
@@ -27,12 +30,19 @@ func (w *DatabaseWorker) Deinit() {
 }
 
 func (w *DatabaseWorker) DoWork() {
-	if !w.db.IsConnected() {
-		Info("[DatabaseWorker::DoWork] Database is not connected, trying to connect...")
-		w.db.Connect()
+	currentTime := time.Now()
+	if currentTime.After(w.lastConnectionCheckTime.Add(5 * time.Second)) {
+		w.setConnectionStatus(w.db.IsConnected())
+		w.lastConnectionCheckTime = currentTime
 	}
 
-	w.setConnectionStatus(w.db.IsConnected())
+	if !w.isConnected {
+		Info("[DatabaseWorker::DoWork] Database is not connected, trying to connect...")
+		w.db.Connect()
+		return
+	}
+
+	w.db.ProcessNotifications()
 }
 
 func (w *DatabaseWorker) setConnectionStatus(connected bool) {
