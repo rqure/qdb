@@ -494,7 +494,16 @@ func (db *RedisDatabase) TriggerNotifications(request *DatabaseRequest) {
 
 		e = base64.StdEncoding.EncodeToString(b)
 
-		db.client.Publish(context.Background(), db.keygen.GetEntityIdNotificationChannelKey(request.Id, request.Field), e)
+		_, err = db.client.XAdd(context.Background(), &redis.XAddArgs{
+			Stream: db.keygen.GetEntityIdNotificationChannelKey(request.Id, request.Field),
+			Values: []string{"data", e},
+			MaxLen: 100,
+			Approx: true,
+		}).Result()
+		if err != nil {
+			Error("[RedisDatabase::TriggerNotifications] Failed to add notification: %v", err)
+			continue
+		}
 	}
 
 	entity := db.GetEntity(request.Id)
@@ -550,6 +559,15 @@ func (db *RedisDatabase) TriggerNotifications(request *DatabaseRequest) {
 
 		e = base64.StdEncoding.EncodeToString(b)
 
-		db.client.Publish(context.Background(), db.keygen.GetEntityTypeNotificationChannelKey(request.Id, request.Field), e)
+		_, err = db.client.XAdd(context.Background(), &redis.XAddArgs{
+			Stream: db.keygen.GetEntityTypeNotificationChannelKey(entity.Type, request.Field),
+			Values: []string{"data", e},
+			MaxLen: 100,
+			Approx: true,
+		}).Result()
+		if err != nil {
+			Error("[RedisDatabase::TriggerNotifications] Failed to add notification: %v", err)
+			continue
+		}
 	}
 }
