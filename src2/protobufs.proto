@@ -75,7 +75,7 @@ message Bool {
     bool value = 1;
 }
 
-message Log {
+message LogMessage {
     enum LogLevelEnum {
         UNSPECIFIED = 0;
         TRACE = 1;
