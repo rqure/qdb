@@ -112,6 +112,14 @@ type RedisDatabase struct {
 	keygen    RedisDatabaseKeyGenerator
 }
 
+func NewRedisDatabase(config RedisDatabaseConfig) IDatabase {
+	return &RedisDatabase{
+		config:    config,
+		callbacks: map[string]func(*DatabaseNotification){},
+		keygen:    RedisDatabaseKeyGenerator{},
+	}
+}
+
 func (db *RedisDatabase) Connect() {
 	db.Disconnect()
 
@@ -120,15 +128,20 @@ func (db *RedisDatabase) Connect() {
 		Password: db.config.Password,
 		DB:       0,
 	})
+
+	Info("[RedisDatabase::Connect] Connected")
 }
 
 func (db *RedisDatabase) Disconnect() {
 	if db.client == nil {
+		Warn("[RedisDatabase::Disconnect] Already disconnected")
 		return
 	}
 
 	db.client.Close()
 	db.client = nil
+
+	Info("[RedisDatabase::Disconnect] Disconnected")
 }
 
 func (db *RedisDatabase) CreateEntity(entityType, parentId, name string) {
@@ -152,6 +165,7 @@ func (db *RedisDatabase) CreateEntity(entityType, parentId, name string) {
 	}
 	b, err := proto.Marshal(p)
 	if err != nil {
+		Error("[RedisDatabase::CreateEntity] Failed to marshal entity: %v", err)
 		return
 	}
 
@@ -162,17 +176,20 @@ func (db *RedisDatabase) CreateEntity(entityType, parentId, name string) {
 func (db *RedisDatabase) GetEntity(entityId string) *DatabaseEntity {
 	e, err := db.client.Get(context.Background(), db.keygen.GetEntityKey(entityId)).Result()
 	if err != nil {
+		Error("[RedisDatabase::GetEntity] Failed to get entity: %v", err)
 		return nil
 	}
 
 	b, err := base64.StdEncoding.DecodeString(e)
 	if err != nil {
+		Error("[RedisDatabase::GetEntity] Failed to decode entity: %v", err)
 		return nil
 	}
 
 	p := &DatabaseEntity{}
 	err = proto.Unmarshal(b, p)
 	if err != nil {
+		Error("[RedisDatabase::GetEntity] Failed to unmarshal entity: %v", err)
 		return nil
 	}
 
@@ -182,6 +199,7 @@ func (db *RedisDatabase) GetEntity(entityId string) *DatabaseEntity {
 func (db *RedisDatabase) DeleteEntity(entityId string) {
 	p := db.GetEntity(entityId)
 	if p == nil {
+		Error("[RedisDatabase::DeleteEntity] Failed to get entity: %v", entityId)
 		return
 	}
 
@@ -234,17 +252,20 @@ func (db *RedisDatabase) FieldExists(fieldName, entityTypeOrId string) bool {
 func (db *RedisDatabase) GetFieldSchema(fieldName string) *DatabaseFieldSchema {
 	e, err := db.client.Get(context.Background(), db.keygen.GetFieldSchemaKey(fieldName)).Result()
 	if err != nil {
+		Error("[RedisDatabase::GetFieldSchema] Failed to get field schema: %v", err)
 		return nil
 	}
 
 	b, err := base64.StdEncoding.DecodeString(e)
 	if err != nil {
+		Error("[RedisDatabase::GetFieldSchema] Failed to decode field schema: %v", err)
 		return nil
 	}
 
 	a := &DatabaseFieldSchema{}
 	err = proto.Unmarshal(b, a)
 	if err != nil {
+		Error("[RedisDatabase::GetFieldSchema] Failed to unmarshal field schema: %v", err)
 		return nil
 	}
 
@@ -254,11 +275,13 @@ func (db *RedisDatabase) GetFieldSchema(fieldName string) *DatabaseFieldSchema {
 func (db *RedisDatabase) SetFieldSchema(fieldName string, value *DatabaseFieldSchema) {
 	a, err := anypb.New(value)
 	if err != nil {
+		Error("[RedisDatabase::SetFieldSchema] Failed to create anypb: %v", err)
 		return
 	}
 
 	b, err := proto.Marshal(a)
 	if err != nil {
+		Error("[RedisDatabase::SetFieldSchema] Failed to marshal field schema: %v", err)
 		return
 	}
 
@@ -268,17 +291,20 @@ func (db *RedisDatabase) SetFieldSchema(fieldName string, value *DatabaseFieldSc
 func (db *RedisDatabase) GetEntitySchema(entityType string) *DatabaseEntitySchema {
 	e, err := db.client.Get(context.Background(), db.keygen.GetEntitySchemaKey(entityType)).Result()
 	if err != nil {
+		Error("[RedisDatabase::GetEntitySchema] Failed to get entity schema: %v", err)
 		return nil
 	}
 
 	b, err := base64.StdEncoding.DecodeString(e)
 	if err != nil {
+		Error("[RedisDatabase::GetEntitySchema] Failed to decode entity schema: %v", err)
 		return nil
 	}
 
 	p := &DatabaseEntitySchema{}
 	err = proto.Unmarshal(b, p)
 	if err != nil {
+		Error("[RedisDatabase::GetEntitySchema] Failed to unmarshal entity schema: %v", err)
 		return nil
 	}
 
@@ -288,6 +314,7 @@ func (db *RedisDatabase) GetEntitySchema(entityType string) *DatabaseEntitySchem
 func (db *RedisDatabase) SetEntitySchema(entityType string, value *DatabaseEntitySchema) {
 	b, err := proto.Marshal(value)
 	if err != nil {
+		Error("[RedisDatabase::SetEntitySchema] Failed to marshal entity schema: %v", err)
 		return
 	}
 
@@ -300,17 +327,20 @@ func (db *RedisDatabase) Read(requests []*DatabaseRequest) {
 
 		e, err := db.client.Get(context.Background(), db.keygen.GetFieldKey(request.Field, request.Id)).Result()
 		if err != nil {
+			Error("[RedisDatabase::Read] Failed to read field: %v", err)
 			continue
 		}
 
 		b, err := base64.StdEncoding.DecodeString(e)
 		if err != nil {
+			Error("[RedisDatabase::Read] Failed to decode field: %v", err)
 			continue
 		}
 
 		p := &DatabaseField{}
 		err = proto.Unmarshal(b, p)
 		if err != nil {
+			Error("[RedisDatabase::Read] Failed to unmarshal field: %v", err)
 			continue
 		}
 
@@ -343,6 +373,7 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 
 		b, err := proto.Marshal(p)
 		if err != nil {
+			Error("[RedisDatabase::Write] Failed to marshal field: %v", err)
 			continue
 		}
 
@@ -350,6 +381,7 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 
 		_, err = db.client.Set(context.Background(), db.keygen.GetFieldKey(request.Field, request.Id), base64.StdEncoding.EncodeToString(b), 0).Result()
 		if err != nil {
+			Error("[RedisDatabase::Write] Failed to write field: %v", err)
 			continue
 		}
 		request.Success = true
@@ -359,6 +391,7 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callback func(*DatabaseNotification)) string {
 	b, err := proto.Marshal(notification)
 	if err != nil {
+		Error("[RedisDatabase::Notify] Failed to marshal notification config: %v", err)
 		return ""
 	}
 
@@ -376,11 +409,13 @@ func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callba
 		return e
 	}
 
+	Warn("[RedisDatabase::Notify] Failed to find field: %v", notification)
 	return ""
 }
 
 func (db *RedisDatabase) Unnotify(subscriptionId string) {
 	if db.callbacks[subscriptionId] == nil {
+		Warn("[RedisDatabase::Unnotify] Failed to find callback: %v", subscriptionId)
 		return
 	}
 
@@ -396,6 +431,7 @@ func (db *RedisDatabase) TriggerNotifications(request *DatabaseRequest) {
 
 	// failed to read old value (it may not exist initially)
 	if !oldRequest.Success {
+		Warn("[RedisDatabase::TriggerNotifications] Failed to read old value: %v", oldRequest)
 		return
 	}
 
@@ -413,18 +449,21 @@ func (db *RedisDatabase) TriggerNotifications(request *DatabaseRequest) {
 
 	m, err := db.client.SMembers(context.Background(), db.keygen.GetEntityIdNotificationConfigKey(request.Field, request.Id)).Result()
 	if err != nil {
+		Error("[RedisDatabase::TriggerNotifications] Failed to get notification config: %v", err)
 		return
 	}
 
 	for _, e := range m {
 		b, err := base64.StdEncoding.DecodeString(e)
 		if err != nil {
+			Error("[RedisDatabase::TriggerNotifications] Failed to decode notification config: %v", err)
 			continue
 		}
 
 		p := &DatabaseNotificationConfig{}
 		err = proto.Unmarshal(b, p)
 		if err != nil {
+			Error("[RedisDatabase::TriggerNotifications] Failed to unmarshal notification config: %v", err)
 			continue
 		}
 
@@ -449,6 +488,7 @@ func (db *RedisDatabase) TriggerNotifications(request *DatabaseRequest) {
 
 		b, err = proto.Marshal(n)
 		if err != nil {
+			Error("[RedisDatabase::TriggerNotifications] Failed to marshal notification: %v", err)
 			continue
 		}
 
@@ -459,23 +499,27 @@ func (db *RedisDatabase) TriggerNotifications(request *DatabaseRequest) {
 
 	entity := db.GetEntity(request.Id)
 	if entity == nil {
+		Error("[RedisDatabase::TriggerNotifications] Failed to get entity: %v", request.Id)
 		return
 	}
 
 	m, err = db.client.SMembers(context.Background(), db.keygen.GetEntityTypeNotificationConfigKey(entity.Type, request.Field)).Result()
 	if err != nil {
+		Error("[RedisDatabase::TriggerNotifications] Failed to get notification config: %v", err)
 		return
 	}
 
 	for _, e := range m {
 		b, err := base64.StdEncoding.DecodeString(e)
 		if err != nil {
+			Error("[RedisDatabase::TriggerNotifications] Failed to decode notification config: %v", err)
 			continue
 		}
 
 		p := &DatabaseNotificationConfig{}
 		err = proto.Unmarshal(b, p)
 		if err != nil {
+			Error("[RedisDatabase::TriggerNotifications] Failed to unmarshal notification config: %v", err)
 			continue
 		}
 
@@ -500,6 +544,7 @@ func (db *RedisDatabase) TriggerNotifications(request *DatabaseRequest) {
 
 		b, err = proto.Marshal(n)
 		if err != nil {
+			Error("[RedisDatabase::TriggerNotifications] Failed to marshal notification: %v", err)
 			continue
 		}
 
