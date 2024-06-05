@@ -14,6 +14,7 @@ import (
 type IDatabase interface {
 	Connect()
 	Disconnect()
+	IsConnected() bool
 
 	CreateEntity(entityType, parentId, name string)
 	GetEntity(entityId string) *DatabaseEntity
@@ -140,6 +141,10 @@ func (db *RedisDatabase) Disconnect() {
 	db.client = nil
 
 	Info("[RedisDatabase::Disconnect] Disconnected")
+}
+
+func (db *RedisDatabase) IsConnected() bool {
+	return db.client != nil && db.client.Ping(context.Background()).Err() == nil
 }
 
 func (db *RedisDatabase) CreateEntity(entityType, parentId, name string) {
