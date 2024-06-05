@@ -16,6 +16,7 @@ type IDatabase interface {
 	Disconnect()
 
 	CreateEntity(entityType, parentId, name string)
+	GetEntity(entityId string) *DatabaseEntity
 	DeleteEntity(entityId string)
 
 	FindEntities(entityType string) []string
@@ -41,13 +42,31 @@ type RedisDatabaseConfig struct {
 	Password string
 }
 
+func (r *DatabaseRequest) FromField(field *DatabaseField) *DatabaseRequest {
+	r.Id = field.Id
+	r.Field = field.Name
+	r.Value = field.Value
+	r.WriteTime.Raw = field.WriteTime
+	r.WriterId.Raw = field.WriterId
+	return r
+}
+
+func (f *DatabaseField) FromRequest(request *DatabaseRequest) *DatabaseField {
+	f.Name = request.Field
+	f.Id = request.Id
+	f.Value = request.Value
+	f.WriteTime = request.WriteTime.Raw
+	f.WriterId = request.WriterId.Raw
+	return f
+}
+
 // schema:entity:<type> -> DatabaseEntitySchema
 // schema:field:<name> -> DatabaseFieldSchema
 // instance:entity:<entityId> -> DatabaseEntity
 // instance:field:<name>:<entityId> -> DatabaseField
 // instance:type:<entityType> -> []string{entityId...}
-// instance:notification:<entityId>:<fieldName> -> []string{subscriptionId...}
-// instance:notification:<entityType>:<fieldName> -> []string{subscriptionId...}
+// instance:notification-config:<entityId>:<fieldName> -> []string{subscriptionId...}
+// instance:notification-config:<entityType>:<fieldName> -> []string{subscriptionId...}
 type RedisDatabaseKeyGenerator struct{}
 
 func (g *RedisDatabaseKeyGenerator) GetEntitySchemaKey(entityType string) string {
@@ -70,11 +89,19 @@ func (g *RedisDatabaseKeyGenerator) GetEntityTypeKey(entityType string) string {
 	return "instance:type:" + entityType
 }
 
-func (g *RedisDatabaseKeyGenerator) GetEntityIdNotificationKey(entityId, fieldName string) string {
+func (g *RedisDatabaseKeyGenerator) GetEntityIdNotificationConfigKey(entityId, fieldName string) string {
+	return "instance:notification-config:" + entityId + ":" + fieldName
+}
+
+func (g *RedisDatabaseKeyGenerator) GetEntityTypeNotificationConfigKey(entityType, fieldName string) string {
+	return "instance:notification-config:" + entityType + ":" + fieldName
+}
+
+func (g *RedisDatabaseKeyGenerator) GetEntityIdNotificationChannelKey(entityId, fieldName string) string {
 	return "instance:notification:" + entityId + ":" + fieldName
 }
 
-func (g *RedisDatabaseKeyGenerator) GetEntityTypeNotificationKey(entityType, fieldName string) string {
+func (g *RedisDatabaseKeyGenerator) GetEntityTypeNotificationChannelKey(entityType, fieldName string) string {
 	return "instance:notification:" + entityType + ":" + fieldName
 }
 
@@ -132,18 +159,29 @@ func (db *RedisDatabase) CreateEntity(entityType, parentId, name string) {
 	db.client.Set(context.Background(), db.keygen.GetEntityKey(entityId), b, 0)
 }
 
-func (db *RedisDatabase) DeleteEntity(entityId string) {
+func (db *RedisDatabase) GetEntity(entityId string) *DatabaseEntity {
 	e, err := db.client.Get(context.Background(), db.keygen.GetEntityKey(entityId)).Result()
 	if err != nil {
-		return
+		return nil
 	}
+
 	b, err := base64.StdEncoding.DecodeString(e)
 	if err != nil {
-		return
+		return nil
 	}
+
 	p := &DatabaseEntity{}
 	err = proto.Unmarshal(b, p)
 	if err != nil {
+		return nil
+	}
+
+	return p
+}
+
+func (db *RedisDatabase) DeleteEntity(entityId string) {
+	p := db.GetEntity(entityId)
+	if p == nil {
 		return
 	}
 
@@ -276,9 +314,7 @@ func (db *RedisDatabase) Read(requests []*DatabaseRequest) {
 			continue
 		}
 
-		request.Value = p.Value
-		request.WriteTime.Raw = p.WriteTime
-		request.WriterId.Raw = p.WriterId
+		request.FromField(p)
 		request.Success = true
 	}
 }
@@ -303,18 +339,14 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 			request.WriterId = &String{Raw: ""}
 		}
 
-		p := &DatabaseField{
-			Id:        request.Id,
-			Name:      request.Field,
-			Value:     request.Value,
-			WriteTime: request.WriteTime.Raw,
-			WriterId:  request.WriterId.Raw,
-		}
+		p := new(DatabaseField).FromRequest(request)
 
 		b, err := proto.Marshal(p)
 		if err != nil {
 			continue
 		}
+
+		db.TriggerNotifications(request)
 
 		_, err = db.client.Set(context.Background(), db.keygen.GetFieldKey(request.Field, request.Id), base64.StdEncoding.EncodeToString(b), 0).Result()
 		if err != nil {
@@ -333,13 +365,13 @@ func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callba
 	e := base64.StdEncoding.EncodeToString(b)
 
 	if db.FieldExists(notification.Field, notification.Id) {
-		db.client.SAdd(context.Background(), db.keygen.GetEntityIdNotificationKey(notification.Id, notification.Field), e)
+		db.client.SAdd(context.Background(), db.keygen.GetEntityIdNotificationConfigKey(notification.Id, notification.Field), e)
 		db.callbacks[e] = callback
 		return e
 	}
 
 	if db.FieldExists(notification.Field, notification.Type) {
-		db.client.SAdd(context.Background(), db.keygen.GetEntityTypeNotificationKey(notification.Type, notification.Field), e)
+		db.client.SAdd(context.Background(), db.keygen.GetEntityTypeNotificationConfigKey(notification.Type, notification.Field), e)
 		db.callbacks[e] = callback
 		return e
 	}
@@ -353,4 +385,126 @@ func (db *RedisDatabase) Unnotify(subscriptionId string) {
 	}
 
 	delete(db.callbacks, subscriptionId)
+}
+
+func (db *RedisDatabase) TriggerNotifications(request *DatabaseRequest) {
+	oldRequest := &DatabaseRequest{
+		Id:    request.Id,
+		Field: request.Field,
+	}
+	db.Read([]*DatabaseRequest{oldRequest})
+
+	// failed to read old value (it may not exist initially)
+	if !oldRequest.Success {
+		return
+	}
+
+	changed := func(a, b *DatabaseRequest) bool {
+		if a.Value != nil && b.Value != nil && len(a.Value.Value) != len(b.Value.Value) {
+			for i := range a.Value.Value {
+				if a.Value.Value[i] != b.Value.Value[i] {
+					return true
+				}
+			}
+		}
+
+		return false
+	}(oldRequest, request)
+
+	m, err := db.client.SMembers(context.Background(), db.keygen.GetEntityIdNotificationConfigKey(request.Field, request.Id)).Result()
+	if err != nil {
+		return
+	}
+
+	for _, e := range m {
+		b, err := base64.StdEncoding.DecodeString(e)
+		if err != nil {
+			continue
+		}
+
+		p := &DatabaseNotificationConfig{}
+		err = proto.Unmarshal(b, p)
+		if err != nil {
+			continue
+		}
+
+		if p.NotifyOnChange && !changed {
+			continue
+		}
+
+		n := &DatabaseNotification{}
+		n.Current.FromRequest(request)
+		n.Previous.FromRequest(oldRequest)
+
+		for _, context := range p.ContextFields {
+			contextRequest := &DatabaseRequest{
+				Id:    request.Id,
+				Field: context,
+			}
+			db.Read([]*DatabaseRequest{contextRequest})
+			if contextRequest.Success {
+				n.Context = append(n.Context, new(DatabaseField).FromRequest(contextRequest))
+			}
+		}
+
+		b, err = proto.Marshal(n)
+		if err != nil {
+			continue
+		}
+
+		e = base64.StdEncoding.EncodeToString(b)
+
+		db.client.Publish(context.Background(), db.keygen.GetEntityIdNotificationChannelKey(request.Id, request.Field), e)
+	}
+
+	entity := db.GetEntity(request.Id)
+	if entity == nil {
+		return
+	}
+
+	m, err = db.client.SMembers(context.Background(), db.keygen.GetEntityTypeNotificationConfigKey(entity.Type, request.Field)).Result()
+	if err != nil {
+		return
+	}
+
+	for _, e := range m {
+		b, err := base64.StdEncoding.DecodeString(e)
+		if err != nil {
+			continue
+		}
+
+		p := &DatabaseNotificationConfig{}
+		err = proto.Unmarshal(b, p)
+		if err != nil {
+			continue
+		}
+
+		if p.NotifyOnChange && !changed {
+			continue
+		}
+
+		n := &DatabaseNotification{}
+		n.Current.FromRequest(request)
+		n.Previous.FromRequest(oldRequest)
+
+		for _, context := range p.ContextFields {
+			contextRequest := &DatabaseRequest{
+				Id:    request.Id,
+				Field: context,
+			}
+			db.Read([]*DatabaseRequest{contextRequest})
+			if contextRequest.Success {
+				n.Context = append(n.Context, new(DatabaseField).FromRequest(contextRequest))
+			}
+		}
+
+		b, err = proto.Marshal(n)
+		if err != nil {
+			continue
+		}
+
+		e = base64.StdEncoding.EncodeToString(b)
+
+		db.client.Publish(context.Background(), db.keygen.GetEntityTypeNotificationChannelKey(request.Id, request.Field), e)
+	}
 }
