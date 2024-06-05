@@ -35,6 +35,7 @@ type IDatabase interface {
 
 	Notify(config *DatabaseNotificationConfig, callback func(*DatabaseNotification)) string
 	Unnotify(subscriptionId string)
+	ProcessNotifications()
 }
 
 type RedisDatabaseConfig struct {
@@ -97,18 +98,15 @@ func (g *RedisDatabaseKeyGenerator) GetEntityTypeNotificationConfigKey(entityTyp
 	return "instance:notification-config:" + entityType + ":" + fieldName
 }
 
-func (g *RedisDatabaseKeyGenerator) GetEntityIdNotificationChannelKey(entityId, fieldName string) string {
-	return "instance:notification:" + entityId + ":" + fieldName
-}
-
-func (g *RedisDatabaseKeyGenerator) GetEntityTypeNotificationChannelKey(entityType, fieldName string) string {
-	return "instance:notification:" + entityType + ":" + fieldName
+func (g *RedisDatabaseKeyGenerator) GetNotificationChannelKey(marshalledNotificationConfig string) string {
+	return "instance:notification:" + marshalledNotificationConfig
 }
 
 type RedisDatabase struct {
 	client    *redis.Client
 	config    RedisDatabaseConfig
 	callbacks map[string]func(*DatabaseNotification)
+	lastIds   map[string]string
 	keygen    RedisDatabaseKeyGenerator
 }
 
@@ -377,7 +375,7 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 			continue
 		}
 
-		db.TriggerNotifications(request)
+		db.triggerNotifications(request)
 
 		_, err = db.client.Set(context.Background(), db.keygen.GetFieldKey(request.Field, request.Id), base64.StdEncoding.EncodeToString(b), 0).Result()
 		if err != nil {
@@ -400,12 +398,14 @@ func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callba
 	if db.FieldExists(notification.Field, notification.Id) {
 		db.client.SAdd(context.Background(), db.keygen.GetEntityIdNotificationConfigKey(notification.Id, notification.Field), e)
 		db.callbacks[e] = callback
+		db.lastIds[e] = "$"
 		return e
 	}
 
 	if db.FieldExists(notification.Field, notification.Type) {
 		db.client.SAdd(context.Background(), db.keygen.GetEntityTypeNotificationConfigKey(notification.Type, notification.Field), e)
 		db.callbacks[e] = callback
+		db.lastIds[e] = "$"
 		return e
 	}
 
@@ -413,16 +413,65 @@ func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callba
 	return ""
 }
 
-func (db *RedisDatabase) Unnotify(subscriptionId string) {
-	if db.callbacks[subscriptionId] == nil {
-		Warn("[RedisDatabase::Unnotify] Failed to find callback: %v", subscriptionId)
+func (db *RedisDatabase) Unnotify(e string) {
+	if db.callbacks[e] == nil {
+		Warn("[RedisDatabase::Unnotify] Failed to find callback: %v", e)
 		return
 	}
 
-	delete(db.callbacks, subscriptionId)
+	delete(db.callbacks, e)
+	delete(db.lastIds, e)
 }
 
-func (db *RedisDatabase) TriggerNotifications(request *DatabaseRequest) {
+func (db *RedisDatabase) ProcessNotifications() {
+	for e := range db.callbacks {
+		r, err := db.client.XRead(context.Background(), &redis.XReadArgs{
+			Streams: []string{db.keygen.GetNotificationChannelKey(e), db.lastIds[e]},
+			Count:   100,
+			Block:   -1,
+		}).Result()
+
+		if err != nil {
+			Error("[RedisDatabase::ProcessNotifications] Failed to read stream %v: %v", e, err)
+			continue
+		}
+
+		for _, x := range r {
+			for _, m := range x.Messages {
+				db.lastIds[e] = m.ID
+				decodedMessage := make(map[string]string)
+
+				for key, value := range m.Values {
+					if castedValue, ok := value.(string); ok {
+						decodedMessage[key] = castedValue
+					} else {
+						Error("[RedisDatabase::ProcessNotifications] Failed to cast value: %v", value)
+						continue
+					}
+				}
+
+				if data, ok := decodedMessage["data"]; ok {
+					p, err := base64.StdEncoding.DecodeString(data)
+					if err != nil {
+						Error("[RedisDatabase::ProcessNotifications] Failed to decode notification: %v", err)
+						continue
+					}
+
+					n := &DatabaseNotification{}
+					err = proto.Unmarshal(p, n)
+					if err != nil {
+						Error("[RedisDatabase::ProcessNotifications] Failed to unmarshal notification: %v", err)
+						continue
+					}
+
+					db.callbacks[e](n)
+				}
+			}
+		}
+	}
+}
+
+func (db *RedisDatabase) triggerNotifications(request *DatabaseRequest) {
 	oldRequest := &DatabaseRequest{
 		Id:    request.Id,
 		Field: request.Field,
@@ -431,7 +480,7 @@ func (db *RedisDatabase) TriggerNotifications(request *DatabaseRequest) {
 
 	// failed to read old value (it may not exist initially)
 	if !oldRequest.Success {
-		Warn("[RedisDatabase::TriggerNotifications] Failed to read old value: %v", oldRequest)
+		Warn("[RedisDatabase::triggerNotifications] Failed to read old value: %v", oldRequest)
 		return
 	}
 
@@ -449,21 +498,21 @@ func (db *RedisDatabase) TriggerNotifications(request *DatabaseRequest) {
 
 	m, err := db.client.SMembers(context.Background(), db.keygen.GetEntityIdNotificationConfigKey(request.Field, request.Id)).Result()
 	if err != nil {
-		Error("[RedisDatabase::TriggerNotifications] Failed to get notification config: %v", err)
+		Error("[RedisDatabase::triggerNotifications] Failed to get notification config: %v", err)
 		return
 	}
 
 	for _, e := range m {
 		b, err := base64.StdEncoding.DecodeString(e)
 		if err != nil {
-			Error("[RedisDatabase::TriggerNotifications] Failed to decode notification config: %v", err)
+			Error("[RedisDatabase::triggerNotifications] Failed to decode notification config: %v", err)
 			continue
 		}
 
 		p := &DatabaseNotificationConfig{}
 		err = proto.Unmarshal(b, p)
 		if err != nil {
-			Error("[RedisDatabase::TriggerNotifications] Failed to unmarshal notification config: %v", err)
+			Error("[RedisDatabase::triggerNotifications] Failed to unmarshal notification config: %v", err)
 			continue
 		}
 
@@ -488,47 +537,45 @@ func (db *RedisDatabase) TriggerNotifications(request *DatabaseRequest) {
 
 		b, err = proto.Marshal(n)
 		if err != nil {
-			Error("[RedisDatabase::TriggerNotifications] Failed to marshal notification: %v", err)
+			Error("[RedisDatabase::triggerNotifications] Failed to marshal notification: %v", err)
 			continue
 		}
 
-		e = base64.StdEncoding.EncodeToString(b)
-
 		_, err = db.client.XAdd(context.Background(), &redis.XAddArgs{
-			Stream: db.keygen.GetEntityIdNotificationChannelKey(request.Id, request.Field),
-			Values: []string{"data", e},
+			Stream: db.keygen.GetNotificationChannelKey(e),
+			Values: []string{"data", base64.StdEncoding.EncodeToString(b)},
 			MaxLen: 100,
 			Approx: true,
 		}).Result()
 		if err != nil {
-			Error("[RedisDatabase::TriggerNotifications] Failed to add notification: %v", err)
+			Error("[RedisDatabase::triggerNotifications] Failed to add notification: %v", err)
 			continue
 		}
 	}
 
 	entity := db.GetEntity(request.Id)
 	if entity == nil {
-		Error("[RedisDatabase::TriggerNotifications] Failed to get entity: %v", request.Id)
+		Error("[RedisDatabase::triggerNotifications] Failed to get entity: %v", request.Id)
 		return
 	}
 
 	m, err = db.client.SMembers(context.Background(), db.keygen.GetEntityTypeNotificationConfigKey(entity.Type, request.Field)).Result()
 	if err != nil {
-		Error("[RedisDatabase::TriggerNotifications] Failed to get notification config: %v", err)
+		Error("[RedisDatabase::triggerNotifications] Failed to get notification config: %v", err)
 		return
 	}
 
 	for _, e := range m {
 		b, err := base64.StdEncoding.DecodeString(e)
 		if err != nil {
-			Error("[RedisDatabase::TriggerNotifications] Failed to decode notification config: %v", err)
+			Error("[RedisDatabase::triggerNotifications] Failed to decode notification config: %v", err)
 			continue
 		}
 
 		p := &DatabaseNotificationConfig{}
 		err = proto.Unmarshal(b, p)
 		if err != nil {
-			Error("[RedisDatabase::TriggerNotifications] Failed to unmarshal notification config: %v", err)
+			Error("[RedisDatabase::triggerNotifications] Failed to unmarshal notification config: %v", err)
 			continue
 		}
 
@@ -553,20 +600,18 @@ func (db *RedisDatabase) TriggerNotifications(request *DatabaseRequest) {
 
 		b, err = proto.Marshal(n)
 		if err != nil {
-			Error("[RedisDatabase::TriggerNotifications] Failed to marshal notification: %v", err)
+			Error("[RedisDatabase::triggerNotifications] Failed to marshal notification: %v", err)
 			continue
 		}
 
-		e = base64.StdEncoding.EncodeToString(b)
-
 		_, err = db.client.XAdd(context.Background(), &redis.XAddArgs{
-			Stream: db.keygen.GetEntityTypeNotificationChannelKey(entity.Type, request.Field),
-			Values: []string{"data", e},
+			Stream: db.keygen.GetNotificationChannelKey(e),
+			Values: []string{"data", base64.StdEncoding.EncodeToString(b)},
 			MaxLen: 100,
 			Approx: true,
 		}).Result()
 		if err != nil {
-			Error("[RedisDatabase::TriggerNotifications] Failed to add notification: %v", err)
+			Error("[RedisDatabase::triggerNotifications] Failed to add notification: %v", err)
 			continue
 		}
 	}
