@@ -111,6 +111,12 @@ func (w *WebServiceWorker) Send(clientId string, p *anypb.Any) {
 	}
 }
 
+func (w *WebServiceWorker) Broadcast(p *anypb.Any) {
+	for clientId := range w.clients {
+		w.Send(clientId, p)
+	}
+}
+
 func (w *WebServiceWorker) addClient(conn *websocket.Conn) IWebClient {
 	client := NewWebClient(conn, func(id string) {
 		w.signals.ClientDisconnected.Emit(id)
