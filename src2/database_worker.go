@@ -15,7 +15,7 @@ type DatabaseWorker struct {
 	lastConnectionCheckTime time.Time
 }
 
-func NewDatabaseWorker(db IDatabase) IWorker {
+func NewDatabaseWorker(db IDatabase) *DatabaseWorker {
 	return &DatabaseWorker{
 		db: db,
 	}
