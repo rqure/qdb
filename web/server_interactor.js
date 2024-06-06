@@ -35,7 +35,7 @@ class ServerInteractor {
     
             for (const responseType in responseTypes) {
                 const deserializer = responseTypes[responseType].deserializeBinary;
-                const response = message.getContent().unpack(deserializer, responseType);
+                const response = message.getPayload().unpack(deserializer, responseType);
     
                 if (!response)
                     continue;
@@ -75,8 +75,8 @@ class ServerInteractor {
         request.setKey(key);
 
         const message = new proto.qmq.WebMessage();
-        message.setContent(new proto.google.protobuf.Any());
-        message.getContent().pack(request.serializeBinary(), 'qmq.WebGetRequest');
+        message.setPayload(new proto.google.protobuf.Any());
+        message.getPayload().pack(request.serializeBinary(), 'qmq.WebGetRequest');
 
         this._ws.send(message.serializeBinary());
     }
@@ -90,8 +90,8 @@ class ServerInteractor {
         request.setValue(value);
 
         const message = new proto.qmq.WebMessage();
-        message.setContent(new proto.google.protobuf.Any());
-        message.getContent().pack(request.serializeBinary(), 'qmq.WebSetRequest');
+        message.setPayload(new proto.google.protobuf.Any());
+        message.getPayload().pack(request.serializeBinary(), 'qmq.WebSetRequest');
 
         this._ws.send(message.serializeBinary());
     }
