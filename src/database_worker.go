@@ -34,12 +34,12 @@ func (w *DatabaseWorker) DoWork() {
 	if currentTime.After(w.lastConnectionCheckTime.Add(5 * time.Second)) {
 		w.setConnectionStatus(w.db.IsConnected())
 		w.lastConnectionCheckTime = currentTime
-	}
 
-	if !w.isConnected {
-		Info("[DatabaseWorker::DoWork] Database is not connected, trying to connect...")
-		w.db.Connect()
-		return
+		if !w.isConnected {
+			Info("[DatabaseWorker::DoWork] Database is not connected, trying to connect...")
+			w.db.Connect()
+			return
+		}
 	}
 
 	w.db.ProcessNotifications()
