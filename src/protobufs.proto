@@ -16,6 +16,28 @@ message WebMessage {
     google.protobuf.Any payload = 2;
 }
 
+message WebGetRequest {
+    string key = 1;
+}
+
+message WebGetResponse {
+    string key = 1;
+    google.protobuf.Any value = 2;
+}
+
+message WebNotification {
+    string key = 1;
+    google.protobuf.Any value = 2;
+}
+
+message WebSetRequest {
+    string key = 1;
+    google.protobuf.Any value = 2;
+}
+
+message WebSetResponse {
+}
+
 message DatabaseEntity {
     string id = 1;
     string type = 2;
@@ -100,4 +122,24 @@ message LogMessage {
     LogLevelEnum level = 2;
     string message = 3;
     google.protobuf.Timestamp timestamp = 4;
+}
+
+message GarageDoorState {
+    enum GarageDoorStateEnum {
+        UNSPECIFIED = 0;
+        OPENED = 1;
+        CLOSED = 2;
+    }
+
+    GarageDoorStateEnum value = 1;
+}
+
+message ConnectionState {
+    enum ConnectionStateEnum {
+        UNSPECIFIED = 0;
+        CONNECTED = 1;
+        DISCONNECTED = 2;
+    }
+
+    ConnectionStateEnum value = 1;
 }

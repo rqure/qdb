@@ -15,7 +15,7 @@ class ServerInteractor {
     notifyConnectionStatus() {
         const value = new proto.google.protobuf.Any();
         value.pack(this._connectionStatus.serializeBinary(), 'qmq.ConnectionState');
-        const notification = new proto.qmq.WebServiceNotification();
+        const notification = new proto.qmq.WebNotification();
         notification.setKey('connected');
         notification.setValue(value);
 
@@ -26,11 +26,11 @@ class ServerInteractor {
         const fileReader = new FileReader();
         const me = this;
         fileReader.onload = function(event) {
-            const message = proto.qmq.Message.deserializeBinary(new Uint8Array(event.target.result));
+            const message = proto.qmq.WebMessage.deserializeBinary(new Uint8Array(event.target.result));
             
             const responseTypes = {
-                "qmq.WebServiceGetResponse": proto.qmq.WebServiceGetResponse,
-                "qmq.WebServiceNotification": proto.qmq.WebServiceNotification,
+                "qmq.WebGetResponse": proto.qmq.WebGetResponse,
+                "qmq.WebNotification": proto.qmq.WebNotification,
             }
     
             for (const responseType in responseTypes) {
@@ -71,12 +71,12 @@ class ServerInteractor {
         if (this._connectionStatus.getValue() !== proto.qmq.ConnectionState.ConnectionStateEnum.CONNECTED)
             return;
         
-        const request = new proto.qmq.WebServiceGetRequest();
+        const request = new proto.qmq.WebGetRequest();
         request.setKey(key);
 
-        const message = new proto.qmq.Message();
+        const message = new proto.qmq.WebMessage();
         message.setContent(new proto.google.protobuf.Any());
-        message.getContent().pack(request.serializeBinary(), 'qmq.WebServiceGetRequest');
+        message.getContent().pack(request.serializeBinary(), 'qmq.WebGetRequest');
 
         this._ws.send(message.serializeBinary());
     }
@@ -85,13 +85,13 @@ class ServerInteractor {
         if (this._connectionStatus.getValue() !== proto.qmq.ConnectionState.ConnectionStateEnum.CONNECTED)
             return;
 
-        const request = new proto.qmq.WebServiceSetRequest();
+        const request = new proto.qmq.WebSetRequest();
         request.setKey(key);
         request.setValue(value);
 
-        const message = new proto.qmq.Message();
+        const message = new proto.qmq.WebMessage();
         message.setContent(new proto.google.protobuf.Any());
-        message.getContent().pack(request.serializeBinary(), 'qmq.WebServiceSetRequest');
+        message.getContent().pack(request.serializeBinary(), 'qmq.WebSetRequest');
 
         this._ws.send(message.serializeBinary());
     }
