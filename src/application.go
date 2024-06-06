@@ -19,6 +19,7 @@ type IWorker interface {
 }
 
 type ApplicationConfig struct {
+	Name    string
 	Workers []IWorker
 }
 
@@ -34,6 +35,8 @@ type Application struct {
 
 func NewApplication(config ApplicationConfig) IApplication {
 	a := &Application{config: config}
+
+	os.Setenv("QMQ_APP_NAME", config.Name)
 
 	for _, worker := range config.Workers {
 		a.init.Connect(Slot(worker.Init))
