@@ -8,7 +8,7 @@ import "google/protobuf/any.proto";
 
 message WebHeader {
     string id = 1;
-    Timestamp timestamp = 2;
+    google.protobuf.Timestamp timestamp = 2;
 }
 
 message WebMessage {

@@ -1,6 +1,8 @@
 package qmq
 
 import (
+	"sync"
+
 	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
 	"google.golang.org/protobuf/proto"
@@ -16,39 +18,60 @@ type IWebClient interface {
 type WebClient struct {
 	id         string
 	connection *websocket.Conn
+	readCh     chan *WebMessage
+	wg         sync.WaitGroup
+	onClose    func(string)
 }
 
-func NewWebClient(connection *websocket.Conn) *WebClient {
-	return &WebClient{
+func NewWebClient(connection *websocket.Conn, onClose func(string)) *WebClient {
+	c := &WebClient{
 		id:         uuid.New().String(),
 		connection: connection,
+		readCh:     make(chan *WebMessage),
+		onClose:    onClose,
 	}
+
+	go c.backgroundRead()
+
+	return c
 }
 
 func (c *WebClient) Id() string {
 	return c.id
 }
 
-func (c *WebClient) Read() *WebMessage {
-	t, b, err := c.connection.ReadMessage()
+func (c *WebClient) backgroundRead() {
+	c.wg.Add(1)
+	defer c.wg.Done()
 
-	if err != nil {
-		Error("[WebClient::Read] Error reading message: %v", err)
-		return nil
-	}
+	for {
+		t, b, err := c.connection.ReadMessage()
 
-	if t == websocket.BinaryMessage {
-		m := new(WebMessage)
-		if err := proto.Unmarshal(b, m); err != nil {
-			Error("[WebClient::Read] Error unmarshalling bytes into message: %v", err)
-			return nil
+		if err != nil {
+			Error("[WebClient::backgroundRead] Error reading message: %v", err)
+			return
 		}
 
-		Debug("[WebClient::Read] Received message: %v", m)
-		return m
-	}
+		if t == websocket.BinaryMessage {
+			m := new(WebMessage)
+			if err := proto.Unmarshal(b, m); err != nil {
+				Error("[WebClient::backgroundRead] Error unmarshalling bytes into message: %v", err)
+				continue
+			}
 
-	return nil
+			Debug("[WebClient::backgroundRead] Received message: %v", m)
+			c.readCh <- m
+		}
+	}
+}
+
+func (c *WebClient) Read() *WebMessage {
+	select {
+	case m := <-c.readCh:
+		return m
+	default:
+		return nil
+	}
 }
 
 func (c *WebClient) Write(message *WebMessage) {
@@ -65,7 +88,13 @@ func (c *WebClient) Write(message *WebMessage) {
 }
 
 func (c *WebClient) Close() {
+	close(c.readCh)
+
 	if err := c.connection.Close(); err != nil {
 		Error("[WebClient::Close] Error closing connection: %v", err)
 	}
+
+	c.wg.Wait()
+
+	c.onClose(c.id)
 }

@@ -4,10 +4,21 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
+	"google.golang.org/protobuf/types/known/anypb"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
+type WebServiceWorkerSignals struct {
+	ClientConnected    Signal
+	ClientDisconnected Signal
+	Received           Signal
+}
+
 type WebServiceWorker struct {
+	clients map[string]IWebClient
+	signals WebServiceWorkerSignals
 }
 
 func NewWebServiceWorker() *WebServiceWorker {
@@ -61,8 +72,7 @@ func (w *WebServiceWorker) onWSRequest(wr http.ResponseWriter, req *http.Request
 		return
 	}
 
-	client := w.addClient(conn)
-	w.clientHandler.Handle(client, w)
+	w.addClient(conn)
 }
 
 func (w *WebServiceWorker) ServeHTTP(wr http.ResponseWriter, req *http.Request) {
@@ -76,9 +86,39 @@ func (w *WebServiceWorker) ServeHTTP(wr http.ResponseWriter, req *http.Request) 
 }
 
 func (w *WebServiceWorker) Deinit() {
-
+	for _, client := range w.clients {
+		client.Close()
+	}
 }
 
 func (w *WebServiceWorker) DoWork() {
+	for _, client := range w.clients {
+		if m := client.Read(); m != nil {
+			w.signals.Received.Emit(client, m)
+		}
+	}
+}
 
+func (w *WebServiceWorker) Send(clientId string, p *anypb.Any) {
+	if client, ok := w.clients[clientId]; ok {
+		client.Write(&WebMessage{
+			Header: &WebHeader{
+				Id:        uuid.New().String(),
+				Timestamp: timestamppb.Now(),
+			},
+			Payload: p,
+		})
+	}
+}
+
+func (w *WebServiceWorker) addClient(conn *websocket.Conn) IWebClient {
+	client := NewWebClient(conn, func(id string) {
+		w.signals.ClientDisconnected.Emit(id)
+		delete(w.clients, id)
+	})
+	w.clients[client.Id()] = client
+
+	w.signals.ClientConnected.Emit(client)
+
+	return client
 }
