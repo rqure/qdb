@@ -16,26 +16,103 @@ message WebMessage {
     google.protobuf.Any payload = 2;
 }
 
-message WebGetRequest {
-    string key = 1;
+message WebConfigCreateEntityRequest {
+    string type = 1;
+    string name = 2;
+    string parentId = 3;
 }
 
-message WebGetResponse {
-    string key = 1;
-    google.protobuf.Any value = 2;
+message WebConfigCreateEntityResponse {
+    enum StatusEnum {
+        UNSPECIFIED = 0;
+        SUCCESS = 1;
+        FAILURE = 2;
+    }
+
+    StatusEnum status = 1;
+    string id = 2;
 }
 
-message WebNotification {
-    string key = 1;
-    google.protobuf.Any value = 2;
+message WebConfigDeleteEntityRequest {
+    string id = 1;
 }
 
-message WebSetRequest {
-    string key = 1;
-    google.protobuf.Any value = 2;
+message WebConfigDeleteEntityResponse {
+    enum StatusEnum {
+        UNSPECIFIED = 0;
+        SUCCESS = 1;
+        FAILURE = 2;
+    }
+
+    StatusEnum status = 1;
 }
 
-message WebSetResponse {
+message WebConfigGetEntityTypesRequest {
+
+}
+
+message WebConfigGetEntityTypesResponse {
+    repeated string types = 1;
+}
+
+message WebConfigGetEntityRequest {
+    string id = 1;
+}
+
+message WebConfigGetEntityResponse {
+    enum StatusEnum {
+        UNSPECIFIED = 0;
+        SUCCESS = 1;
+        FAILURE = 2;
+    }
+
+    StatusEnum status = 1;
+    DatabaseEntity entity = 2;
+}
+
+message WebConfigGetFieldSchemaRequest {
+    string field = 1;
+}
+
+message WebConfigGetFieldSchemaResponse {
+    enum StatusEnum {
+        UNSPECIFIED = 0;
+        SUCCESS = 1;
+        FAILURE = 2;
+    }
+
+    StatusEnum status = 1;
+    DatabaseFieldSchema schema = 2;
+}
+
+message WebConfigSetFieldSchemaRequest {
+    string field = 1;
+    DatabaseFieldSchema schema = 2;
+}
+
+message WebConfigSetFieldSchemaResponse {
+    enum StatusEnum {
+        UNSPECIFIED = 0;
+        SUCCESS = 1;
+        FAILURE = 2;
+    }
+
+    StatusEnum status = 1;
+}
+
+message WebConfigGetEntitySchemaRequest {
+    string type = 1;
+}
+
+message WebConfigGetEntitySchemaResponse {
+    enum StatusEnum {
+        UNSPECIFIED = 0;
+        SUCCESS = 1;
+        FAILURE = 2;
+    }
+
+    StatusEnum status = 1;
+    DatabaseEntitySchema schema = 2;
 }
 
 message DatabaseEntity {
