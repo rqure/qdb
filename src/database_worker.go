@@ -11,13 +11,14 @@ type DatabaseWorker struct {
 	Signals DatabaseWorkerSignals
 
 	db                      IDatabase
-	isConnected             bool
+	connectionState         ConnectionState_ConnectionStateEnum
 	lastConnectionCheckTime time.Time
 }
 
 func NewDatabaseWorker(db IDatabase) *DatabaseWorker {
 	return &DatabaseWorker{
-		db: db,
+		db:              db,
+		connectionState: ConnectionState_DISCONNECTED,
 	}
 }
 
@@ -35,8 +36,7 @@ func (w *DatabaseWorker) DoWork() {
 		w.setConnectionStatus(w.db.IsConnected())
 		w.lastConnectionCheckTime = currentTime
 
-		if !w.isConnected {
-			Info("[DatabaseWorker::DoWork] Database is not connected, trying to connect...")
+		if w.connectionState != ConnectionState_CONNECTED {
 			w.db.Connect()
 			return
 		}
@@ -46,12 +46,17 @@ func (w *DatabaseWorker) DoWork() {
 }
 
 func (w *DatabaseWorker) setConnectionStatus(connected bool) {
-	if w.isConnected == connected {
+	connectionStatus := ConnectionState_DISCONNECTED
+	if connected {
+		connectionStatus = ConnectionState_CONNECTED
+	}
+
+	if w.connectionState == connectionStatus {
 		return
 	}
 
-	w.isConnected = connected
-	Info("[DatabaseWorker::setConnectionStatus] Connection status changed: %v", connected)
+	w.connectionState = connectionStatus
+	Info("[DatabaseWorker::setConnectionStatus] Connection status changed to [%s]", connectionStatus.String())
 	if connected {
 		w.Signals.Connected.Emit()
 	} else {

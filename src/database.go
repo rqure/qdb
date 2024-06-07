@@ -122,7 +122,7 @@ func NewRedisDatabase(config RedisDatabaseConfig) IDatabase {
 func (db *RedisDatabase) Connect() {
 	db.Disconnect()
 
-	Info("[RedisDatabase::Connect] Connecting to %v...", db.config.Address)
+	Info("[RedisDatabase::Connect] Connecting to %v", db.config.Address)
 	db.client = redis.NewClient(&redis.Options{
 		Addr:     db.config.Address,
 		Password: db.config.Password,

@@ -1,12 +1,23 @@
 package main
 
 import (
+	"os"
+
 	qmq "github.com/rqure/qmq/src"
 )
 
+func getDatabaseAddress() string {
+	addr := os.Getenv("QMQ_ADDR")
+	if addr == "" {
+		addr = "redis:6379"
+	}
+
+	return addr
+}
+
 func main() {
 	db := qmq.NewRedisDatabase(qmq.RedisDatabaseConfig{
-		Address: "redis:6379",
+		Address: getDatabaseAddress(),
 	})
 
 	dbWorker := qmq.NewDatabaseWorker(db)
