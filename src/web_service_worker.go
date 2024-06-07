@@ -34,10 +34,10 @@ func (w *WebServiceWorker) Init() {
 	// Handle WebSocket and other routes
 	http.Handle("/", w)
 
-	// Register_web_handler_notification_listener()
-	// Register_web_handler_notification_manager()
-	// Register_web_handler_server_interactor()
-	// Register_web_handler_app()
+	Register_web_handler_notification_listener()
+	Register_web_handler_notification_manager()
+	Register_web_handler_server_interactor()
+	Register_web_handler_app()
 
 	go func() {
 		err := http.ListenAndServe("0.0.0.0:20000", nil)
