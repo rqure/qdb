@@ -115,6 +115,21 @@ message WebConfigGetEntitySchemaResponse {
     DatabaseEntitySchema schema = 2;
 }
 
+message WebConfigSetEntitySchemaRequest {
+    string name = 1;
+    repeated string fields = 2;
+}
+
+message WebConfigSetEntitySchemaResponse {
+    enum StatusEnum {
+        UNSPECIFIED = 0;
+        SUCCESS = 1;
+        FAILURE = 2;
+    }
+
+    StatusEnum status = 1;
+}
+
 message DatabaseEntity {
     string id = 1;
     string type = 2;
