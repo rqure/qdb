@@ -23,34 +23,44 @@ func Register_web_handler_server_interactor() {
     }
 
     onMessage(event) {
+        const me = this;
         const fileReader = new FileReader();
 
         fileReader.onload = function(event) {
             const message = proto.qmq.WebMessage.deserializeBinary(new Uint8Array(event.target.result));
-            
-            const responseTypes = {
-                "qmq.WebGetResponse": proto.qmq.WebGetResponse,
-                "qmq.WebNotification": proto.qmq.WebNotification,
-            }
-    
-            for (const responseType in responseTypes) {
-                const deserializer = responseTypes[responseType].deserializeBinary;
-                const response = message.getPayload().unpack(deserializer, responseType);
-    
-                if (!response)
-                    continue;
+            const requestId = message.getHeader().getId();
 
-                return
+            if (!me._waitingResponses[requestId]) {
+                Warn("[ServerInteractor::onMessage] Received response for unknown request '" + requestId + "'");
+                return;
+            }
+
+            const request = me._waitingResponses[requestId];
+            const response = requset.responseType.deserializeBinary(message.getPayload().getValue_asU8());
+            if (response) {
+                request.resolve(response);
+            } else {
+                request.reject(new Error('Invalid response'));
             }
         }
         fileReader.readAsArrayBuffer(event.data);
     }
 
     onOpen(event) {
-
+        Info("[ServerInteractor::onOpen] Connection established with '" + this._url + "'");
+        this._isConnected = true;
     }
 
     onClose(event) {
+        Warn("[ServerInteractor::onClose] Connection closed with '" + this._url + "'");
+        this._isConnected = false;
+
+        for (const requestId in this._waitingResponses) {
+            const request = this._waitingResponses[requestId];
+            request.reject(new Error('Connection closed'));
+        }
+        this._waitingResponses = {};
+
         this.connect();
     }
 
@@ -62,20 +72,36 @@ func Register_web_handler_server_interactor() {
         this._ws.addEventListener('close', this.onClose.bind(this));
     }
 
-    send(payload, payloadType) {
-        if (!this.isConnected()) {
-            return;
-        }
+    async send(request, requestType, responseType) {
+        const requestId = uuidv4();
+        const request = this._waitingResponses[requestId] = { "sent": +new Date(), "responseType": responseType };
 
         const header = new proto.qmq.WebHeader();
-        header.setId();
-        header.setTimestamp();
+        header.setId(requestId);
+        header.setTimestamp(new proto.google.protobuf.Timestamp.fromDate(new Date()));
 
         const message = new proto.qmq.WebMessage();
         message.setPayload(new proto.google.protobuf.Any());
-        message.getPayload().pack(payload, payloadType);
+        message.getPayload().pack(request, requestType);
 
-        this._ws.send(message.serializeBinary());
+        try {
+            if (this.isConnected()) {
+                this._ws.send(message.serializeBinary());
+            }
+
+            Trace("[ServerInteractor::send] Request '" + requestId + "' sent");
+
+            const result = await new Promise((resolve, reject) => {
+                request.resolve = resolve;
+                request.reject = reject;
+            });
+
+            Trace("[ServerInteractor::send] Response for '" + requestId + "' received in " + (new Date() - request.sent) + "ms");
+
+            return result;
+        } finally {
+            delete this._waitingResponses[requestId];
+        }
     }
 }`)
     })
