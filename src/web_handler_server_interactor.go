@@ -94,6 +94,10 @@ func Register_web_handler_server_interactor() {
             const result = await new Promise((resolve, reject) => {
                 request.resolve = resolve;
                 request.reject = reject;
+
+                if (!this.isConnected()) {
+                    reject(new Error('Connection closed'));
+                }
             });
 
             Trace("[ServerInteractor::send] Response for '" + requestId + "' received in " + (new Date() - request.sent) + "ms");
