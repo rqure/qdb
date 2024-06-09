@@ -19,6 +19,9 @@ type WebServiceWorkerSignals struct {
 type WebServiceWorker struct {
 	clients map[string]IWebClient
 	signals WebServiceWorkerSignals
+
+	addClientCh    chan IWebClient
+	removeClientCh chan string
 }
 
 func NewWebServiceWorker() *WebServiceWorker {
@@ -92,9 +95,29 @@ func (w *WebServiceWorker) Deinit() {
 }
 
 func (w *WebServiceWorker) DoWork() {
+	w.processClientConnectionEvents()
+	w.processClientMessages()
+}
+
+func (w *WebServiceWorker) processClientMessages() {
 	for _, client := range w.clients {
 		if m := client.Read(); m != nil {
 			w.signals.Received.Emit(client, m)
+		}
+	}
+}
+
+func (w *WebServiceWorker) processClientConnectionEvents() {
+	for {
+		select {
+		case client := <-w.addClientCh:
+			w.clients[client.Id()] = client
+			w.signals.ClientConnected.Emit(client)
+		case id := <-w.removeClientCh:
+			w.signals.ClientDisconnected.Emit(id)
+			delete(w.clients, id)
+		default:
+			return
 		}
 	}
 }
@@ -119,12 +142,10 @@ func (w *WebServiceWorker) Broadcast(p *anypb.Any) {
 
 func (w *WebServiceWorker) addClient(conn *websocket.Conn) IWebClient {
 	client := NewWebClient(conn, func(id string) {
-		w.signals.ClientDisconnected.Emit(id)
-		delete(w.clients, id)
+		w.removeClientCh <- id
 	})
-	w.clients[client.Id()] = client
 
-	w.signals.ClientConnected.Emit(client)
+	w.addClientCh <- client
 
 	return client
 }
