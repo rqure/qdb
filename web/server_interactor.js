@@ -60,9 +60,9 @@ class ServerInteractor {
         this._ws.addEventListener('close', this.onClose.bind(this));
     }
 
-    async send(request, requestType, responseType) {
+    async send(requestProto, requestProtoTypeName, responseProtoType) {
         const requestId = uuidv4();
-        const request = this._waitingResponses[requestId] = { "sent": +new Date(), "responseType": responseType };
+        const request = this._waitingResponses[requestId] = { "sent": +new Date(), "responseType": responseProtoType };
 
         const header = new proto.qmq.WebHeader();
         header.setId(requestId);
@@ -70,7 +70,7 @@ class ServerInteractor {
 
         const message = new proto.qmq.WebMessage();
         message.setPayload(new proto.google.protobuf.Any());
-        message.getPayload().pack(request, requestType);
+        message.getPayload().pack(requestProto, requestProtoTypeName);
 
         try {
             if (this.isConnected()) {
