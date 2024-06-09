@@ -35,10 +35,12 @@ class ServerInteractor {
     }
 
     onOpen(event) {
+        Info("[ServerInteractor::onOpen] Connection established with '" + this._url + "'");
         this._isConnected = true;
     }
 
     onClose(event) {
+        Warn("[ServerInteractor::onClose] Connection closed with '" + this._url + "'");
         this._isConnected = false;
 
         for (const requestId in this._waitingResponses) {
