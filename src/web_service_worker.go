@@ -111,9 +111,11 @@ func (w *WebServiceWorker) processClientConnectionEvents() {
 	for {
 		select {
 		case client := <-w.addClientCh:
+			Info("[WebServiceWorker::processClientConnectionEvents] Client connected: %s", client.Id())
 			w.clients[client.Id()] = client
 			w.signals.ClientConnected.Emit(client)
 		case id := <-w.removeClientCh:
+			Info("[WebServiceWorker::processClientConnectionEvents] Client disconnected: %s", id)
 			w.signals.ClientDisconnected.Emit(id)
 			delete(w.clients, id)
 		default:
