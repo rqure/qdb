@@ -11,32 +11,20 @@ func Register_web_handler_server_interactor() {
     http.HandleFunc("/js/qmq/server_interactor.js", func(w http.ResponseWriter, r *http.Request) {
         w.Header().Set("Content-Type", "application/javascript")
         fmt.Fprint(w, `class ServerInteractor {
-    constructor(url, notificationManager, context) {
-        this._context = context;
-        this._notificationManager = notificationManager;
+    constructor(url) {
         this._url = url;
         this._ws = null;
-        this._connectionStatus = new proto.qmq.ConnectionState();
-
-        this._connectionStatus.setValue(proto.qmq.ConnectionState.ConnectionStateEnum.DISCONNECTED);
-        this.notifyConnectionStatus();
+        this._isConnected = false;
+        this._waitingResponses = {};
     }
 
-    get notificationManager() { return this._notificationManager; }
-
-    notifyConnectionStatus() {
-        const value = new proto.google.protobuf.Any();
-        value.pack(this._connectionStatus.serializeBinary(), 'qmq.ConnectionState');
-        const notification = new proto.qmq.WebNotification();
-        notification.setKey('connected');
-        notification.setValue(value);
-
-        this._notificationManager.notifyListeners(notification, this._context);
+    isConnected() {
+        return this._isConnected;
     }
 
     onMessage(event) {
         const fileReader = new FileReader();
-        const me = this;
+
         fileReader.onload = function(event) {
             const message = proto.qmq.WebMessage.deserializeBinary(new Uint8Array(event.target.result));
             
@@ -51,23 +39,18 @@ func Register_web_handler_server_interactor() {
     
                 if (!response)
                     continue;
-    
-                me._notificationManager.notifyListeners(response, me._context);
+
                 return
-            }            
+            }
         }
         fileReader.readAsArrayBuffer(event.data);
     }
 
     onOpen(event) {
-        this._connectionStatus.setValue(proto.qmq.ConnectionState.ConnectionStateEnum.CONNECTED);
-        this.notifyConnectionStatus();
+
     }
 
     onClose(event) {
-        this._connectionStatus.setValue(proto.qmq.ConnectionState.ConnectionStateEnum.DISCONNECTED);
-        this.notifyConnectionStatus();
-
         this.connect();
     }
 
@@ -79,31 +62,18 @@ func Register_web_handler_server_interactor() {
         this._ws.addEventListener('close', this.onClose.bind(this));
     }
 
-    get(key) {
-        if (this._connectionStatus.getValue() !== proto.qmq.ConnectionState.ConnectionStateEnum.CONNECTED)
+    send(payload, payloadType) {
+        if (!this.isConnected()) {
             return;
-        
-        const request = new proto.qmq.WebGetRequest();
-        request.setKey(key);
+        }
+
+        const header = new proto.qmq.WebHeader();
+        header.setId();
+        header.setTimestamp();
 
         const message = new proto.qmq.WebMessage();
         message.setPayload(new proto.google.protobuf.Any());
-        message.getPayload().pack(request.serializeBinary(), 'qmq.WebGetRequest');
-
-        this._ws.send(message.serializeBinary());
-    }
-
-    set(key, value) {
-        if (this._connectionStatus.getValue() !== proto.qmq.ConnectionState.ConnectionStateEnum.CONNECTED)
-            return;
-
-        const request = new proto.qmq.WebSetRequest();
-        request.setKey(key);
-        request.setValue(value);
-
-        const message = new proto.qmq.WebMessage();
-        message.setPayload(new proto.google.protobuf.Any());
-        message.getPayload().pack(request.serializeBinary(), 'qmq.WebSetRequest');
+        message.getPayload().pack(payload, payloadType);
 
         this._ws.send(message.serializeBinary());
     }
