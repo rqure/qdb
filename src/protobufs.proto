@@ -179,6 +179,13 @@ message DatabaseRequest {
     bool success = 6;
 }
 
+message DatabaseSnapshot {
+    repeated DatabaseEntity entities = 1;
+    repeated DatabaseField fields = 2;
+    repeated DatabaseEntitySchema entitySchemas = 3;
+    repeated DatabaseFieldSchema fieldSchemas = 4;
+}
+
 message Int {
     int64 raw = 1;
 }

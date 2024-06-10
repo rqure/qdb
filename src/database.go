@@ -19,6 +19,8 @@ type IDatabase interface {
 	Disconnect()
 	IsConnected() bool
 
+	Snapshot() *DatabaseSnapshot
+
 	CreateEntity(entityType, parentId, name string)
 	GetEntity(entityId string) *DatabaseEntity
 	SetEntity(entityId string, value *DatabaseEntity)
