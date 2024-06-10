@@ -203,6 +203,11 @@ message EntityReference {
     string id = 1;
 }
 
+message BinaryFile {
+    string name = 1;
+    string content = 2;
+}
+
 message LogMessage {
     enum LogLevelEnum {
         UNSPECIFIED = 0;

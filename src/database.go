@@ -30,6 +30,7 @@ type IDatabase interface {
 	EntityExists(entityId string) bool
 	FieldExists(fieldName, entityType string) bool
 
+	GetFieldSchemas() []*DatabaseFieldSchema
 	GetFieldSchema(fieldName string) *DatabaseFieldSchema
 	SetFieldSchema(fieldName string, value *DatabaseFieldSchema)
 
@@ -287,6 +288,37 @@ func (db *RedisDatabase) FieldExists(fieldName, entityTypeOrId string) bool {
 	db.Read([]*DatabaseRequest{request})
 
 	return request.Success
+}
+
+func (db *RedisDatabase) GetFieldSchemas() []*DatabaseFieldSchema {
+	it := db.client.Scan(context.Background(), 0, db.keygen.GetFieldSchemaKey("*"), 0).Iterator()
+	schemas := []*DatabaseFieldSchema{}
+
+	for it.Next(context.Background()) {
+		e, err := db.client.Get(context.Background(), it.Val()).Result()
+		if err != nil {
+			Error("[RedisDatabase::GetFieldSchemas] Failed to get field schema: %v", err)
+			continue
+		}
+
+		b, err := base64.StdEncoding.DecodeString(e)
+		if err != nil {
+			Error("[RedisDatabase::GetFieldSchemas] Failed to decode field schema: %v", err)
+			continue
+		}
+
+		p := &DatabaseFieldSchema{}
+		err = proto.Unmarshal(b, p)
+		if err != nil {
+			Error("[RedisDatabase::GetFieldSchemas] Failed to unmarshal field schema: %v", err)
+			continue
+		}
+
+		schemas = append(schemas, p)
+	}
+
+	return schemas
+
 }
 
 func (db *RedisDatabase) GetFieldSchema(fieldName string) *DatabaseFieldSchema {
