@@ -7,6 +7,8 @@ import (
 	"github.com/google/uuid"
 	"github.com/redis/go-redis/v9"
 	"google.golang.org/protobuf/proto"
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	"google.golang.org/protobuf/reflect/protoregistry"
 	"google.golang.org/protobuf/types/known/anypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
@@ -353,10 +355,27 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 		request.Success = false
 
 		schema := db.GetFieldSchema(request.Field)
-		if request.Value == nil || request.Value.TypeUrl != schema.Type {
-			request.Value = &anypb.Any{
-				TypeUrl: schema.Type,
-				Value:   []byte{},
+		sampleType, err := protoregistry.GlobalTypes.FindMessageByName(protoreflect.FullName(schema.Type))
+		if err != nil {
+			Error("[RedisDatabase::Write] Failed to find message type: %v", err)
+			continue
+		}
+
+		if request.Value == nil {
+			if request.Value, err = anypb.New(sampleType.New().Interface()); err != nil {
+				Error("[RedisDatabase::Write] Failed to create anypb: %v", err)
+				continue
+			}
+		} else {
+			sampleAnyType, err := anypb.New(sampleType.New().Interface())
+			if err != nil {
+				Error("[RedisDatabase::Write] Failed to create anypb: %v", err)
+				continue
+			}
+
+			if request.Value.TypeUrl != sampleAnyType.TypeUrl {
+				Warn("[RedisDatabase::Write] Field type mismatch: %v != %v. Overwritting...", request.Value.TypeUrl, sampleAnyType.TypeUrl)
+				request.Value = sampleAnyType
 			}
 		}
 
