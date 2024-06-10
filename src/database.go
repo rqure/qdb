@@ -21,9 +21,11 @@ type IDatabase interface {
 
 	CreateEntity(entityType, parentId, name string)
 	GetEntity(entityId string) *DatabaseEntity
+	SetEntity(entityId string, value *DatabaseEntity)
 	DeleteEntity(entityId string)
 
 	FindEntities(entityType string) []string
+	GetEntityTypes() []string
 
 	EntityExists(entityId string) bool
 	FieldExists(fieldName, entityType string) bool
@@ -159,11 +161,11 @@ func (db *RedisDatabase) CreateEntity(entityType, parentId, name string) {
 	db.Write(requests)
 
 	p := &DatabaseEntity{
-		Id:          entityId,
-		Name:        name,
-		ParentId:    parentId,
-		Type:        entityType,
-		ChildrenIds: []string{},
+		Id:       entityId,
+		Name:     name,
+		Parent:   &EntityReference{Id: parentId},
+		Type:     entityType,
+		Children: []*EntityReference{},
 	}
 	b, err := proto.Marshal(p)
 	if err != nil {
@@ -173,6 +175,16 @@ func (db *RedisDatabase) CreateEntity(entityType, parentId, name string) {
 
 	db.client.SAdd(context.Background(), db.keygen.GetEntityTypeKey(entityType), entityId)
 	db.client.Set(context.Background(), db.keygen.GetEntityKey(entityId), b, 0)
+
+	if parentId != "" {
+		parent := db.GetEntity(parentId)
+		if parent != nil {
+			parent.Children = append(parent.Children, &EntityReference{Id: entityId})
+			db.SetEntity(parentId, parent)
+		} else {
+			Error("[RedisDatabase::CreateEntity] Failed to get parent entity: %v", parentId)
+		}
+	}
 }
 
 func (db *RedisDatabase) GetEntity(entityId string) *DatabaseEntity {
@@ -198,6 +210,20 @@ func (db *RedisDatabase) GetEntity(entityId string) *DatabaseEntity {
 	return p
 }
 
+func (db *RedisDatabase) SetEntity(entityId string, value *DatabaseEntity) {
+	b, err := proto.Marshal(value)
+	if err != nil {
+		Error("[RedisDatabase::SetEntity] Failed to marshal entity: %v", err)
+		return
+	}
+
+	err = db.client.Set(context.Background(), db.keygen.GetEntityKey(entityId), base64.StdEncoding.EncodeToString(b), 0).Err()
+	if err != nil {
+		Error("[RedisDatabase::SetEntity] Failed to set entity '%s': %v", entityId, err)
+		return
+	}
+}
+
 func (db *RedisDatabase) DeleteEntity(entityId string) {
 	p := db.GetEntity(entityId)
 	if p == nil {
@@ -205,8 +231,20 @@ func (db *RedisDatabase) DeleteEntity(entityId string) {
 		return
 	}
 
-	for _, childrenId := range p.ChildrenIds {
-		db.DeleteEntity(childrenId)
+	parent := db.GetEntity(p.Parent.Id)
+	if parent != nil {
+		newChildren := []*EntityReference{}
+		for _, child := range parent.Children {
+			if child.Id != entityId {
+				newChildren = append(newChildren, child)
+			}
+		}
+		parent.Children = newChildren
+		db.SetEntity(p.Parent.Id, parent)
+	}
+
+	for _, child := range p.Children {
+		db.DeleteEntity(child.Id)
 	}
 
 	for _, fieldName := range db.GetEntitySchema(p.Type).Fields {
