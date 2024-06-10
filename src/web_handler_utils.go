@@ -57,6 +57,16 @@ function Error(message) {
 
 function Panic(message) {
     Log(LOG_LEVELS.PANIC, message);
+}
+
+function getQmqMessageType(message) {
+    for (const key in proto.qmq) {
+        if (message instanceof proto.qmq[key]) {
+            return key
+        }
+    }
+
+    return null
 }`)
     })
 }

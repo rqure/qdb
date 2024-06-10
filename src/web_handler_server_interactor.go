@@ -72,7 +72,7 @@ func Register_web_handler_server_interactor() {
         this._ws.addEventListener('close', this.onClose.bind(this));
     }
 
-    async send(requestProto, requestProtoTypeName, responseProtoType) {
+    async send(requestProto, responseProtoType) {
         const requestId = uuidv4();
         const request = this._waitingResponses[requestId] = { "sent": +new Date(), "responseType": responseProtoType };
 
@@ -82,7 +82,7 @@ func Register_web_handler_server_interactor() {
 
         const message = new proto.qmq.WebMessage();
         message.setPayload(new proto.google.protobuf.Any());
-        message.getPayload().pack(requestProto, requestProtoTypeName);
+        message.getPayload().pack(requestProto, 'qmq.' + getQmqMessageType(requestProto));
 
         try {
             if (this.isConnected()) {
