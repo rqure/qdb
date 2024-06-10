@@ -134,8 +134,8 @@ message DatabaseEntity {
     string id = 1;
     string type = 2;
     string name = 3;
-    string parentId = 4;
-    repeated string childrenIds = 5;
+    EntityReference parent = 4;
+    repeated EntityReference children = 5;
 }
 
 message DatabaseField {
@@ -196,7 +196,11 @@ message Float {
 }
 
 message Bool {
-    bool value = 1;
+    bool raw = 1;
+}
+
+message EntityReference {
+    string id = 1;
 }
 
 message LogMessage {
@@ -223,7 +227,7 @@ message GarageDoorState {
         CLOSED = 2;
     }
 
-    GarageDoorStateEnum value = 1;
+    GarageDoorStateEnum raw = 1;
 }
 
 message ConnectionState {
@@ -233,5 +237,5 @@ message ConnectionState {
         DISCONNECTED = 2;
     }
 
-    ConnectionStateEnum value = 1;
+    ConnectionStateEnum raw = 1;
 }
