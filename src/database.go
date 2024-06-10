@@ -3,6 +3,7 @@ package qmq
 import (
 	"context"
 	"encoding/base64"
+	"strings"
 
 	"github.com/google/uuid"
 	"github.com/redis/go-redis/v9"
@@ -287,6 +288,17 @@ func (db *RedisDatabase) SetFieldSchema(fieldName string, value *DatabaseFieldSc
 	}
 
 	db.client.Set(context.Background(), db.keygen.GetFieldSchemaKey(fieldName), base64.StdEncoding.EncodeToString(b), 0)
+}
+
+func (db *RedisDatabase) GetEntityTypes() []string {
+	it := db.client.Scan(context.Background(), 0, db.keygen.GetEntityTypeKey("*"), 0).Iterator()
+	types := []string{}
+
+	for it.Next(context.Background()) {
+		types = append(types, strings.ReplaceAll(it.Val(), db.keygen.GetEntityTypeKey(""), ""))
+	}
+
+	return types
 }
 
 func (db *RedisDatabase) GetEntitySchema(entityType string) *DatabaseEntitySchema {
