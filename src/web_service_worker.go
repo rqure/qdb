@@ -17,9 +17,9 @@ type WebServiceWorkerSignals struct {
 }
 
 type WebServiceWorker struct {
+	Signals WebServiceWorkerSignals
+	
 	clients map[string]IWebClient
-	signals WebServiceWorkerSignals
-
 	addClientCh    chan IWebClient
 	removeClientCh chan string
 }
