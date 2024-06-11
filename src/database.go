@@ -152,6 +152,73 @@ func (db *RedisDatabase) IsConnected() bool {
 	return db.client != nil && db.client.Ping(context.Background()).Err() == nil
 }
 
+func (db *RedisDatabase) CreateSnapshot() *DatabaseSnapshot {
+	snapshot := &DatabaseSnapshot{}
+
+	for _, entityType := range db.GetEntityTypes() {
+		entitySchema := db.GetEntitySchema(entityType)
+		snapshot.EntitySchemas = append(snapshot.EntitySchemas, entitySchema)
+		for _, entityId := range db.FindEntities(entityType) {
+			snapshot.Entities = append(snapshot.Entities, db.GetEntity(entityId))
+			for _, fieldName := range entitySchema.Fields {
+				request := &DatabaseRequest{
+					Id:    entityId,
+					Field: fieldName,
+				}
+				db.Read([]*DatabaseRequest{request})
+				if request.Success {
+					snapshot.Fields = append(snapshot.Fields, new(DatabaseField).FromRequest(request))
+				}
+			}
+		}
+	}
+
+	snapshot.FieldSchemas = db.GetFieldSchemas()
+
+	return snapshot
+}
+
+func (db *RedisDatabase) RestoreSnapshot(snapshot *DatabaseSnapshot) {
+	Info("[RedisDatabase::RestoreSnapshot] Restoring snapshot...")
+
+	err := db.client.FlushDB(context.Background()).Err()
+	if err != nil {
+		Error("[RedisDatabase::RestoreSnapshot] Failed to flush database: %v", err)
+		return
+	}
+
+	for _, schema := range snapshot.EntitySchemas {
+		db.SetEntitySchema(schema.Name, schema)
+		Debug("[RedisDatabase::RestoreSnapshot] Restored entity schema: %v", schema)
+	}
+
+	for _, schema := range snapshot.FieldSchemas {
+		db.SetFieldSchema(schema.Name, schema)
+		Debug("[RedisDatabase::RestoreSnapshot] Restored field schema: %v", schema)
+	}
+
+	for _, entity := range snapshot.Entities {
+		db.SetEntity(entity.Id, entity)
+		db.client.SAdd(context.Background(), db.keygen.GetEntityTypeKey(entity.Type), entity.Id)
+		Debug("[RedisDatabase::RestoreSnapshot] Restored entity: %v", entity)
+	}
+
+	for _, field := range snapshot.Fields {
+		db.Write([]*DatabaseRequest{
+			{
+				Id:        field.Id,
+				Field:     field.Name,
+				Value:     field.Value,
+				WriteTime: &Timestamp{Raw: field.WriteTime},
+				WriterId:  &String{Raw: field.WriterId},
+			},
+		})
+		Debug("[RedisDatabase::RestoreSnapshot] Restored field: %v", field)
+	}
+
+	Info("[RedisDatabase::RestoreSnapshot] Snapshot restored.")
+}
+
 func (db *RedisDatabase) CreateEntity(entityType, parentId, name string) {
 	entityId := uuid.New().String()
 
