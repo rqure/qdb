@@ -101,7 +101,7 @@ func (w *WebServiceWorker) DoWork() {
 func (w *WebServiceWorker) processClientMessages() {
 	for _, client := range w.clients {
 		if m := client.Read(); m != nil {
-			w.signals.Received.Emit(client, m)
+			w.Signals.Received.Emit(client, m)
 		}
 	}
 }
@@ -112,10 +112,10 @@ func (w *WebServiceWorker) processClientConnectionEvents() {
 		case client := <-w.addClientCh:
 			Info("[WebServiceWorker::processClientConnectionEvents] Client connected: %s", client.Id())
 			w.clients[client.Id()] = client
-			w.signals.ClientConnected.Emit(client)
+			w.Signals.ClientConnected.Emit(client)
 		case id := <-w.removeClientCh:
 			Info("[WebServiceWorker::processClientConnectionEvents] Client disconnected: %s", id)
-			w.signals.ClientDisconnected.Emit(id)
+			w.Signals.ClientDisconnected.Emit(id)
 			delete(w.clients, id)
 		default:
 			return
