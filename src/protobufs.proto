@@ -130,6 +130,34 @@ message WebConfigSetEntitySchemaResponse {
     StatusEnum status = 1;
 }
 
+message WebConfigCreateSnapshotRequest {
+}
+
+message WebConfigCreateSnapshotResponse {
+    enum StatusEnum {
+        UNSPECIFIED = 0;
+        SUCCESS = 1;
+        FAILURE = 2;
+    }
+
+    StatusEnum status = 1;
+    DatabaseSnapshot snapshot = 2;
+}
+
+message WebConfigRestoreSnapshotRequest {
+    DatabaseSnapshot snapshot = 1;
+}
+
+message WebConfigRestoreSnapshotResponse {
+    enum StatusEnum {
+        UNSPECIFIED = 0;
+        SUCCESS = 1;
+        FAILURE = 2;
+    }
+
+    StatusEnum status = 1;
+}
+
 message DatabaseEntity {
     string id = 1;
     string type = 2;
