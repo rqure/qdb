@@ -13,14 +13,14 @@ const LOG_LEVELS = {
     PANIC: 5,
 }
 
-const CURRENT_LOG_LEVEL = LOG_LEVELS.DEBUG;
+let CURRENT_LOG_LEVEL = LOG_LEVELS.TRACE;
 
 function qLog(level, message) {
     if (level < CURRENT_LOG_LEVEL) {
         return;
     }
 
-    console.log(message);
+    console.log(`${new Date().toISOString()} | [${Object.keys(LOG_LEVELS).find(key => LOG_LEVELS[key] === level)} | ${message}`);
 }
 
 function qTrace(message) {
@@ -47,10 +47,10 @@ function qPanic(message) {
     qLog(LOG_LEVELS.PANIC, message);
 }
 
-function getQmqMessageType(message) {
+function qMessageType(message) {
     for (const key in proto.qmq) {
         if (message instanceof proto.qmq[key]) {
-            return key
+            return "qmq." + key
         }
     }
 

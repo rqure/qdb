@@ -69,8 +69,9 @@ class ServerInteractor {
         header.setTimestamp(new proto.google.protobuf.Timestamp.fromDate(new Date()));
 
         const message = new proto.qmq.WebMessage();
+        message.setHeader(header);
         message.setPayload(new proto.google.protobuf.Any());
-        message.getPayload().pack(requestProto, 'qmq.' + getQmqMessageType(requestProto));
+        message.getPayload().pack(requestProto.serializeBinary(), qMessageType(requestProto));
 
         try {
             if (this.isConnected()) {
