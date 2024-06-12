@@ -65,6 +65,8 @@ func Register_web_handler_server_interactor() {
     }
 
     connect() {
+        qInfo("[ServerInteractor::connect] Connecting to '" + this._url + "'")
+
         this._ws = new WebSocket(this._url);
         
         this._ws.addEventListener('open', this.onOpen.bind(this));
@@ -81,8 +83,9 @@ func Register_web_handler_server_interactor() {
         header.setTimestamp(new proto.google.protobuf.Timestamp.fromDate(new Date()));
 
         const message = new proto.qmq.WebMessage();
+        message.setHeader(header);
         message.setPayload(new proto.google.protobuf.Any());
-        message.getPayload().pack(requestProto, 'qmq.' + getQmqMessageType(requestProto));
+        message.getPayload().pack(requestProto.serializeBinary(), qMessageType(requestProto));
 
         try {
             if (this.isConnected()) {
