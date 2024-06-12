@@ -15,7 +15,7 @@ const LOG_LEVELS = {
 
 const CURRENT_LOG_LEVEL = LOG_LEVELS.DEBUG;
 
-function Log(level, message) {
+function qLog(level, message) {
     if (level < CURRENT_LOG_LEVEL) {
         return;
     }
@@ -23,28 +23,28 @@ function Log(level, message) {
     console.log(message);
 }
 
-function Trace(message) {
-    Log(LOG_LEVELS.TRACE, message);
+function qTrace(message) {
+    qLog(LOG_LEVELS.TRACE, message);
 }
 
-function Debug(message) {
-    Log(LOG_LEVELS.DEBUG, message);
+function qDebug(message) {
+    qLog(LOG_LEVELS.DEBUG, message);
 }
 
-function Info(message) {
-    Log(LOG_LEVELS.INFO, message);
+function qInfo(message) {
+    qLog(LOG_LEVELS.INFO, message);
 }
 
-function Warn(message) {
-    Log(LOG_LEVELS.WARN, message);
+function qWarn(message) {
+    qLog(LOG_LEVELS.WARN, message);
 }
 
-function Error(message) {
-    Log(LOG_LEVELS.ERROR, message);
+function qError(message) {
+    qLog(LOG_LEVELS.ERROR, message);
 }
 
-function Panic(message) {
-    Log(LOG_LEVELS.PANIC, message);
+function qPanic(message) {
+    qLog(LOG_LEVELS.PANIC, message);
 }
 
 function getQmqMessageType(message) {
