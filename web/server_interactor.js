@@ -19,7 +19,7 @@ class ServerInteractor {
             const requestId = message.getHeader().getId();
 
             if (!me._waitingResponses[requestId]) {
-                Warn("[ServerInteractor::onMessage] Received response for unknown request '" + requestId + "'");
+                qWarn("[ServerInteractor::onMessage] Received response for unknown request '" + requestId + "'");
                 return;
             }
 
@@ -35,12 +35,12 @@ class ServerInteractor {
     }
 
     onOpen(event) {
-        Info("[ServerInteractor::onOpen] Connection established with '" + this._url + "'");
+        qInfo("[ServerInteractor::onOpen] Connection established with '" + this._url + "'");
         this._isConnected = true;
     }
 
     onClose(event) {
-        Warn("[ServerInteractor::onClose] Connection closed with '" + this._url + "'");
+        qWarn("[ServerInteractor::onClose] Connection closed with '" + this._url + "'");
         this._isConnected = false;
 
         for (const requestId in this._waitingResponses) {
@@ -77,7 +77,7 @@ class ServerInteractor {
                 this._ws.send(message.serializeBinary());
             }
 
-            Trace("[ServerInteractor::send] Request '" + requestId + "' sent");
+            qTrace("[ServerInteractor::send] Request '" + requestId + "' sent");
 
             const result = await new Promise((resolve, reject) => {
                 request.resolve = resolve;
@@ -88,7 +88,7 @@ class ServerInteractor {
                 }
             });
 
-            Trace("[ServerInteractor::send] Response for '" + requestId + "' received in " + (new Date() - request.sent) + "ms");
+            qTrace("[ServerInteractor::send] Response for '" + requestId + "' received in " + (new Date() - request.sent) + "ms");
 
             return result;
         } finally {
