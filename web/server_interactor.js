@@ -53,6 +53,8 @@ class ServerInteractor {
     }
 
     connect() {
+        qInfo("[ServerInteractor::connect] Connecting to '" + this._url + "'")
+
         this._ws = new WebSocket(this._url);
         
         this._ws.addEventListener('open', this.onOpen.bind(this));
