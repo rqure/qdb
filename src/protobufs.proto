@@ -158,6 +158,14 @@ message WebConfigRestoreSnapshotResponse {
     StatusEnum status = 1;
 }
 
+message WebConfigGetAllFieldsRequest {
+
+}
+
+message WebConfigGetAllFieldsResponse {
+    repeated string fields = 1;
+}
+
 message DatabaseEntity {
     string id = 1;
     string type = 2;
