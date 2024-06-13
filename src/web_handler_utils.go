@@ -32,7 +32,7 @@ function qLog(level, message) {
         return;
     }
 
-    console.log(` + "`" + `${new Date().toISOString()} | [${Object.keys(LOG_LEVELS).find(key => LOG_LEVELS[key] === level)} | ${message}` + "`" + `);
+    console.log(` + "`" + `${new Date().toISOString()} | ${Object.keys(LOG_LEVELS).find(key => LOG_LEVELS[key] === level)} | ${message}` + "`" + `);
 }
 
 function qTrace(message) {
