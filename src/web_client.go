@@ -27,7 +27,7 @@ func NewWebClient(connection *websocket.Conn, onClose func(string)) *WebClient {
 	c := &WebClient{
 		id:         uuid.New().String(),
 		connection: connection,
-		readCh:     make(chan *WebMessage),
+		readCh:     make(chan *WebMessage, 100),
 		onClose:    onClose,
 	}
 

@@ -18,14 +18,17 @@ type WebServiceWorkerSignals struct {
 
 type WebServiceWorker struct {
 	Signals WebServiceWorkerSignals
-	
-	clients map[string]IWebClient
+
+	clients        map[string]IWebClient
 	addClientCh    chan IWebClient
 	removeClientCh chan string
 }
 
 func NewWebServiceWorker() *WebServiceWorker {
-	return &WebServiceWorker{}
+	return &WebServiceWorker{
+		addClientCh:    make(chan IWebClient, 100),
+		removeClientCh: make(chan string, 100),
+	}
 }
 
 func (w *WebServiceWorker) Init() {
