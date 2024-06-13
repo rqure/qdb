@@ -26,6 +26,8 @@ type WebServiceWorker struct {
 
 func NewWebServiceWorker() *WebServiceWorker {
 	return &WebServiceWorker{
+		Signals:        WebServiceWorkerSignals{},
+		clients:        make(map[string]IWebClient),
 		addClientCh:    make(chan IWebClient, 100),
 		removeClientCh: make(chan string, 100),
 	}
