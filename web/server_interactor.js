@@ -24,7 +24,7 @@ class ServerInteractor {
             }
 
             const request = me._waitingResponses[requestId];
-            const response = requset.responseType.deserializeBinary(message.getPayload().getValue_asU8());
+            const response = request.responseType.deserializeBinary(message.getPayload().getValue_asU8());
             if (response) {
                 request.resolve(response);
             } else {
