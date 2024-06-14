@@ -158,6 +158,13 @@ message WebConfigRestoreSnapshotResponse {
     StatusEnum status = 1;
 }
 
+message WebConfigGetRootRequest {
+}
+
+message WebConfigGetRootRequest {
+    string rootId = 1;
+}
+
 message WebConfigGetAllFieldsRequest {
 
 }
