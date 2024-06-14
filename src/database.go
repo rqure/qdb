@@ -57,8 +57,17 @@ func (r *DatabaseRequest) FromField(field *DatabaseField) *DatabaseRequest {
 	r.Id = field.Id
 	r.Field = field.Name
 	r.Value = field.Value
+
+	if r.WriteTime == nil {
+		r.WriteTime = &Timestamp{Raw: timestamppb.Now()}
+	}
 	r.WriteTime.Raw = field.WriteTime
+
+	if r.WriterId == nil {
+		r.WriterId = &String{Raw: ""}
+	}
 	r.WriterId.Raw = field.WriterId
+	
 	return r
 }
 
@@ -66,8 +75,15 @@ func (f *DatabaseField) FromRequest(request *DatabaseRequest) *DatabaseField {
 	f.Name = request.Field
 	f.Id = request.Id
 	f.Value = request.Value
-	f.WriteTime = request.WriteTime.Raw
-	f.WriterId = request.WriterId.Raw
+
+	if request.WriteTime != nil {
+		f.WriteTime = request.WriteTime.Raw
+	}
+	
+	if request.WriterId != nil {
+		f.WriterId = request.WriterId.Raw
+	}
+	
 	return f
 }
 
