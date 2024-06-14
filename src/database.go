@@ -261,7 +261,7 @@ func (db *RedisDatabase) CreateEntity(entityType, parentId, name string) {
 	}
 
 	db.client.SAdd(context.Background(), db.keygen.GetEntityTypeKey(entityType), entityId)
-	db.client.Set(context.Background(), db.keygen.GetEntityKey(entityId), b, 0)
+	db.client.Set(context.Background(), db.keygen.GetEntityKey(entityId), base64.StdEncoding.EncodeToString(b), 0)
 
 	if parentId != "" {
 		parent := db.GetEntity(parentId)
