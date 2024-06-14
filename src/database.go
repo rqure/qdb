@@ -415,13 +415,7 @@ func (db *RedisDatabase) GetFieldSchema(fieldName string) *DatabaseFieldSchema {
 }
 
 func (db *RedisDatabase) SetFieldSchema(fieldName string, value *DatabaseFieldSchema) {
-	a, err := anypb.New(value)
-	if err != nil {
-		Error("[RedisDatabase::SetFieldSchema] Failed to create anypb: %v", err)
-		return
-	}
-
-	b, err := proto.Marshal(a)
+	b, err := proto.Marshal(value)
 	if err != nil {
 		Error("[RedisDatabase::SetFieldSchema] Failed to marshal field schema: %v", err)
 		return
