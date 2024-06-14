@@ -161,7 +161,7 @@ message WebConfigRestoreSnapshotResponse {
 message WebConfigGetRootRequest {
 }
 
-message WebConfigGetRootRequest {
+message WebConfigGetRootResponse {
     string rootId = 1;
 }
 
