@@ -425,11 +425,11 @@ func (db *RedisDatabase) SetFieldSchema(fieldName string, value *DatabaseFieldSc
 }
 
 func (db *RedisDatabase) GetEntityTypes() []string {
-	it := db.client.Scan(context.Background(), 0, db.keygen.GetEntityTypeKey("*"), 0).Iterator()
+	it := db.client.Scan(context.Background(), 0, db.keygen.GetEntitySchemaKey("*"), 0).Iterator()
 	types := []string{}
 
 	for it.Next(context.Background()) {
-		types = append(types, strings.ReplaceAll(it.Val(), db.keygen.GetEntityTypeKey(""), ""))
+		types = append(types, strings.ReplaceAll(it.Val(), db.keygen.GetEntitySchemaKey(""), ""))
 	}
 
 	return types
