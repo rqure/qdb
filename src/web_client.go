@@ -84,6 +84,8 @@ func (c *WebClient) Write(message *WebMessage) {
 
 	if err := c.connection.WriteMessage(websocket.BinaryMessage, b); err != nil {
 		Error("[WebClient::Write] Error writing message: %v", err)
+	} else {
+		Debug("[WebClient::Write] Sent message: %v", message)
 	}
 }
 
