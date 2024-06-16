@@ -173,6 +173,40 @@ message WebConfigGetAllFieldsResponse {
     repeated string fields = 1;
 }
 
+message WebRuntimeDatabaseRequest {
+    repeated DatabaseRequest requests = 1;
+}
+
+message WebRuntimeDatabaseResponse {
+    repeated DatabaseField response = 2;
+}
+
+message WebRuntimeRegisterNotificationRequest {
+    repeated DatabaseNotificationConfig requests = 1;
+}
+
+message WebRuntimeRegisterNotificationResponse {
+    repeated string tokens = 1;
+}
+
+message WebRuntimeNotification {
+    repeated DatabaseNotification notifications = 1;
+}
+
+message WebRuntimeUnregisterNotificationRequest {
+    repeated string tokens = 1;
+}
+
+message WebRuntimeUnregisterNotificationResponse {
+    enum StatusEnum {
+        UNSPECIFIED = 0;
+        SUCCESS = 1;
+        FAILURE = 2;
+    }
+
+    StatusEnum status = 1;
+}
+
 message DatabaseEntity {
     string id = 1;
     string type = 2;
