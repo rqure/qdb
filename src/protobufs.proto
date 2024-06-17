@@ -174,11 +174,18 @@ message WebConfigGetAllFieldsResponse {
 }
 
 message WebRuntimeDatabaseRequest {
-    repeated DatabaseRequest requests = 1;
+    enum RequestTypeEnum {
+        UNSPECIFIED = 0;
+        READ = 1;
+        WRITE = 2;
+    }
+
+    RequestTypeEnum requestType = 1;
+    repeated DatabaseRequest requests = 2;
 }
 
 message WebRuntimeDatabaseResponse {
-    repeated DatabaseField response = 2;
+    repeated DatabaseRequest response = 2;
 }
 
 message WebRuntimeRegisterNotificationRequest {
