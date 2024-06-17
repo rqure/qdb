@@ -1184,6 +1184,7 @@ goog.exportSymbol('proto.qmq.WebConfigSetFieldSchemaResponse.StatusEnum', null, 
 goog.exportSymbol('proto.qmq.WebHeader', null, global);
 goog.exportSymbol('proto.qmq.WebMessage', null, global);
 goog.exportSymbol('proto.qmq.WebRuntimeDatabaseRequest', null, global);
+goog.exportSymbol('proto.qmq.WebRuntimeDatabaseRequest.RequestTypeEnum', null, global);
 goog.exportSymbol('proto.qmq.WebRuntimeDatabaseResponse', null, global);
 goog.exportSymbol('proto.qmq.WebRuntimeGetNotificationsRequest', null, global);
 goog.exportSymbol('proto.qmq.WebRuntimeGetNotificationsResponse', null, global);
@@ -6232,7 +6233,7 @@ proto.qmq.WebConfigGetAllFieldsResponse.prototype.clearFieldsList = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.qmq.WebRuntimeDatabaseRequest.repeatedFields_ = [1];
+proto.qmq.WebRuntimeDatabaseRequest.repeatedFields_ = [2];
 
 
 
@@ -6265,6 +6266,7 @@ proto.qmq.WebRuntimeDatabaseRequest.prototype.toObject = function(opt_includeIns
  */
 proto.qmq.WebRuntimeDatabaseRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
+    requesttype: jspb.Message.getFieldWithDefault(msg, 1, 0),
     requestsList: jspb.Message.toObjectList(msg.getRequestsList(),
     proto.qmq.DatabaseRequest.toObject, includeInstance)
   };
@@ -6304,6 +6306,10 @@ proto.qmq.WebRuntimeDatabaseRequest.deserializeBinaryFromReader = function(msg, 
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
+      var value = /** @type {!proto.qmq.WebRuntimeDatabaseRequest.RequestTypeEnum} */ (reader.readEnum());
+      msg.setRequesttype(value);
+      break;
+    case 2:
       var value = new proto.qmq.DatabaseRequest;
       reader.readMessage(value,proto.qmq.DatabaseRequest.deserializeBinaryFromReader);
       msg.addRequests(value);
@@ -6337,10 +6343,17 @@ proto.qmq.WebRuntimeDatabaseRequest.prototype.serializeBinary = function() {
  */
 proto.qmq.WebRuntimeDatabaseRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getRequesttype();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      1,
+      f
+    );
+  }
   f = message.getRequestsList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      1,
+      2,
       f,
       proto.qmq.DatabaseRequest.serializeBinaryToWriter
     );
@@ -6349,12 +6362,39 @@ proto.qmq.WebRuntimeDatabaseRequest.serializeBinaryToWriter = function(message, 
 
 
 /**
- * repeated DatabaseRequest requests = 1;
+ * @enum {number}
+ */
+proto.qmq.WebRuntimeDatabaseRequest.RequestTypeEnum = {
+  UNSPECIFIED: 0,
+  READ: 1,
+  WRITE: 2
+};
+
+/**
+ * optional RequestTypeEnum requestType = 1;
+ * @return {!proto.qmq.WebRuntimeDatabaseRequest.RequestTypeEnum}
+ */
+proto.qmq.WebRuntimeDatabaseRequest.prototype.getRequesttype = function() {
+  return /** @type {!proto.qmq.WebRuntimeDatabaseRequest.RequestTypeEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/**
+ * @param {!proto.qmq.WebRuntimeDatabaseRequest.RequestTypeEnum} value
+ * @return {!proto.qmq.WebRuntimeDatabaseRequest} returns this
+ */
+proto.qmq.WebRuntimeDatabaseRequest.prototype.setRequesttype = function(value) {
+  return jspb.Message.setProto3EnumField(this, 1, value);
+};
+
+
+/**
+ * repeated DatabaseRequest requests = 2;
  * @return {!Array<!proto.qmq.DatabaseRequest>}
  */
 proto.qmq.WebRuntimeDatabaseRequest.prototype.getRequestsList = function() {
   return /** @type{!Array<!proto.qmq.DatabaseRequest>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.qmq.DatabaseRequest, 1));
+    jspb.Message.getRepeatedWrapperField(this, proto.qmq.DatabaseRequest, 2));
 };
 
 
@@ -6363,7 +6403,7 @@ proto.qmq.WebRuntimeDatabaseRequest.prototype.getRequestsList = function() {
  * @return {!proto.qmq.WebRuntimeDatabaseRequest} returns this
 */
 proto.qmq.WebRuntimeDatabaseRequest.prototype.setRequestsList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 1, value);
+  return jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
 
@@ -6373,7 +6413,7 @@ proto.qmq.WebRuntimeDatabaseRequest.prototype.setRequestsList = function(value) 
  * @return {!proto.qmq.DatabaseRequest}
  */
 proto.qmq.WebRuntimeDatabaseRequest.prototype.addRequests = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.qmq.DatabaseRequest, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.qmq.DatabaseRequest, opt_index);
 };
 
 
@@ -6426,7 +6466,7 @@ proto.qmq.WebRuntimeDatabaseResponse.prototype.toObject = function(opt_includeIn
 proto.qmq.WebRuntimeDatabaseResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     responseList: jspb.Message.toObjectList(msg.getResponseList(),
-    proto.qmq.DatabaseField.toObject, includeInstance)
+    proto.qmq.DatabaseRequest.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -6464,8 +6504,8 @@ proto.qmq.WebRuntimeDatabaseResponse.deserializeBinaryFromReader = function(msg,
     var field = reader.getFieldNumber();
     switch (field) {
     case 2:
-      var value = new proto.qmq.DatabaseField;
-      reader.readMessage(value,proto.qmq.DatabaseField.deserializeBinaryFromReader);
+      var value = new proto.qmq.DatabaseRequest;
+      reader.readMessage(value,proto.qmq.DatabaseRequest.deserializeBinaryFromReader);
       msg.addResponse(value);
       break;
     default:
@@ -6502,24 +6542,24 @@ proto.qmq.WebRuntimeDatabaseResponse.serializeBinaryToWriter = function(message,
     writer.writeRepeatedMessage(
       2,
       f,
-      proto.qmq.DatabaseField.serializeBinaryToWriter
+      proto.qmq.DatabaseRequest.serializeBinaryToWriter
     );
   }
 };
 
 
 /**
- * repeated DatabaseField response = 2;
- * @return {!Array<!proto.qmq.DatabaseField>}
+ * repeated DatabaseRequest response = 2;
+ * @return {!Array<!proto.qmq.DatabaseRequest>}
  */
 proto.qmq.WebRuntimeDatabaseResponse.prototype.getResponseList = function() {
-  return /** @type{!Array<!proto.qmq.DatabaseField>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.qmq.DatabaseField, 2));
+  return /** @type{!Array<!proto.qmq.DatabaseRequest>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.qmq.DatabaseRequest, 2));
 };
 
 
 /**
- * @param {!Array<!proto.qmq.DatabaseField>} value
+ * @param {!Array<!proto.qmq.DatabaseRequest>} value
  * @return {!proto.qmq.WebRuntimeDatabaseResponse} returns this
 */
 proto.qmq.WebRuntimeDatabaseResponse.prototype.setResponseList = function(value) {
@@ -6528,12 +6568,12 @@ proto.qmq.WebRuntimeDatabaseResponse.prototype.setResponseList = function(value)
 
 
 /**
- * @param {!proto.qmq.DatabaseField=} opt_value
+ * @param {!proto.qmq.DatabaseRequest=} opt_value
  * @param {number=} opt_index
- * @return {!proto.qmq.DatabaseField}
+ * @return {!proto.qmq.DatabaseRequest}
  */
 proto.qmq.WebRuntimeDatabaseResponse.prototype.addResponse = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.qmq.DatabaseField, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.qmq.DatabaseRequest, opt_index);
 };
 
 
