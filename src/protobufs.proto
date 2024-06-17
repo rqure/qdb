@@ -189,7 +189,10 @@ message WebRuntimeRegisterNotificationResponse {
     repeated string tokens = 1;
 }
 
-message WebRuntimeNotification {
+message WebRuntimeGetNotificationsRequest {
+}
+
+message WebRuntimeGetNotificationsResponse {
     repeated DatabaseNotification notifications = 1;
 }
 
@@ -232,9 +235,10 @@ message DatabaseNotificationConfig {
 }
 
 message DatabaseNotification {
-    DatabaseField current = 1;
-    DatabaseField previous = 2;
-    repeated DatabaseField context = 3;
+    string token = 1;
+    DatabaseField current = 2;
+    DatabaseField previous = 3;
+    repeated DatabaseField context = 4;
 }
 
 message DatabaseEntitySchema {
