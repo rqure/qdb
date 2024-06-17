@@ -67,7 +67,7 @@ func (r *DatabaseRequest) FromField(field *DatabaseField) *DatabaseRequest {
 		r.WriterId = &String{Raw: ""}
 	}
 	r.WriterId.Raw = field.WriterId
-	
+
 	return r
 }
 
@@ -79,11 +79,11 @@ func (f *DatabaseField) FromRequest(request *DatabaseRequest) *DatabaseField {
 	if request.WriteTime != nil {
 		f.WriteTime = request.WriteTime.Raw
 	}
-	
+
 	if request.WriterId != nil {
 		f.WriterId = request.WriterId.Raw
 	}
-	
+
 	return f
 }
 
@@ -703,6 +703,7 @@ func (db *RedisDatabase) triggerNotifications(request *DatabaseRequest) {
 		}
 
 		n := &DatabaseNotification{}
+		n.Token = e
 		n.Current.FromRequest(request)
 		n.Previous.FromRequest(oldRequest)
 
@@ -766,6 +767,7 @@ func (db *RedisDatabase) triggerNotifications(request *DatabaseRequest) {
 		}
 
 		n := &DatabaseNotification{}
+		n.Token = e
 		n.Current.FromRequest(request)
 		n.Previous.FromRequest(oldRequest)
 
