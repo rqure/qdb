@@ -72,6 +72,15 @@ func Register_web_handler_server_interactor() {
         this._ws.addEventListener('close', this.onClose.bind(this));
     }
 
+    disconnect() {
+        if (this._ws) {
+            this._ws.close();
+            
+            this._ws = null;
+            this._isConnected = false;
+        }
+    }
+
     async send(requestProto, responseProtoType) {
         const requestId = uuidv4();
         const request = this._waitingResponses[requestId] = { "sent": +new Date(), "responseType": responseProtoType };
