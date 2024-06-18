@@ -60,8 +60,6 @@ func Register_web_handler_server_interactor() {
             request.reject(new Error('Connection closed'));
         }
         this._waitingResponses = {};
-
-        this.connect();
     }
 
     connect() {
