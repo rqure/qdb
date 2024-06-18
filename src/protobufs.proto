@@ -217,6 +217,13 @@ message WebRuntimeUnregisterNotificationResponse {
     StatusEnum status = 1;
 }
 
+message WebRuntimeGetDatabaseConnectionStatusRequest {
+}
+
+message WebRuntimeGetDatabaseConnectionStatusResponse {
+    ConnectionState status = 1;
+}
+
 message DatabaseEntity {
     string id = 1;
     string type = 2;
