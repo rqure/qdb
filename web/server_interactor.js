@@ -48,8 +48,6 @@ class ServerInteractor {
             request.reject(new Error('Connection closed'));
         }
         this._waitingResponses = {};
-
-        this.connect();
     }
 
     connect() {
