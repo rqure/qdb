@@ -3,6 +3,7 @@ package qmq
 import (
 	"context"
 	"encoding/base64"
+	"slices"
 	"strings"
 
 	"github.com/google/uuid"
@@ -479,6 +480,38 @@ func (db *RedisDatabase) SetEntitySchema(entityType string, value *DatabaseEntit
 	if err != nil {
 		Error("[RedisDatabase::SetEntitySchema] Failed to marshal entity schema: %v", err)
 		return
+	}
+
+	oldSchema := db.GetEntitySchema(entityType)
+	if oldSchema != nil {
+		removedFields := []string{}
+		newFields := []string{}
+
+		for _, field := range oldSchema.Fields {
+			if !slices.Contains(value.Fields, field) {
+				removedFields = append(removedFields, field)
+			}
+		}
+
+		for _, field := range value.Fields {
+			if !slices.Contains(oldSchema.Fields, field) {
+				newFields = append(newFields, field)
+			}
+		}
+
+		for _, entityId := range db.FindEntities(entityType) {
+			for _, field := range removedFields {
+				db.client.Del(context.Background(), db.keygen.GetFieldKey(field, entityId))
+			}
+
+			for _, field := range newFields {
+				request := &DatabaseRequest{
+					Id:    entityId,
+					Field: field,
+				}
+				db.Write([]*DatabaseRequest{request})
+			}
+		}
 	}
 
 	db.client.Set(context.Background(), db.keygen.GetEntitySchemaKey(entityType), base64.StdEncoding.EncodeToString(b), 0)
