@@ -54,10 +54,12 @@ func Register_web_handler_server_interactor() {
     onClose(event) {
         qWarn("[ServerInteractor::onClose] Connection closed with '" + this._url + "'");
         
-        this._ws.removeEventListener('open', this.onOpen.bind(this));
-        this._ws.removeEventListener('message', this.onMessage.bind(this));
-        this._ws.removeEventListener('close', this.onClose.bind(this));
-        this._ws = null;
+        if( this._ws ) {
+            this._ws.removeEventListener('open', this.onOpen.bind(this));
+            this._ws.removeEventListener('message', this.onMessage.bind(this));
+            this._ws.removeEventListener('close', this.onClose.bind(this));
+            this._ws = null;
+        }
         
         this._isConnected = false;
 
@@ -72,6 +74,8 @@ func Register_web_handler_server_interactor() {
     connect() {
         if (this._ws) {
             this.disconnect();
+            qError("[ServerInteractor::connect] Connection already exists, disconnecting first. Try again.");
+            return;
         }
         
         qInfo("[ServerInteractor::connect] Connecting to '" + this._url + "'")
@@ -86,9 +90,6 @@ func Register_web_handler_server_interactor() {
         if (this._ws) {
             qInfo("[ServerInteractor::disconnect] Disconnecting from '" + this._url + "'")
             this._ws.close();
-            
-            this._ws = null;
-            this._isConnected = false;
         }
     }
 
