@@ -105,8 +105,12 @@ func (w *WebServiceWorker) DoWork() {
 
 func (w *WebServiceWorker) processClientMessages() {
 	for _, client := range w.clients {
-		if m := client.Read(); m != nil {
-			w.Signals.Received.Emit(client, m)
+		for {
+			if m := client.Read(); m != nil {
+				w.Signals.Received.Emit(client, m)
+			} else {
+				break
+			}
 		}
 	}
 }
