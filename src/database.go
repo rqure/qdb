@@ -521,7 +521,14 @@ func (db *RedisDatabase) Read(requests []*DatabaseRequest) {
 	for _, request := range requests {
 		request.Success = false
 
-		e, err := db.client.Get(context.Background(), db.keygen.GetFieldKey(request.Field, request.Id)).Result()
+		indirectField, indirectEntity := db.ResolveIndirection(request.Field, request.Id)
+
+		if indirectField == "" || indirectEntity == "" {
+			Error("[RedisDatabase::Read] Failed to resolve indirection: %v", request)
+			continue
+		}
+
+		e, err := db.client.Get(context.Background(), db.keygen.GetFieldKey(indirectField, indirectEntity)).Result()
 		if err != nil {
 			Error("[RedisDatabase::Read] Failed to read field: %v", err)
 			continue
@@ -540,7 +547,18 @@ func (db *RedisDatabase) Read(requests []*DatabaseRequest) {
 			continue
 		}
 
-		request.FromField(p)
+		request.Value = p.Value
+
+		if request.WriteTime == nil {
+			request.WriteTime = &Timestamp{Raw: timestamppb.Now()}
+		}
+		request.WriteTime.Raw = p.WriteTime
+
+		if request.WriterId == nil {
+			request.WriterId = &String{Raw: ""}
+		}
+		request.WriterId.Raw = p.WriterId
+
 		request.Success = true
 	}
 }
@@ -549,7 +567,14 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 	for _, request := range requests {
 		request.Success = false
 
-		schema := db.GetFieldSchema(request.Field)
+		indirectField, indirectEntity := db.ResolveIndirection(request.Field, request.Id)
+
+		if indirectField == "" || indirectEntity == "" {
+			Error("[RedisDatabase::Write] Failed to resolve indirection: %v", request)
+			continue
+		}
+
+		schema := db.GetFieldSchema(indirectField)
 		sampleType, err := protoregistry.GlobalTypes.FindMessageByName(protoreflect.FullName(schema.Type))
 		if err != nil {
 			Error("[RedisDatabase::Write] Failed to find message type: %v", err)
@@ -590,9 +615,12 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 			continue
 		}
 
+		p.Id = indirectEntity
+		p.Name = indirectField
+
 		db.triggerNotifications(request)
 
-		_, err = db.client.Set(context.Background(), db.keygen.GetFieldKey(request.Field, request.Id), base64.StdEncoding.EncodeToString(b), 0).Result()
+		_, err = db.client.Set(context.Background(), db.keygen.GetFieldKey(indirectField, indirectEntity), base64.StdEncoding.EncodeToString(b), 0).Result()
 		if err != nil {
 			Error("[RedisDatabase::Write] Failed to write field: %v", err)
 			continue
@@ -686,6 +714,66 @@ func (db *RedisDatabase) ProcessNotifications() {
 	}
 }
 
+func (db *RedisDatabase) ResolveIndirection(indirectField, entityId string) (string, string) {
+	fields := strings.Split(indirectField, "->")
+	if len(fields) == 1 {
+		return indirectField, entityId
+	}
+
+	for _, field := range fields {
+		request := &DatabaseRequest{
+			Id:    entityId,
+			Field: field,
+		}
+
+		db.Read([]*DatabaseRequest{request})
+
+		if !request.Success {
+			return "", ""
+		}
+
+		entityReference := &EntityReference{}
+		if request.Value.MessageIs(entityReference) {
+			err := request.Value.UnmarshalTo(entityReference)
+			if err != nil {
+				Error("[RedisDatabase::Read] Failed to unmarshal entity reference: %v", err)
+				return "", ""
+			}
+
+			entityId = entityReference.Id
+			continue
+		}
+
+		// Fallback to children entity reference by name
+		entity := db.GetEntity(entityId)
+		if entity == nil {
+			Error("[RedisDatabase::Read] Failed to get entity: %v", entityId)
+			return "", ""
+		}
+
+		foundChild := false
+		for _, child := range entity.Children {
+			childEntity := db.GetEntity(child.Id)
+			if childEntity == nil {
+				Error("[RedisDatabase::Read] Failed to get child entity: %v", child.Id)
+				continue
+			}
+
+			if childEntity.Name == request.Field {
+				entityId = child.Id
+				foundChild = true
+				break
+			}
+		}
+
+		if !foundChild {
+			return "", ""
+		}
+	}
+
+	return fields[len(fields)-1], entityId
+}
+
 func (db *RedisDatabase) triggerNotifications(request *DatabaseRequest) {
 	oldRequest := &DatabaseRequest{
 		Id:    request.Id,
@@ -711,7 +799,14 @@ func (db *RedisDatabase) triggerNotifications(request *DatabaseRequest) {
 		return false
 	}(oldRequest, request)
 
-	m, err := db.client.SMembers(context.Background(), db.keygen.GetEntityIdNotificationConfigKey(request.Field, request.Id)).Result()
+	indirectField, indirectEntity := db.ResolveIndirection(request.Field, request.Id)
+
+	if indirectField == "" || indirectEntity == "" {
+		Error("[RedisDatabase::triggerNotifications] Failed to resolve indirection: %v", request)
+		return
+	}
+
+	m, err := db.client.SMembers(context.Background(), db.keygen.GetEntityIdNotificationConfigKey(indirectField, indirectEntity)).Result()
 	if err != nil {
 		Error("[RedisDatabase::triggerNotifications] Failed to get notification config: %v", err)
 		return
@@ -769,13 +864,13 @@ func (db *RedisDatabase) triggerNotifications(request *DatabaseRequest) {
 		}
 	}
 
-	entity := db.GetEntity(request.Id)
+	entity := db.GetEntity(indirectEntity)
 	if entity == nil {
-		Error("[RedisDatabase::triggerNotifications] Failed to get entity: %v", request.Id)
+		Error("[RedisDatabase::triggerNotifications] Failed to get entity: %v (indirect=%v)", request.Id, indirectEntity)
 		return
 	}
 
-	m, err = db.client.SMembers(context.Background(), db.keygen.GetEntityTypeNotificationConfigKey(entity.Type, request.Field)).Result()
+	m, err = db.client.SMembers(context.Background(), db.keygen.GetEntityTypeNotificationConfigKey(entity.Type, indirectField)).Result()
 	if err != nil {
 		Error("[RedisDatabase::triggerNotifications] Failed to get notification config: %v", err)
 		return
