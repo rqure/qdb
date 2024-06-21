@@ -728,38 +728,49 @@ func (db *RedisDatabase) ResolveIndirection(indirectField, entityId string) (str
 
 		db.Read([]*DatabaseRequest{request})
 
-		if !request.Success {
-			return "", ""
-		}
+		if request.Success {
+			entityReference := &EntityReference{}
+			if request.Value.MessageIs(entityReference) {
+				err := request.Value.UnmarshalTo(entityReference)
+				if err != nil {
+					Error("[RedisDatabase::ResolveIndirection] Failed to unmarshal entity reference: %v", err)
+					return "", ""
+				}
 
-		entityReference := &EntityReference{}
-		if request.Value.MessageIs(entityReference) {
-			err := request.Value.UnmarshalTo(entityReference)
-			if err != nil {
-				Error("[RedisDatabase::Read] Failed to unmarshal entity reference: %v", err)
-				return "", ""
+				entityId = entityReference.Id
+				continue
 			}
 
-			entityId = entityReference.Id
-			continue
-		}
-
-		// Fallback to children entity reference by name
-		entity := db.GetEntity(entityId)
-		if entity == nil {
-			Error("[RedisDatabase::Read] Failed to get entity: %v", entityId)
+			Error("[RedisDatabase::ResolveIndirection] Field is not an entity reference: %v", request)
 			return "", ""
 		}
 
+		// Fallback to parent entity reference by name
+		entity := db.GetEntity(entityId)
+		if entity == nil {
+			Error("[RedisDatabase::ResolveIndirection] Failed to get entity: %v", entityId)
+			return "", ""
+		}
+
+		if entity.Parent != nil && entity.Parent.Id != "" {
+			parentEntity := db.GetEntity(entity.Parent.Id)
+
+			if parentEntity != nil && parentEntity.Name == field {
+				entityId = entity.Parent.Id
+				continue
+			}
+		}
+
+		// Fallback to child entity reference by name
 		foundChild := false
 		for _, child := range entity.Children {
 			childEntity := db.GetEntity(child.Id)
 			if childEntity == nil {
-				Error("[RedisDatabase::Read] Failed to get child entity: %v", child.Id)
+				Error("[RedisDatabase::ResolveIndirection] Failed to get child entity: %v", child.Id)
 				continue
 			}
 
-			if childEntity.Name == request.Field {
+			if childEntity.Name == field {
 				entityId = child.Id
 				foundChild = true
 				break
