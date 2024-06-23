@@ -306,8 +306,7 @@ message EntityReference {
 }
 
 message BinaryFile {
-    string name = 1;
-    string content = 2;
+    string raw = 1;
 }
 
 message LogMessage {
