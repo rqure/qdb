@@ -10756,8 +10756,7 @@ proto.qmq.BinaryFile.prototype.toObject = function(opt_includeInstance) {
  */
 proto.qmq.BinaryFile.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    content: jspb.Message.getFieldWithDefault(msg, 2, "")
+    raw: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -10796,11 +10795,7 @@ proto.qmq.BinaryFile.deserializeBinaryFromReader = function(msg, reader) {
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setName(value);
-      break;
-    case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setContent(value);
+      msg.setRaw(value);
       break;
     default:
       reader.skipField();
@@ -10831,17 +10826,10 @@ proto.qmq.BinaryFile.prototype.serializeBinary = function() {
  */
 proto.qmq.BinaryFile.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getName();
+  f = message.getRaw();
   if (f.length > 0) {
     writer.writeString(
       1,
-      f
-    );
-  }
-  f = message.getContent();
-  if (f.length > 0) {
-    writer.writeString(
-      2,
       f
     );
   }
@@ -10849,10 +10837,10 @@ proto.qmq.BinaryFile.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional string name = 1;
+ * optional string raw = 1;
  * @return {string}
  */
-proto.qmq.BinaryFile.prototype.getName = function() {
+proto.qmq.BinaryFile.prototype.getRaw = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -10861,26 +10849,8 @@ proto.qmq.BinaryFile.prototype.getName = function() {
  * @param {string} value
  * @return {!proto.qmq.BinaryFile} returns this
  */
-proto.qmq.BinaryFile.prototype.setName = function(value) {
+proto.qmq.BinaryFile.prototype.setRaw = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
-};
-
-
-/**
- * optional string content = 2;
- * @return {string}
- */
-proto.qmq.BinaryFile.prototype.getContent = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.qmq.BinaryFile} returns this
- */
-proto.qmq.BinaryFile.prototype.setContent = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
