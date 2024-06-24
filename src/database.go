@@ -252,7 +252,7 @@ func (db *RedisDatabase) CreateEntity(entityType, parentId, name string) {
 	p := &DatabaseEntity{
 		Id:       entityId,
 		Name:     name,
-		Parent:   &EntityReference{Id: parentId},
+		Parent:   &EntityReference{Raw: parentId},
 		Type:     entityType,
 		Children: []*EntityReference{},
 	}
@@ -268,7 +268,7 @@ func (db *RedisDatabase) CreateEntity(entityType, parentId, name string) {
 	if parentId != "" {
 		parent := db.GetEntity(parentId)
 		if parent != nil {
-			parent.Children = append(parent.Children, &EntityReference{Id: entityId})
+			parent.Children = append(parent.Children, &EntityReference{Raw: entityId})
 			db.SetEntity(parentId, parent)
 		} else {
 			Error("[RedisDatabase::CreateEntity] Failed to get parent entity: %v", parentId)
@@ -320,20 +320,20 @@ func (db *RedisDatabase) DeleteEntity(entityId string) {
 		return
 	}
 
-	parent := db.GetEntity(p.Parent.Id)
+	parent := db.GetEntity(p.Parent.Raw)
 	if parent != nil {
 		newChildren := []*EntityReference{}
 		for _, child := range parent.Children {
-			if child.Id != entityId {
+			if child.Raw != entityId {
 				newChildren = append(newChildren, child)
 			}
 		}
 		parent.Children = newChildren
-		db.SetEntity(p.Parent.Id, parent)
+		db.SetEntity(p.Parent.Raw, parent)
 	}
 
 	for _, child := range p.Children {
-		db.DeleteEntity(child.Id)
+		db.DeleteEntity(child.Raw)
 	}
 
 	for _, fieldName := range db.GetEntitySchema(p.Type).Fields {
@@ -754,7 +754,7 @@ func (db *RedisDatabase) ResolveIndirection(indirectField, entityId string) (str
 					return "", ""
 				}
 
-				entityId = entityReference.Id
+				entityId = entityReference.Raw
 				continue
 			}
 
@@ -769,11 +769,11 @@ func (db *RedisDatabase) ResolveIndirection(indirectField, entityId string) (str
 			return "", ""
 		}
 
-		if entity.Parent != nil && entity.Parent.Id != "" {
-			parentEntity := db.GetEntity(entity.Parent.Id)
+		if entity.Parent != nil && entity.Parent.Raw != "" {
+			parentEntity := db.GetEntity(entity.Parent.Raw)
 
 			if parentEntity != nil && parentEntity.Name == field {
-				entityId = entity.Parent.Id
+				entityId = entity.Parent.Raw
 				continue
 			}
 		}
@@ -781,14 +781,14 @@ func (db *RedisDatabase) ResolveIndirection(indirectField, entityId string) (str
 		// Fallback to child entity reference by name
 		foundChild := false
 		for _, child := range entity.Children {
-			childEntity := db.GetEntity(child.Id)
+			childEntity := db.GetEntity(child.Raw)
 			if childEntity == nil {
-				Error("[RedisDatabase::ResolveIndirection] Failed to get child entity: %v", child.Id)
+				Error("[RedisDatabase::ResolveIndirection] Failed to get child entity: %v", child.Raw)
 				continue
 			}
 
 			if childEntity.Name == field {
-				entityId = child.Id
+				entityId = child.Raw
 				foundChild = true
 				break
 			}
