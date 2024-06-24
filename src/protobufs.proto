@@ -302,7 +302,7 @@ message Bool {
 }
 
 message EntityReference {
-    string id = 1;
+    string raw = 1;
 }
 
 message BinaryFile {
