@@ -642,16 +642,30 @@ func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callba
 	e := base64.StdEncoding.EncodeToString(b)
 
 	if db.FieldExists(notification.Field, notification.Id) {
+		r, err := db.client.XInfoStream(context.Background(), db.keygen.GetNotificationChannelKey(e)).Result()
+		if err != nil {
+			Warn("[RedisDatabase::Notify] Failed to find stream for: %v (%v)", e, err)
+			db.lastIds[e] = "0"
+		} else {
+			db.lastIds[e] = r.LastGeneratedID
+		}
+
 		db.client.SAdd(context.Background(), db.keygen.GetEntityIdNotificationConfigKey(notification.Id, notification.Field), e)
 		db.callbacks[e] = callback
-		db.lastIds[e] = "$"
 		return e
 	}
 
 	if db.FieldExists(notification.Field, notification.Type) {
+		r, err := db.client.XInfoStream(context.Background(), db.keygen.GetNotificationChannelKey(e)).Result()
+		if err != nil {
+			Warn("[RedisDatabase::Notify] Failed to find stream for: %v (%v)", e, err)
+			db.lastIds[e] = "0"
+		} else {
+			db.lastIds[e] = r.LastGeneratedID
+		}
+
 		db.client.SAdd(context.Background(), db.keygen.GetEntityTypeNotificationConfigKey(notification.Type, notification.Field), e)
 		db.callbacks[e] = callback
-		db.lastIds[e] = "$"
 		return e
 	}
 
