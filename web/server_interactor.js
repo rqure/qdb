@@ -1,13 +1,20 @@
+SERVER_INTERACTOR_CONNECTION_STATES = {
+    DISCONNECTED: 0,
+    CONNECTING: 1,
+    CONNECTED: 2,
+    DISCONNECTING: 3
+};
+
 class ServerInteractor {
     constructor(url) {
         this._url = url;
         this._ws = null;
-        this._isConnected = false;
+        this._connectionStatus = SERVER_INTERACTOR_CONNECTION_STATES.DISCONNECTED;
         this._waitingResponses = {};
     }
 
     isConnected() {
-        return this._isConnected;
+        return this._connectionStatus === SERVER_INTERACTOR_CONNECTION_STATES.CONNECTED;
     }
 
     onMessage(event) {
@@ -36,7 +43,7 @@ class ServerInteractor {
 
     onOpen(event) {
         qInfo("[ServerInteractor::onOpen] Connection established with '" + this._url + "'");
-        this._isConnected = true;
+        this._connectionStatus = SERVER_INTERACTOR_CONNECTION_STATES.CONNECTED;
     }
 
     onClose(event) {
@@ -49,7 +56,7 @@ class ServerInteractor {
             this._ws = null;
         }
         
-        this._isConnected = false;
+        this._connectionStatus = SERVER_INTERACTOR_CONNECTION_STATES.DISCONNECTED;
 
         for (const requestId in this._waitingResponses) {
             const request = this._waitingResponses[requestId];
@@ -60,13 +67,14 @@ class ServerInteractor {
     }
 
     connect() {
-        if (this._ws) {
-            this.disconnect();
+        if (this._connectionStatus !== SERVER_INTERACTOR_CONNECTION_STATES.DISCONNECTED) {
             qError("[ServerInteractor::connect] Connection already exists, disconnecting first.");
+            this.disconnect();
             return;
         }
         
         qInfo("[ServerInteractor::connect] Connecting to '" + this._url + "'")
+        this._connectionStatus = SERVER_INTERACTOR_CONNECTION_STATES.CONNECTING;
         this._ws = new WebSocket(this._url);
         
         this._ws.addEventListener('open', this.onOpen.bind(this));
@@ -75,10 +83,14 @@ class ServerInteractor {
     }
 
     disconnect() {
-        qInfo("[ServerInteractor::disconnect] Disconnecting from '" + this._url + "'")
         if (this._ws) {
+            qInfo("[ServerInteractor::disconnect] Disconnecting from '" + this._url + "'")
+
+            this._connectionStatus = SERVER_INTERACTOR_CONNECTION_STATES.DISCONNECTING;
+
             this._ws.close();
-            this.onClose();
+        } else {
+            this._connectionStatus = SERVER_INTERACTOR_CONNECTION_STATES.DISCONNECTED;
         }
     }
 
