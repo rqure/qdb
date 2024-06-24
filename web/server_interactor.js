@@ -62,7 +62,7 @@ class ServerInteractor {
     connect() {
         if (this._ws) {
             this.disconnect();
-            qError("[ServerInteractor::connect] Connection already exists, disconnecting first. Try again.");
+            qError("[ServerInteractor::connect] Connection already exists, disconnecting first.");
             return;
         }
         
@@ -75,9 +75,10 @@ class ServerInteractor {
     }
 
     disconnect() {
+        qInfo("[ServerInteractor::disconnect] Disconnecting from '" + this._url + "'")
         if (this._ws) {
-            qInfo("[ServerInteractor::disconnect] Disconnecting from '" + this._url + "'")
             this._ws.close();
+            this.onClose();
         }
     }
 
