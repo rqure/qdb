@@ -832,10 +832,12 @@ func (db *RedisDatabase) triggerNotifications(request *DatabaseRequest) {
 			continue
 		}
 
-		n := &DatabaseNotification{}
-		n.Token = e
-		n.Current.FromRequest(request)
-		n.Previous.FromRequest(oldRequest)
+		n := &DatabaseNotification{
+			Token:    e,
+			Current:  new(DatabaseField).FromRequest(request),
+			Previous: new(DatabaseField).FromRequest(oldRequest),
+			Context:  []*DatabaseField{},
+		}
 
 		for _, context := range p.ContextFields {
 			contextRequest := &DatabaseRequest{
@@ -896,10 +898,12 @@ func (db *RedisDatabase) triggerNotifications(request *DatabaseRequest) {
 			continue
 		}
 
-		n := &DatabaseNotification{}
-		n.Token = e
-		n.Current.FromRequest(request)
-		n.Previous.FromRequest(oldRequest)
+		n := &DatabaseNotification{
+			Token:    e,
+			Current:  new(DatabaseField).FromRequest(request),
+			Previous: new(DatabaseField).FromRequest(oldRequest),
+			Context:  []*DatabaseField{},
+		}
 
 		for _, context := range p.ContextFields {
 			contextRequest := &DatabaseRequest{
