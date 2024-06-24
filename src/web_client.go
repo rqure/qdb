@@ -41,6 +41,7 @@ func (c *WebClient) Id() string {
 }
 
 func (c *WebClient) backgroundRead() {
+	defer c.Close()
 	c.wg.Add(1)
 	defer c.wg.Done()
 
