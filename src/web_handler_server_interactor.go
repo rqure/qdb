@@ -74,7 +74,7 @@ func Register_web_handler_server_interactor() {
     connect() {
         if (this._ws) {
             this.disconnect();
-            qError("[ServerInteractor::connect] Connection already exists, disconnecting first. Try again.");
+            qError("[ServerInteractor::connect] Connection already exists, disconnecting first.");
             return;
         }
         
@@ -87,9 +87,10 @@ func Register_web_handler_server_interactor() {
     }
 
     disconnect() {
+        qInfo("[ServerInteractor::disconnect] Disconnecting from '" + this._url + "'")
         if (this._ws) {
-            qInfo("[ServerInteractor::disconnect] Disconnecting from '" + this._url + "'")
             this._ws.close();
+            this.onClose();
         }
     }
 
