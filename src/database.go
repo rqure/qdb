@@ -808,7 +808,7 @@ func (db *RedisDatabase) triggerNotifications(request *DatabaseRequest) {
 		return
 	}
 
-	m, err := db.client.SMembers(context.Background(), db.keygen.GetEntityIdNotificationConfigKey(indirectField, indirectEntity)).Result()
+	m, err := db.client.SMembers(context.Background(), db.keygen.GetEntityIdNotificationConfigKey(indirectEntity, indirectField)).Result()
 	if err != nil {
 		Error("[RedisDatabase::triggerNotifications] Failed to get notification config: %v", err)
 		return
