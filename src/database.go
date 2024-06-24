@@ -141,6 +141,7 @@ func NewRedisDatabase(config RedisDatabaseConfig) IDatabase {
 	return &RedisDatabase{
 		config:    config,
 		callbacks: map[string]func(*DatabaseNotification){},
+		lastIds:   map[string]string{},
 		keygen:    RedisDatabaseKeyGenerator{},
 	}
 }
