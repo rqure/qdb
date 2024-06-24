@@ -10638,7 +10638,7 @@ proto.qmq.EntityReference.prototype.toObject = function(opt_includeInstance) {
  */
 proto.qmq.EntityReference.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, "")
+    raw: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -10677,7 +10677,7 @@ proto.qmq.EntityReference.deserializeBinaryFromReader = function(msg, reader) {
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setId(value);
+      msg.setRaw(value);
       break;
     default:
       reader.skipField();
@@ -10708,7 +10708,7 @@ proto.qmq.EntityReference.prototype.serializeBinary = function() {
  */
 proto.qmq.EntityReference.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getId();
+  f = message.getRaw();
   if (f.length > 0) {
     writer.writeString(
       1,
@@ -10719,10 +10719,10 @@ proto.qmq.EntityReference.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional string id = 1;
+ * optional string raw = 1;
  * @return {string}
  */
-proto.qmq.EntityReference.prototype.getId = function() {
+proto.qmq.EntityReference.prototype.getRaw = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -10731,7 +10731,7 @@ proto.qmq.EntityReference.prototype.getId = function() {
  * @param {string} value
  * @return {!proto.qmq.EntityReference} returns this
  */
-proto.qmq.EntityReference.prototype.setId = function(value) {
+proto.qmq.EntityReference.prototype.setRaw = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
