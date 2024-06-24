@@ -358,15 +358,17 @@ func (db *RedisDatabase) EntityExists(entityId string) bool {
 }
 
 func (db *RedisDatabase) FieldExists(fieldName, entityTypeOrId string) bool {
-	schema := db.GetEntitySchema(entityTypeOrId)
-	if schema != nil {
-		for _, field := range schema.Fields {
-			if field == fieldName {
-				return true
+	if !strings.Contains(entityTypeOrId, "-") {
+		schema := db.GetEntitySchema(entityTypeOrId)
+		if schema != nil {
+			for _, field := range schema.Fields {
+				if field == fieldName {
+					return true
+				}
 			}
-		}
 
-		return false
+			return false
+		}
 	}
 
 	request := &DatabaseRequest{
