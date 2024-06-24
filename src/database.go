@@ -675,7 +675,7 @@ func (db *RedisDatabase) ProcessNotifications() {
 			Block:   -1,
 		}).Result()
 
-		if err != nil {
+		if err != nil && err != redis.Nil {
 			Error("[RedisDatabase::ProcessNotifications] Failed to read stream %v: %v", e, err)
 			continue
 		}
