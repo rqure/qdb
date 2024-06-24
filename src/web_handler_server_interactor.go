@@ -10,16 +10,23 @@ func Register_web_handler_server_interactor() {
 
     http.HandleFunc("/js/qmq/server_interactor.js", func(w http.ResponseWriter, r *http.Request) {
         w.Header().Set("Content-Type", "application/javascript")
-        fmt.Fprint(w, `class ServerInteractor {
+        fmt.Fprint(w, `SERVER_INTERACTOR_CONNECTION_STATES = {
+    DISCONNECTED: 0,
+    CONNECTING: 1,
+    CONNECTED: 2,
+    DISCONNECTING: 3
+};
+
+class ServerInteractor {
     constructor(url) {
         this._url = url;
         this._ws = null;
-        this._isConnected = false;
+        this._connectionStatus = SERVER_INTERACTOR_CONNECTION_STATES.DISCONNECTED;
         this._waitingResponses = {};
     }
 
     isConnected() {
-        return this._isConnected;
+        return this._connectionStatus === SERVER_INTERACTOR_CONNECTION_STATES.CONNECTED;
     }
 
     onMessage(event) {
@@ -48,7 +55,7 @@ func Register_web_handler_server_interactor() {
 
     onOpen(event) {
         qInfo("[ServerInteractor::onOpen] Connection established with '" + this._url + "'");
-        this._isConnected = true;
+        this._connectionStatus = SERVER_INTERACTOR_CONNECTION_STATES.CONNECTED;
     }
 
     onClose(event) {
@@ -61,7 +68,7 @@ func Register_web_handler_server_interactor() {
             this._ws = null;
         }
         
-        this._isConnected = false;
+        this._connectionStatus = SERVER_INTERACTOR_CONNECTION_STATES.DISCONNECTED;
 
         for (const requestId in this._waitingResponses) {
             const request = this._waitingResponses[requestId];
@@ -72,13 +79,14 @@ func Register_web_handler_server_interactor() {
     }
 
     connect() {
-        if (this._ws) {
-            this.disconnect();
+        if (this._connectionStatus !== SERVER_INTERACTOR_CONNECTION_STATES.DISCONNECTED) {
             qError("[ServerInteractor::connect] Connection already exists, disconnecting first.");
+            this.disconnect();
             return;
         }
         
         qInfo("[ServerInteractor::connect] Connecting to '" + this._url + "'")
+        this._connectionStatus = SERVER_INTERACTOR_CONNECTION_STATES.CONNECTING;
         this._ws = new WebSocket(this._url);
         
         this._ws.addEventListener('open', this.onOpen.bind(this));
@@ -87,10 +95,14 @@ func Register_web_handler_server_interactor() {
     }
 
     disconnect() {
-        qInfo("[ServerInteractor::disconnect] Disconnecting from '" + this._url + "'")
         if (this._ws) {
+            qInfo("[ServerInteractor::disconnect] Disconnecting from '" + this._url + "'")
+
+            this._connectionStatus = SERVER_INTERACTOR_CONNECTION_STATES.DISCONNECTING;
+
             this._ws.close();
-            this.onClose();
+        } else {
+            this._connectionStatus = SERVER_INTERACTOR_CONNECTION_STATES.DISCONNECTED;
         }
     }
 
