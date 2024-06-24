@@ -799,17 +799,7 @@ func (db *RedisDatabase) triggerNotifications(request *DatabaseRequest) {
 		return
 	}
 
-	changed := func(a, b *DatabaseRequest) bool {
-		if a.Value != nil && b.Value != nil && len(a.Value.Value) != len(b.Value.Value) {
-			for i := range a.Value.Value {
-				if a.Value.Value[i] != b.Value.Value[i] {
-					return true
-				}
-			}
-		}
-
-		return false
-	}(oldRequest, request)
+	changed := proto.Equal(oldRequest.Value, request.Value)
 
 	indirectField, indirectEntity := db.ResolveIndirection(request.Field, request.Id)
 
