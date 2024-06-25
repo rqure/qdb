@@ -2,15 +2,15 @@
 package qdb
 
 import (
-	"fmt"
-	"net/http"
+    "net/http"
+    "fmt"
 )
 
 func Register_web_handler_utils() {
 
-	http.HandleFunc("/js/qdb/utils.js", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/javascript")
-		fmt.Fprint(w, `function uuidv4() {
+    http.HandleFunc("/js/qdb/utils.js", func(w http.ResponseWriter, r *http.Request) {
+        w.Header().Set("Content-Type", "application/javascript")
+        fmt.Fprint(w, `function uuidv4() {
     return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
       (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
     );
@@ -32,7 +32,7 @@ function qLog(level, message) {
         return;
     }
 
-    console.log(`+"`"+`${new Date().toISOString()} | ${Object.keys(LOG_LEVELS).find(key => LOG_LEVELS[key] === level)} | ${message}`+"`"+`);
+    console.log(` + "`" + `${new Date().toISOString()} | ${Object.keys(LOG_LEVELS).find(key => LOG_LEVELS[key] === level)} | ${message}` + "`" + `);
 }
 
 function qTrace(message) {
@@ -68,5 +68,5 @@ function qMessageType(message) {
 
     return null
 }`)
-	})
+    })
 }
