@@ -48,9 +48,9 @@ function qPanic(message) {
 }
 
 function qMessageType(message) {
-    for (const key in proto.qmq) {
-        if (message instanceof proto.qmq[key]) {
-            return "qmq." + key
+    for (const key in proto.qdb) {
+        if (message instanceof proto.qdb[key]) {
+            return "qdb." + key
         }
     }
 

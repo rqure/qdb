@@ -22,7 +22,7 @@ class ServerInteractor {
         const fileReader = new FileReader();
 
         fileReader.onload = function(event) {
-            const message = proto.qmq.WebMessage.deserializeBinary(new Uint8Array(event.target.result));
+            const message = proto.qdb.WebMessage.deserializeBinary(new Uint8Array(event.target.result));
             const requestId = message.getHeader().getId();
 
             if (!me._waitingResponses[requestId]) {
@@ -98,11 +98,11 @@ class ServerInteractor {
         const requestId = uuidv4();
         const request = this._waitingResponses[requestId] = { "sent": +new Date(), "responseType": responseProtoType };
 
-        const header = new proto.qmq.WebHeader();
+        const header = new proto.qdb.WebHeader();
         header.setId(requestId);
         header.setTimestamp(new proto.google.protobuf.Timestamp.fromDate(new Date()));
 
-        const message = new proto.qmq.WebMessage();
+        const message = new proto.qdb.WebMessage();
         message.setHeader(header);
         message.setPayload(new proto.google.protobuf.Any());
         message.getPayload().pack(requestProto.serializeBinary(), qMessageType(requestProto));

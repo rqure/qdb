@@ -1,4 +1,4 @@
-package qmq
+package qdb
 
 type ISlot interface {
 	Invoke(...interface{})

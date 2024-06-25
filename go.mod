@@ -1,4 +1,4 @@
-module github.com/rqure/qmq
+module github.com/rqure/qdb
 
 go 1.21.6
 

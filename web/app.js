@@ -1127,74 +1127,74 @@ var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/time
 goog.object.extend(proto, google_protobuf_timestamp_pb);
 var google_protobuf_any_pb = require('google-protobuf/google/protobuf/any_pb.js');
 goog.object.extend(proto, google_protobuf_any_pb);
-goog.exportSymbol('proto.qmq.BinaryFile', null, global);
-goog.exportSymbol('proto.qmq.Bool', null, global);
-goog.exportSymbol('proto.qmq.ConnectionState', null, global);
-goog.exportSymbol('proto.qmq.ConnectionState.ConnectionStateEnum', null, global);
-goog.exportSymbol('proto.qmq.DatabaseEntity', null, global);
-goog.exportSymbol('proto.qmq.DatabaseEntitySchema', null, global);
-goog.exportSymbol('proto.qmq.DatabaseField', null, global);
-goog.exportSymbol('proto.qmq.DatabaseFieldSchema', null, global);
-goog.exportSymbol('proto.qmq.DatabaseNotification', null, global);
-goog.exportSymbol('proto.qmq.DatabaseNotificationConfig', null, global);
-goog.exportSymbol('proto.qmq.DatabaseRequest', null, global);
-goog.exportSymbol('proto.qmq.DatabaseSnapshot', null, global);
-goog.exportSymbol('proto.qmq.EntityReference', null, global);
-goog.exportSymbol('proto.qmq.Float', null, global);
-goog.exportSymbol('proto.qmq.GarageDoorState', null, global);
-goog.exportSymbol('proto.qmq.GarageDoorState.GarageDoorStateEnum', null, global);
-goog.exportSymbol('proto.qmq.Int', null, global);
-goog.exportSymbol('proto.qmq.LogMessage', null, global);
-goog.exportSymbol('proto.qmq.LogMessage.LogLevelEnum', null, global);
-goog.exportSymbol('proto.qmq.String', null, global);
-goog.exportSymbol('proto.qmq.Timestamp', null, global);
-goog.exportSymbol('proto.qmq.WebConfigCreateEntityRequest', null, global);
-goog.exportSymbol('proto.qmq.WebConfigCreateEntityResponse', null, global);
-goog.exportSymbol('proto.qmq.WebConfigCreateEntityResponse.StatusEnum', null, global);
-goog.exportSymbol('proto.qmq.WebConfigCreateSnapshotRequest', null, global);
-goog.exportSymbol('proto.qmq.WebConfigCreateSnapshotResponse', null, global);
-goog.exportSymbol('proto.qmq.WebConfigCreateSnapshotResponse.StatusEnum', null, global);
-goog.exportSymbol('proto.qmq.WebConfigDeleteEntityRequest', null, global);
-goog.exportSymbol('proto.qmq.WebConfigDeleteEntityResponse', null, global);
-goog.exportSymbol('proto.qmq.WebConfigDeleteEntityResponse.StatusEnum', null, global);
-goog.exportSymbol('proto.qmq.WebConfigGetAllFieldsRequest', null, global);
-goog.exportSymbol('proto.qmq.WebConfigGetAllFieldsResponse', null, global);
-goog.exportSymbol('proto.qmq.WebConfigGetEntityRequest', null, global);
-goog.exportSymbol('proto.qmq.WebConfigGetEntityResponse', null, global);
-goog.exportSymbol('proto.qmq.WebConfigGetEntityResponse.StatusEnum', null, global);
-goog.exportSymbol('proto.qmq.WebConfigGetEntitySchemaRequest', null, global);
-goog.exportSymbol('proto.qmq.WebConfigGetEntitySchemaResponse', null, global);
-goog.exportSymbol('proto.qmq.WebConfigGetEntitySchemaResponse.StatusEnum', null, global);
-goog.exportSymbol('proto.qmq.WebConfigGetEntityTypesRequest', null, global);
-goog.exportSymbol('proto.qmq.WebConfigGetEntityTypesResponse', null, global);
-goog.exportSymbol('proto.qmq.WebConfigGetFieldSchemaRequest', null, global);
-goog.exportSymbol('proto.qmq.WebConfigGetFieldSchemaResponse', null, global);
-goog.exportSymbol('proto.qmq.WebConfigGetFieldSchemaResponse.StatusEnum', null, global);
-goog.exportSymbol('proto.qmq.WebConfigGetRootRequest', null, global);
-goog.exportSymbol('proto.qmq.WebConfigGetRootResponse', null, global);
-goog.exportSymbol('proto.qmq.WebConfigRestoreSnapshotRequest', null, global);
-goog.exportSymbol('proto.qmq.WebConfigRestoreSnapshotResponse', null, global);
-goog.exportSymbol('proto.qmq.WebConfigRestoreSnapshotResponse.StatusEnum', null, global);
-goog.exportSymbol('proto.qmq.WebConfigSetEntitySchemaRequest', null, global);
-goog.exportSymbol('proto.qmq.WebConfigSetEntitySchemaResponse', null, global);
-goog.exportSymbol('proto.qmq.WebConfigSetEntitySchemaResponse.StatusEnum', null, global);
-goog.exportSymbol('proto.qmq.WebConfigSetFieldSchemaRequest', null, global);
-goog.exportSymbol('proto.qmq.WebConfigSetFieldSchemaResponse', null, global);
-goog.exportSymbol('proto.qmq.WebConfigSetFieldSchemaResponse.StatusEnum', null, global);
-goog.exportSymbol('proto.qmq.WebHeader', null, global);
-goog.exportSymbol('proto.qmq.WebMessage', null, global);
-goog.exportSymbol('proto.qmq.WebRuntimeDatabaseRequest', null, global);
-goog.exportSymbol('proto.qmq.WebRuntimeDatabaseRequest.RequestTypeEnum', null, global);
-goog.exportSymbol('proto.qmq.WebRuntimeDatabaseResponse', null, global);
-goog.exportSymbol('proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest', null, global);
-goog.exportSymbol('proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse', null, global);
-goog.exportSymbol('proto.qmq.WebRuntimeGetNotificationsRequest', null, global);
-goog.exportSymbol('proto.qmq.WebRuntimeGetNotificationsResponse', null, global);
-goog.exportSymbol('proto.qmq.WebRuntimeRegisterNotificationRequest', null, global);
-goog.exportSymbol('proto.qmq.WebRuntimeRegisterNotificationResponse', null, global);
-goog.exportSymbol('proto.qmq.WebRuntimeUnregisterNotificationRequest', null, global);
-goog.exportSymbol('proto.qmq.WebRuntimeUnregisterNotificationResponse', null, global);
-goog.exportSymbol('proto.qmq.WebRuntimeUnregisterNotificationResponse.StatusEnum', null, global);
+goog.exportSymbol('proto.qdb.BinaryFile', null, global);
+goog.exportSymbol('proto.qdb.Bool', null, global);
+goog.exportSymbol('proto.qdb.ConnectionState', null, global);
+goog.exportSymbol('proto.qdb.ConnectionState.ConnectionStateEnum', null, global);
+goog.exportSymbol('proto.qdb.DatabaseEntity', null, global);
+goog.exportSymbol('proto.qdb.DatabaseEntitySchema', null, global);
+goog.exportSymbol('proto.qdb.DatabaseField', null, global);
+goog.exportSymbol('proto.qdb.DatabaseFieldSchema', null, global);
+goog.exportSymbol('proto.qdb.DatabaseNotification', null, global);
+goog.exportSymbol('proto.qdb.DatabaseNotificationConfig', null, global);
+goog.exportSymbol('proto.qdb.DatabaseRequest', null, global);
+goog.exportSymbol('proto.qdb.DatabaseSnapshot', null, global);
+goog.exportSymbol('proto.qdb.EntityReference', null, global);
+goog.exportSymbol('proto.qdb.Float', null, global);
+goog.exportSymbol('proto.qdb.GarageDoorState', null, global);
+goog.exportSymbol('proto.qdb.GarageDoorState.GarageDoorStateEnum', null, global);
+goog.exportSymbol('proto.qdb.Int', null, global);
+goog.exportSymbol('proto.qdb.LogMessage', null, global);
+goog.exportSymbol('proto.qdb.LogMessage.LogLevelEnum', null, global);
+goog.exportSymbol('proto.qdb.String', null, global);
+goog.exportSymbol('proto.qdb.Timestamp', null, global);
+goog.exportSymbol('proto.qdb.WebConfigCreateEntityRequest', null, global);
+goog.exportSymbol('proto.qdb.WebConfigCreateEntityResponse', null, global);
+goog.exportSymbol('proto.qdb.WebConfigCreateEntityResponse.StatusEnum', null, global);
+goog.exportSymbol('proto.qdb.WebConfigCreateSnapshotRequest', null, global);
+goog.exportSymbol('proto.qdb.WebConfigCreateSnapshotResponse', null, global);
+goog.exportSymbol('proto.qdb.WebConfigCreateSnapshotResponse.StatusEnum', null, global);
+goog.exportSymbol('proto.qdb.WebConfigDeleteEntityRequest', null, global);
+goog.exportSymbol('proto.qdb.WebConfigDeleteEntityResponse', null, global);
+goog.exportSymbol('proto.qdb.WebConfigDeleteEntityResponse.StatusEnum', null, global);
+goog.exportSymbol('proto.qdb.WebConfigGetAllFieldsRequest', null, global);
+goog.exportSymbol('proto.qdb.WebConfigGetAllFieldsResponse', null, global);
+goog.exportSymbol('proto.qdb.WebConfigGetEntityRequest', null, global);
+goog.exportSymbol('proto.qdb.WebConfigGetEntityResponse', null, global);
+goog.exportSymbol('proto.qdb.WebConfigGetEntityResponse.StatusEnum', null, global);
+goog.exportSymbol('proto.qdb.WebConfigGetEntitySchemaRequest', null, global);
+goog.exportSymbol('proto.qdb.WebConfigGetEntitySchemaResponse', null, global);
+goog.exportSymbol('proto.qdb.WebConfigGetEntitySchemaResponse.StatusEnum', null, global);
+goog.exportSymbol('proto.qdb.WebConfigGetEntityTypesRequest', null, global);
+goog.exportSymbol('proto.qdb.WebConfigGetEntityTypesResponse', null, global);
+goog.exportSymbol('proto.qdb.WebConfigGetFieldSchemaRequest', null, global);
+goog.exportSymbol('proto.qdb.WebConfigGetFieldSchemaResponse', null, global);
+goog.exportSymbol('proto.qdb.WebConfigGetFieldSchemaResponse.StatusEnum', null, global);
+goog.exportSymbol('proto.qdb.WebConfigGetRootRequest', null, global);
+goog.exportSymbol('proto.qdb.WebConfigGetRootResponse', null, global);
+goog.exportSymbol('proto.qdb.WebConfigRestoreSnapshotRequest', null, global);
+goog.exportSymbol('proto.qdb.WebConfigRestoreSnapshotResponse', null, global);
+goog.exportSymbol('proto.qdb.WebConfigRestoreSnapshotResponse.StatusEnum', null, global);
+goog.exportSymbol('proto.qdb.WebConfigSetEntitySchemaRequest', null, global);
+goog.exportSymbol('proto.qdb.WebConfigSetEntitySchemaResponse', null, global);
+goog.exportSymbol('proto.qdb.WebConfigSetEntitySchemaResponse.StatusEnum', null, global);
+goog.exportSymbol('proto.qdb.WebConfigSetFieldSchemaRequest', null, global);
+goog.exportSymbol('proto.qdb.WebConfigSetFieldSchemaResponse', null, global);
+goog.exportSymbol('proto.qdb.WebConfigSetFieldSchemaResponse.StatusEnum', null, global);
+goog.exportSymbol('proto.qdb.WebHeader', null, global);
+goog.exportSymbol('proto.qdb.WebMessage', null, global);
+goog.exportSymbol('proto.qdb.WebRuntimeDatabaseRequest', null, global);
+goog.exportSymbol('proto.qdb.WebRuntimeDatabaseRequest.RequestTypeEnum', null, global);
+goog.exportSymbol('proto.qdb.WebRuntimeDatabaseResponse', null, global);
+goog.exportSymbol('proto.qdb.WebRuntimeGetDatabaseConnectionStatusRequest', null, global);
+goog.exportSymbol('proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse', null, global);
+goog.exportSymbol('proto.qdb.WebRuntimeGetNotificationsRequest', null, global);
+goog.exportSymbol('proto.qdb.WebRuntimeGetNotificationsResponse', null, global);
+goog.exportSymbol('proto.qdb.WebRuntimeRegisterNotificationRequest', null, global);
+goog.exportSymbol('proto.qdb.WebRuntimeRegisterNotificationResponse', null, global);
+goog.exportSymbol('proto.qdb.WebRuntimeUnregisterNotificationRequest', null, global);
+goog.exportSymbol('proto.qdb.WebRuntimeUnregisterNotificationResponse', null, global);
+goog.exportSymbol('proto.qdb.WebRuntimeUnregisterNotificationResponse.StatusEnum', null, global);
 /**
  * Generated by JsPbCodeGenerator.
  * @param {Array=} opt_data Optional initial data array, typically from a
@@ -1205,16 +1205,16 @@ goog.exportSymbol('proto.qmq.WebRuntimeUnregisterNotificationResponse.StatusEnum
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebHeader = function(opt_data) {
+proto.qdb.WebHeader = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebHeader, jspb.Message);
+goog.inherits(proto.qdb.WebHeader, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebHeader.displayName = 'proto.qmq.WebHeader';
+  proto.qdb.WebHeader.displayName = 'proto.qdb.WebHeader';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1226,16 +1226,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebMessage = function(opt_data) {
+proto.qdb.WebMessage = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebMessage, jspb.Message);
+goog.inherits(proto.qdb.WebMessage, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebMessage.displayName = 'proto.qmq.WebMessage';
+  proto.qdb.WebMessage.displayName = 'proto.qdb.WebMessage';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1247,16 +1247,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigCreateEntityRequest = function(opt_data) {
+proto.qdb.WebConfigCreateEntityRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigCreateEntityRequest, jspb.Message);
+goog.inherits(proto.qdb.WebConfigCreateEntityRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigCreateEntityRequest.displayName = 'proto.qmq.WebConfigCreateEntityRequest';
+  proto.qdb.WebConfigCreateEntityRequest.displayName = 'proto.qdb.WebConfigCreateEntityRequest';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1268,16 +1268,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigCreateEntityResponse = function(opt_data) {
+proto.qdb.WebConfigCreateEntityResponse = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigCreateEntityResponse, jspb.Message);
+goog.inherits(proto.qdb.WebConfigCreateEntityResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigCreateEntityResponse.displayName = 'proto.qmq.WebConfigCreateEntityResponse';
+  proto.qdb.WebConfigCreateEntityResponse.displayName = 'proto.qdb.WebConfigCreateEntityResponse';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1289,16 +1289,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigDeleteEntityRequest = function(opt_data) {
+proto.qdb.WebConfigDeleteEntityRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigDeleteEntityRequest, jspb.Message);
+goog.inherits(proto.qdb.WebConfigDeleteEntityRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigDeleteEntityRequest.displayName = 'proto.qmq.WebConfigDeleteEntityRequest';
+  proto.qdb.WebConfigDeleteEntityRequest.displayName = 'proto.qdb.WebConfigDeleteEntityRequest';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1310,16 +1310,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigDeleteEntityResponse = function(opt_data) {
+proto.qdb.WebConfigDeleteEntityResponse = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigDeleteEntityResponse, jspb.Message);
+goog.inherits(proto.qdb.WebConfigDeleteEntityResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigDeleteEntityResponse.displayName = 'proto.qmq.WebConfigDeleteEntityResponse';
+  proto.qdb.WebConfigDeleteEntityResponse.displayName = 'proto.qdb.WebConfigDeleteEntityResponse';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1331,16 +1331,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigGetEntityTypesRequest = function(opt_data) {
+proto.qdb.WebConfigGetEntityTypesRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigGetEntityTypesRequest, jspb.Message);
+goog.inherits(proto.qdb.WebConfigGetEntityTypesRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigGetEntityTypesRequest.displayName = 'proto.qmq.WebConfigGetEntityTypesRequest';
+  proto.qdb.WebConfigGetEntityTypesRequest.displayName = 'proto.qdb.WebConfigGetEntityTypesRequest';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1352,16 +1352,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigGetEntityTypesResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.qmq.WebConfigGetEntityTypesResponse.repeatedFields_, null);
+proto.qdb.WebConfigGetEntityTypesResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.qdb.WebConfigGetEntityTypesResponse.repeatedFields_, null);
 };
-goog.inherits(proto.qmq.WebConfigGetEntityTypesResponse, jspb.Message);
+goog.inherits(proto.qdb.WebConfigGetEntityTypesResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigGetEntityTypesResponse.displayName = 'proto.qmq.WebConfigGetEntityTypesResponse';
+  proto.qdb.WebConfigGetEntityTypesResponse.displayName = 'proto.qdb.WebConfigGetEntityTypesResponse';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1373,16 +1373,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigGetEntityRequest = function(opt_data) {
+proto.qdb.WebConfigGetEntityRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigGetEntityRequest, jspb.Message);
+goog.inherits(proto.qdb.WebConfigGetEntityRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigGetEntityRequest.displayName = 'proto.qmq.WebConfigGetEntityRequest';
+  proto.qdb.WebConfigGetEntityRequest.displayName = 'proto.qdb.WebConfigGetEntityRequest';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1394,16 +1394,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigGetEntityResponse = function(opt_data) {
+proto.qdb.WebConfigGetEntityResponse = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigGetEntityResponse, jspb.Message);
+goog.inherits(proto.qdb.WebConfigGetEntityResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigGetEntityResponse.displayName = 'proto.qmq.WebConfigGetEntityResponse';
+  proto.qdb.WebConfigGetEntityResponse.displayName = 'proto.qdb.WebConfigGetEntityResponse';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1415,16 +1415,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigGetFieldSchemaRequest = function(opt_data) {
+proto.qdb.WebConfigGetFieldSchemaRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigGetFieldSchemaRequest, jspb.Message);
+goog.inherits(proto.qdb.WebConfigGetFieldSchemaRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigGetFieldSchemaRequest.displayName = 'proto.qmq.WebConfigGetFieldSchemaRequest';
+  proto.qdb.WebConfigGetFieldSchemaRequest.displayName = 'proto.qdb.WebConfigGetFieldSchemaRequest';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1436,16 +1436,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigGetFieldSchemaResponse = function(opt_data) {
+proto.qdb.WebConfigGetFieldSchemaResponse = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigGetFieldSchemaResponse, jspb.Message);
+goog.inherits(proto.qdb.WebConfigGetFieldSchemaResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigGetFieldSchemaResponse.displayName = 'proto.qmq.WebConfigGetFieldSchemaResponse';
+  proto.qdb.WebConfigGetFieldSchemaResponse.displayName = 'proto.qdb.WebConfigGetFieldSchemaResponse';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1457,16 +1457,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigSetFieldSchemaRequest = function(opt_data) {
+proto.qdb.WebConfigSetFieldSchemaRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigSetFieldSchemaRequest, jspb.Message);
+goog.inherits(proto.qdb.WebConfigSetFieldSchemaRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigSetFieldSchemaRequest.displayName = 'proto.qmq.WebConfigSetFieldSchemaRequest';
+  proto.qdb.WebConfigSetFieldSchemaRequest.displayName = 'proto.qdb.WebConfigSetFieldSchemaRequest';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1478,16 +1478,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigSetFieldSchemaResponse = function(opt_data) {
+proto.qdb.WebConfigSetFieldSchemaResponse = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigSetFieldSchemaResponse, jspb.Message);
+goog.inherits(proto.qdb.WebConfigSetFieldSchemaResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigSetFieldSchemaResponse.displayName = 'proto.qmq.WebConfigSetFieldSchemaResponse';
+  proto.qdb.WebConfigSetFieldSchemaResponse.displayName = 'proto.qdb.WebConfigSetFieldSchemaResponse';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1499,16 +1499,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigGetEntitySchemaRequest = function(opt_data) {
+proto.qdb.WebConfigGetEntitySchemaRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigGetEntitySchemaRequest, jspb.Message);
+goog.inherits(proto.qdb.WebConfigGetEntitySchemaRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigGetEntitySchemaRequest.displayName = 'proto.qmq.WebConfigGetEntitySchemaRequest';
+  proto.qdb.WebConfigGetEntitySchemaRequest.displayName = 'proto.qdb.WebConfigGetEntitySchemaRequest';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1520,16 +1520,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigGetEntitySchemaResponse = function(opt_data) {
+proto.qdb.WebConfigGetEntitySchemaResponse = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigGetEntitySchemaResponse, jspb.Message);
+goog.inherits(proto.qdb.WebConfigGetEntitySchemaResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigGetEntitySchemaResponse.displayName = 'proto.qmq.WebConfigGetEntitySchemaResponse';
+  proto.qdb.WebConfigGetEntitySchemaResponse.displayName = 'proto.qdb.WebConfigGetEntitySchemaResponse';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1541,16 +1541,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigSetEntitySchemaRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.qmq.WebConfigSetEntitySchemaRequest.repeatedFields_, null);
+proto.qdb.WebConfigSetEntitySchemaRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.qdb.WebConfigSetEntitySchemaRequest.repeatedFields_, null);
 };
-goog.inherits(proto.qmq.WebConfigSetEntitySchemaRequest, jspb.Message);
+goog.inherits(proto.qdb.WebConfigSetEntitySchemaRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigSetEntitySchemaRequest.displayName = 'proto.qmq.WebConfigSetEntitySchemaRequest';
+  proto.qdb.WebConfigSetEntitySchemaRequest.displayName = 'proto.qdb.WebConfigSetEntitySchemaRequest';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1562,16 +1562,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigSetEntitySchemaResponse = function(opt_data) {
+proto.qdb.WebConfigSetEntitySchemaResponse = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigSetEntitySchemaResponse, jspb.Message);
+goog.inherits(proto.qdb.WebConfigSetEntitySchemaResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigSetEntitySchemaResponse.displayName = 'proto.qmq.WebConfigSetEntitySchemaResponse';
+  proto.qdb.WebConfigSetEntitySchemaResponse.displayName = 'proto.qdb.WebConfigSetEntitySchemaResponse';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1583,16 +1583,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigCreateSnapshotRequest = function(opt_data) {
+proto.qdb.WebConfigCreateSnapshotRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigCreateSnapshotRequest, jspb.Message);
+goog.inherits(proto.qdb.WebConfigCreateSnapshotRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigCreateSnapshotRequest.displayName = 'proto.qmq.WebConfigCreateSnapshotRequest';
+  proto.qdb.WebConfigCreateSnapshotRequest.displayName = 'proto.qdb.WebConfigCreateSnapshotRequest';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1604,16 +1604,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigCreateSnapshotResponse = function(opt_data) {
+proto.qdb.WebConfigCreateSnapshotResponse = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigCreateSnapshotResponse, jspb.Message);
+goog.inherits(proto.qdb.WebConfigCreateSnapshotResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigCreateSnapshotResponse.displayName = 'proto.qmq.WebConfigCreateSnapshotResponse';
+  proto.qdb.WebConfigCreateSnapshotResponse.displayName = 'proto.qdb.WebConfigCreateSnapshotResponse';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1625,16 +1625,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigRestoreSnapshotRequest = function(opt_data) {
+proto.qdb.WebConfigRestoreSnapshotRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigRestoreSnapshotRequest, jspb.Message);
+goog.inherits(proto.qdb.WebConfigRestoreSnapshotRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigRestoreSnapshotRequest.displayName = 'proto.qmq.WebConfigRestoreSnapshotRequest';
+  proto.qdb.WebConfigRestoreSnapshotRequest.displayName = 'proto.qdb.WebConfigRestoreSnapshotRequest';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1646,16 +1646,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigRestoreSnapshotResponse = function(opt_data) {
+proto.qdb.WebConfigRestoreSnapshotResponse = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigRestoreSnapshotResponse, jspb.Message);
+goog.inherits(proto.qdb.WebConfigRestoreSnapshotResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigRestoreSnapshotResponse.displayName = 'proto.qmq.WebConfigRestoreSnapshotResponse';
+  proto.qdb.WebConfigRestoreSnapshotResponse.displayName = 'proto.qdb.WebConfigRestoreSnapshotResponse';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1667,16 +1667,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigGetRootRequest = function(opt_data) {
+proto.qdb.WebConfigGetRootRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigGetRootRequest, jspb.Message);
+goog.inherits(proto.qdb.WebConfigGetRootRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigGetRootRequest.displayName = 'proto.qmq.WebConfigGetRootRequest';
+  proto.qdb.WebConfigGetRootRequest.displayName = 'proto.qdb.WebConfigGetRootRequest';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1688,16 +1688,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigGetRootResponse = function(opt_data) {
+proto.qdb.WebConfigGetRootResponse = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigGetRootResponse, jspb.Message);
+goog.inherits(proto.qdb.WebConfigGetRootResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigGetRootResponse.displayName = 'proto.qmq.WebConfigGetRootResponse';
+  proto.qdb.WebConfigGetRootResponse.displayName = 'proto.qdb.WebConfigGetRootResponse';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1709,16 +1709,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigGetAllFieldsRequest = function(opt_data) {
+proto.qdb.WebConfigGetAllFieldsRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebConfigGetAllFieldsRequest, jspb.Message);
+goog.inherits(proto.qdb.WebConfigGetAllFieldsRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigGetAllFieldsRequest.displayName = 'proto.qmq.WebConfigGetAllFieldsRequest';
+  proto.qdb.WebConfigGetAllFieldsRequest.displayName = 'proto.qdb.WebConfigGetAllFieldsRequest';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1730,16 +1730,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebConfigGetAllFieldsResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.qmq.WebConfigGetAllFieldsResponse.repeatedFields_, null);
+proto.qdb.WebConfigGetAllFieldsResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.qdb.WebConfigGetAllFieldsResponse.repeatedFields_, null);
 };
-goog.inherits(proto.qmq.WebConfigGetAllFieldsResponse, jspb.Message);
+goog.inherits(proto.qdb.WebConfigGetAllFieldsResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebConfigGetAllFieldsResponse.displayName = 'proto.qmq.WebConfigGetAllFieldsResponse';
+  proto.qdb.WebConfigGetAllFieldsResponse.displayName = 'proto.qdb.WebConfigGetAllFieldsResponse';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1751,16 +1751,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebRuntimeDatabaseRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.qmq.WebRuntimeDatabaseRequest.repeatedFields_, null);
+proto.qdb.WebRuntimeDatabaseRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.qdb.WebRuntimeDatabaseRequest.repeatedFields_, null);
 };
-goog.inherits(proto.qmq.WebRuntimeDatabaseRequest, jspb.Message);
+goog.inherits(proto.qdb.WebRuntimeDatabaseRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebRuntimeDatabaseRequest.displayName = 'proto.qmq.WebRuntimeDatabaseRequest';
+  proto.qdb.WebRuntimeDatabaseRequest.displayName = 'proto.qdb.WebRuntimeDatabaseRequest';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1772,16 +1772,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebRuntimeDatabaseResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.qmq.WebRuntimeDatabaseResponse.repeatedFields_, null);
+proto.qdb.WebRuntimeDatabaseResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.qdb.WebRuntimeDatabaseResponse.repeatedFields_, null);
 };
-goog.inherits(proto.qmq.WebRuntimeDatabaseResponse, jspb.Message);
+goog.inherits(proto.qdb.WebRuntimeDatabaseResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebRuntimeDatabaseResponse.displayName = 'proto.qmq.WebRuntimeDatabaseResponse';
+  proto.qdb.WebRuntimeDatabaseResponse.displayName = 'proto.qdb.WebRuntimeDatabaseResponse';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1793,16 +1793,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebRuntimeRegisterNotificationRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.qmq.WebRuntimeRegisterNotificationRequest.repeatedFields_, null);
+proto.qdb.WebRuntimeRegisterNotificationRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.qdb.WebRuntimeRegisterNotificationRequest.repeatedFields_, null);
 };
-goog.inherits(proto.qmq.WebRuntimeRegisterNotificationRequest, jspb.Message);
+goog.inherits(proto.qdb.WebRuntimeRegisterNotificationRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebRuntimeRegisterNotificationRequest.displayName = 'proto.qmq.WebRuntimeRegisterNotificationRequest';
+  proto.qdb.WebRuntimeRegisterNotificationRequest.displayName = 'proto.qdb.WebRuntimeRegisterNotificationRequest';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1814,16 +1814,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebRuntimeRegisterNotificationResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.qmq.WebRuntimeRegisterNotificationResponse.repeatedFields_, null);
+proto.qdb.WebRuntimeRegisterNotificationResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.qdb.WebRuntimeRegisterNotificationResponse.repeatedFields_, null);
 };
-goog.inherits(proto.qmq.WebRuntimeRegisterNotificationResponse, jspb.Message);
+goog.inherits(proto.qdb.WebRuntimeRegisterNotificationResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebRuntimeRegisterNotificationResponse.displayName = 'proto.qmq.WebRuntimeRegisterNotificationResponse';
+  proto.qdb.WebRuntimeRegisterNotificationResponse.displayName = 'proto.qdb.WebRuntimeRegisterNotificationResponse';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1835,16 +1835,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebRuntimeGetNotificationsRequest = function(opt_data) {
+proto.qdb.WebRuntimeGetNotificationsRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebRuntimeGetNotificationsRequest, jspb.Message);
+goog.inherits(proto.qdb.WebRuntimeGetNotificationsRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebRuntimeGetNotificationsRequest.displayName = 'proto.qmq.WebRuntimeGetNotificationsRequest';
+  proto.qdb.WebRuntimeGetNotificationsRequest.displayName = 'proto.qdb.WebRuntimeGetNotificationsRequest';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1856,16 +1856,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebRuntimeGetNotificationsResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.qmq.WebRuntimeGetNotificationsResponse.repeatedFields_, null);
+proto.qdb.WebRuntimeGetNotificationsResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.qdb.WebRuntimeGetNotificationsResponse.repeatedFields_, null);
 };
-goog.inherits(proto.qmq.WebRuntimeGetNotificationsResponse, jspb.Message);
+goog.inherits(proto.qdb.WebRuntimeGetNotificationsResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebRuntimeGetNotificationsResponse.displayName = 'proto.qmq.WebRuntimeGetNotificationsResponse';
+  proto.qdb.WebRuntimeGetNotificationsResponse.displayName = 'proto.qdb.WebRuntimeGetNotificationsResponse';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1877,16 +1877,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebRuntimeUnregisterNotificationRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.qmq.WebRuntimeUnregisterNotificationRequest.repeatedFields_, null);
+proto.qdb.WebRuntimeUnregisterNotificationRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.qdb.WebRuntimeUnregisterNotificationRequest.repeatedFields_, null);
 };
-goog.inherits(proto.qmq.WebRuntimeUnregisterNotificationRequest, jspb.Message);
+goog.inherits(proto.qdb.WebRuntimeUnregisterNotificationRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebRuntimeUnregisterNotificationRequest.displayName = 'proto.qmq.WebRuntimeUnregisterNotificationRequest';
+  proto.qdb.WebRuntimeUnregisterNotificationRequest.displayName = 'proto.qdb.WebRuntimeUnregisterNotificationRequest';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1898,16 +1898,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebRuntimeUnregisterNotificationResponse = function(opt_data) {
+proto.qdb.WebRuntimeUnregisterNotificationResponse = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebRuntimeUnregisterNotificationResponse, jspb.Message);
+goog.inherits(proto.qdb.WebRuntimeUnregisterNotificationResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebRuntimeUnregisterNotificationResponse.displayName = 'proto.qmq.WebRuntimeUnregisterNotificationResponse';
+  proto.qdb.WebRuntimeUnregisterNotificationResponse.displayName = 'proto.qdb.WebRuntimeUnregisterNotificationResponse';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1919,16 +1919,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest = function(opt_data) {
+proto.qdb.WebRuntimeGetDatabaseConnectionStatusRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest, jspb.Message);
+goog.inherits(proto.qdb.WebRuntimeGetDatabaseConnectionStatusRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest.displayName = 'proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest';
+  proto.qdb.WebRuntimeGetDatabaseConnectionStatusRequest.displayName = 'proto.qdb.WebRuntimeGetDatabaseConnectionStatusRequest';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1940,16 +1940,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse = function(opt_data) {
+proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse, jspb.Message);
+goog.inherits(proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.displayName = 'proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse';
+  proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse.displayName = 'proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1961,16 +1961,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.DatabaseEntity = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.qmq.DatabaseEntity.repeatedFields_, null);
+proto.qdb.DatabaseEntity = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.qdb.DatabaseEntity.repeatedFields_, null);
 };
-goog.inherits(proto.qmq.DatabaseEntity, jspb.Message);
+goog.inherits(proto.qdb.DatabaseEntity, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.DatabaseEntity.displayName = 'proto.qmq.DatabaseEntity';
+  proto.qdb.DatabaseEntity.displayName = 'proto.qdb.DatabaseEntity';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1982,16 +1982,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.DatabaseField = function(opt_data) {
+proto.qdb.DatabaseField = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.DatabaseField, jspb.Message);
+goog.inherits(proto.qdb.DatabaseField, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.DatabaseField.displayName = 'proto.qmq.DatabaseField';
+  proto.qdb.DatabaseField.displayName = 'proto.qdb.DatabaseField';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -2003,16 +2003,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.DatabaseNotificationConfig = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.qmq.DatabaseNotificationConfig.repeatedFields_, null);
+proto.qdb.DatabaseNotificationConfig = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.qdb.DatabaseNotificationConfig.repeatedFields_, null);
 };
-goog.inherits(proto.qmq.DatabaseNotificationConfig, jspb.Message);
+goog.inherits(proto.qdb.DatabaseNotificationConfig, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.DatabaseNotificationConfig.displayName = 'proto.qmq.DatabaseNotificationConfig';
+  proto.qdb.DatabaseNotificationConfig.displayName = 'proto.qdb.DatabaseNotificationConfig';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -2024,16 +2024,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.DatabaseNotification = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.qmq.DatabaseNotification.repeatedFields_, null);
+proto.qdb.DatabaseNotification = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.qdb.DatabaseNotification.repeatedFields_, null);
 };
-goog.inherits(proto.qmq.DatabaseNotification, jspb.Message);
+goog.inherits(proto.qdb.DatabaseNotification, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.DatabaseNotification.displayName = 'proto.qmq.DatabaseNotification';
+  proto.qdb.DatabaseNotification.displayName = 'proto.qdb.DatabaseNotification';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -2045,16 +2045,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.DatabaseEntitySchema = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.qmq.DatabaseEntitySchema.repeatedFields_, null);
+proto.qdb.DatabaseEntitySchema = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.qdb.DatabaseEntitySchema.repeatedFields_, null);
 };
-goog.inherits(proto.qmq.DatabaseEntitySchema, jspb.Message);
+goog.inherits(proto.qdb.DatabaseEntitySchema, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.DatabaseEntitySchema.displayName = 'proto.qmq.DatabaseEntitySchema';
+  proto.qdb.DatabaseEntitySchema.displayName = 'proto.qdb.DatabaseEntitySchema';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -2066,16 +2066,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.DatabaseFieldSchema = function(opt_data) {
+proto.qdb.DatabaseFieldSchema = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.DatabaseFieldSchema, jspb.Message);
+goog.inherits(proto.qdb.DatabaseFieldSchema, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.DatabaseFieldSchema.displayName = 'proto.qmq.DatabaseFieldSchema';
+  proto.qdb.DatabaseFieldSchema.displayName = 'proto.qdb.DatabaseFieldSchema';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -2087,16 +2087,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.DatabaseRequest = function(opt_data) {
+proto.qdb.DatabaseRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.DatabaseRequest, jspb.Message);
+goog.inherits(proto.qdb.DatabaseRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.DatabaseRequest.displayName = 'proto.qmq.DatabaseRequest';
+  proto.qdb.DatabaseRequest.displayName = 'proto.qdb.DatabaseRequest';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -2108,16 +2108,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.DatabaseSnapshot = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.qmq.DatabaseSnapshot.repeatedFields_, null);
+proto.qdb.DatabaseSnapshot = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.qdb.DatabaseSnapshot.repeatedFields_, null);
 };
-goog.inherits(proto.qmq.DatabaseSnapshot, jspb.Message);
+goog.inherits(proto.qdb.DatabaseSnapshot, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.DatabaseSnapshot.displayName = 'proto.qmq.DatabaseSnapshot';
+  proto.qdb.DatabaseSnapshot.displayName = 'proto.qdb.DatabaseSnapshot';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -2129,16 +2129,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.Int = function(opt_data) {
+proto.qdb.Int = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.Int, jspb.Message);
+goog.inherits(proto.qdb.Int, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.Int.displayName = 'proto.qmq.Int';
+  proto.qdb.Int.displayName = 'proto.qdb.Int';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -2150,16 +2150,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.String = function(opt_data) {
+proto.qdb.String = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.String, jspb.Message);
+goog.inherits(proto.qdb.String, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.String.displayName = 'proto.qmq.String';
+  proto.qdb.String.displayName = 'proto.qdb.String';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -2171,16 +2171,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.Timestamp = function(opt_data) {
+proto.qdb.Timestamp = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.Timestamp, jspb.Message);
+goog.inherits(proto.qdb.Timestamp, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.Timestamp.displayName = 'proto.qmq.Timestamp';
+  proto.qdb.Timestamp.displayName = 'proto.qdb.Timestamp';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -2192,16 +2192,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.Float = function(opt_data) {
+proto.qdb.Float = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.Float, jspb.Message);
+goog.inherits(proto.qdb.Float, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.Float.displayName = 'proto.qmq.Float';
+  proto.qdb.Float.displayName = 'proto.qdb.Float';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -2213,16 +2213,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.Bool = function(opt_data) {
+proto.qdb.Bool = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.Bool, jspb.Message);
+goog.inherits(proto.qdb.Bool, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.Bool.displayName = 'proto.qmq.Bool';
+  proto.qdb.Bool.displayName = 'proto.qdb.Bool';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -2234,16 +2234,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.EntityReference = function(opt_data) {
+proto.qdb.EntityReference = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.EntityReference, jspb.Message);
+goog.inherits(proto.qdb.EntityReference, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.EntityReference.displayName = 'proto.qmq.EntityReference';
+  proto.qdb.EntityReference.displayName = 'proto.qdb.EntityReference';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -2255,16 +2255,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.BinaryFile = function(opt_data) {
+proto.qdb.BinaryFile = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.BinaryFile, jspb.Message);
+goog.inherits(proto.qdb.BinaryFile, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.BinaryFile.displayName = 'proto.qmq.BinaryFile';
+  proto.qdb.BinaryFile.displayName = 'proto.qdb.BinaryFile';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -2276,16 +2276,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.LogMessage = function(opt_data) {
+proto.qdb.LogMessage = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.LogMessage, jspb.Message);
+goog.inherits(proto.qdb.LogMessage, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.LogMessage.displayName = 'proto.qmq.LogMessage';
+  proto.qdb.LogMessage.displayName = 'proto.qdb.LogMessage';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -2297,16 +2297,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.GarageDoorState = function(opt_data) {
+proto.qdb.GarageDoorState = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.GarageDoorState, jspb.Message);
+goog.inherits(proto.qdb.GarageDoorState, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.GarageDoorState.displayName = 'proto.qmq.GarageDoorState';
+  proto.qdb.GarageDoorState.displayName = 'proto.qdb.GarageDoorState';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -2318,16 +2318,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.qmq.ConnectionState = function(opt_data) {
+proto.qdb.ConnectionState = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.qmq.ConnectionState, jspb.Message);
+goog.inherits(proto.qdb.ConnectionState, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.qmq.ConnectionState.displayName = 'proto.qmq.ConnectionState';
+  proto.qdb.ConnectionState.displayName = 'proto.qdb.ConnectionState';
 }
 
 
@@ -2345,8 +2345,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebHeader.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebHeader.toObject(opt_includeInstance, this);
+proto.qdb.WebHeader.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebHeader.toObject(opt_includeInstance, this);
 };
 
 
@@ -2355,11 +2355,11 @@ proto.qmq.WebHeader.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebHeader} msg The msg instance to transform.
+ * @param {!proto.qdb.WebHeader} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebHeader.toObject = function(includeInstance, msg) {
+proto.qdb.WebHeader.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
     timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
@@ -2376,23 +2376,23 @@ proto.qmq.WebHeader.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebHeader}
+ * @return {!proto.qdb.WebHeader}
  */
-proto.qmq.WebHeader.deserializeBinary = function(bytes) {
+proto.qdb.WebHeader.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebHeader;
-  return proto.qmq.WebHeader.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebHeader;
+  return proto.qdb.WebHeader.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebHeader} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebHeader} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebHeader}
+ * @return {!proto.qdb.WebHeader}
  */
-proto.qmq.WebHeader.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebHeader.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -2421,9 +2421,9 @@ proto.qmq.WebHeader.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebHeader.prototype.serializeBinary = function() {
+proto.qdb.WebHeader.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebHeader.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebHeader.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -2431,11 +2431,11 @@ proto.qmq.WebHeader.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebHeader} message
+ * @param {!proto.qdb.WebHeader} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebHeader.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebHeader.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getId();
   if (f.length > 0) {
@@ -2459,16 +2459,16 @@ proto.qmq.WebHeader.serializeBinaryToWriter = function(message, writer) {
  * optional string id = 1;
  * @return {string}
  */
-proto.qmq.WebHeader.prototype.getId = function() {
+proto.qdb.WebHeader.prototype.getId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.WebHeader} returns this
+ * @return {!proto.qdb.WebHeader} returns this
  */
-proto.qmq.WebHeader.prototype.setId = function(value) {
+proto.qdb.WebHeader.prototype.setId = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -2477,7 +2477,7 @@ proto.qmq.WebHeader.prototype.setId = function(value) {
  * optional google.protobuf.Timestamp timestamp = 2;
  * @return {?proto.google.protobuf.Timestamp}
  */
-proto.qmq.WebHeader.prototype.getTimestamp = function() {
+proto.qdb.WebHeader.prototype.getTimestamp = function() {
   return /** @type{?proto.google.protobuf.Timestamp} */ (
     jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 2));
 };
@@ -2485,18 +2485,18 @@ proto.qmq.WebHeader.prototype.getTimestamp = function() {
 
 /**
  * @param {?proto.google.protobuf.Timestamp|undefined} value
- * @return {!proto.qmq.WebHeader} returns this
+ * @return {!proto.qdb.WebHeader} returns this
 */
-proto.qmq.WebHeader.prototype.setTimestamp = function(value) {
+proto.qdb.WebHeader.prototype.setTimestamp = function(value) {
   return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.WebHeader} returns this
+ * @return {!proto.qdb.WebHeader} returns this
  */
-proto.qmq.WebHeader.prototype.clearTimestamp = function() {
+proto.qdb.WebHeader.prototype.clearTimestamp = function() {
   return this.setTimestamp(undefined);
 };
 
@@ -2505,7 +2505,7 @@ proto.qmq.WebHeader.prototype.clearTimestamp = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.WebHeader.prototype.hasTimestamp = function() {
+proto.qdb.WebHeader.prototype.hasTimestamp = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 
@@ -2526,8 +2526,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebMessage.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebMessage.toObject(opt_includeInstance, this);
+proto.qdb.WebMessage.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebMessage.toObject(opt_includeInstance, this);
 };
 
 
@@ -2536,13 +2536,13 @@ proto.qmq.WebMessage.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebMessage} msg The msg instance to transform.
+ * @param {!proto.qdb.WebMessage} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebMessage.toObject = function(includeInstance, msg) {
+proto.qdb.WebMessage.toObject = function(includeInstance, msg) {
   var f, obj = {
-    header: (f = msg.getHeader()) && proto.qmq.WebHeader.toObject(includeInstance, f),
+    header: (f = msg.getHeader()) && proto.qdb.WebHeader.toObject(includeInstance, f),
     payload: (f = msg.getPayload()) && google_protobuf_any_pb.Any.toObject(includeInstance, f)
   };
 
@@ -2557,23 +2557,23 @@ proto.qmq.WebMessage.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebMessage}
+ * @return {!proto.qdb.WebMessage}
  */
-proto.qmq.WebMessage.deserializeBinary = function(bytes) {
+proto.qdb.WebMessage.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebMessage;
-  return proto.qmq.WebMessage.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebMessage;
+  return proto.qdb.WebMessage.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebMessage} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebMessage} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebMessage}
+ * @return {!proto.qdb.WebMessage}
  */
-proto.qmq.WebMessage.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebMessage.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -2581,8 +2581,8 @@ proto.qmq.WebMessage.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new proto.qmq.WebHeader;
-      reader.readMessage(value,proto.qmq.WebHeader.deserializeBinaryFromReader);
+      var value = new proto.qdb.WebHeader;
+      reader.readMessage(value,proto.qdb.WebHeader.deserializeBinaryFromReader);
       msg.setHeader(value);
       break;
     case 2:
@@ -2603,9 +2603,9 @@ proto.qmq.WebMessage.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebMessage.prototype.serializeBinary = function() {
+proto.qdb.WebMessage.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebMessage.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebMessage.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -2613,18 +2613,18 @@ proto.qmq.WebMessage.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebMessage} message
+ * @param {!proto.qdb.WebMessage} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebMessage.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebMessage.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getHeader();
   if (f != null) {
     writer.writeMessage(
       1,
       f,
-      proto.qmq.WebHeader.serializeBinaryToWriter
+      proto.qdb.WebHeader.serializeBinaryToWriter
     );
   }
   f = message.getPayload();
@@ -2640,28 +2640,28 @@ proto.qmq.WebMessage.serializeBinaryToWriter = function(message, writer) {
 
 /**
  * optional WebHeader header = 1;
- * @return {?proto.qmq.WebHeader}
+ * @return {?proto.qdb.WebHeader}
  */
-proto.qmq.WebMessage.prototype.getHeader = function() {
-  return /** @type{?proto.qmq.WebHeader} */ (
-    jspb.Message.getWrapperField(this, proto.qmq.WebHeader, 1));
+proto.qdb.WebMessage.prototype.getHeader = function() {
+  return /** @type{?proto.qdb.WebHeader} */ (
+    jspb.Message.getWrapperField(this, proto.qdb.WebHeader, 1));
 };
 
 
 /**
- * @param {?proto.qmq.WebHeader|undefined} value
- * @return {!proto.qmq.WebMessage} returns this
+ * @param {?proto.qdb.WebHeader|undefined} value
+ * @return {!proto.qdb.WebMessage} returns this
 */
-proto.qmq.WebMessage.prototype.setHeader = function(value) {
+proto.qdb.WebMessage.prototype.setHeader = function(value) {
   return jspb.Message.setWrapperField(this, 1, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.WebMessage} returns this
+ * @return {!proto.qdb.WebMessage} returns this
  */
-proto.qmq.WebMessage.prototype.clearHeader = function() {
+proto.qdb.WebMessage.prototype.clearHeader = function() {
   return this.setHeader(undefined);
 };
 
@@ -2670,7 +2670,7 @@ proto.qmq.WebMessage.prototype.clearHeader = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.WebMessage.prototype.hasHeader = function() {
+proto.qdb.WebMessage.prototype.hasHeader = function() {
   return jspb.Message.getField(this, 1) != null;
 };
 
@@ -2679,7 +2679,7 @@ proto.qmq.WebMessage.prototype.hasHeader = function() {
  * optional google.protobuf.Any payload = 2;
  * @return {?proto.google.protobuf.Any}
  */
-proto.qmq.WebMessage.prototype.getPayload = function() {
+proto.qdb.WebMessage.prototype.getPayload = function() {
   return /** @type{?proto.google.protobuf.Any} */ (
     jspb.Message.getWrapperField(this, google_protobuf_any_pb.Any, 2));
 };
@@ -2687,18 +2687,18 @@ proto.qmq.WebMessage.prototype.getPayload = function() {
 
 /**
  * @param {?proto.google.protobuf.Any|undefined} value
- * @return {!proto.qmq.WebMessage} returns this
+ * @return {!proto.qdb.WebMessage} returns this
 */
-proto.qmq.WebMessage.prototype.setPayload = function(value) {
+proto.qdb.WebMessage.prototype.setPayload = function(value) {
   return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.WebMessage} returns this
+ * @return {!proto.qdb.WebMessage} returns this
  */
-proto.qmq.WebMessage.prototype.clearPayload = function() {
+proto.qdb.WebMessage.prototype.clearPayload = function() {
   return this.setPayload(undefined);
 };
 
@@ -2707,7 +2707,7 @@ proto.qmq.WebMessage.prototype.clearPayload = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.WebMessage.prototype.hasPayload = function() {
+proto.qdb.WebMessage.prototype.hasPayload = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 
@@ -2728,8 +2728,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigCreateEntityRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigCreateEntityRequest.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigCreateEntityRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigCreateEntityRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -2738,11 +2738,11 @@ proto.qmq.WebConfigCreateEntityRequest.prototype.toObject = function(opt_include
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigCreateEntityRequest} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigCreateEntityRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigCreateEntityRequest.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigCreateEntityRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     type: jspb.Message.getFieldWithDefault(msg, 1, ""),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
@@ -2760,23 +2760,23 @@ proto.qmq.WebConfigCreateEntityRequest.toObject = function(includeInstance, msg)
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigCreateEntityRequest}
+ * @return {!proto.qdb.WebConfigCreateEntityRequest}
  */
-proto.qmq.WebConfigCreateEntityRequest.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigCreateEntityRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigCreateEntityRequest;
-  return proto.qmq.WebConfigCreateEntityRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigCreateEntityRequest;
+  return proto.qdb.WebConfigCreateEntityRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigCreateEntityRequest} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigCreateEntityRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigCreateEntityRequest}
+ * @return {!proto.qdb.WebConfigCreateEntityRequest}
  */
-proto.qmq.WebConfigCreateEntityRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigCreateEntityRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -2808,9 +2808,9 @@ proto.qmq.WebConfigCreateEntityRequest.deserializeBinaryFromReader = function(ms
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigCreateEntityRequest.prototype.serializeBinary = function() {
+proto.qdb.WebConfigCreateEntityRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigCreateEntityRequest.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigCreateEntityRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -2818,11 +2818,11 @@ proto.qmq.WebConfigCreateEntityRequest.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigCreateEntityRequest} message
+ * @param {!proto.qdb.WebConfigCreateEntityRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigCreateEntityRequest.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigCreateEntityRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getType();
   if (f.length > 0) {
@@ -2852,16 +2852,16 @@ proto.qmq.WebConfigCreateEntityRequest.serializeBinaryToWriter = function(messag
  * optional string type = 1;
  * @return {string}
  */
-proto.qmq.WebConfigCreateEntityRequest.prototype.getType = function() {
+proto.qdb.WebConfigCreateEntityRequest.prototype.getType = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.WebConfigCreateEntityRequest} returns this
+ * @return {!proto.qdb.WebConfigCreateEntityRequest} returns this
  */
-proto.qmq.WebConfigCreateEntityRequest.prototype.setType = function(value) {
+proto.qdb.WebConfigCreateEntityRequest.prototype.setType = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -2870,16 +2870,16 @@ proto.qmq.WebConfigCreateEntityRequest.prototype.setType = function(value) {
  * optional string name = 2;
  * @return {string}
  */
-proto.qmq.WebConfigCreateEntityRequest.prototype.getName = function() {
+proto.qdb.WebConfigCreateEntityRequest.prototype.getName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.WebConfigCreateEntityRequest} returns this
+ * @return {!proto.qdb.WebConfigCreateEntityRequest} returns this
  */
-proto.qmq.WebConfigCreateEntityRequest.prototype.setName = function(value) {
+proto.qdb.WebConfigCreateEntityRequest.prototype.setName = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -2888,16 +2888,16 @@ proto.qmq.WebConfigCreateEntityRequest.prototype.setName = function(value) {
  * optional string parentId = 3;
  * @return {string}
  */
-proto.qmq.WebConfigCreateEntityRequest.prototype.getParentid = function() {
+proto.qdb.WebConfigCreateEntityRequest.prototype.getParentid = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.WebConfigCreateEntityRequest} returns this
+ * @return {!proto.qdb.WebConfigCreateEntityRequest} returns this
  */
-proto.qmq.WebConfigCreateEntityRequest.prototype.setParentid = function(value) {
+proto.qdb.WebConfigCreateEntityRequest.prototype.setParentid = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
@@ -2918,8 +2918,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigCreateEntityResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigCreateEntityResponse.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigCreateEntityResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigCreateEntityResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -2928,11 +2928,11 @@ proto.qmq.WebConfigCreateEntityResponse.prototype.toObject = function(opt_includ
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigCreateEntityResponse} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigCreateEntityResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigCreateEntityResponse.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigCreateEntityResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     status: jspb.Message.getFieldWithDefault(msg, 1, 0),
     id: jspb.Message.getFieldWithDefault(msg, 2, "")
@@ -2949,23 +2949,23 @@ proto.qmq.WebConfigCreateEntityResponse.toObject = function(includeInstance, msg
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigCreateEntityResponse}
+ * @return {!proto.qdb.WebConfigCreateEntityResponse}
  */
-proto.qmq.WebConfigCreateEntityResponse.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigCreateEntityResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigCreateEntityResponse;
-  return proto.qmq.WebConfigCreateEntityResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigCreateEntityResponse;
+  return proto.qdb.WebConfigCreateEntityResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigCreateEntityResponse} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigCreateEntityResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigCreateEntityResponse}
+ * @return {!proto.qdb.WebConfigCreateEntityResponse}
  */
-proto.qmq.WebConfigCreateEntityResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigCreateEntityResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -2973,7 +2973,7 @@ proto.qmq.WebConfigCreateEntityResponse.deserializeBinaryFromReader = function(m
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.qmq.WebConfigCreateEntityResponse.StatusEnum} */ (reader.readEnum());
+      var value = /** @type {!proto.qdb.WebConfigCreateEntityResponse.StatusEnum} */ (reader.readEnum());
       msg.setStatus(value);
       break;
     case 2:
@@ -2993,9 +2993,9 @@ proto.qmq.WebConfigCreateEntityResponse.deserializeBinaryFromReader = function(m
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigCreateEntityResponse.prototype.serializeBinary = function() {
+proto.qdb.WebConfigCreateEntityResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigCreateEntityResponse.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigCreateEntityResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -3003,11 +3003,11 @@ proto.qmq.WebConfigCreateEntityResponse.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigCreateEntityResponse} message
+ * @param {!proto.qdb.WebConfigCreateEntityResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigCreateEntityResponse.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigCreateEntityResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getStatus();
   if (f !== 0.0) {
@@ -3029,7 +3029,7 @@ proto.qmq.WebConfigCreateEntityResponse.serializeBinaryToWriter = function(messa
 /**
  * @enum {number}
  */
-proto.qmq.WebConfigCreateEntityResponse.StatusEnum = {
+proto.qdb.WebConfigCreateEntityResponse.StatusEnum = {
   UNSPECIFIED: 0,
   SUCCESS: 1,
   FAILURE: 2
@@ -3037,18 +3037,18 @@ proto.qmq.WebConfigCreateEntityResponse.StatusEnum = {
 
 /**
  * optional StatusEnum status = 1;
- * @return {!proto.qmq.WebConfigCreateEntityResponse.StatusEnum}
+ * @return {!proto.qdb.WebConfigCreateEntityResponse.StatusEnum}
  */
-proto.qmq.WebConfigCreateEntityResponse.prototype.getStatus = function() {
-  return /** @type {!proto.qmq.WebConfigCreateEntityResponse.StatusEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.qdb.WebConfigCreateEntityResponse.prototype.getStatus = function() {
+  return /** @type {!proto.qdb.WebConfigCreateEntityResponse.StatusEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {!proto.qmq.WebConfigCreateEntityResponse.StatusEnum} value
- * @return {!proto.qmq.WebConfigCreateEntityResponse} returns this
+ * @param {!proto.qdb.WebConfigCreateEntityResponse.StatusEnum} value
+ * @return {!proto.qdb.WebConfigCreateEntityResponse} returns this
  */
-proto.qmq.WebConfigCreateEntityResponse.prototype.setStatus = function(value) {
+proto.qdb.WebConfigCreateEntityResponse.prototype.setStatus = function(value) {
   return jspb.Message.setProto3EnumField(this, 1, value);
 };
 
@@ -3057,16 +3057,16 @@ proto.qmq.WebConfigCreateEntityResponse.prototype.setStatus = function(value) {
  * optional string id = 2;
  * @return {string}
  */
-proto.qmq.WebConfigCreateEntityResponse.prototype.getId = function() {
+proto.qdb.WebConfigCreateEntityResponse.prototype.getId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.WebConfigCreateEntityResponse} returns this
+ * @return {!proto.qdb.WebConfigCreateEntityResponse} returns this
  */
-proto.qmq.WebConfigCreateEntityResponse.prototype.setId = function(value) {
+proto.qdb.WebConfigCreateEntityResponse.prototype.setId = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -3087,8 +3087,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigDeleteEntityRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigDeleteEntityRequest.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigDeleteEntityRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigDeleteEntityRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -3097,11 +3097,11 @@ proto.qmq.WebConfigDeleteEntityRequest.prototype.toObject = function(opt_include
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigDeleteEntityRequest} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigDeleteEntityRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigDeleteEntityRequest.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigDeleteEntityRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
@@ -3117,23 +3117,23 @@ proto.qmq.WebConfigDeleteEntityRequest.toObject = function(includeInstance, msg)
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigDeleteEntityRequest}
+ * @return {!proto.qdb.WebConfigDeleteEntityRequest}
  */
-proto.qmq.WebConfigDeleteEntityRequest.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigDeleteEntityRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigDeleteEntityRequest;
-  return proto.qmq.WebConfigDeleteEntityRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigDeleteEntityRequest;
+  return proto.qdb.WebConfigDeleteEntityRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigDeleteEntityRequest} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigDeleteEntityRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigDeleteEntityRequest}
+ * @return {!proto.qdb.WebConfigDeleteEntityRequest}
  */
-proto.qmq.WebConfigDeleteEntityRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigDeleteEntityRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -3157,9 +3157,9 @@ proto.qmq.WebConfigDeleteEntityRequest.deserializeBinaryFromReader = function(ms
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigDeleteEntityRequest.prototype.serializeBinary = function() {
+proto.qdb.WebConfigDeleteEntityRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigDeleteEntityRequest.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigDeleteEntityRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -3167,11 +3167,11 @@ proto.qmq.WebConfigDeleteEntityRequest.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigDeleteEntityRequest} message
+ * @param {!proto.qdb.WebConfigDeleteEntityRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigDeleteEntityRequest.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigDeleteEntityRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getId();
   if (f.length > 0) {
@@ -3187,16 +3187,16 @@ proto.qmq.WebConfigDeleteEntityRequest.serializeBinaryToWriter = function(messag
  * optional string id = 1;
  * @return {string}
  */
-proto.qmq.WebConfigDeleteEntityRequest.prototype.getId = function() {
+proto.qdb.WebConfigDeleteEntityRequest.prototype.getId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.WebConfigDeleteEntityRequest} returns this
+ * @return {!proto.qdb.WebConfigDeleteEntityRequest} returns this
  */
-proto.qmq.WebConfigDeleteEntityRequest.prototype.setId = function(value) {
+proto.qdb.WebConfigDeleteEntityRequest.prototype.setId = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -3217,8 +3217,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigDeleteEntityResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigDeleteEntityResponse.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigDeleteEntityResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigDeleteEntityResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -3227,11 +3227,11 @@ proto.qmq.WebConfigDeleteEntityResponse.prototype.toObject = function(opt_includ
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigDeleteEntityResponse} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigDeleteEntityResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigDeleteEntityResponse.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigDeleteEntityResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     status: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
@@ -3247,23 +3247,23 @@ proto.qmq.WebConfigDeleteEntityResponse.toObject = function(includeInstance, msg
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigDeleteEntityResponse}
+ * @return {!proto.qdb.WebConfigDeleteEntityResponse}
  */
-proto.qmq.WebConfigDeleteEntityResponse.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigDeleteEntityResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigDeleteEntityResponse;
-  return proto.qmq.WebConfigDeleteEntityResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigDeleteEntityResponse;
+  return proto.qdb.WebConfigDeleteEntityResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigDeleteEntityResponse} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigDeleteEntityResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigDeleteEntityResponse}
+ * @return {!proto.qdb.WebConfigDeleteEntityResponse}
  */
-proto.qmq.WebConfigDeleteEntityResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigDeleteEntityResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -3271,7 +3271,7 @@ proto.qmq.WebConfigDeleteEntityResponse.deserializeBinaryFromReader = function(m
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.qmq.WebConfigDeleteEntityResponse.StatusEnum} */ (reader.readEnum());
+      var value = /** @type {!proto.qdb.WebConfigDeleteEntityResponse.StatusEnum} */ (reader.readEnum());
       msg.setStatus(value);
       break;
     default:
@@ -3287,9 +3287,9 @@ proto.qmq.WebConfigDeleteEntityResponse.deserializeBinaryFromReader = function(m
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigDeleteEntityResponse.prototype.serializeBinary = function() {
+proto.qdb.WebConfigDeleteEntityResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigDeleteEntityResponse.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigDeleteEntityResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -3297,11 +3297,11 @@ proto.qmq.WebConfigDeleteEntityResponse.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigDeleteEntityResponse} message
+ * @param {!proto.qdb.WebConfigDeleteEntityResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigDeleteEntityResponse.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigDeleteEntityResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getStatus();
   if (f !== 0.0) {
@@ -3316,7 +3316,7 @@ proto.qmq.WebConfigDeleteEntityResponse.serializeBinaryToWriter = function(messa
 /**
  * @enum {number}
  */
-proto.qmq.WebConfigDeleteEntityResponse.StatusEnum = {
+proto.qdb.WebConfigDeleteEntityResponse.StatusEnum = {
   UNSPECIFIED: 0,
   SUCCESS: 1,
   FAILURE: 2
@@ -3324,18 +3324,18 @@ proto.qmq.WebConfigDeleteEntityResponse.StatusEnum = {
 
 /**
  * optional StatusEnum status = 1;
- * @return {!proto.qmq.WebConfigDeleteEntityResponse.StatusEnum}
+ * @return {!proto.qdb.WebConfigDeleteEntityResponse.StatusEnum}
  */
-proto.qmq.WebConfigDeleteEntityResponse.prototype.getStatus = function() {
-  return /** @type {!proto.qmq.WebConfigDeleteEntityResponse.StatusEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.qdb.WebConfigDeleteEntityResponse.prototype.getStatus = function() {
+  return /** @type {!proto.qdb.WebConfigDeleteEntityResponse.StatusEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {!proto.qmq.WebConfigDeleteEntityResponse.StatusEnum} value
- * @return {!proto.qmq.WebConfigDeleteEntityResponse} returns this
+ * @param {!proto.qdb.WebConfigDeleteEntityResponse.StatusEnum} value
+ * @return {!proto.qdb.WebConfigDeleteEntityResponse} returns this
  */
-proto.qmq.WebConfigDeleteEntityResponse.prototype.setStatus = function(value) {
+proto.qdb.WebConfigDeleteEntityResponse.prototype.setStatus = function(value) {
   return jspb.Message.setProto3EnumField(this, 1, value);
 };
 
@@ -3356,8 +3356,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigGetEntityTypesRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigGetEntityTypesRequest.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigGetEntityTypesRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigGetEntityTypesRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -3366,11 +3366,11 @@ proto.qmq.WebConfigGetEntityTypesRequest.prototype.toObject = function(opt_inclu
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigGetEntityTypesRequest} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigGetEntityTypesRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetEntityTypesRequest.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigGetEntityTypesRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
 
   };
@@ -3386,23 +3386,23 @@ proto.qmq.WebConfigGetEntityTypesRequest.toObject = function(includeInstance, ms
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigGetEntityTypesRequest}
+ * @return {!proto.qdb.WebConfigGetEntityTypesRequest}
  */
-proto.qmq.WebConfigGetEntityTypesRequest.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigGetEntityTypesRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigGetEntityTypesRequest;
-  return proto.qmq.WebConfigGetEntityTypesRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigGetEntityTypesRequest;
+  return proto.qdb.WebConfigGetEntityTypesRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigGetEntityTypesRequest} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigGetEntityTypesRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigGetEntityTypesRequest}
+ * @return {!proto.qdb.WebConfigGetEntityTypesRequest}
  */
-proto.qmq.WebConfigGetEntityTypesRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigGetEntityTypesRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -3422,9 +3422,9 @@ proto.qmq.WebConfigGetEntityTypesRequest.deserializeBinaryFromReader = function(
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigGetEntityTypesRequest.prototype.serializeBinary = function() {
+proto.qdb.WebConfigGetEntityTypesRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigGetEntityTypesRequest.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigGetEntityTypesRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -3432,11 +3432,11 @@ proto.qmq.WebConfigGetEntityTypesRequest.prototype.serializeBinary = function() 
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigGetEntityTypesRequest} message
+ * @param {!proto.qdb.WebConfigGetEntityTypesRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetEntityTypesRequest.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigGetEntityTypesRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
 };
 
@@ -3447,7 +3447,7 @@ proto.qmq.WebConfigGetEntityTypesRequest.serializeBinaryToWriter = function(mess
  * @private {!Array<number>}
  * @const
  */
-proto.qmq.WebConfigGetEntityTypesResponse.repeatedFields_ = [1];
+proto.qdb.WebConfigGetEntityTypesResponse.repeatedFields_ = [1];
 
 
 
@@ -3464,8 +3464,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigGetEntityTypesResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigGetEntityTypesResponse.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigGetEntityTypesResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigGetEntityTypesResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -3474,11 +3474,11 @@ proto.qmq.WebConfigGetEntityTypesResponse.prototype.toObject = function(opt_incl
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigGetEntityTypesResponse} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigGetEntityTypesResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetEntityTypesResponse.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigGetEntityTypesResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     typesList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
   };
@@ -3494,23 +3494,23 @@ proto.qmq.WebConfigGetEntityTypesResponse.toObject = function(includeInstance, m
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigGetEntityTypesResponse}
+ * @return {!proto.qdb.WebConfigGetEntityTypesResponse}
  */
-proto.qmq.WebConfigGetEntityTypesResponse.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigGetEntityTypesResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigGetEntityTypesResponse;
-  return proto.qmq.WebConfigGetEntityTypesResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigGetEntityTypesResponse;
+  return proto.qdb.WebConfigGetEntityTypesResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigGetEntityTypesResponse} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigGetEntityTypesResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigGetEntityTypesResponse}
+ * @return {!proto.qdb.WebConfigGetEntityTypesResponse}
  */
-proto.qmq.WebConfigGetEntityTypesResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigGetEntityTypesResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -3534,9 +3534,9 @@ proto.qmq.WebConfigGetEntityTypesResponse.deserializeBinaryFromReader = function
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigGetEntityTypesResponse.prototype.serializeBinary = function() {
+proto.qdb.WebConfigGetEntityTypesResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigGetEntityTypesResponse.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigGetEntityTypesResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -3544,11 +3544,11 @@ proto.qmq.WebConfigGetEntityTypesResponse.prototype.serializeBinary = function()
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigGetEntityTypesResponse} message
+ * @param {!proto.qdb.WebConfigGetEntityTypesResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetEntityTypesResponse.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigGetEntityTypesResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getTypesList();
   if (f.length > 0) {
@@ -3564,16 +3564,16 @@ proto.qmq.WebConfigGetEntityTypesResponse.serializeBinaryToWriter = function(mes
  * repeated string types = 1;
  * @return {!Array<string>}
  */
-proto.qmq.WebConfigGetEntityTypesResponse.prototype.getTypesList = function() {
+proto.qdb.WebConfigGetEntityTypesResponse.prototype.getTypesList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 1));
 };
 
 
 /**
  * @param {!Array<string>} value
- * @return {!proto.qmq.WebConfigGetEntityTypesResponse} returns this
+ * @return {!proto.qdb.WebConfigGetEntityTypesResponse} returns this
  */
-proto.qmq.WebConfigGetEntityTypesResponse.prototype.setTypesList = function(value) {
+proto.qdb.WebConfigGetEntityTypesResponse.prototype.setTypesList = function(value) {
   return jspb.Message.setField(this, 1, value || []);
 };
 
@@ -3581,18 +3581,18 @@ proto.qmq.WebConfigGetEntityTypesResponse.prototype.setTypesList = function(valu
 /**
  * @param {string} value
  * @param {number=} opt_index
- * @return {!proto.qmq.WebConfigGetEntityTypesResponse} returns this
+ * @return {!proto.qdb.WebConfigGetEntityTypesResponse} returns this
  */
-proto.qmq.WebConfigGetEntityTypesResponse.prototype.addTypes = function(value, opt_index) {
+proto.qdb.WebConfigGetEntityTypesResponse.prototype.addTypes = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
- * @return {!proto.qmq.WebConfigGetEntityTypesResponse} returns this
+ * @return {!proto.qdb.WebConfigGetEntityTypesResponse} returns this
  */
-proto.qmq.WebConfigGetEntityTypesResponse.prototype.clearTypesList = function() {
+proto.qdb.WebConfigGetEntityTypesResponse.prototype.clearTypesList = function() {
   return this.setTypesList([]);
 };
 
@@ -3613,8 +3613,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigGetEntityRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigGetEntityRequest.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigGetEntityRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigGetEntityRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -3623,11 +3623,11 @@ proto.qmq.WebConfigGetEntityRequest.prototype.toObject = function(opt_includeIns
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigGetEntityRequest} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigGetEntityRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetEntityRequest.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigGetEntityRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
@@ -3643,23 +3643,23 @@ proto.qmq.WebConfigGetEntityRequest.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigGetEntityRequest}
+ * @return {!proto.qdb.WebConfigGetEntityRequest}
  */
-proto.qmq.WebConfigGetEntityRequest.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigGetEntityRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigGetEntityRequest;
-  return proto.qmq.WebConfigGetEntityRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigGetEntityRequest;
+  return proto.qdb.WebConfigGetEntityRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigGetEntityRequest} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigGetEntityRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigGetEntityRequest}
+ * @return {!proto.qdb.WebConfigGetEntityRequest}
  */
-proto.qmq.WebConfigGetEntityRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigGetEntityRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -3683,9 +3683,9 @@ proto.qmq.WebConfigGetEntityRequest.deserializeBinaryFromReader = function(msg, 
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigGetEntityRequest.prototype.serializeBinary = function() {
+proto.qdb.WebConfigGetEntityRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigGetEntityRequest.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigGetEntityRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -3693,11 +3693,11 @@ proto.qmq.WebConfigGetEntityRequest.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigGetEntityRequest} message
+ * @param {!proto.qdb.WebConfigGetEntityRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetEntityRequest.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigGetEntityRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getId();
   if (f.length > 0) {
@@ -3713,16 +3713,16 @@ proto.qmq.WebConfigGetEntityRequest.serializeBinaryToWriter = function(message, 
  * optional string id = 1;
  * @return {string}
  */
-proto.qmq.WebConfigGetEntityRequest.prototype.getId = function() {
+proto.qdb.WebConfigGetEntityRequest.prototype.getId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.WebConfigGetEntityRequest} returns this
+ * @return {!proto.qdb.WebConfigGetEntityRequest} returns this
  */
-proto.qmq.WebConfigGetEntityRequest.prototype.setId = function(value) {
+proto.qdb.WebConfigGetEntityRequest.prototype.setId = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -3743,8 +3743,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigGetEntityResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigGetEntityResponse.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigGetEntityResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigGetEntityResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -3753,14 +3753,14 @@ proto.qmq.WebConfigGetEntityResponse.prototype.toObject = function(opt_includeIn
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigGetEntityResponse} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigGetEntityResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetEntityResponse.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigGetEntityResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     status: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    entity: (f = msg.getEntity()) && proto.qmq.DatabaseEntity.toObject(includeInstance, f)
+    entity: (f = msg.getEntity()) && proto.qdb.DatabaseEntity.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -3774,23 +3774,23 @@ proto.qmq.WebConfigGetEntityResponse.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigGetEntityResponse}
+ * @return {!proto.qdb.WebConfigGetEntityResponse}
  */
-proto.qmq.WebConfigGetEntityResponse.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigGetEntityResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigGetEntityResponse;
-  return proto.qmq.WebConfigGetEntityResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigGetEntityResponse;
+  return proto.qdb.WebConfigGetEntityResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigGetEntityResponse} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigGetEntityResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigGetEntityResponse}
+ * @return {!proto.qdb.WebConfigGetEntityResponse}
  */
-proto.qmq.WebConfigGetEntityResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigGetEntityResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -3798,12 +3798,12 @@ proto.qmq.WebConfigGetEntityResponse.deserializeBinaryFromReader = function(msg,
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.qmq.WebConfigGetEntityResponse.StatusEnum} */ (reader.readEnum());
+      var value = /** @type {!proto.qdb.WebConfigGetEntityResponse.StatusEnum} */ (reader.readEnum());
       msg.setStatus(value);
       break;
     case 2:
-      var value = new proto.qmq.DatabaseEntity;
-      reader.readMessage(value,proto.qmq.DatabaseEntity.deserializeBinaryFromReader);
+      var value = new proto.qdb.DatabaseEntity;
+      reader.readMessage(value,proto.qdb.DatabaseEntity.deserializeBinaryFromReader);
       msg.setEntity(value);
       break;
     default:
@@ -3819,9 +3819,9 @@ proto.qmq.WebConfigGetEntityResponse.deserializeBinaryFromReader = function(msg,
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigGetEntityResponse.prototype.serializeBinary = function() {
+proto.qdb.WebConfigGetEntityResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigGetEntityResponse.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigGetEntityResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -3829,11 +3829,11 @@ proto.qmq.WebConfigGetEntityResponse.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigGetEntityResponse} message
+ * @param {!proto.qdb.WebConfigGetEntityResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetEntityResponse.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigGetEntityResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getStatus();
   if (f !== 0.0) {
@@ -3847,7 +3847,7 @@ proto.qmq.WebConfigGetEntityResponse.serializeBinaryToWriter = function(message,
     writer.writeMessage(
       2,
       f,
-      proto.qmq.DatabaseEntity.serializeBinaryToWriter
+      proto.qdb.DatabaseEntity.serializeBinaryToWriter
     );
   }
 };
@@ -3856,7 +3856,7 @@ proto.qmq.WebConfigGetEntityResponse.serializeBinaryToWriter = function(message,
 /**
  * @enum {number}
  */
-proto.qmq.WebConfigGetEntityResponse.StatusEnum = {
+proto.qdb.WebConfigGetEntityResponse.StatusEnum = {
   UNSPECIFIED: 0,
   SUCCESS: 1,
   FAILURE: 2
@@ -3864,46 +3864,46 @@ proto.qmq.WebConfigGetEntityResponse.StatusEnum = {
 
 /**
  * optional StatusEnum status = 1;
- * @return {!proto.qmq.WebConfigGetEntityResponse.StatusEnum}
+ * @return {!proto.qdb.WebConfigGetEntityResponse.StatusEnum}
  */
-proto.qmq.WebConfigGetEntityResponse.prototype.getStatus = function() {
-  return /** @type {!proto.qmq.WebConfigGetEntityResponse.StatusEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.qdb.WebConfigGetEntityResponse.prototype.getStatus = function() {
+  return /** @type {!proto.qdb.WebConfigGetEntityResponse.StatusEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {!proto.qmq.WebConfigGetEntityResponse.StatusEnum} value
- * @return {!proto.qmq.WebConfigGetEntityResponse} returns this
+ * @param {!proto.qdb.WebConfigGetEntityResponse.StatusEnum} value
+ * @return {!proto.qdb.WebConfigGetEntityResponse} returns this
  */
-proto.qmq.WebConfigGetEntityResponse.prototype.setStatus = function(value) {
+proto.qdb.WebConfigGetEntityResponse.prototype.setStatus = function(value) {
   return jspb.Message.setProto3EnumField(this, 1, value);
 };
 
 
 /**
  * optional DatabaseEntity entity = 2;
- * @return {?proto.qmq.DatabaseEntity}
+ * @return {?proto.qdb.DatabaseEntity}
  */
-proto.qmq.WebConfigGetEntityResponse.prototype.getEntity = function() {
-  return /** @type{?proto.qmq.DatabaseEntity} */ (
-    jspb.Message.getWrapperField(this, proto.qmq.DatabaseEntity, 2));
+proto.qdb.WebConfigGetEntityResponse.prototype.getEntity = function() {
+  return /** @type{?proto.qdb.DatabaseEntity} */ (
+    jspb.Message.getWrapperField(this, proto.qdb.DatabaseEntity, 2));
 };
 
 
 /**
- * @param {?proto.qmq.DatabaseEntity|undefined} value
- * @return {!proto.qmq.WebConfigGetEntityResponse} returns this
+ * @param {?proto.qdb.DatabaseEntity|undefined} value
+ * @return {!proto.qdb.WebConfigGetEntityResponse} returns this
 */
-proto.qmq.WebConfigGetEntityResponse.prototype.setEntity = function(value) {
+proto.qdb.WebConfigGetEntityResponse.prototype.setEntity = function(value) {
   return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.WebConfigGetEntityResponse} returns this
+ * @return {!proto.qdb.WebConfigGetEntityResponse} returns this
  */
-proto.qmq.WebConfigGetEntityResponse.prototype.clearEntity = function() {
+proto.qdb.WebConfigGetEntityResponse.prototype.clearEntity = function() {
   return this.setEntity(undefined);
 };
 
@@ -3912,7 +3912,7 @@ proto.qmq.WebConfigGetEntityResponse.prototype.clearEntity = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.WebConfigGetEntityResponse.prototype.hasEntity = function() {
+proto.qdb.WebConfigGetEntityResponse.prototype.hasEntity = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 
@@ -3933,8 +3933,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigGetFieldSchemaRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigGetFieldSchemaRequest.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigGetFieldSchemaRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigGetFieldSchemaRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -3943,11 +3943,11 @@ proto.qmq.WebConfigGetFieldSchemaRequest.prototype.toObject = function(opt_inclu
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigGetFieldSchemaRequest} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigGetFieldSchemaRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetFieldSchemaRequest.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigGetFieldSchemaRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     field: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
@@ -3963,23 +3963,23 @@ proto.qmq.WebConfigGetFieldSchemaRequest.toObject = function(includeInstance, ms
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigGetFieldSchemaRequest}
+ * @return {!proto.qdb.WebConfigGetFieldSchemaRequest}
  */
-proto.qmq.WebConfigGetFieldSchemaRequest.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigGetFieldSchemaRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigGetFieldSchemaRequest;
-  return proto.qmq.WebConfigGetFieldSchemaRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigGetFieldSchemaRequest;
+  return proto.qdb.WebConfigGetFieldSchemaRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigGetFieldSchemaRequest} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigGetFieldSchemaRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigGetFieldSchemaRequest}
+ * @return {!proto.qdb.WebConfigGetFieldSchemaRequest}
  */
-proto.qmq.WebConfigGetFieldSchemaRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigGetFieldSchemaRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -4003,9 +4003,9 @@ proto.qmq.WebConfigGetFieldSchemaRequest.deserializeBinaryFromReader = function(
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigGetFieldSchemaRequest.prototype.serializeBinary = function() {
+proto.qdb.WebConfigGetFieldSchemaRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigGetFieldSchemaRequest.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigGetFieldSchemaRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -4013,11 +4013,11 @@ proto.qmq.WebConfigGetFieldSchemaRequest.prototype.serializeBinary = function() 
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigGetFieldSchemaRequest} message
+ * @param {!proto.qdb.WebConfigGetFieldSchemaRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetFieldSchemaRequest.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigGetFieldSchemaRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getField();
   if (f.length > 0) {
@@ -4033,16 +4033,16 @@ proto.qmq.WebConfigGetFieldSchemaRequest.serializeBinaryToWriter = function(mess
  * optional string field = 1;
  * @return {string}
  */
-proto.qmq.WebConfigGetFieldSchemaRequest.prototype.getField = function() {
+proto.qdb.WebConfigGetFieldSchemaRequest.prototype.getField = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.WebConfigGetFieldSchemaRequest} returns this
+ * @return {!proto.qdb.WebConfigGetFieldSchemaRequest} returns this
  */
-proto.qmq.WebConfigGetFieldSchemaRequest.prototype.setField = function(value) {
+proto.qdb.WebConfigGetFieldSchemaRequest.prototype.setField = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -4063,8 +4063,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigGetFieldSchemaResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigGetFieldSchemaResponse.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigGetFieldSchemaResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigGetFieldSchemaResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -4073,14 +4073,14 @@ proto.qmq.WebConfigGetFieldSchemaResponse.prototype.toObject = function(opt_incl
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigGetFieldSchemaResponse} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigGetFieldSchemaResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetFieldSchemaResponse.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigGetFieldSchemaResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     status: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    schema: (f = msg.getSchema()) && proto.qmq.DatabaseFieldSchema.toObject(includeInstance, f)
+    schema: (f = msg.getSchema()) && proto.qdb.DatabaseFieldSchema.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -4094,23 +4094,23 @@ proto.qmq.WebConfigGetFieldSchemaResponse.toObject = function(includeInstance, m
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigGetFieldSchemaResponse}
+ * @return {!proto.qdb.WebConfigGetFieldSchemaResponse}
  */
-proto.qmq.WebConfigGetFieldSchemaResponse.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigGetFieldSchemaResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigGetFieldSchemaResponse;
-  return proto.qmq.WebConfigGetFieldSchemaResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigGetFieldSchemaResponse;
+  return proto.qdb.WebConfigGetFieldSchemaResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigGetFieldSchemaResponse} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigGetFieldSchemaResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigGetFieldSchemaResponse}
+ * @return {!proto.qdb.WebConfigGetFieldSchemaResponse}
  */
-proto.qmq.WebConfigGetFieldSchemaResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigGetFieldSchemaResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -4118,12 +4118,12 @@ proto.qmq.WebConfigGetFieldSchemaResponse.deserializeBinaryFromReader = function
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.qmq.WebConfigGetFieldSchemaResponse.StatusEnum} */ (reader.readEnum());
+      var value = /** @type {!proto.qdb.WebConfigGetFieldSchemaResponse.StatusEnum} */ (reader.readEnum());
       msg.setStatus(value);
       break;
     case 2:
-      var value = new proto.qmq.DatabaseFieldSchema;
-      reader.readMessage(value,proto.qmq.DatabaseFieldSchema.deserializeBinaryFromReader);
+      var value = new proto.qdb.DatabaseFieldSchema;
+      reader.readMessage(value,proto.qdb.DatabaseFieldSchema.deserializeBinaryFromReader);
       msg.setSchema(value);
       break;
     default:
@@ -4139,9 +4139,9 @@ proto.qmq.WebConfigGetFieldSchemaResponse.deserializeBinaryFromReader = function
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigGetFieldSchemaResponse.prototype.serializeBinary = function() {
+proto.qdb.WebConfigGetFieldSchemaResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigGetFieldSchemaResponse.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigGetFieldSchemaResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -4149,11 +4149,11 @@ proto.qmq.WebConfigGetFieldSchemaResponse.prototype.serializeBinary = function()
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigGetFieldSchemaResponse} message
+ * @param {!proto.qdb.WebConfigGetFieldSchemaResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetFieldSchemaResponse.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigGetFieldSchemaResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getStatus();
   if (f !== 0.0) {
@@ -4167,7 +4167,7 @@ proto.qmq.WebConfigGetFieldSchemaResponse.serializeBinaryToWriter = function(mes
     writer.writeMessage(
       2,
       f,
-      proto.qmq.DatabaseFieldSchema.serializeBinaryToWriter
+      proto.qdb.DatabaseFieldSchema.serializeBinaryToWriter
     );
   }
 };
@@ -4176,7 +4176,7 @@ proto.qmq.WebConfigGetFieldSchemaResponse.serializeBinaryToWriter = function(mes
 /**
  * @enum {number}
  */
-proto.qmq.WebConfigGetFieldSchemaResponse.StatusEnum = {
+proto.qdb.WebConfigGetFieldSchemaResponse.StatusEnum = {
   UNSPECIFIED: 0,
   SUCCESS: 1,
   FAILURE: 2
@@ -4184,46 +4184,46 @@ proto.qmq.WebConfigGetFieldSchemaResponse.StatusEnum = {
 
 /**
  * optional StatusEnum status = 1;
- * @return {!proto.qmq.WebConfigGetFieldSchemaResponse.StatusEnum}
+ * @return {!proto.qdb.WebConfigGetFieldSchemaResponse.StatusEnum}
  */
-proto.qmq.WebConfigGetFieldSchemaResponse.prototype.getStatus = function() {
-  return /** @type {!proto.qmq.WebConfigGetFieldSchemaResponse.StatusEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.qdb.WebConfigGetFieldSchemaResponse.prototype.getStatus = function() {
+  return /** @type {!proto.qdb.WebConfigGetFieldSchemaResponse.StatusEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {!proto.qmq.WebConfigGetFieldSchemaResponse.StatusEnum} value
- * @return {!proto.qmq.WebConfigGetFieldSchemaResponse} returns this
+ * @param {!proto.qdb.WebConfigGetFieldSchemaResponse.StatusEnum} value
+ * @return {!proto.qdb.WebConfigGetFieldSchemaResponse} returns this
  */
-proto.qmq.WebConfigGetFieldSchemaResponse.prototype.setStatus = function(value) {
+proto.qdb.WebConfigGetFieldSchemaResponse.prototype.setStatus = function(value) {
   return jspb.Message.setProto3EnumField(this, 1, value);
 };
 
 
 /**
  * optional DatabaseFieldSchema schema = 2;
- * @return {?proto.qmq.DatabaseFieldSchema}
+ * @return {?proto.qdb.DatabaseFieldSchema}
  */
-proto.qmq.WebConfigGetFieldSchemaResponse.prototype.getSchema = function() {
-  return /** @type{?proto.qmq.DatabaseFieldSchema} */ (
-    jspb.Message.getWrapperField(this, proto.qmq.DatabaseFieldSchema, 2));
+proto.qdb.WebConfigGetFieldSchemaResponse.prototype.getSchema = function() {
+  return /** @type{?proto.qdb.DatabaseFieldSchema} */ (
+    jspb.Message.getWrapperField(this, proto.qdb.DatabaseFieldSchema, 2));
 };
 
 
 /**
- * @param {?proto.qmq.DatabaseFieldSchema|undefined} value
- * @return {!proto.qmq.WebConfigGetFieldSchemaResponse} returns this
+ * @param {?proto.qdb.DatabaseFieldSchema|undefined} value
+ * @return {!proto.qdb.WebConfigGetFieldSchemaResponse} returns this
 */
-proto.qmq.WebConfigGetFieldSchemaResponse.prototype.setSchema = function(value) {
+proto.qdb.WebConfigGetFieldSchemaResponse.prototype.setSchema = function(value) {
   return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.WebConfigGetFieldSchemaResponse} returns this
+ * @return {!proto.qdb.WebConfigGetFieldSchemaResponse} returns this
  */
-proto.qmq.WebConfigGetFieldSchemaResponse.prototype.clearSchema = function() {
+proto.qdb.WebConfigGetFieldSchemaResponse.prototype.clearSchema = function() {
   return this.setSchema(undefined);
 };
 
@@ -4232,7 +4232,7 @@ proto.qmq.WebConfigGetFieldSchemaResponse.prototype.clearSchema = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.WebConfigGetFieldSchemaResponse.prototype.hasSchema = function() {
+proto.qdb.WebConfigGetFieldSchemaResponse.prototype.hasSchema = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 
@@ -4253,8 +4253,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigSetFieldSchemaRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigSetFieldSchemaRequest.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigSetFieldSchemaRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigSetFieldSchemaRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -4263,14 +4263,14 @@ proto.qmq.WebConfigSetFieldSchemaRequest.prototype.toObject = function(opt_inclu
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigSetFieldSchemaRequest} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigSetFieldSchemaRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigSetFieldSchemaRequest.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigSetFieldSchemaRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     field: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    schema: (f = msg.getSchema()) && proto.qmq.DatabaseFieldSchema.toObject(includeInstance, f)
+    schema: (f = msg.getSchema()) && proto.qdb.DatabaseFieldSchema.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -4284,23 +4284,23 @@ proto.qmq.WebConfigSetFieldSchemaRequest.toObject = function(includeInstance, ms
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigSetFieldSchemaRequest}
+ * @return {!proto.qdb.WebConfigSetFieldSchemaRequest}
  */
-proto.qmq.WebConfigSetFieldSchemaRequest.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigSetFieldSchemaRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigSetFieldSchemaRequest;
-  return proto.qmq.WebConfigSetFieldSchemaRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigSetFieldSchemaRequest;
+  return proto.qdb.WebConfigSetFieldSchemaRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigSetFieldSchemaRequest} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigSetFieldSchemaRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigSetFieldSchemaRequest}
+ * @return {!proto.qdb.WebConfigSetFieldSchemaRequest}
  */
-proto.qmq.WebConfigSetFieldSchemaRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigSetFieldSchemaRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -4312,8 +4312,8 @@ proto.qmq.WebConfigSetFieldSchemaRequest.deserializeBinaryFromReader = function(
       msg.setField(value);
       break;
     case 2:
-      var value = new proto.qmq.DatabaseFieldSchema;
-      reader.readMessage(value,proto.qmq.DatabaseFieldSchema.deserializeBinaryFromReader);
+      var value = new proto.qdb.DatabaseFieldSchema;
+      reader.readMessage(value,proto.qdb.DatabaseFieldSchema.deserializeBinaryFromReader);
       msg.setSchema(value);
       break;
     default:
@@ -4329,9 +4329,9 @@ proto.qmq.WebConfigSetFieldSchemaRequest.deserializeBinaryFromReader = function(
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigSetFieldSchemaRequest.prototype.serializeBinary = function() {
+proto.qdb.WebConfigSetFieldSchemaRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigSetFieldSchemaRequest.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigSetFieldSchemaRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -4339,11 +4339,11 @@ proto.qmq.WebConfigSetFieldSchemaRequest.prototype.serializeBinary = function() 
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigSetFieldSchemaRequest} message
+ * @param {!proto.qdb.WebConfigSetFieldSchemaRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigSetFieldSchemaRequest.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigSetFieldSchemaRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getField();
   if (f.length > 0) {
@@ -4357,7 +4357,7 @@ proto.qmq.WebConfigSetFieldSchemaRequest.serializeBinaryToWriter = function(mess
     writer.writeMessage(
       2,
       f,
-      proto.qmq.DatabaseFieldSchema.serializeBinaryToWriter
+      proto.qdb.DatabaseFieldSchema.serializeBinaryToWriter
     );
   }
 };
@@ -4367,44 +4367,44 @@ proto.qmq.WebConfigSetFieldSchemaRequest.serializeBinaryToWriter = function(mess
  * optional string field = 1;
  * @return {string}
  */
-proto.qmq.WebConfigSetFieldSchemaRequest.prototype.getField = function() {
+proto.qdb.WebConfigSetFieldSchemaRequest.prototype.getField = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.WebConfigSetFieldSchemaRequest} returns this
+ * @return {!proto.qdb.WebConfigSetFieldSchemaRequest} returns this
  */
-proto.qmq.WebConfigSetFieldSchemaRequest.prototype.setField = function(value) {
+proto.qdb.WebConfigSetFieldSchemaRequest.prototype.setField = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
  * optional DatabaseFieldSchema schema = 2;
- * @return {?proto.qmq.DatabaseFieldSchema}
+ * @return {?proto.qdb.DatabaseFieldSchema}
  */
-proto.qmq.WebConfigSetFieldSchemaRequest.prototype.getSchema = function() {
-  return /** @type{?proto.qmq.DatabaseFieldSchema} */ (
-    jspb.Message.getWrapperField(this, proto.qmq.DatabaseFieldSchema, 2));
+proto.qdb.WebConfigSetFieldSchemaRequest.prototype.getSchema = function() {
+  return /** @type{?proto.qdb.DatabaseFieldSchema} */ (
+    jspb.Message.getWrapperField(this, proto.qdb.DatabaseFieldSchema, 2));
 };
 
 
 /**
- * @param {?proto.qmq.DatabaseFieldSchema|undefined} value
- * @return {!proto.qmq.WebConfigSetFieldSchemaRequest} returns this
+ * @param {?proto.qdb.DatabaseFieldSchema|undefined} value
+ * @return {!proto.qdb.WebConfigSetFieldSchemaRequest} returns this
 */
-proto.qmq.WebConfigSetFieldSchemaRequest.prototype.setSchema = function(value) {
+proto.qdb.WebConfigSetFieldSchemaRequest.prototype.setSchema = function(value) {
   return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.WebConfigSetFieldSchemaRequest} returns this
+ * @return {!proto.qdb.WebConfigSetFieldSchemaRequest} returns this
  */
-proto.qmq.WebConfigSetFieldSchemaRequest.prototype.clearSchema = function() {
+proto.qdb.WebConfigSetFieldSchemaRequest.prototype.clearSchema = function() {
   return this.setSchema(undefined);
 };
 
@@ -4413,7 +4413,7 @@ proto.qmq.WebConfigSetFieldSchemaRequest.prototype.clearSchema = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.WebConfigSetFieldSchemaRequest.prototype.hasSchema = function() {
+proto.qdb.WebConfigSetFieldSchemaRequest.prototype.hasSchema = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 
@@ -4434,8 +4434,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigSetFieldSchemaResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigSetFieldSchemaResponse.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigSetFieldSchemaResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigSetFieldSchemaResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -4444,11 +4444,11 @@ proto.qmq.WebConfigSetFieldSchemaResponse.prototype.toObject = function(opt_incl
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigSetFieldSchemaResponse} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigSetFieldSchemaResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigSetFieldSchemaResponse.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigSetFieldSchemaResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     status: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
@@ -4464,23 +4464,23 @@ proto.qmq.WebConfigSetFieldSchemaResponse.toObject = function(includeInstance, m
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigSetFieldSchemaResponse}
+ * @return {!proto.qdb.WebConfigSetFieldSchemaResponse}
  */
-proto.qmq.WebConfigSetFieldSchemaResponse.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigSetFieldSchemaResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigSetFieldSchemaResponse;
-  return proto.qmq.WebConfigSetFieldSchemaResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigSetFieldSchemaResponse;
+  return proto.qdb.WebConfigSetFieldSchemaResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigSetFieldSchemaResponse} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigSetFieldSchemaResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigSetFieldSchemaResponse}
+ * @return {!proto.qdb.WebConfigSetFieldSchemaResponse}
  */
-proto.qmq.WebConfigSetFieldSchemaResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigSetFieldSchemaResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -4488,7 +4488,7 @@ proto.qmq.WebConfigSetFieldSchemaResponse.deserializeBinaryFromReader = function
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.qmq.WebConfigSetFieldSchemaResponse.StatusEnum} */ (reader.readEnum());
+      var value = /** @type {!proto.qdb.WebConfigSetFieldSchemaResponse.StatusEnum} */ (reader.readEnum());
       msg.setStatus(value);
       break;
     default:
@@ -4504,9 +4504,9 @@ proto.qmq.WebConfigSetFieldSchemaResponse.deserializeBinaryFromReader = function
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigSetFieldSchemaResponse.prototype.serializeBinary = function() {
+proto.qdb.WebConfigSetFieldSchemaResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigSetFieldSchemaResponse.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigSetFieldSchemaResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -4514,11 +4514,11 @@ proto.qmq.WebConfigSetFieldSchemaResponse.prototype.serializeBinary = function()
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigSetFieldSchemaResponse} message
+ * @param {!proto.qdb.WebConfigSetFieldSchemaResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigSetFieldSchemaResponse.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigSetFieldSchemaResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getStatus();
   if (f !== 0.0) {
@@ -4533,7 +4533,7 @@ proto.qmq.WebConfigSetFieldSchemaResponse.serializeBinaryToWriter = function(mes
 /**
  * @enum {number}
  */
-proto.qmq.WebConfigSetFieldSchemaResponse.StatusEnum = {
+proto.qdb.WebConfigSetFieldSchemaResponse.StatusEnum = {
   UNSPECIFIED: 0,
   SUCCESS: 1,
   FAILURE: 2
@@ -4541,18 +4541,18 @@ proto.qmq.WebConfigSetFieldSchemaResponse.StatusEnum = {
 
 /**
  * optional StatusEnum status = 1;
- * @return {!proto.qmq.WebConfigSetFieldSchemaResponse.StatusEnum}
+ * @return {!proto.qdb.WebConfigSetFieldSchemaResponse.StatusEnum}
  */
-proto.qmq.WebConfigSetFieldSchemaResponse.prototype.getStatus = function() {
-  return /** @type {!proto.qmq.WebConfigSetFieldSchemaResponse.StatusEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.qdb.WebConfigSetFieldSchemaResponse.prototype.getStatus = function() {
+  return /** @type {!proto.qdb.WebConfigSetFieldSchemaResponse.StatusEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {!proto.qmq.WebConfigSetFieldSchemaResponse.StatusEnum} value
- * @return {!proto.qmq.WebConfigSetFieldSchemaResponse} returns this
+ * @param {!proto.qdb.WebConfigSetFieldSchemaResponse.StatusEnum} value
+ * @return {!proto.qdb.WebConfigSetFieldSchemaResponse} returns this
  */
-proto.qmq.WebConfigSetFieldSchemaResponse.prototype.setStatus = function(value) {
+proto.qdb.WebConfigSetFieldSchemaResponse.prototype.setStatus = function(value) {
   return jspb.Message.setProto3EnumField(this, 1, value);
 };
 
@@ -4573,8 +4573,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigGetEntitySchemaRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigGetEntitySchemaRequest.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigGetEntitySchemaRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigGetEntitySchemaRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -4583,11 +4583,11 @@ proto.qmq.WebConfigGetEntitySchemaRequest.prototype.toObject = function(opt_incl
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigGetEntitySchemaRequest} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigGetEntitySchemaRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetEntitySchemaRequest.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigGetEntitySchemaRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     type: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
@@ -4603,23 +4603,23 @@ proto.qmq.WebConfigGetEntitySchemaRequest.toObject = function(includeInstance, m
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigGetEntitySchemaRequest}
+ * @return {!proto.qdb.WebConfigGetEntitySchemaRequest}
  */
-proto.qmq.WebConfigGetEntitySchemaRequest.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigGetEntitySchemaRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigGetEntitySchemaRequest;
-  return proto.qmq.WebConfigGetEntitySchemaRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigGetEntitySchemaRequest;
+  return proto.qdb.WebConfigGetEntitySchemaRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigGetEntitySchemaRequest} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigGetEntitySchemaRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigGetEntitySchemaRequest}
+ * @return {!proto.qdb.WebConfigGetEntitySchemaRequest}
  */
-proto.qmq.WebConfigGetEntitySchemaRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigGetEntitySchemaRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -4643,9 +4643,9 @@ proto.qmq.WebConfigGetEntitySchemaRequest.deserializeBinaryFromReader = function
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigGetEntitySchemaRequest.prototype.serializeBinary = function() {
+proto.qdb.WebConfigGetEntitySchemaRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigGetEntitySchemaRequest.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigGetEntitySchemaRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -4653,11 +4653,11 @@ proto.qmq.WebConfigGetEntitySchemaRequest.prototype.serializeBinary = function()
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigGetEntitySchemaRequest} message
+ * @param {!proto.qdb.WebConfigGetEntitySchemaRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetEntitySchemaRequest.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigGetEntitySchemaRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getType();
   if (f.length > 0) {
@@ -4673,16 +4673,16 @@ proto.qmq.WebConfigGetEntitySchemaRequest.serializeBinaryToWriter = function(mes
  * optional string type = 1;
  * @return {string}
  */
-proto.qmq.WebConfigGetEntitySchemaRequest.prototype.getType = function() {
+proto.qdb.WebConfigGetEntitySchemaRequest.prototype.getType = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.WebConfigGetEntitySchemaRequest} returns this
+ * @return {!proto.qdb.WebConfigGetEntitySchemaRequest} returns this
  */
-proto.qmq.WebConfigGetEntitySchemaRequest.prototype.setType = function(value) {
+proto.qdb.WebConfigGetEntitySchemaRequest.prototype.setType = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -4703,8 +4703,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigGetEntitySchemaResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigGetEntitySchemaResponse.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigGetEntitySchemaResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigGetEntitySchemaResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -4713,14 +4713,14 @@ proto.qmq.WebConfigGetEntitySchemaResponse.prototype.toObject = function(opt_inc
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigGetEntitySchemaResponse} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigGetEntitySchemaResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetEntitySchemaResponse.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigGetEntitySchemaResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     status: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    schema: (f = msg.getSchema()) && proto.qmq.DatabaseEntitySchema.toObject(includeInstance, f)
+    schema: (f = msg.getSchema()) && proto.qdb.DatabaseEntitySchema.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -4734,23 +4734,23 @@ proto.qmq.WebConfigGetEntitySchemaResponse.toObject = function(includeInstance, 
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigGetEntitySchemaResponse}
+ * @return {!proto.qdb.WebConfigGetEntitySchemaResponse}
  */
-proto.qmq.WebConfigGetEntitySchemaResponse.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigGetEntitySchemaResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigGetEntitySchemaResponse;
-  return proto.qmq.WebConfigGetEntitySchemaResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigGetEntitySchemaResponse;
+  return proto.qdb.WebConfigGetEntitySchemaResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigGetEntitySchemaResponse} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigGetEntitySchemaResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigGetEntitySchemaResponse}
+ * @return {!proto.qdb.WebConfigGetEntitySchemaResponse}
  */
-proto.qmq.WebConfigGetEntitySchemaResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigGetEntitySchemaResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -4758,12 +4758,12 @@ proto.qmq.WebConfigGetEntitySchemaResponse.deserializeBinaryFromReader = functio
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.qmq.WebConfigGetEntitySchemaResponse.StatusEnum} */ (reader.readEnum());
+      var value = /** @type {!proto.qdb.WebConfigGetEntitySchemaResponse.StatusEnum} */ (reader.readEnum());
       msg.setStatus(value);
       break;
     case 2:
-      var value = new proto.qmq.DatabaseEntitySchema;
-      reader.readMessage(value,proto.qmq.DatabaseEntitySchema.deserializeBinaryFromReader);
+      var value = new proto.qdb.DatabaseEntitySchema;
+      reader.readMessage(value,proto.qdb.DatabaseEntitySchema.deserializeBinaryFromReader);
       msg.setSchema(value);
       break;
     default:
@@ -4779,9 +4779,9 @@ proto.qmq.WebConfigGetEntitySchemaResponse.deserializeBinaryFromReader = functio
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigGetEntitySchemaResponse.prototype.serializeBinary = function() {
+proto.qdb.WebConfigGetEntitySchemaResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigGetEntitySchemaResponse.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigGetEntitySchemaResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -4789,11 +4789,11 @@ proto.qmq.WebConfigGetEntitySchemaResponse.prototype.serializeBinary = function(
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigGetEntitySchemaResponse} message
+ * @param {!proto.qdb.WebConfigGetEntitySchemaResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetEntitySchemaResponse.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigGetEntitySchemaResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getStatus();
   if (f !== 0.0) {
@@ -4807,7 +4807,7 @@ proto.qmq.WebConfigGetEntitySchemaResponse.serializeBinaryToWriter = function(me
     writer.writeMessage(
       2,
       f,
-      proto.qmq.DatabaseEntitySchema.serializeBinaryToWriter
+      proto.qdb.DatabaseEntitySchema.serializeBinaryToWriter
     );
   }
 };
@@ -4816,7 +4816,7 @@ proto.qmq.WebConfigGetEntitySchemaResponse.serializeBinaryToWriter = function(me
 /**
  * @enum {number}
  */
-proto.qmq.WebConfigGetEntitySchemaResponse.StatusEnum = {
+proto.qdb.WebConfigGetEntitySchemaResponse.StatusEnum = {
   UNSPECIFIED: 0,
   SUCCESS: 1,
   FAILURE: 2
@@ -4824,46 +4824,46 @@ proto.qmq.WebConfigGetEntitySchemaResponse.StatusEnum = {
 
 /**
  * optional StatusEnum status = 1;
- * @return {!proto.qmq.WebConfigGetEntitySchemaResponse.StatusEnum}
+ * @return {!proto.qdb.WebConfigGetEntitySchemaResponse.StatusEnum}
  */
-proto.qmq.WebConfigGetEntitySchemaResponse.prototype.getStatus = function() {
-  return /** @type {!proto.qmq.WebConfigGetEntitySchemaResponse.StatusEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.qdb.WebConfigGetEntitySchemaResponse.prototype.getStatus = function() {
+  return /** @type {!proto.qdb.WebConfigGetEntitySchemaResponse.StatusEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {!proto.qmq.WebConfigGetEntitySchemaResponse.StatusEnum} value
- * @return {!proto.qmq.WebConfigGetEntitySchemaResponse} returns this
+ * @param {!proto.qdb.WebConfigGetEntitySchemaResponse.StatusEnum} value
+ * @return {!proto.qdb.WebConfigGetEntitySchemaResponse} returns this
  */
-proto.qmq.WebConfigGetEntitySchemaResponse.prototype.setStatus = function(value) {
+proto.qdb.WebConfigGetEntitySchemaResponse.prototype.setStatus = function(value) {
   return jspb.Message.setProto3EnumField(this, 1, value);
 };
 
 
 /**
  * optional DatabaseEntitySchema schema = 2;
- * @return {?proto.qmq.DatabaseEntitySchema}
+ * @return {?proto.qdb.DatabaseEntitySchema}
  */
-proto.qmq.WebConfigGetEntitySchemaResponse.prototype.getSchema = function() {
-  return /** @type{?proto.qmq.DatabaseEntitySchema} */ (
-    jspb.Message.getWrapperField(this, proto.qmq.DatabaseEntitySchema, 2));
+proto.qdb.WebConfigGetEntitySchemaResponse.prototype.getSchema = function() {
+  return /** @type{?proto.qdb.DatabaseEntitySchema} */ (
+    jspb.Message.getWrapperField(this, proto.qdb.DatabaseEntitySchema, 2));
 };
 
 
 /**
- * @param {?proto.qmq.DatabaseEntitySchema|undefined} value
- * @return {!proto.qmq.WebConfigGetEntitySchemaResponse} returns this
+ * @param {?proto.qdb.DatabaseEntitySchema|undefined} value
+ * @return {!proto.qdb.WebConfigGetEntitySchemaResponse} returns this
 */
-proto.qmq.WebConfigGetEntitySchemaResponse.prototype.setSchema = function(value) {
+proto.qdb.WebConfigGetEntitySchemaResponse.prototype.setSchema = function(value) {
   return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.WebConfigGetEntitySchemaResponse} returns this
+ * @return {!proto.qdb.WebConfigGetEntitySchemaResponse} returns this
  */
-proto.qmq.WebConfigGetEntitySchemaResponse.prototype.clearSchema = function() {
+proto.qdb.WebConfigGetEntitySchemaResponse.prototype.clearSchema = function() {
   return this.setSchema(undefined);
 };
 
@@ -4872,7 +4872,7 @@ proto.qmq.WebConfigGetEntitySchemaResponse.prototype.clearSchema = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.WebConfigGetEntitySchemaResponse.prototype.hasSchema = function() {
+proto.qdb.WebConfigGetEntitySchemaResponse.prototype.hasSchema = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 
@@ -4883,7 +4883,7 @@ proto.qmq.WebConfigGetEntitySchemaResponse.prototype.hasSchema = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.qmq.WebConfigSetEntitySchemaRequest.repeatedFields_ = [2];
+proto.qdb.WebConfigSetEntitySchemaRequest.repeatedFields_ = [2];
 
 
 
@@ -4900,8 +4900,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigSetEntitySchemaRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigSetEntitySchemaRequest.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigSetEntitySchemaRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigSetEntitySchemaRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -4910,11 +4910,11 @@ proto.qmq.WebConfigSetEntitySchemaRequest.prototype.toObject = function(opt_incl
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigSetEntitySchemaRequest} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigSetEntitySchemaRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigSetEntitySchemaRequest.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigSetEntitySchemaRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     name: jspb.Message.getFieldWithDefault(msg, 1, ""),
     fieldsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
@@ -4931,23 +4931,23 @@ proto.qmq.WebConfigSetEntitySchemaRequest.toObject = function(includeInstance, m
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigSetEntitySchemaRequest}
+ * @return {!proto.qdb.WebConfigSetEntitySchemaRequest}
  */
-proto.qmq.WebConfigSetEntitySchemaRequest.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigSetEntitySchemaRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigSetEntitySchemaRequest;
-  return proto.qmq.WebConfigSetEntitySchemaRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigSetEntitySchemaRequest;
+  return proto.qdb.WebConfigSetEntitySchemaRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigSetEntitySchemaRequest} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigSetEntitySchemaRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigSetEntitySchemaRequest}
+ * @return {!proto.qdb.WebConfigSetEntitySchemaRequest}
  */
-proto.qmq.WebConfigSetEntitySchemaRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigSetEntitySchemaRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -4975,9 +4975,9 @@ proto.qmq.WebConfigSetEntitySchemaRequest.deserializeBinaryFromReader = function
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigSetEntitySchemaRequest.prototype.serializeBinary = function() {
+proto.qdb.WebConfigSetEntitySchemaRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigSetEntitySchemaRequest.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigSetEntitySchemaRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -4985,11 +4985,11 @@ proto.qmq.WebConfigSetEntitySchemaRequest.prototype.serializeBinary = function()
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigSetEntitySchemaRequest} message
+ * @param {!proto.qdb.WebConfigSetEntitySchemaRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigSetEntitySchemaRequest.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigSetEntitySchemaRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getName();
   if (f.length > 0) {
@@ -5012,16 +5012,16 @@ proto.qmq.WebConfigSetEntitySchemaRequest.serializeBinaryToWriter = function(mes
  * optional string name = 1;
  * @return {string}
  */
-proto.qmq.WebConfigSetEntitySchemaRequest.prototype.getName = function() {
+proto.qdb.WebConfigSetEntitySchemaRequest.prototype.getName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.WebConfigSetEntitySchemaRequest} returns this
+ * @return {!proto.qdb.WebConfigSetEntitySchemaRequest} returns this
  */
-proto.qmq.WebConfigSetEntitySchemaRequest.prototype.setName = function(value) {
+proto.qdb.WebConfigSetEntitySchemaRequest.prototype.setName = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -5030,16 +5030,16 @@ proto.qmq.WebConfigSetEntitySchemaRequest.prototype.setName = function(value) {
  * repeated string fields = 2;
  * @return {!Array<string>}
  */
-proto.qmq.WebConfigSetEntitySchemaRequest.prototype.getFieldsList = function() {
+proto.qdb.WebConfigSetEntitySchemaRequest.prototype.getFieldsList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 2));
 };
 
 
 /**
  * @param {!Array<string>} value
- * @return {!proto.qmq.WebConfigSetEntitySchemaRequest} returns this
+ * @return {!proto.qdb.WebConfigSetEntitySchemaRequest} returns this
  */
-proto.qmq.WebConfigSetEntitySchemaRequest.prototype.setFieldsList = function(value) {
+proto.qdb.WebConfigSetEntitySchemaRequest.prototype.setFieldsList = function(value) {
   return jspb.Message.setField(this, 2, value || []);
 };
 
@@ -5047,18 +5047,18 @@ proto.qmq.WebConfigSetEntitySchemaRequest.prototype.setFieldsList = function(val
 /**
  * @param {string} value
  * @param {number=} opt_index
- * @return {!proto.qmq.WebConfigSetEntitySchemaRequest} returns this
+ * @return {!proto.qdb.WebConfigSetEntitySchemaRequest} returns this
  */
-proto.qmq.WebConfigSetEntitySchemaRequest.prototype.addFields = function(value, opt_index) {
+proto.qdb.WebConfigSetEntitySchemaRequest.prototype.addFields = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 2, value, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
- * @return {!proto.qmq.WebConfigSetEntitySchemaRequest} returns this
+ * @return {!proto.qdb.WebConfigSetEntitySchemaRequest} returns this
  */
-proto.qmq.WebConfigSetEntitySchemaRequest.prototype.clearFieldsList = function() {
+proto.qdb.WebConfigSetEntitySchemaRequest.prototype.clearFieldsList = function() {
   return this.setFieldsList([]);
 };
 
@@ -5079,8 +5079,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigSetEntitySchemaResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigSetEntitySchemaResponse.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigSetEntitySchemaResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigSetEntitySchemaResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -5089,11 +5089,11 @@ proto.qmq.WebConfigSetEntitySchemaResponse.prototype.toObject = function(opt_inc
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigSetEntitySchemaResponse} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigSetEntitySchemaResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigSetEntitySchemaResponse.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigSetEntitySchemaResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     status: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
@@ -5109,23 +5109,23 @@ proto.qmq.WebConfigSetEntitySchemaResponse.toObject = function(includeInstance, 
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigSetEntitySchemaResponse}
+ * @return {!proto.qdb.WebConfigSetEntitySchemaResponse}
  */
-proto.qmq.WebConfigSetEntitySchemaResponse.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigSetEntitySchemaResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigSetEntitySchemaResponse;
-  return proto.qmq.WebConfigSetEntitySchemaResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigSetEntitySchemaResponse;
+  return proto.qdb.WebConfigSetEntitySchemaResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigSetEntitySchemaResponse} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigSetEntitySchemaResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigSetEntitySchemaResponse}
+ * @return {!proto.qdb.WebConfigSetEntitySchemaResponse}
  */
-proto.qmq.WebConfigSetEntitySchemaResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigSetEntitySchemaResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -5133,7 +5133,7 @@ proto.qmq.WebConfigSetEntitySchemaResponse.deserializeBinaryFromReader = functio
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.qmq.WebConfigSetEntitySchemaResponse.StatusEnum} */ (reader.readEnum());
+      var value = /** @type {!proto.qdb.WebConfigSetEntitySchemaResponse.StatusEnum} */ (reader.readEnum());
       msg.setStatus(value);
       break;
     default:
@@ -5149,9 +5149,9 @@ proto.qmq.WebConfigSetEntitySchemaResponse.deserializeBinaryFromReader = functio
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigSetEntitySchemaResponse.prototype.serializeBinary = function() {
+proto.qdb.WebConfigSetEntitySchemaResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigSetEntitySchemaResponse.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigSetEntitySchemaResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -5159,11 +5159,11 @@ proto.qmq.WebConfigSetEntitySchemaResponse.prototype.serializeBinary = function(
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigSetEntitySchemaResponse} message
+ * @param {!proto.qdb.WebConfigSetEntitySchemaResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigSetEntitySchemaResponse.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigSetEntitySchemaResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getStatus();
   if (f !== 0.0) {
@@ -5178,7 +5178,7 @@ proto.qmq.WebConfigSetEntitySchemaResponse.serializeBinaryToWriter = function(me
 /**
  * @enum {number}
  */
-proto.qmq.WebConfigSetEntitySchemaResponse.StatusEnum = {
+proto.qdb.WebConfigSetEntitySchemaResponse.StatusEnum = {
   UNSPECIFIED: 0,
   SUCCESS: 1,
   FAILURE: 2
@@ -5186,18 +5186,18 @@ proto.qmq.WebConfigSetEntitySchemaResponse.StatusEnum = {
 
 /**
  * optional StatusEnum status = 1;
- * @return {!proto.qmq.WebConfigSetEntitySchemaResponse.StatusEnum}
+ * @return {!proto.qdb.WebConfigSetEntitySchemaResponse.StatusEnum}
  */
-proto.qmq.WebConfigSetEntitySchemaResponse.prototype.getStatus = function() {
-  return /** @type {!proto.qmq.WebConfigSetEntitySchemaResponse.StatusEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.qdb.WebConfigSetEntitySchemaResponse.prototype.getStatus = function() {
+  return /** @type {!proto.qdb.WebConfigSetEntitySchemaResponse.StatusEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {!proto.qmq.WebConfigSetEntitySchemaResponse.StatusEnum} value
- * @return {!proto.qmq.WebConfigSetEntitySchemaResponse} returns this
+ * @param {!proto.qdb.WebConfigSetEntitySchemaResponse.StatusEnum} value
+ * @return {!proto.qdb.WebConfigSetEntitySchemaResponse} returns this
  */
-proto.qmq.WebConfigSetEntitySchemaResponse.prototype.setStatus = function(value) {
+proto.qdb.WebConfigSetEntitySchemaResponse.prototype.setStatus = function(value) {
   return jspb.Message.setProto3EnumField(this, 1, value);
 };
 
@@ -5218,8 +5218,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigCreateSnapshotRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigCreateSnapshotRequest.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigCreateSnapshotRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigCreateSnapshotRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -5228,11 +5228,11 @@ proto.qmq.WebConfigCreateSnapshotRequest.prototype.toObject = function(opt_inclu
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigCreateSnapshotRequest} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigCreateSnapshotRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigCreateSnapshotRequest.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigCreateSnapshotRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
 
   };
@@ -5248,23 +5248,23 @@ proto.qmq.WebConfigCreateSnapshotRequest.toObject = function(includeInstance, ms
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigCreateSnapshotRequest}
+ * @return {!proto.qdb.WebConfigCreateSnapshotRequest}
  */
-proto.qmq.WebConfigCreateSnapshotRequest.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigCreateSnapshotRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigCreateSnapshotRequest;
-  return proto.qmq.WebConfigCreateSnapshotRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigCreateSnapshotRequest;
+  return proto.qdb.WebConfigCreateSnapshotRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigCreateSnapshotRequest} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigCreateSnapshotRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigCreateSnapshotRequest}
+ * @return {!proto.qdb.WebConfigCreateSnapshotRequest}
  */
-proto.qmq.WebConfigCreateSnapshotRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigCreateSnapshotRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -5284,9 +5284,9 @@ proto.qmq.WebConfigCreateSnapshotRequest.deserializeBinaryFromReader = function(
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigCreateSnapshotRequest.prototype.serializeBinary = function() {
+proto.qdb.WebConfigCreateSnapshotRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigCreateSnapshotRequest.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigCreateSnapshotRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -5294,11 +5294,11 @@ proto.qmq.WebConfigCreateSnapshotRequest.prototype.serializeBinary = function() 
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigCreateSnapshotRequest} message
+ * @param {!proto.qdb.WebConfigCreateSnapshotRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigCreateSnapshotRequest.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigCreateSnapshotRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
 };
 
@@ -5319,8 +5319,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigCreateSnapshotResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigCreateSnapshotResponse.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigCreateSnapshotResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigCreateSnapshotResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -5329,14 +5329,14 @@ proto.qmq.WebConfigCreateSnapshotResponse.prototype.toObject = function(opt_incl
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigCreateSnapshotResponse} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigCreateSnapshotResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigCreateSnapshotResponse.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigCreateSnapshotResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     status: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    snapshot: (f = msg.getSnapshot()) && proto.qmq.DatabaseSnapshot.toObject(includeInstance, f)
+    snapshot: (f = msg.getSnapshot()) && proto.qdb.DatabaseSnapshot.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -5350,23 +5350,23 @@ proto.qmq.WebConfigCreateSnapshotResponse.toObject = function(includeInstance, m
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigCreateSnapshotResponse}
+ * @return {!proto.qdb.WebConfigCreateSnapshotResponse}
  */
-proto.qmq.WebConfigCreateSnapshotResponse.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigCreateSnapshotResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigCreateSnapshotResponse;
-  return proto.qmq.WebConfigCreateSnapshotResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigCreateSnapshotResponse;
+  return proto.qdb.WebConfigCreateSnapshotResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigCreateSnapshotResponse} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigCreateSnapshotResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigCreateSnapshotResponse}
+ * @return {!proto.qdb.WebConfigCreateSnapshotResponse}
  */
-proto.qmq.WebConfigCreateSnapshotResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigCreateSnapshotResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -5374,12 +5374,12 @@ proto.qmq.WebConfigCreateSnapshotResponse.deserializeBinaryFromReader = function
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.qmq.WebConfigCreateSnapshotResponse.StatusEnum} */ (reader.readEnum());
+      var value = /** @type {!proto.qdb.WebConfigCreateSnapshotResponse.StatusEnum} */ (reader.readEnum());
       msg.setStatus(value);
       break;
     case 2:
-      var value = new proto.qmq.DatabaseSnapshot;
-      reader.readMessage(value,proto.qmq.DatabaseSnapshot.deserializeBinaryFromReader);
+      var value = new proto.qdb.DatabaseSnapshot;
+      reader.readMessage(value,proto.qdb.DatabaseSnapshot.deserializeBinaryFromReader);
       msg.setSnapshot(value);
       break;
     default:
@@ -5395,9 +5395,9 @@ proto.qmq.WebConfigCreateSnapshotResponse.deserializeBinaryFromReader = function
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigCreateSnapshotResponse.prototype.serializeBinary = function() {
+proto.qdb.WebConfigCreateSnapshotResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigCreateSnapshotResponse.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigCreateSnapshotResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -5405,11 +5405,11 @@ proto.qmq.WebConfigCreateSnapshotResponse.prototype.serializeBinary = function()
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigCreateSnapshotResponse} message
+ * @param {!proto.qdb.WebConfigCreateSnapshotResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigCreateSnapshotResponse.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigCreateSnapshotResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getStatus();
   if (f !== 0.0) {
@@ -5423,7 +5423,7 @@ proto.qmq.WebConfigCreateSnapshotResponse.serializeBinaryToWriter = function(mes
     writer.writeMessage(
       2,
       f,
-      proto.qmq.DatabaseSnapshot.serializeBinaryToWriter
+      proto.qdb.DatabaseSnapshot.serializeBinaryToWriter
     );
   }
 };
@@ -5432,7 +5432,7 @@ proto.qmq.WebConfigCreateSnapshotResponse.serializeBinaryToWriter = function(mes
 /**
  * @enum {number}
  */
-proto.qmq.WebConfigCreateSnapshotResponse.StatusEnum = {
+proto.qdb.WebConfigCreateSnapshotResponse.StatusEnum = {
   UNSPECIFIED: 0,
   SUCCESS: 1,
   FAILURE: 2
@@ -5440,46 +5440,46 @@ proto.qmq.WebConfigCreateSnapshotResponse.StatusEnum = {
 
 /**
  * optional StatusEnum status = 1;
- * @return {!proto.qmq.WebConfigCreateSnapshotResponse.StatusEnum}
+ * @return {!proto.qdb.WebConfigCreateSnapshotResponse.StatusEnum}
  */
-proto.qmq.WebConfigCreateSnapshotResponse.prototype.getStatus = function() {
-  return /** @type {!proto.qmq.WebConfigCreateSnapshotResponse.StatusEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.qdb.WebConfigCreateSnapshotResponse.prototype.getStatus = function() {
+  return /** @type {!proto.qdb.WebConfigCreateSnapshotResponse.StatusEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {!proto.qmq.WebConfigCreateSnapshotResponse.StatusEnum} value
- * @return {!proto.qmq.WebConfigCreateSnapshotResponse} returns this
+ * @param {!proto.qdb.WebConfigCreateSnapshotResponse.StatusEnum} value
+ * @return {!proto.qdb.WebConfigCreateSnapshotResponse} returns this
  */
-proto.qmq.WebConfigCreateSnapshotResponse.prototype.setStatus = function(value) {
+proto.qdb.WebConfigCreateSnapshotResponse.prototype.setStatus = function(value) {
   return jspb.Message.setProto3EnumField(this, 1, value);
 };
 
 
 /**
  * optional DatabaseSnapshot snapshot = 2;
- * @return {?proto.qmq.DatabaseSnapshot}
+ * @return {?proto.qdb.DatabaseSnapshot}
  */
-proto.qmq.WebConfigCreateSnapshotResponse.prototype.getSnapshot = function() {
-  return /** @type{?proto.qmq.DatabaseSnapshot} */ (
-    jspb.Message.getWrapperField(this, proto.qmq.DatabaseSnapshot, 2));
+proto.qdb.WebConfigCreateSnapshotResponse.prototype.getSnapshot = function() {
+  return /** @type{?proto.qdb.DatabaseSnapshot} */ (
+    jspb.Message.getWrapperField(this, proto.qdb.DatabaseSnapshot, 2));
 };
 
 
 /**
- * @param {?proto.qmq.DatabaseSnapshot|undefined} value
- * @return {!proto.qmq.WebConfigCreateSnapshotResponse} returns this
+ * @param {?proto.qdb.DatabaseSnapshot|undefined} value
+ * @return {!proto.qdb.WebConfigCreateSnapshotResponse} returns this
 */
-proto.qmq.WebConfigCreateSnapshotResponse.prototype.setSnapshot = function(value) {
+proto.qdb.WebConfigCreateSnapshotResponse.prototype.setSnapshot = function(value) {
   return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.WebConfigCreateSnapshotResponse} returns this
+ * @return {!proto.qdb.WebConfigCreateSnapshotResponse} returns this
  */
-proto.qmq.WebConfigCreateSnapshotResponse.prototype.clearSnapshot = function() {
+proto.qdb.WebConfigCreateSnapshotResponse.prototype.clearSnapshot = function() {
   return this.setSnapshot(undefined);
 };
 
@@ -5488,7 +5488,7 @@ proto.qmq.WebConfigCreateSnapshotResponse.prototype.clearSnapshot = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.WebConfigCreateSnapshotResponse.prototype.hasSnapshot = function() {
+proto.qdb.WebConfigCreateSnapshotResponse.prototype.hasSnapshot = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 
@@ -5509,8 +5509,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigRestoreSnapshotRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigRestoreSnapshotRequest.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigRestoreSnapshotRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigRestoreSnapshotRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -5519,13 +5519,13 @@ proto.qmq.WebConfigRestoreSnapshotRequest.prototype.toObject = function(opt_incl
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigRestoreSnapshotRequest} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigRestoreSnapshotRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigRestoreSnapshotRequest.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigRestoreSnapshotRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    snapshot: (f = msg.getSnapshot()) && proto.qmq.DatabaseSnapshot.toObject(includeInstance, f)
+    snapshot: (f = msg.getSnapshot()) && proto.qdb.DatabaseSnapshot.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -5539,23 +5539,23 @@ proto.qmq.WebConfigRestoreSnapshotRequest.toObject = function(includeInstance, m
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigRestoreSnapshotRequest}
+ * @return {!proto.qdb.WebConfigRestoreSnapshotRequest}
  */
-proto.qmq.WebConfigRestoreSnapshotRequest.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigRestoreSnapshotRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigRestoreSnapshotRequest;
-  return proto.qmq.WebConfigRestoreSnapshotRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigRestoreSnapshotRequest;
+  return proto.qdb.WebConfigRestoreSnapshotRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigRestoreSnapshotRequest} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigRestoreSnapshotRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigRestoreSnapshotRequest}
+ * @return {!proto.qdb.WebConfigRestoreSnapshotRequest}
  */
-proto.qmq.WebConfigRestoreSnapshotRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigRestoreSnapshotRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -5563,8 +5563,8 @@ proto.qmq.WebConfigRestoreSnapshotRequest.deserializeBinaryFromReader = function
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new proto.qmq.DatabaseSnapshot;
-      reader.readMessage(value,proto.qmq.DatabaseSnapshot.deserializeBinaryFromReader);
+      var value = new proto.qdb.DatabaseSnapshot;
+      reader.readMessage(value,proto.qdb.DatabaseSnapshot.deserializeBinaryFromReader);
       msg.setSnapshot(value);
       break;
     default:
@@ -5580,9 +5580,9 @@ proto.qmq.WebConfigRestoreSnapshotRequest.deserializeBinaryFromReader = function
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigRestoreSnapshotRequest.prototype.serializeBinary = function() {
+proto.qdb.WebConfigRestoreSnapshotRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigRestoreSnapshotRequest.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigRestoreSnapshotRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -5590,18 +5590,18 @@ proto.qmq.WebConfigRestoreSnapshotRequest.prototype.serializeBinary = function()
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigRestoreSnapshotRequest} message
+ * @param {!proto.qdb.WebConfigRestoreSnapshotRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigRestoreSnapshotRequest.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigRestoreSnapshotRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getSnapshot();
   if (f != null) {
     writer.writeMessage(
       1,
       f,
-      proto.qmq.DatabaseSnapshot.serializeBinaryToWriter
+      proto.qdb.DatabaseSnapshot.serializeBinaryToWriter
     );
   }
 };
@@ -5609,28 +5609,28 @@ proto.qmq.WebConfigRestoreSnapshotRequest.serializeBinaryToWriter = function(mes
 
 /**
  * optional DatabaseSnapshot snapshot = 1;
- * @return {?proto.qmq.DatabaseSnapshot}
+ * @return {?proto.qdb.DatabaseSnapshot}
  */
-proto.qmq.WebConfigRestoreSnapshotRequest.prototype.getSnapshot = function() {
-  return /** @type{?proto.qmq.DatabaseSnapshot} */ (
-    jspb.Message.getWrapperField(this, proto.qmq.DatabaseSnapshot, 1));
+proto.qdb.WebConfigRestoreSnapshotRequest.prototype.getSnapshot = function() {
+  return /** @type{?proto.qdb.DatabaseSnapshot} */ (
+    jspb.Message.getWrapperField(this, proto.qdb.DatabaseSnapshot, 1));
 };
 
 
 /**
- * @param {?proto.qmq.DatabaseSnapshot|undefined} value
- * @return {!proto.qmq.WebConfigRestoreSnapshotRequest} returns this
+ * @param {?proto.qdb.DatabaseSnapshot|undefined} value
+ * @return {!proto.qdb.WebConfigRestoreSnapshotRequest} returns this
 */
-proto.qmq.WebConfigRestoreSnapshotRequest.prototype.setSnapshot = function(value) {
+proto.qdb.WebConfigRestoreSnapshotRequest.prototype.setSnapshot = function(value) {
   return jspb.Message.setWrapperField(this, 1, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.WebConfigRestoreSnapshotRequest} returns this
+ * @return {!proto.qdb.WebConfigRestoreSnapshotRequest} returns this
  */
-proto.qmq.WebConfigRestoreSnapshotRequest.prototype.clearSnapshot = function() {
+proto.qdb.WebConfigRestoreSnapshotRequest.prototype.clearSnapshot = function() {
   return this.setSnapshot(undefined);
 };
 
@@ -5639,7 +5639,7 @@ proto.qmq.WebConfigRestoreSnapshotRequest.prototype.clearSnapshot = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.WebConfigRestoreSnapshotRequest.prototype.hasSnapshot = function() {
+proto.qdb.WebConfigRestoreSnapshotRequest.prototype.hasSnapshot = function() {
   return jspb.Message.getField(this, 1) != null;
 };
 
@@ -5660,8 +5660,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigRestoreSnapshotResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigRestoreSnapshotResponse.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigRestoreSnapshotResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigRestoreSnapshotResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -5670,11 +5670,11 @@ proto.qmq.WebConfigRestoreSnapshotResponse.prototype.toObject = function(opt_inc
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigRestoreSnapshotResponse} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigRestoreSnapshotResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigRestoreSnapshotResponse.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigRestoreSnapshotResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     status: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
@@ -5690,23 +5690,23 @@ proto.qmq.WebConfigRestoreSnapshotResponse.toObject = function(includeInstance, 
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigRestoreSnapshotResponse}
+ * @return {!proto.qdb.WebConfigRestoreSnapshotResponse}
  */
-proto.qmq.WebConfigRestoreSnapshotResponse.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigRestoreSnapshotResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigRestoreSnapshotResponse;
-  return proto.qmq.WebConfigRestoreSnapshotResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigRestoreSnapshotResponse;
+  return proto.qdb.WebConfigRestoreSnapshotResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigRestoreSnapshotResponse} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigRestoreSnapshotResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigRestoreSnapshotResponse}
+ * @return {!proto.qdb.WebConfigRestoreSnapshotResponse}
  */
-proto.qmq.WebConfigRestoreSnapshotResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigRestoreSnapshotResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -5714,7 +5714,7 @@ proto.qmq.WebConfigRestoreSnapshotResponse.deserializeBinaryFromReader = functio
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.qmq.WebConfigRestoreSnapshotResponse.StatusEnum} */ (reader.readEnum());
+      var value = /** @type {!proto.qdb.WebConfigRestoreSnapshotResponse.StatusEnum} */ (reader.readEnum());
       msg.setStatus(value);
       break;
     default:
@@ -5730,9 +5730,9 @@ proto.qmq.WebConfigRestoreSnapshotResponse.deserializeBinaryFromReader = functio
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigRestoreSnapshotResponse.prototype.serializeBinary = function() {
+proto.qdb.WebConfigRestoreSnapshotResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigRestoreSnapshotResponse.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigRestoreSnapshotResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -5740,11 +5740,11 @@ proto.qmq.WebConfigRestoreSnapshotResponse.prototype.serializeBinary = function(
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigRestoreSnapshotResponse} message
+ * @param {!proto.qdb.WebConfigRestoreSnapshotResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigRestoreSnapshotResponse.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigRestoreSnapshotResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getStatus();
   if (f !== 0.0) {
@@ -5759,7 +5759,7 @@ proto.qmq.WebConfigRestoreSnapshotResponse.serializeBinaryToWriter = function(me
 /**
  * @enum {number}
  */
-proto.qmq.WebConfigRestoreSnapshotResponse.StatusEnum = {
+proto.qdb.WebConfigRestoreSnapshotResponse.StatusEnum = {
   UNSPECIFIED: 0,
   SUCCESS: 1,
   FAILURE: 2
@@ -5767,18 +5767,18 @@ proto.qmq.WebConfigRestoreSnapshotResponse.StatusEnum = {
 
 /**
  * optional StatusEnum status = 1;
- * @return {!proto.qmq.WebConfigRestoreSnapshotResponse.StatusEnum}
+ * @return {!proto.qdb.WebConfigRestoreSnapshotResponse.StatusEnum}
  */
-proto.qmq.WebConfigRestoreSnapshotResponse.prototype.getStatus = function() {
-  return /** @type {!proto.qmq.WebConfigRestoreSnapshotResponse.StatusEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.qdb.WebConfigRestoreSnapshotResponse.prototype.getStatus = function() {
+  return /** @type {!proto.qdb.WebConfigRestoreSnapshotResponse.StatusEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {!proto.qmq.WebConfigRestoreSnapshotResponse.StatusEnum} value
- * @return {!proto.qmq.WebConfigRestoreSnapshotResponse} returns this
+ * @param {!proto.qdb.WebConfigRestoreSnapshotResponse.StatusEnum} value
+ * @return {!proto.qdb.WebConfigRestoreSnapshotResponse} returns this
  */
-proto.qmq.WebConfigRestoreSnapshotResponse.prototype.setStatus = function(value) {
+proto.qdb.WebConfigRestoreSnapshotResponse.prototype.setStatus = function(value) {
   return jspb.Message.setProto3EnumField(this, 1, value);
 };
 
@@ -5799,8 +5799,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigGetRootRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigGetRootRequest.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigGetRootRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigGetRootRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -5809,11 +5809,11 @@ proto.qmq.WebConfigGetRootRequest.prototype.toObject = function(opt_includeInsta
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigGetRootRequest} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigGetRootRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetRootRequest.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigGetRootRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
 
   };
@@ -5829,23 +5829,23 @@ proto.qmq.WebConfigGetRootRequest.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigGetRootRequest}
+ * @return {!proto.qdb.WebConfigGetRootRequest}
  */
-proto.qmq.WebConfigGetRootRequest.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigGetRootRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigGetRootRequest;
-  return proto.qmq.WebConfigGetRootRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigGetRootRequest;
+  return proto.qdb.WebConfigGetRootRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigGetRootRequest} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigGetRootRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigGetRootRequest}
+ * @return {!proto.qdb.WebConfigGetRootRequest}
  */
-proto.qmq.WebConfigGetRootRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigGetRootRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -5865,9 +5865,9 @@ proto.qmq.WebConfigGetRootRequest.deserializeBinaryFromReader = function(msg, re
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigGetRootRequest.prototype.serializeBinary = function() {
+proto.qdb.WebConfigGetRootRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigGetRootRequest.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigGetRootRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -5875,11 +5875,11 @@ proto.qmq.WebConfigGetRootRequest.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigGetRootRequest} message
+ * @param {!proto.qdb.WebConfigGetRootRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetRootRequest.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigGetRootRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
 };
 
@@ -5900,8 +5900,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigGetRootResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigGetRootResponse.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigGetRootResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigGetRootResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -5910,11 +5910,11 @@ proto.qmq.WebConfigGetRootResponse.prototype.toObject = function(opt_includeInst
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigGetRootResponse} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigGetRootResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetRootResponse.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigGetRootResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     rootid: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
@@ -5930,23 +5930,23 @@ proto.qmq.WebConfigGetRootResponse.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigGetRootResponse}
+ * @return {!proto.qdb.WebConfigGetRootResponse}
  */
-proto.qmq.WebConfigGetRootResponse.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigGetRootResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigGetRootResponse;
-  return proto.qmq.WebConfigGetRootResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigGetRootResponse;
+  return proto.qdb.WebConfigGetRootResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigGetRootResponse} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigGetRootResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigGetRootResponse}
+ * @return {!proto.qdb.WebConfigGetRootResponse}
  */
-proto.qmq.WebConfigGetRootResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigGetRootResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -5970,9 +5970,9 @@ proto.qmq.WebConfigGetRootResponse.deserializeBinaryFromReader = function(msg, r
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigGetRootResponse.prototype.serializeBinary = function() {
+proto.qdb.WebConfigGetRootResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigGetRootResponse.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigGetRootResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -5980,11 +5980,11 @@ proto.qmq.WebConfigGetRootResponse.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigGetRootResponse} message
+ * @param {!proto.qdb.WebConfigGetRootResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetRootResponse.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigGetRootResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getRootid();
   if (f.length > 0) {
@@ -6000,16 +6000,16 @@ proto.qmq.WebConfigGetRootResponse.serializeBinaryToWriter = function(message, w
  * optional string rootId = 1;
  * @return {string}
  */
-proto.qmq.WebConfigGetRootResponse.prototype.getRootid = function() {
+proto.qdb.WebConfigGetRootResponse.prototype.getRootid = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.WebConfigGetRootResponse} returns this
+ * @return {!proto.qdb.WebConfigGetRootResponse} returns this
  */
-proto.qmq.WebConfigGetRootResponse.prototype.setRootid = function(value) {
+proto.qdb.WebConfigGetRootResponse.prototype.setRootid = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -6030,8 +6030,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigGetAllFieldsRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigGetAllFieldsRequest.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigGetAllFieldsRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigGetAllFieldsRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -6040,11 +6040,11 @@ proto.qmq.WebConfigGetAllFieldsRequest.prototype.toObject = function(opt_include
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigGetAllFieldsRequest} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigGetAllFieldsRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetAllFieldsRequest.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigGetAllFieldsRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
 
   };
@@ -6060,23 +6060,23 @@ proto.qmq.WebConfigGetAllFieldsRequest.toObject = function(includeInstance, msg)
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigGetAllFieldsRequest}
+ * @return {!proto.qdb.WebConfigGetAllFieldsRequest}
  */
-proto.qmq.WebConfigGetAllFieldsRequest.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigGetAllFieldsRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigGetAllFieldsRequest;
-  return proto.qmq.WebConfigGetAllFieldsRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigGetAllFieldsRequest;
+  return proto.qdb.WebConfigGetAllFieldsRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigGetAllFieldsRequest} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigGetAllFieldsRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigGetAllFieldsRequest}
+ * @return {!proto.qdb.WebConfigGetAllFieldsRequest}
  */
-proto.qmq.WebConfigGetAllFieldsRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigGetAllFieldsRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -6096,9 +6096,9 @@ proto.qmq.WebConfigGetAllFieldsRequest.deserializeBinaryFromReader = function(ms
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigGetAllFieldsRequest.prototype.serializeBinary = function() {
+proto.qdb.WebConfigGetAllFieldsRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigGetAllFieldsRequest.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigGetAllFieldsRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -6106,11 +6106,11 @@ proto.qmq.WebConfigGetAllFieldsRequest.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigGetAllFieldsRequest} message
+ * @param {!proto.qdb.WebConfigGetAllFieldsRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetAllFieldsRequest.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigGetAllFieldsRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
 };
 
@@ -6121,7 +6121,7 @@ proto.qmq.WebConfigGetAllFieldsRequest.serializeBinaryToWriter = function(messag
  * @private {!Array<number>}
  * @const
  */
-proto.qmq.WebConfigGetAllFieldsResponse.repeatedFields_ = [1];
+proto.qdb.WebConfigGetAllFieldsResponse.repeatedFields_ = [1];
 
 
 
@@ -6138,8 +6138,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebConfigGetAllFieldsResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebConfigGetAllFieldsResponse.toObject(opt_includeInstance, this);
+proto.qdb.WebConfigGetAllFieldsResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebConfigGetAllFieldsResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -6148,11 +6148,11 @@ proto.qmq.WebConfigGetAllFieldsResponse.prototype.toObject = function(opt_includ
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebConfigGetAllFieldsResponse} msg The msg instance to transform.
+ * @param {!proto.qdb.WebConfigGetAllFieldsResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetAllFieldsResponse.toObject = function(includeInstance, msg) {
+proto.qdb.WebConfigGetAllFieldsResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     fieldsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
   };
@@ -6168,23 +6168,23 @@ proto.qmq.WebConfigGetAllFieldsResponse.toObject = function(includeInstance, msg
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebConfigGetAllFieldsResponse}
+ * @return {!proto.qdb.WebConfigGetAllFieldsResponse}
  */
-proto.qmq.WebConfigGetAllFieldsResponse.deserializeBinary = function(bytes) {
+proto.qdb.WebConfigGetAllFieldsResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebConfigGetAllFieldsResponse;
-  return proto.qmq.WebConfigGetAllFieldsResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebConfigGetAllFieldsResponse;
+  return proto.qdb.WebConfigGetAllFieldsResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebConfigGetAllFieldsResponse} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebConfigGetAllFieldsResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebConfigGetAllFieldsResponse}
+ * @return {!proto.qdb.WebConfigGetAllFieldsResponse}
  */
-proto.qmq.WebConfigGetAllFieldsResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebConfigGetAllFieldsResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -6208,9 +6208,9 @@ proto.qmq.WebConfigGetAllFieldsResponse.deserializeBinaryFromReader = function(m
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebConfigGetAllFieldsResponse.prototype.serializeBinary = function() {
+proto.qdb.WebConfigGetAllFieldsResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebConfigGetAllFieldsResponse.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebConfigGetAllFieldsResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -6218,11 +6218,11 @@ proto.qmq.WebConfigGetAllFieldsResponse.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebConfigGetAllFieldsResponse} message
+ * @param {!proto.qdb.WebConfigGetAllFieldsResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebConfigGetAllFieldsResponse.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebConfigGetAllFieldsResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getFieldsList();
   if (f.length > 0) {
@@ -6238,16 +6238,16 @@ proto.qmq.WebConfigGetAllFieldsResponse.serializeBinaryToWriter = function(messa
  * repeated string fields = 1;
  * @return {!Array<string>}
  */
-proto.qmq.WebConfigGetAllFieldsResponse.prototype.getFieldsList = function() {
+proto.qdb.WebConfigGetAllFieldsResponse.prototype.getFieldsList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 1));
 };
 
 
 /**
  * @param {!Array<string>} value
- * @return {!proto.qmq.WebConfigGetAllFieldsResponse} returns this
+ * @return {!proto.qdb.WebConfigGetAllFieldsResponse} returns this
  */
-proto.qmq.WebConfigGetAllFieldsResponse.prototype.setFieldsList = function(value) {
+proto.qdb.WebConfigGetAllFieldsResponse.prototype.setFieldsList = function(value) {
   return jspb.Message.setField(this, 1, value || []);
 };
 
@@ -6255,18 +6255,18 @@ proto.qmq.WebConfigGetAllFieldsResponse.prototype.setFieldsList = function(value
 /**
  * @param {string} value
  * @param {number=} opt_index
- * @return {!proto.qmq.WebConfigGetAllFieldsResponse} returns this
+ * @return {!proto.qdb.WebConfigGetAllFieldsResponse} returns this
  */
-proto.qmq.WebConfigGetAllFieldsResponse.prototype.addFields = function(value, opt_index) {
+proto.qdb.WebConfigGetAllFieldsResponse.prototype.addFields = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
- * @return {!proto.qmq.WebConfigGetAllFieldsResponse} returns this
+ * @return {!proto.qdb.WebConfigGetAllFieldsResponse} returns this
  */
-proto.qmq.WebConfigGetAllFieldsResponse.prototype.clearFieldsList = function() {
+proto.qdb.WebConfigGetAllFieldsResponse.prototype.clearFieldsList = function() {
   return this.setFieldsList([]);
 };
 
@@ -6277,7 +6277,7 @@ proto.qmq.WebConfigGetAllFieldsResponse.prototype.clearFieldsList = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.qmq.WebRuntimeDatabaseRequest.repeatedFields_ = [2];
+proto.qdb.WebRuntimeDatabaseRequest.repeatedFields_ = [2];
 
 
 
@@ -6294,8 +6294,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebRuntimeDatabaseRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebRuntimeDatabaseRequest.toObject(opt_includeInstance, this);
+proto.qdb.WebRuntimeDatabaseRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebRuntimeDatabaseRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -6304,15 +6304,15 @@ proto.qmq.WebRuntimeDatabaseRequest.prototype.toObject = function(opt_includeIns
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebRuntimeDatabaseRequest} msg The msg instance to transform.
+ * @param {!proto.qdb.WebRuntimeDatabaseRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebRuntimeDatabaseRequest.toObject = function(includeInstance, msg) {
+proto.qdb.WebRuntimeDatabaseRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     requesttype: jspb.Message.getFieldWithDefault(msg, 1, 0),
     requestsList: jspb.Message.toObjectList(msg.getRequestsList(),
-    proto.qmq.DatabaseRequest.toObject, includeInstance)
+    proto.qdb.DatabaseRequest.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -6326,23 +6326,23 @@ proto.qmq.WebRuntimeDatabaseRequest.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebRuntimeDatabaseRequest}
+ * @return {!proto.qdb.WebRuntimeDatabaseRequest}
  */
-proto.qmq.WebRuntimeDatabaseRequest.deserializeBinary = function(bytes) {
+proto.qdb.WebRuntimeDatabaseRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebRuntimeDatabaseRequest;
-  return proto.qmq.WebRuntimeDatabaseRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebRuntimeDatabaseRequest;
+  return proto.qdb.WebRuntimeDatabaseRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebRuntimeDatabaseRequest} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebRuntimeDatabaseRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebRuntimeDatabaseRequest}
+ * @return {!proto.qdb.WebRuntimeDatabaseRequest}
  */
-proto.qmq.WebRuntimeDatabaseRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebRuntimeDatabaseRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -6350,12 +6350,12 @@ proto.qmq.WebRuntimeDatabaseRequest.deserializeBinaryFromReader = function(msg, 
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.qmq.WebRuntimeDatabaseRequest.RequestTypeEnum} */ (reader.readEnum());
+      var value = /** @type {!proto.qdb.WebRuntimeDatabaseRequest.RequestTypeEnum} */ (reader.readEnum());
       msg.setRequesttype(value);
       break;
     case 2:
-      var value = new proto.qmq.DatabaseRequest;
-      reader.readMessage(value,proto.qmq.DatabaseRequest.deserializeBinaryFromReader);
+      var value = new proto.qdb.DatabaseRequest;
+      reader.readMessage(value,proto.qdb.DatabaseRequest.deserializeBinaryFromReader);
       msg.addRequests(value);
       break;
     default:
@@ -6371,9 +6371,9 @@ proto.qmq.WebRuntimeDatabaseRequest.deserializeBinaryFromReader = function(msg, 
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebRuntimeDatabaseRequest.prototype.serializeBinary = function() {
+proto.qdb.WebRuntimeDatabaseRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebRuntimeDatabaseRequest.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebRuntimeDatabaseRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -6381,11 +6381,11 @@ proto.qmq.WebRuntimeDatabaseRequest.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebRuntimeDatabaseRequest} message
+ * @param {!proto.qdb.WebRuntimeDatabaseRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebRuntimeDatabaseRequest.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebRuntimeDatabaseRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getRequesttype();
   if (f !== 0.0) {
@@ -6399,7 +6399,7 @@ proto.qmq.WebRuntimeDatabaseRequest.serializeBinaryToWriter = function(message, 
     writer.writeRepeatedMessage(
       2,
       f,
-      proto.qmq.DatabaseRequest.serializeBinaryToWriter
+      proto.qdb.DatabaseRequest.serializeBinaryToWriter
     );
   }
 };
@@ -6408,7 +6408,7 @@ proto.qmq.WebRuntimeDatabaseRequest.serializeBinaryToWriter = function(message, 
 /**
  * @enum {number}
  */
-proto.qmq.WebRuntimeDatabaseRequest.RequestTypeEnum = {
+proto.qdb.WebRuntimeDatabaseRequest.RequestTypeEnum = {
   UNSPECIFIED: 0,
   READ: 1,
   WRITE: 2
@@ -6416,56 +6416,56 @@ proto.qmq.WebRuntimeDatabaseRequest.RequestTypeEnum = {
 
 /**
  * optional RequestTypeEnum requestType = 1;
- * @return {!proto.qmq.WebRuntimeDatabaseRequest.RequestTypeEnum}
+ * @return {!proto.qdb.WebRuntimeDatabaseRequest.RequestTypeEnum}
  */
-proto.qmq.WebRuntimeDatabaseRequest.prototype.getRequesttype = function() {
-  return /** @type {!proto.qmq.WebRuntimeDatabaseRequest.RequestTypeEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.qdb.WebRuntimeDatabaseRequest.prototype.getRequesttype = function() {
+  return /** @type {!proto.qdb.WebRuntimeDatabaseRequest.RequestTypeEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {!proto.qmq.WebRuntimeDatabaseRequest.RequestTypeEnum} value
- * @return {!proto.qmq.WebRuntimeDatabaseRequest} returns this
+ * @param {!proto.qdb.WebRuntimeDatabaseRequest.RequestTypeEnum} value
+ * @return {!proto.qdb.WebRuntimeDatabaseRequest} returns this
  */
-proto.qmq.WebRuntimeDatabaseRequest.prototype.setRequesttype = function(value) {
+proto.qdb.WebRuntimeDatabaseRequest.prototype.setRequesttype = function(value) {
   return jspb.Message.setProto3EnumField(this, 1, value);
 };
 
 
 /**
  * repeated DatabaseRequest requests = 2;
- * @return {!Array<!proto.qmq.DatabaseRequest>}
+ * @return {!Array<!proto.qdb.DatabaseRequest>}
  */
-proto.qmq.WebRuntimeDatabaseRequest.prototype.getRequestsList = function() {
-  return /** @type{!Array<!proto.qmq.DatabaseRequest>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.qmq.DatabaseRequest, 2));
+proto.qdb.WebRuntimeDatabaseRequest.prototype.getRequestsList = function() {
+  return /** @type{!Array<!proto.qdb.DatabaseRequest>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.qdb.DatabaseRequest, 2));
 };
 
 
 /**
- * @param {!Array<!proto.qmq.DatabaseRequest>} value
- * @return {!proto.qmq.WebRuntimeDatabaseRequest} returns this
+ * @param {!Array<!proto.qdb.DatabaseRequest>} value
+ * @return {!proto.qdb.WebRuntimeDatabaseRequest} returns this
 */
-proto.qmq.WebRuntimeDatabaseRequest.prototype.setRequestsList = function(value) {
+proto.qdb.WebRuntimeDatabaseRequest.prototype.setRequestsList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
 
 /**
- * @param {!proto.qmq.DatabaseRequest=} opt_value
+ * @param {!proto.qdb.DatabaseRequest=} opt_value
  * @param {number=} opt_index
- * @return {!proto.qmq.DatabaseRequest}
+ * @return {!proto.qdb.DatabaseRequest}
  */
-proto.qmq.WebRuntimeDatabaseRequest.prototype.addRequests = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.qmq.DatabaseRequest, opt_index);
+proto.qdb.WebRuntimeDatabaseRequest.prototype.addRequests = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.qdb.DatabaseRequest, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
- * @return {!proto.qmq.WebRuntimeDatabaseRequest} returns this
+ * @return {!proto.qdb.WebRuntimeDatabaseRequest} returns this
  */
-proto.qmq.WebRuntimeDatabaseRequest.prototype.clearRequestsList = function() {
+proto.qdb.WebRuntimeDatabaseRequest.prototype.clearRequestsList = function() {
   return this.setRequestsList([]);
 };
 
@@ -6476,7 +6476,7 @@ proto.qmq.WebRuntimeDatabaseRequest.prototype.clearRequestsList = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.qmq.WebRuntimeDatabaseResponse.repeatedFields_ = [2];
+proto.qdb.WebRuntimeDatabaseResponse.repeatedFields_ = [2];
 
 
 
@@ -6493,8 +6493,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebRuntimeDatabaseResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebRuntimeDatabaseResponse.toObject(opt_includeInstance, this);
+proto.qdb.WebRuntimeDatabaseResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebRuntimeDatabaseResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -6503,14 +6503,14 @@ proto.qmq.WebRuntimeDatabaseResponse.prototype.toObject = function(opt_includeIn
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebRuntimeDatabaseResponse} msg The msg instance to transform.
+ * @param {!proto.qdb.WebRuntimeDatabaseResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebRuntimeDatabaseResponse.toObject = function(includeInstance, msg) {
+proto.qdb.WebRuntimeDatabaseResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     responseList: jspb.Message.toObjectList(msg.getResponseList(),
-    proto.qmq.DatabaseRequest.toObject, includeInstance)
+    proto.qdb.DatabaseRequest.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -6524,23 +6524,23 @@ proto.qmq.WebRuntimeDatabaseResponse.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebRuntimeDatabaseResponse}
+ * @return {!proto.qdb.WebRuntimeDatabaseResponse}
  */
-proto.qmq.WebRuntimeDatabaseResponse.deserializeBinary = function(bytes) {
+proto.qdb.WebRuntimeDatabaseResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebRuntimeDatabaseResponse;
-  return proto.qmq.WebRuntimeDatabaseResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebRuntimeDatabaseResponse;
+  return proto.qdb.WebRuntimeDatabaseResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebRuntimeDatabaseResponse} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebRuntimeDatabaseResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebRuntimeDatabaseResponse}
+ * @return {!proto.qdb.WebRuntimeDatabaseResponse}
  */
-proto.qmq.WebRuntimeDatabaseResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebRuntimeDatabaseResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -6548,8 +6548,8 @@ proto.qmq.WebRuntimeDatabaseResponse.deserializeBinaryFromReader = function(msg,
     var field = reader.getFieldNumber();
     switch (field) {
     case 2:
-      var value = new proto.qmq.DatabaseRequest;
-      reader.readMessage(value,proto.qmq.DatabaseRequest.deserializeBinaryFromReader);
+      var value = new proto.qdb.DatabaseRequest;
+      reader.readMessage(value,proto.qdb.DatabaseRequest.deserializeBinaryFromReader);
       msg.addResponse(value);
       break;
     default:
@@ -6565,9 +6565,9 @@ proto.qmq.WebRuntimeDatabaseResponse.deserializeBinaryFromReader = function(msg,
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebRuntimeDatabaseResponse.prototype.serializeBinary = function() {
+proto.qdb.WebRuntimeDatabaseResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebRuntimeDatabaseResponse.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebRuntimeDatabaseResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -6575,18 +6575,18 @@ proto.qmq.WebRuntimeDatabaseResponse.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebRuntimeDatabaseResponse} message
+ * @param {!proto.qdb.WebRuntimeDatabaseResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebRuntimeDatabaseResponse.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebRuntimeDatabaseResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getResponseList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       2,
       f,
-      proto.qmq.DatabaseRequest.serializeBinaryToWriter
+      proto.qdb.DatabaseRequest.serializeBinaryToWriter
     );
   }
 };
@@ -6594,38 +6594,38 @@ proto.qmq.WebRuntimeDatabaseResponse.serializeBinaryToWriter = function(message,
 
 /**
  * repeated DatabaseRequest response = 2;
- * @return {!Array<!proto.qmq.DatabaseRequest>}
+ * @return {!Array<!proto.qdb.DatabaseRequest>}
  */
-proto.qmq.WebRuntimeDatabaseResponse.prototype.getResponseList = function() {
-  return /** @type{!Array<!proto.qmq.DatabaseRequest>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.qmq.DatabaseRequest, 2));
+proto.qdb.WebRuntimeDatabaseResponse.prototype.getResponseList = function() {
+  return /** @type{!Array<!proto.qdb.DatabaseRequest>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.qdb.DatabaseRequest, 2));
 };
 
 
 /**
- * @param {!Array<!proto.qmq.DatabaseRequest>} value
- * @return {!proto.qmq.WebRuntimeDatabaseResponse} returns this
+ * @param {!Array<!proto.qdb.DatabaseRequest>} value
+ * @return {!proto.qdb.WebRuntimeDatabaseResponse} returns this
 */
-proto.qmq.WebRuntimeDatabaseResponse.prototype.setResponseList = function(value) {
+proto.qdb.WebRuntimeDatabaseResponse.prototype.setResponseList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
 
 /**
- * @param {!proto.qmq.DatabaseRequest=} opt_value
+ * @param {!proto.qdb.DatabaseRequest=} opt_value
  * @param {number=} opt_index
- * @return {!proto.qmq.DatabaseRequest}
+ * @return {!proto.qdb.DatabaseRequest}
  */
-proto.qmq.WebRuntimeDatabaseResponse.prototype.addResponse = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.qmq.DatabaseRequest, opt_index);
+proto.qdb.WebRuntimeDatabaseResponse.prototype.addResponse = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.qdb.DatabaseRequest, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
- * @return {!proto.qmq.WebRuntimeDatabaseResponse} returns this
+ * @return {!proto.qdb.WebRuntimeDatabaseResponse} returns this
  */
-proto.qmq.WebRuntimeDatabaseResponse.prototype.clearResponseList = function() {
+proto.qdb.WebRuntimeDatabaseResponse.prototype.clearResponseList = function() {
   return this.setResponseList([]);
 };
 
@@ -6636,7 +6636,7 @@ proto.qmq.WebRuntimeDatabaseResponse.prototype.clearResponseList = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.qmq.WebRuntimeRegisterNotificationRequest.repeatedFields_ = [1];
+proto.qdb.WebRuntimeRegisterNotificationRequest.repeatedFields_ = [1];
 
 
 
@@ -6653,8 +6653,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebRuntimeRegisterNotificationRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebRuntimeRegisterNotificationRequest.toObject(opt_includeInstance, this);
+proto.qdb.WebRuntimeRegisterNotificationRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebRuntimeRegisterNotificationRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -6663,14 +6663,14 @@ proto.qmq.WebRuntimeRegisterNotificationRequest.prototype.toObject = function(op
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebRuntimeRegisterNotificationRequest} msg The msg instance to transform.
+ * @param {!proto.qdb.WebRuntimeRegisterNotificationRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebRuntimeRegisterNotificationRequest.toObject = function(includeInstance, msg) {
+proto.qdb.WebRuntimeRegisterNotificationRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     requestsList: jspb.Message.toObjectList(msg.getRequestsList(),
-    proto.qmq.DatabaseNotificationConfig.toObject, includeInstance)
+    proto.qdb.DatabaseNotificationConfig.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -6684,23 +6684,23 @@ proto.qmq.WebRuntimeRegisterNotificationRequest.toObject = function(includeInsta
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebRuntimeRegisterNotificationRequest}
+ * @return {!proto.qdb.WebRuntimeRegisterNotificationRequest}
  */
-proto.qmq.WebRuntimeRegisterNotificationRequest.deserializeBinary = function(bytes) {
+proto.qdb.WebRuntimeRegisterNotificationRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebRuntimeRegisterNotificationRequest;
-  return proto.qmq.WebRuntimeRegisterNotificationRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebRuntimeRegisterNotificationRequest;
+  return proto.qdb.WebRuntimeRegisterNotificationRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebRuntimeRegisterNotificationRequest} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebRuntimeRegisterNotificationRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebRuntimeRegisterNotificationRequest}
+ * @return {!proto.qdb.WebRuntimeRegisterNotificationRequest}
  */
-proto.qmq.WebRuntimeRegisterNotificationRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebRuntimeRegisterNotificationRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -6708,8 +6708,8 @@ proto.qmq.WebRuntimeRegisterNotificationRequest.deserializeBinaryFromReader = fu
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new proto.qmq.DatabaseNotificationConfig;
-      reader.readMessage(value,proto.qmq.DatabaseNotificationConfig.deserializeBinaryFromReader);
+      var value = new proto.qdb.DatabaseNotificationConfig;
+      reader.readMessage(value,proto.qdb.DatabaseNotificationConfig.deserializeBinaryFromReader);
       msg.addRequests(value);
       break;
     default:
@@ -6725,9 +6725,9 @@ proto.qmq.WebRuntimeRegisterNotificationRequest.deserializeBinaryFromReader = fu
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebRuntimeRegisterNotificationRequest.prototype.serializeBinary = function() {
+proto.qdb.WebRuntimeRegisterNotificationRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebRuntimeRegisterNotificationRequest.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebRuntimeRegisterNotificationRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -6735,18 +6735,18 @@ proto.qmq.WebRuntimeRegisterNotificationRequest.prototype.serializeBinary = func
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebRuntimeRegisterNotificationRequest} message
+ * @param {!proto.qdb.WebRuntimeRegisterNotificationRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebRuntimeRegisterNotificationRequest.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebRuntimeRegisterNotificationRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getRequestsList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       1,
       f,
-      proto.qmq.DatabaseNotificationConfig.serializeBinaryToWriter
+      proto.qdb.DatabaseNotificationConfig.serializeBinaryToWriter
     );
   }
 };
@@ -6754,38 +6754,38 @@ proto.qmq.WebRuntimeRegisterNotificationRequest.serializeBinaryToWriter = functi
 
 /**
  * repeated DatabaseNotificationConfig requests = 1;
- * @return {!Array<!proto.qmq.DatabaseNotificationConfig>}
+ * @return {!Array<!proto.qdb.DatabaseNotificationConfig>}
  */
-proto.qmq.WebRuntimeRegisterNotificationRequest.prototype.getRequestsList = function() {
-  return /** @type{!Array<!proto.qmq.DatabaseNotificationConfig>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.qmq.DatabaseNotificationConfig, 1));
+proto.qdb.WebRuntimeRegisterNotificationRequest.prototype.getRequestsList = function() {
+  return /** @type{!Array<!proto.qdb.DatabaseNotificationConfig>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.qdb.DatabaseNotificationConfig, 1));
 };
 
 
 /**
- * @param {!Array<!proto.qmq.DatabaseNotificationConfig>} value
- * @return {!proto.qmq.WebRuntimeRegisterNotificationRequest} returns this
+ * @param {!Array<!proto.qdb.DatabaseNotificationConfig>} value
+ * @return {!proto.qdb.WebRuntimeRegisterNotificationRequest} returns this
 */
-proto.qmq.WebRuntimeRegisterNotificationRequest.prototype.setRequestsList = function(value) {
+proto.qdb.WebRuntimeRegisterNotificationRequest.prototype.setRequestsList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 1, value);
 };
 
 
 /**
- * @param {!proto.qmq.DatabaseNotificationConfig=} opt_value
+ * @param {!proto.qdb.DatabaseNotificationConfig=} opt_value
  * @param {number=} opt_index
- * @return {!proto.qmq.DatabaseNotificationConfig}
+ * @return {!proto.qdb.DatabaseNotificationConfig}
  */
-proto.qmq.WebRuntimeRegisterNotificationRequest.prototype.addRequests = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.qmq.DatabaseNotificationConfig, opt_index);
+proto.qdb.WebRuntimeRegisterNotificationRequest.prototype.addRequests = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.qdb.DatabaseNotificationConfig, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
- * @return {!proto.qmq.WebRuntimeRegisterNotificationRequest} returns this
+ * @return {!proto.qdb.WebRuntimeRegisterNotificationRequest} returns this
  */
-proto.qmq.WebRuntimeRegisterNotificationRequest.prototype.clearRequestsList = function() {
+proto.qdb.WebRuntimeRegisterNotificationRequest.prototype.clearRequestsList = function() {
   return this.setRequestsList([]);
 };
 
@@ -6796,7 +6796,7 @@ proto.qmq.WebRuntimeRegisterNotificationRequest.prototype.clearRequestsList = fu
  * @private {!Array<number>}
  * @const
  */
-proto.qmq.WebRuntimeRegisterNotificationResponse.repeatedFields_ = [1];
+proto.qdb.WebRuntimeRegisterNotificationResponse.repeatedFields_ = [1];
 
 
 
@@ -6813,8 +6813,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebRuntimeRegisterNotificationResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebRuntimeRegisterNotificationResponse.toObject(opt_includeInstance, this);
+proto.qdb.WebRuntimeRegisterNotificationResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebRuntimeRegisterNotificationResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -6823,11 +6823,11 @@ proto.qmq.WebRuntimeRegisterNotificationResponse.prototype.toObject = function(o
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebRuntimeRegisterNotificationResponse} msg The msg instance to transform.
+ * @param {!proto.qdb.WebRuntimeRegisterNotificationResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebRuntimeRegisterNotificationResponse.toObject = function(includeInstance, msg) {
+proto.qdb.WebRuntimeRegisterNotificationResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     tokensList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
   };
@@ -6843,23 +6843,23 @@ proto.qmq.WebRuntimeRegisterNotificationResponse.toObject = function(includeInst
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebRuntimeRegisterNotificationResponse}
+ * @return {!proto.qdb.WebRuntimeRegisterNotificationResponse}
  */
-proto.qmq.WebRuntimeRegisterNotificationResponse.deserializeBinary = function(bytes) {
+proto.qdb.WebRuntimeRegisterNotificationResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebRuntimeRegisterNotificationResponse;
-  return proto.qmq.WebRuntimeRegisterNotificationResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebRuntimeRegisterNotificationResponse;
+  return proto.qdb.WebRuntimeRegisterNotificationResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebRuntimeRegisterNotificationResponse} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebRuntimeRegisterNotificationResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebRuntimeRegisterNotificationResponse}
+ * @return {!proto.qdb.WebRuntimeRegisterNotificationResponse}
  */
-proto.qmq.WebRuntimeRegisterNotificationResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebRuntimeRegisterNotificationResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -6883,9 +6883,9 @@ proto.qmq.WebRuntimeRegisterNotificationResponse.deserializeBinaryFromReader = f
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebRuntimeRegisterNotificationResponse.prototype.serializeBinary = function() {
+proto.qdb.WebRuntimeRegisterNotificationResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebRuntimeRegisterNotificationResponse.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebRuntimeRegisterNotificationResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -6893,11 +6893,11 @@ proto.qmq.WebRuntimeRegisterNotificationResponse.prototype.serializeBinary = fun
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebRuntimeRegisterNotificationResponse} message
+ * @param {!proto.qdb.WebRuntimeRegisterNotificationResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebRuntimeRegisterNotificationResponse.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebRuntimeRegisterNotificationResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getTokensList();
   if (f.length > 0) {
@@ -6913,16 +6913,16 @@ proto.qmq.WebRuntimeRegisterNotificationResponse.serializeBinaryToWriter = funct
  * repeated string tokens = 1;
  * @return {!Array<string>}
  */
-proto.qmq.WebRuntimeRegisterNotificationResponse.prototype.getTokensList = function() {
+proto.qdb.WebRuntimeRegisterNotificationResponse.prototype.getTokensList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 1));
 };
 
 
 /**
  * @param {!Array<string>} value
- * @return {!proto.qmq.WebRuntimeRegisterNotificationResponse} returns this
+ * @return {!proto.qdb.WebRuntimeRegisterNotificationResponse} returns this
  */
-proto.qmq.WebRuntimeRegisterNotificationResponse.prototype.setTokensList = function(value) {
+proto.qdb.WebRuntimeRegisterNotificationResponse.prototype.setTokensList = function(value) {
   return jspb.Message.setField(this, 1, value || []);
 };
 
@@ -6930,18 +6930,18 @@ proto.qmq.WebRuntimeRegisterNotificationResponse.prototype.setTokensList = funct
 /**
  * @param {string} value
  * @param {number=} opt_index
- * @return {!proto.qmq.WebRuntimeRegisterNotificationResponse} returns this
+ * @return {!proto.qdb.WebRuntimeRegisterNotificationResponse} returns this
  */
-proto.qmq.WebRuntimeRegisterNotificationResponse.prototype.addTokens = function(value, opt_index) {
+proto.qdb.WebRuntimeRegisterNotificationResponse.prototype.addTokens = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
- * @return {!proto.qmq.WebRuntimeRegisterNotificationResponse} returns this
+ * @return {!proto.qdb.WebRuntimeRegisterNotificationResponse} returns this
  */
-proto.qmq.WebRuntimeRegisterNotificationResponse.prototype.clearTokensList = function() {
+proto.qdb.WebRuntimeRegisterNotificationResponse.prototype.clearTokensList = function() {
   return this.setTokensList([]);
 };
 
@@ -6962,8 +6962,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebRuntimeGetNotificationsRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebRuntimeGetNotificationsRequest.toObject(opt_includeInstance, this);
+proto.qdb.WebRuntimeGetNotificationsRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebRuntimeGetNotificationsRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -6972,11 +6972,11 @@ proto.qmq.WebRuntimeGetNotificationsRequest.prototype.toObject = function(opt_in
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebRuntimeGetNotificationsRequest} msg The msg instance to transform.
+ * @param {!proto.qdb.WebRuntimeGetNotificationsRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebRuntimeGetNotificationsRequest.toObject = function(includeInstance, msg) {
+proto.qdb.WebRuntimeGetNotificationsRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
 
   };
@@ -6992,23 +6992,23 @@ proto.qmq.WebRuntimeGetNotificationsRequest.toObject = function(includeInstance,
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebRuntimeGetNotificationsRequest}
+ * @return {!proto.qdb.WebRuntimeGetNotificationsRequest}
  */
-proto.qmq.WebRuntimeGetNotificationsRequest.deserializeBinary = function(bytes) {
+proto.qdb.WebRuntimeGetNotificationsRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebRuntimeGetNotificationsRequest;
-  return proto.qmq.WebRuntimeGetNotificationsRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebRuntimeGetNotificationsRequest;
+  return proto.qdb.WebRuntimeGetNotificationsRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebRuntimeGetNotificationsRequest} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebRuntimeGetNotificationsRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebRuntimeGetNotificationsRequest}
+ * @return {!proto.qdb.WebRuntimeGetNotificationsRequest}
  */
-proto.qmq.WebRuntimeGetNotificationsRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebRuntimeGetNotificationsRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -7028,9 +7028,9 @@ proto.qmq.WebRuntimeGetNotificationsRequest.deserializeBinaryFromReader = functi
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebRuntimeGetNotificationsRequest.prototype.serializeBinary = function() {
+proto.qdb.WebRuntimeGetNotificationsRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebRuntimeGetNotificationsRequest.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebRuntimeGetNotificationsRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -7038,11 +7038,11 @@ proto.qmq.WebRuntimeGetNotificationsRequest.prototype.serializeBinary = function
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebRuntimeGetNotificationsRequest} message
+ * @param {!proto.qdb.WebRuntimeGetNotificationsRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebRuntimeGetNotificationsRequest.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebRuntimeGetNotificationsRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
 };
 
@@ -7053,7 +7053,7 @@ proto.qmq.WebRuntimeGetNotificationsRequest.serializeBinaryToWriter = function(m
  * @private {!Array<number>}
  * @const
  */
-proto.qmq.WebRuntimeGetNotificationsResponse.repeatedFields_ = [1];
+proto.qdb.WebRuntimeGetNotificationsResponse.repeatedFields_ = [1];
 
 
 
@@ -7070,8 +7070,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebRuntimeGetNotificationsResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebRuntimeGetNotificationsResponse.toObject(opt_includeInstance, this);
+proto.qdb.WebRuntimeGetNotificationsResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebRuntimeGetNotificationsResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -7080,14 +7080,14 @@ proto.qmq.WebRuntimeGetNotificationsResponse.prototype.toObject = function(opt_i
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebRuntimeGetNotificationsResponse} msg The msg instance to transform.
+ * @param {!proto.qdb.WebRuntimeGetNotificationsResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebRuntimeGetNotificationsResponse.toObject = function(includeInstance, msg) {
+proto.qdb.WebRuntimeGetNotificationsResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     notificationsList: jspb.Message.toObjectList(msg.getNotificationsList(),
-    proto.qmq.DatabaseNotification.toObject, includeInstance)
+    proto.qdb.DatabaseNotification.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -7101,23 +7101,23 @@ proto.qmq.WebRuntimeGetNotificationsResponse.toObject = function(includeInstance
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebRuntimeGetNotificationsResponse}
+ * @return {!proto.qdb.WebRuntimeGetNotificationsResponse}
  */
-proto.qmq.WebRuntimeGetNotificationsResponse.deserializeBinary = function(bytes) {
+proto.qdb.WebRuntimeGetNotificationsResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebRuntimeGetNotificationsResponse;
-  return proto.qmq.WebRuntimeGetNotificationsResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebRuntimeGetNotificationsResponse;
+  return proto.qdb.WebRuntimeGetNotificationsResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebRuntimeGetNotificationsResponse} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebRuntimeGetNotificationsResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebRuntimeGetNotificationsResponse}
+ * @return {!proto.qdb.WebRuntimeGetNotificationsResponse}
  */
-proto.qmq.WebRuntimeGetNotificationsResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebRuntimeGetNotificationsResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -7125,8 +7125,8 @@ proto.qmq.WebRuntimeGetNotificationsResponse.deserializeBinaryFromReader = funct
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new proto.qmq.DatabaseNotification;
-      reader.readMessage(value,proto.qmq.DatabaseNotification.deserializeBinaryFromReader);
+      var value = new proto.qdb.DatabaseNotification;
+      reader.readMessage(value,proto.qdb.DatabaseNotification.deserializeBinaryFromReader);
       msg.addNotifications(value);
       break;
     default:
@@ -7142,9 +7142,9 @@ proto.qmq.WebRuntimeGetNotificationsResponse.deserializeBinaryFromReader = funct
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebRuntimeGetNotificationsResponse.prototype.serializeBinary = function() {
+proto.qdb.WebRuntimeGetNotificationsResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebRuntimeGetNotificationsResponse.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebRuntimeGetNotificationsResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -7152,18 +7152,18 @@ proto.qmq.WebRuntimeGetNotificationsResponse.prototype.serializeBinary = functio
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebRuntimeGetNotificationsResponse} message
+ * @param {!proto.qdb.WebRuntimeGetNotificationsResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebRuntimeGetNotificationsResponse.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebRuntimeGetNotificationsResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getNotificationsList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       1,
       f,
-      proto.qmq.DatabaseNotification.serializeBinaryToWriter
+      proto.qdb.DatabaseNotification.serializeBinaryToWriter
     );
   }
 };
@@ -7171,38 +7171,38 @@ proto.qmq.WebRuntimeGetNotificationsResponse.serializeBinaryToWriter = function(
 
 /**
  * repeated DatabaseNotification notifications = 1;
- * @return {!Array<!proto.qmq.DatabaseNotification>}
+ * @return {!Array<!proto.qdb.DatabaseNotification>}
  */
-proto.qmq.WebRuntimeGetNotificationsResponse.prototype.getNotificationsList = function() {
-  return /** @type{!Array<!proto.qmq.DatabaseNotification>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.qmq.DatabaseNotification, 1));
+proto.qdb.WebRuntimeGetNotificationsResponse.prototype.getNotificationsList = function() {
+  return /** @type{!Array<!proto.qdb.DatabaseNotification>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.qdb.DatabaseNotification, 1));
 };
 
 
 /**
- * @param {!Array<!proto.qmq.DatabaseNotification>} value
- * @return {!proto.qmq.WebRuntimeGetNotificationsResponse} returns this
+ * @param {!Array<!proto.qdb.DatabaseNotification>} value
+ * @return {!proto.qdb.WebRuntimeGetNotificationsResponse} returns this
 */
-proto.qmq.WebRuntimeGetNotificationsResponse.prototype.setNotificationsList = function(value) {
+proto.qdb.WebRuntimeGetNotificationsResponse.prototype.setNotificationsList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 1, value);
 };
 
 
 /**
- * @param {!proto.qmq.DatabaseNotification=} opt_value
+ * @param {!proto.qdb.DatabaseNotification=} opt_value
  * @param {number=} opt_index
- * @return {!proto.qmq.DatabaseNotification}
+ * @return {!proto.qdb.DatabaseNotification}
  */
-proto.qmq.WebRuntimeGetNotificationsResponse.prototype.addNotifications = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.qmq.DatabaseNotification, opt_index);
+proto.qdb.WebRuntimeGetNotificationsResponse.prototype.addNotifications = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.qdb.DatabaseNotification, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
- * @return {!proto.qmq.WebRuntimeGetNotificationsResponse} returns this
+ * @return {!proto.qdb.WebRuntimeGetNotificationsResponse} returns this
  */
-proto.qmq.WebRuntimeGetNotificationsResponse.prototype.clearNotificationsList = function() {
+proto.qdb.WebRuntimeGetNotificationsResponse.prototype.clearNotificationsList = function() {
   return this.setNotificationsList([]);
 };
 
@@ -7213,7 +7213,7 @@ proto.qmq.WebRuntimeGetNotificationsResponse.prototype.clearNotificationsList = 
  * @private {!Array<number>}
  * @const
  */
-proto.qmq.WebRuntimeUnregisterNotificationRequest.repeatedFields_ = [1];
+proto.qdb.WebRuntimeUnregisterNotificationRequest.repeatedFields_ = [1];
 
 
 
@@ -7230,8 +7230,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebRuntimeUnregisterNotificationRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebRuntimeUnregisterNotificationRequest.toObject(opt_includeInstance, this);
+proto.qdb.WebRuntimeUnregisterNotificationRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebRuntimeUnregisterNotificationRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -7240,11 +7240,11 @@ proto.qmq.WebRuntimeUnregisterNotificationRequest.prototype.toObject = function(
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebRuntimeUnregisterNotificationRequest} msg The msg instance to transform.
+ * @param {!proto.qdb.WebRuntimeUnregisterNotificationRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebRuntimeUnregisterNotificationRequest.toObject = function(includeInstance, msg) {
+proto.qdb.WebRuntimeUnregisterNotificationRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     tokensList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
   };
@@ -7260,23 +7260,23 @@ proto.qmq.WebRuntimeUnregisterNotificationRequest.toObject = function(includeIns
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebRuntimeUnregisterNotificationRequest}
+ * @return {!proto.qdb.WebRuntimeUnregisterNotificationRequest}
  */
-proto.qmq.WebRuntimeUnregisterNotificationRequest.deserializeBinary = function(bytes) {
+proto.qdb.WebRuntimeUnregisterNotificationRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebRuntimeUnregisterNotificationRequest;
-  return proto.qmq.WebRuntimeUnregisterNotificationRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebRuntimeUnregisterNotificationRequest;
+  return proto.qdb.WebRuntimeUnregisterNotificationRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebRuntimeUnregisterNotificationRequest} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebRuntimeUnregisterNotificationRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebRuntimeUnregisterNotificationRequest}
+ * @return {!proto.qdb.WebRuntimeUnregisterNotificationRequest}
  */
-proto.qmq.WebRuntimeUnregisterNotificationRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebRuntimeUnregisterNotificationRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -7300,9 +7300,9 @@ proto.qmq.WebRuntimeUnregisterNotificationRequest.deserializeBinaryFromReader = 
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebRuntimeUnregisterNotificationRequest.prototype.serializeBinary = function() {
+proto.qdb.WebRuntimeUnregisterNotificationRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebRuntimeUnregisterNotificationRequest.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebRuntimeUnregisterNotificationRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -7310,11 +7310,11 @@ proto.qmq.WebRuntimeUnregisterNotificationRequest.prototype.serializeBinary = fu
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebRuntimeUnregisterNotificationRequest} message
+ * @param {!proto.qdb.WebRuntimeUnregisterNotificationRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebRuntimeUnregisterNotificationRequest.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebRuntimeUnregisterNotificationRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getTokensList();
   if (f.length > 0) {
@@ -7330,16 +7330,16 @@ proto.qmq.WebRuntimeUnregisterNotificationRequest.serializeBinaryToWriter = func
  * repeated string tokens = 1;
  * @return {!Array<string>}
  */
-proto.qmq.WebRuntimeUnregisterNotificationRequest.prototype.getTokensList = function() {
+proto.qdb.WebRuntimeUnregisterNotificationRequest.prototype.getTokensList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 1));
 };
 
 
 /**
  * @param {!Array<string>} value
- * @return {!proto.qmq.WebRuntimeUnregisterNotificationRequest} returns this
+ * @return {!proto.qdb.WebRuntimeUnregisterNotificationRequest} returns this
  */
-proto.qmq.WebRuntimeUnregisterNotificationRequest.prototype.setTokensList = function(value) {
+proto.qdb.WebRuntimeUnregisterNotificationRequest.prototype.setTokensList = function(value) {
   return jspb.Message.setField(this, 1, value || []);
 };
 
@@ -7347,18 +7347,18 @@ proto.qmq.WebRuntimeUnregisterNotificationRequest.prototype.setTokensList = func
 /**
  * @param {string} value
  * @param {number=} opt_index
- * @return {!proto.qmq.WebRuntimeUnregisterNotificationRequest} returns this
+ * @return {!proto.qdb.WebRuntimeUnregisterNotificationRequest} returns this
  */
-proto.qmq.WebRuntimeUnregisterNotificationRequest.prototype.addTokens = function(value, opt_index) {
+proto.qdb.WebRuntimeUnregisterNotificationRequest.prototype.addTokens = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
- * @return {!proto.qmq.WebRuntimeUnregisterNotificationRequest} returns this
+ * @return {!proto.qdb.WebRuntimeUnregisterNotificationRequest} returns this
  */
-proto.qmq.WebRuntimeUnregisterNotificationRequest.prototype.clearTokensList = function() {
+proto.qdb.WebRuntimeUnregisterNotificationRequest.prototype.clearTokensList = function() {
   return this.setTokensList([]);
 };
 
@@ -7379,8 +7379,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebRuntimeUnregisterNotificationResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebRuntimeUnregisterNotificationResponse.toObject(opt_includeInstance, this);
+proto.qdb.WebRuntimeUnregisterNotificationResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebRuntimeUnregisterNotificationResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -7389,11 +7389,11 @@ proto.qmq.WebRuntimeUnregisterNotificationResponse.prototype.toObject = function
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebRuntimeUnregisterNotificationResponse} msg The msg instance to transform.
+ * @param {!proto.qdb.WebRuntimeUnregisterNotificationResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebRuntimeUnregisterNotificationResponse.toObject = function(includeInstance, msg) {
+proto.qdb.WebRuntimeUnregisterNotificationResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     status: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
@@ -7409,23 +7409,23 @@ proto.qmq.WebRuntimeUnregisterNotificationResponse.toObject = function(includeIn
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebRuntimeUnregisterNotificationResponse}
+ * @return {!proto.qdb.WebRuntimeUnregisterNotificationResponse}
  */
-proto.qmq.WebRuntimeUnregisterNotificationResponse.deserializeBinary = function(bytes) {
+proto.qdb.WebRuntimeUnregisterNotificationResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebRuntimeUnregisterNotificationResponse;
-  return proto.qmq.WebRuntimeUnregisterNotificationResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebRuntimeUnregisterNotificationResponse;
+  return proto.qdb.WebRuntimeUnregisterNotificationResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebRuntimeUnregisterNotificationResponse} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebRuntimeUnregisterNotificationResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebRuntimeUnregisterNotificationResponse}
+ * @return {!proto.qdb.WebRuntimeUnregisterNotificationResponse}
  */
-proto.qmq.WebRuntimeUnregisterNotificationResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebRuntimeUnregisterNotificationResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -7433,7 +7433,7 @@ proto.qmq.WebRuntimeUnregisterNotificationResponse.deserializeBinaryFromReader =
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.qmq.WebRuntimeUnregisterNotificationResponse.StatusEnum} */ (reader.readEnum());
+      var value = /** @type {!proto.qdb.WebRuntimeUnregisterNotificationResponse.StatusEnum} */ (reader.readEnum());
       msg.setStatus(value);
       break;
     default:
@@ -7449,9 +7449,9 @@ proto.qmq.WebRuntimeUnregisterNotificationResponse.deserializeBinaryFromReader =
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebRuntimeUnregisterNotificationResponse.prototype.serializeBinary = function() {
+proto.qdb.WebRuntimeUnregisterNotificationResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebRuntimeUnregisterNotificationResponse.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebRuntimeUnregisterNotificationResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -7459,11 +7459,11 @@ proto.qmq.WebRuntimeUnregisterNotificationResponse.prototype.serializeBinary = f
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebRuntimeUnregisterNotificationResponse} message
+ * @param {!proto.qdb.WebRuntimeUnregisterNotificationResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebRuntimeUnregisterNotificationResponse.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebRuntimeUnregisterNotificationResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getStatus();
   if (f !== 0.0) {
@@ -7478,7 +7478,7 @@ proto.qmq.WebRuntimeUnregisterNotificationResponse.serializeBinaryToWriter = fun
 /**
  * @enum {number}
  */
-proto.qmq.WebRuntimeUnregisterNotificationResponse.StatusEnum = {
+proto.qdb.WebRuntimeUnregisterNotificationResponse.StatusEnum = {
   UNSPECIFIED: 0,
   SUCCESS: 1,
   FAILURE: 2
@@ -7486,18 +7486,18 @@ proto.qmq.WebRuntimeUnregisterNotificationResponse.StatusEnum = {
 
 /**
  * optional StatusEnum status = 1;
- * @return {!proto.qmq.WebRuntimeUnregisterNotificationResponse.StatusEnum}
+ * @return {!proto.qdb.WebRuntimeUnregisterNotificationResponse.StatusEnum}
  */
-proto.qmq.WebRuntimeUnregisterNotificationResponse.prototype.getStatus = function() {
-  return /** @type {!proto.qmq.WebRuntimeUnregisterNotificationResponse.StatusEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.qdb.WebRuntimeUnregisterNotificationResponse.prototype.getStatus = function() {
+  return /** @type {!proto.qdb.WebRuntimeUnregisterNotificationResponse.StatusEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {!proto.qmq.WebRuntimeUnregisterNotificationResponse.StatusEnum} value
- * @return {!proto.qmq.WebRuntimeUnregisterNotificationResponse} returns this
+ * @param {!proto.qdb.WebRuntimeUnregisterNotificationResponse.StatusEnum} value
+ * @return {!proto.qdb.WebRuntimeUnregisterNotificationResponse} returns this
  */
-proto.qmq.WebRuntimeUnregisterNotificationResponse.prototype.setStatus = function(value) {
+proto.qdb.WebRuntimeUnregisterNotificationResponse.prototype.setStatus = function(value) {
   return jspb.Message.setProto3EnumField(this, 1, value);
 };
 
@@ -7518,8 +7518,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest.toObject(opt_includeInstance, this);
+proto.qdb.WebRuntimeGetDatabaseConnectionStatusRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebRuntimeGetDatabaseConnectionStatusRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -7528,11 +7528,11 @@ proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest.prototype.toObject = func
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest} msg The msg instance to transform.
+ * @param {!proto.qdb.WebRuntimeGetDatabaseConnectionStatusRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest.toObject = function(includeInstance, msg) {
+proto.qdb.WebRuntimeGetDatabaseConnectionStatusRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
 
   };
@@ -7548,23 +7548,23 @@ proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest.toObject = function(inclu
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest}
+ * @return {!proto.qdb.WebRuntimeGetDatabaseConnectionStatusRequest}
  */
-proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest.deserializeBinary = function(bytes) {
+proto.qdb.WebRuntimeGetDatabaseConnectionStatusRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest;
-  return proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebRuntimeGetDatabaseConnectionStatusRequest;
+  return proto.qdb.WebRuntimeGetDatabaseConnectionStatusRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebRuntimeGetDatabaseConnectionStatusRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest}
+ * @return {!proto.qdb.WebRuntimeGetDatabaseConnectionStatusRequest}
  */
-proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebRuntimeGetDatabaseConnectionStatusRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -7584,9 +7584,9 @@ proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest.deserializeBinaryFromRead
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest.prototype.serializeBinary = function() {
+proto.qdb.WebRuntimeGetDatabaseConnectionStatusRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebRuntimeGetDatabaseConnectionStatusRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -7594,11 +7594,11 @@ proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest.prototype.serializeBinary
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest} message
+ * @param {!proto.qdb.WebRuntimeGetDatabaseConnectionStatusRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebRuntimeGetDatabaseConnectionStatusRequest.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebRuntimeGetDatabaseConnectionStatusRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
 };
 
@@ -7619,8 +7619,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.toObject(opt_includeInstance, this);
+proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -7629,13 +7629,13 @@ proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.prototype.toObject = fun
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse} msg The msg instance to transform.
+ * @param {!proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.toObject = function(includeInstance, msg) {
+proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    status: (f = msg.getStatus()) && proto.qmq.ConnectionState.toObject(includeInstance, f)
+    status: (f = msg.getStatus()) && proto.qdb.ConnectionState.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -7649,23 +7649,23 @@ proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.toObject = function(incl
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse}
+ * @return {!proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse}
  */
-proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.deserializeBinary = function(bytes) {
+proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse;
-  return proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse;
+  return proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse} msg The message object to deserialize into.
+ * @param {!proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse}
+ * @return {!proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse}
  */
-proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -7673,8 +7673,8 @@ proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.deserializeBinaryFromRea
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new proto.qmq.ConnectionState;
-      reader.readMessage(value,proto.qmq.ConnectionState.deserializeBinaryFromReader);
+      var value = new proto.qdb.ConnectionState;
+      reader.readMessage(value,proto.qdb.ConnectionState.deserializeBinaryFromReader);
       msg.setStatus(value);
       break;
     default:
@@ -7690,9 +7690,9 @@ proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.deserializeBinaryFromRea
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.prototype.serializeBinary = function() {
+proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.serializeBinaryToWriter(this, writer);
+  proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -7700,18 +7700,18 @@ proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.prototype.serializeBinar
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse} message
+ * @param {!proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getStatus();
   if (f != null) {
     writer.writeMessage(
       1,
       f,
-      proto.qmq.ConnectionState.serializeBinaryToWriter
+      proto.qdb.ConnectionState.serializeBinaryToWriter
     );
   }
 };
@@ -7719,28 +7719,28 @@ proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.serializeBinaryToWriter 
 
 /**
  * optional ConnectionState status = 1;
- * @return {?proto.qmq.ConnectionState}
+ * @return {?proto.qdb.ConnectionState}
  */
-proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.prototype.getStatus = function() {
-  return /** @type{?proto.qmq.ConnectionState} */ (
-    jspb.Message.getWrapperField(this, proto.qmq.ConnectionState, 1));
+proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse.prototype.getStatus = function() {
+  return /** @type{?proto.qdb.ConnectionState} */ (
+    jspb.Message.getWrapperField(this, proto.qdb.ConnectionState, 1));
 };
 
 
 /**
- * @param {?proto.qmq.ConnectionState|undefined} value
- * @return {!proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse} returns this
+ * @param {?proto.qdb.ConnectionState|undefined} value
+ * @return {!proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse} returns this
 */
-proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.prototype.setStatus = function(value) {
+proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse.prototype.setStatus = function(value) {
   return jspb.Message.setWrapperField(this, 1, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse} returns this
+ * @return {!proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse} returns this
  */
-proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.prototype.clearStatus = function() {
+proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse.prototype.clearStatus = function() {
   return this.setStatus(undefined);
 };
 
@@ -7749,7 +7749,7 @@ proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.prototype.clearStatus = 
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.prototype.hasStatus = function() {
+proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse.prototype.hasStatus = function() {
   return jspb.Message.getField(this, 1) != null;
 };
 
@@ -7760,7 +7760,7 @@ proto.qmq.WebRuntimeGetDatabaseConnectionStatusResponse.prototype.hasStatus = fu
  * @private {!Array<number>}
  * @const
  */
-proto.qmq.DatabaseEntity.repeatedFields_ = [5];
+proto.qdb.DatabaseEntity.repeatedFields_ = [5];
 
 
 
@@ -7777,8 +7777,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.DatabaseEntity.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.DatabaseEntity.toObject(opt_includeInstance, this);
+proto.qdb.DatabaseEntity.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.DatabaseEntity.toObject(opt_includeInstance, this);
 };
 
 
@@ -7787,18 +7787,18 @@ proto.qmq.DatabaseEntity.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.DatabaseEntity} msg The msg instance to transform.
+ * @param {!proto.qdb.DatabaseEntity} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.DatabaseEntity.toObject = function(includeInstance, msg) {
+proto.qdb.DatabaseEntity.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
     type: jspb.Message.getFieldWithDefault(msg, 2, ""),
     name: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    parent: (f = msg.getParent()) && proto.qmq.EntityReference.toObject(includeInstance, f),
+    parent: (f = msg.getParent()) && proto.qdb.EntityReference.toObject(includeInstance, f),
     childrenList: jspb.Message.toObjectList(msg.getChildrenList(),
-    proto.qmq.EntityReference.toObject, includeInstance)
+    proto.qdb.EntityReference.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -7812,23 +7812,23 @@ proto.qmq.DatabaseEntity.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.DatabaseEntity}
+ * @return {!proto.qdb.DatabaseEntity}
  */
-proto.qmq.DatabaseEntity.deserializeBinary = function(bytes) {
+proto.qdb.DatabaseEntity.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.DatabaseEntity;
-  return proto.qmq.DatabaseEntity.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.DatabaseEntity;
+  return proto.qdb.DatabaseEntity.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.DatabaseEntity} msg The message object to deserialize into.
+ * @param {!proto.qdb.DatabaseEntity} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.DatabaseEntity}
+ * @return {!proto.qdb.DatabaseEntity}
  */
-proto.qmq.DatabaseEntity.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.DatabaseEntity.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -7848,13 +7848,13 @@ proto.qmq.DatabaseEntity.deserializeBinaryFromReader = function(msg, reader) {
       msg.setName(value);
       break;
     case 4:
-      var value = new proto.qmq.EntityReference;
-      reader.readMessage(value,proto.qmq.EntityReference.deserializeBinaryFromReader);
+      var value = new proto.qdb.EntityReference;
+      reader.readMessage(value,proto.qdb.EntityReference.deserializeBinaryFromReader);
       msg.setParent(value);
       break;
     case 5:
-      var value = new proto.qmq.EntityReference;
-      reader.readMessage(value,proto.qmq.EntityReference.deserializeBinaryFromReader);
+      var value = new proto.qdb.EntityReference;
+      reader.readMessage(value,proto.qdb.EntityReference.deserializeBinaryFromReader);
       msg.addChildren(value);
       break;
     default:
@@ -7870,9 +7870,9 @@ proto.qmq.DatabaseEntity.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.DatabaseEntity.prototype.serializeBinary = function() {
+proto.qdb.DatabaseEntity.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.DatabaseEntity.serializeBinaryToWriter(this, writer);
+  proto.qdb.DatabaseEntity.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -7880,11 +7880,11 @@ proto.qmq.DatabaseEntity.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.DatabaseEntity} message
+ * @param {!proto.qdb.DatabaseEntity} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.DatabaseEntity.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.DatabaseEntity.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getId();
   if (f.length > 0) {
@@ -7912,7 +7912,7 @@ proto.qmq.DatabaseEntity.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       4,
       f,
-      proto.qmq.EntityReference.serializeBinaryToWriter
+      proto.qdb.EntityReference.serializeBinaryToWriter
     );
   }
   f = message.getChildrenList();
@@ -7920,7 +7920,7 @@ proto.qmq.DatabaseEntity.serializeBinaryToWriter = function(message, writer) {
     writer.writeRepeatedMessage(
       5,
       f,
-      proto.qmq.EntityReference.serializeBinaryToWriter
+      proto.qdb.EntityReference.serializeBinaryToWriter
     );
   }
 };
@@ -7930,16 +7930,16 @@ proto.qmq.DatabaseEntity.serializeBinaryToWriter = function(message, writer) {
  * optional string id = 1;
  * @return {string}
  */
-proto.qmq.DatabaseEntity.prototype.getId = function() {
+proto.qdb.DatabaseEntity.prototype.getId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.DatabaseEntity} returns this
+ * @return {!proto.qdb.DatabaseEntity} returns this
  */
-proto.qmq.DatabaseEntity.prototype.setId = function(value) {
+proto.qdb.DatabaseEntity.prototype.setId = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -7948,16 +7948,16 @@ proto.qmq.DatabaseEntity.prototype.setId = function(value) {
  * optional string type = 2;
  * @return {string}
  */
-proto.qmq.DatabaseEntity.prototype.getType = function() {
+proto.qdb.DatabaseEntity.prototype.getType = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.DatabaseEntity} returns this
+ * @return {!proto.qdb.DatabaseEntity} returns this
  */
-proto.qmq.DatabaseEntity.prototype.setType = function(value) {
+proto.qdb.DatabaseEntity.prototype.setType = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -7966,44 +7966,44 @@ proto.qmq.DatabaseEntity.prototype.setType = function(value) {
  * optional string name = 3;
  * @return {string}
  */
-proto.qmq.DatabaseEntity.prototype.getName = function() {
+proto.qdb.DatabaseEntity.prototype.getName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.DatabaseEntity} returns this
+ * @return {!proto.qdb.DatabaseEntity} returns this
  */
-proto.qmq.DatabaseEntity.prototype.setName = function(value) {
+proto.qdb.DatabaseEntity.prototype.setName = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
  * optional EntityReference parent = 4;
- * @return {?proto.qmq.EntityReference}
+ * @return {?proto.qdb.EntityReference}
  */
-proto.qmq.DatabaseEntity.prototype.getParent = function() {
-  return /** @type{?proto.qmq.EntityReference} */ (
-    jspb.Message.getWrapperField(this, proto.qmq.EntityReference, 4));
+proto.qdb.DatabaseEntity.prototype.getParent = function() {
+  return /** @type{?proto.qdb.EntityReference} */ (
+    jspb.Message.getWrapperField(this, proto.qdb.EntityReference, 4));
 };
 
 
 /**
- * @param {?proto.qmq.EntityReference|undefined} value
- * @return {!proto.qmq.DatabaseEntity} returns this
+ * @param {?proto.qdb.EntityReference|undefined} value
+ * @return {!proto.qdb.DatabaseEntity} returns this
 */
-proto.qmq.DatabaseEntity.prototype.setParent = function(value) {
+proto.qdb.DatabaseEntity.prototype.setParent = function(value) {
   return jspb.Message.setWrapperField(this, 4, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.DatabaseEntity} returns this
+ * @return {!proto.qdb.DatabaseEntity} returns this
  */
-proto.qmq.DatabaseEntity.prototype.clearParent = function() {
+proto.qdb.DatabaseEntity.prototype.clearParent = function() {
   return this.setParent(undefined);
 };
 
@@ -8012,45 +8012,45 @@ proto.qmq.DatabaseEntity.prototype.clearParent = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.DatabaseEntity.prototype.hasParent = function() {
+proto.qdb.DatabaseEntity.prototype.hasParent = function() {
   return jspb.Message.getField(this, 4) != null;
 };
 
 
 /**
  * repeated EntityReference children = 5;
- * @return {!Array<!proto.qmq.EntityReference>}
+ * @return {!Array<!proto.qdb.EntityReference>}
  */
-proto.qmq.DatabaseEntity.prototype.getChildrenList = function() {
-  return /** @type{!Array<!proto.qmq.EntityReference>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.qmq.EntityReference, 5));
+proto.qdb.DatabaseEntity.prototype.getChildrenList = function() {
+  return /** @type{!Array<!proto.qdb.EntityReference>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.qdb.EntityReference, 5));
 };
 
 
 /**
- * @param {!Array<!proto.qmq.EntityReference>} value
- * @return {!proto.qmq.DatabaseEntity} returns this
+ * @param {!Array<!proto.qdb.EntityReference>} value
+ * @return {!proto.qdb.DatabaseEntity} returns this
 */
-proto.qmq.DatabaseEntity.prototype.setChildrenList = function(value) {
+proto.qdb.DatabaseEntity.prototype.setChildrenList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 5, value);
 };
 
 
 /**
- * @param {!proto.qmq.EntityReference=} opt_value
+ * @param {!proto.qdb.EntityReference=} opt_value
  * @param {number=} opt_index
- * @return {!proto.qmq.EntityReference}
+ * @return {!proto.qdb.EntityReference}
  */
-proto.qmq.DatabaseEntity.prototype.addChildren = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 5, opt_value, proto.qmq.EntityReference, opt_index);
+proto.qdb.DatabaseEntity.prototype.addChildren = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 5, opt_value, proto.qdb.EntityReference, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
- * @return {!proto.qmq.DatabaseEntity} returns this
+ * @return {!proto.qdb.DatabaseEntity} returns this
  */
-proto.qmq.DatabaseEntity.prototype.clearChildrenList = function() {
+proto.qdb.DatabaseEntity.prototype.clearChildrenList = function() {
   return this.setChildrenList([]);
 };
 
@@ -8071,8 +8071,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.DatabaseField.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.DatabaseField.toObject(opt_includeInstance, this);
+proto.qdb.DatabaseField.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.DatabaseField.toObject(opt_includeInstance, this);
 };
 
 
@@ -8081,11 +8081,11 @@ proto.qmq.DatabaseField.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.DatabaseField} msg The msg instance to transform.
+ * @param {!proto.qdb.DatabaseField} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.DatabaseField.toObject = function(includeInstance, msg) {
+proto.qdb.DatabaseField.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
@@ -8105,23 +8105,23 @@ proto.qmq.DatabaseField.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.DatabaseField}
+ * @return {!proto.qdb.DatabaseField}
  */
-proto.qmq.DatabaseField.deserializeBinary = function(bytes) {
+proto.qdb.DatabaseField.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.DatabaseField;
-  return proto.qmq.DatabaseField.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.DatabaseField;
+  return proto.qdb.DatabaseField.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.DatabaseField} msg The message object to deserialize into.
+ * @param {!proto.qdb.DatabaseField} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.DatabaseField}
+ * @return {!proto.qdb.DatabaseField}
  */
-proto.qmq.DatabaseField.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.DatabaseField.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -8163,9 +8163,9 @@ proto.qmq.DatabaseField.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.DatabaseField.prototype.serializeBinary = function() {
+proto.qdb.DatabaseField.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.DatabaseField.serializeBinaryToWriter(this, writer);
+  proto.qdb.DatabaseField.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -8173,11 +8173,11 @@ proto.qmq.DatabaseField.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.DatabaseField} message
+ * @param {!proto.qdb.DatabaseField} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.DatabaseField.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.DatabaseField.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getId();
   if (f.length > 0) {
@@ -8223,16 +8223,16 @@ proto.qmq.DatabaseField.serializeBinaryToWriter = function(message, writer) {
  * optional string id = 1;
  * @return {string}
  */
-proto.qmq.DatabaseField.prototype.getId = function() {
+proto.qdb.DatabaseField.prototype.getId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.DatabaseField} returns this
+ * @return {!proto.qdb.DatabaseField} returns this
  */
-proto.qmq.DatabaseField.prototype.setId = function(value) {
+proto.qdb.DatabaseField.prototype.setId = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -8241,16 +8241,16 @@ proto.qmq.DatabaseField.prototype.setId = function(value) {
  * optional string name = 2;
  * @return {string}
  */
-proto.qmq.DatabaseField.prototype.getName = function() {
+proto.qdb.DatabaseField.prototype.getName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.DatabaseField} returns this
+ * @return {!proto.qdb.DatabaseField} returns this
  */
-proto.qmq.DatabaseField.prototype.setName = function(value) {
+proto.qdb.DatabaseField.prototype.setName = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -8259,7 +8259,7 @@ proto.qmq.DatabaseField.prototype.setName = function(value) {
  * optional google.protobuf.Any value = 3;
  * @return {?proto.google.protobuf.Any}
  */
-proto.qmq.DatabaseField.prototype.getValue = function() {
+proto.qdb.DatabaseField.prototype.getValue = function() {
   return /** @type{?proto.google.protobuf.Any} */ (
     jspb.Message.getWrapperField(this, google_protobuf_any_pb.Any, 3));
 };
@@ -8267,18 +8267,18 @@ proto.qmq.DatabaseField.prototype.getValue = function() {
 
 /**
  * @param {?proto.google.protobuf.Any|undefined} value
- * @return {!proto.qmq.DatabaseField} returns this
+ * @return {!proto.qdb.DatabaseField} returns this
 */
-proto.qmq.DatabaseField.prototype.setValue = function(value) {
+proto.qdb.DatabaseField.prototype.setValue = function(value) {
   return jspb.Message.setWrapperField(this, 3, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.DatabaseField} returns this
+ * @return {!proto.qdb.DatabaseField} returns this
  */
-proto.qmq.DatabaseField.prototype.clearValue = function() {
+proto.qdb.DatabaseField.prototype.clearValue = function() {
   return this.setValue(undefined);
 };
 
@@ -8287,7 +8287,7 @@ proto.qmq.DatabaseField.prototype.clearValue = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.DatabaseField.prototype.hasValue = function() {
+proto.qdb.DatabaseField.prototype.hasValue = function() {
   return jspb.Message.getField(this, 3) != null;
 };
 
@@ -8296,7 +8296,7 @@ proto.qmq.DatabaseField.prototype.hasValue = function() {
  * optional google.protobuf.Timestamp writeTime = 4;
  * @return {?proto.google.protobuf.Timestamp}
  */
-proto.qmq.DatabaseField.prototype.getWritetime = function() {
+proto.qdb.DatabaseField.prototype.getWritetime = function() {
   return /** @type{?proto.google.protobuf.Timestamp} */ (
     jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 4));
 };
@@ -8304,18 +8304,18 @@ proto.qmq.DatabaseField.prototype.getWritetime = function() {
 
 /**
  * @param {?proto.google.protobuf.Timestamp|undefined} value
- * @return {!proto.qmq.DatabaseField} returns this
+ * @return {!proto.qdb.DatabaseField} returns this
 */
-proto.qmq.DatabaseField.prototype.setWritetime = function(value) {
+proto.qdb.DatabaseField.prototype.setWritetime = function(value) {
   return jspb.Message.setWrapperField(this, 4, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.DatabaseField} returns this
+ * @return {!proto.qdb.DatabaseField} returns this
  */
-proto.qmq.DatabaseField.prototype.clearWritetime = function() {
+proto.qdb.DatabaseField.prototype.clearWritetime = function() {
   return this.setWritetime(undefined);
 };
 
@@ -8324,7 +8324,7 @@ proto.qmq.DatabaseField.prototype.clearWritetime = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.DatabaseField.prototype.hasWritetime = function() {
+proto.qdb.DatabaseField.prototype.hasWritetime = function() {
   return jspb.Message.getField(this, 4) != null;
 };
 
@@ -8333,16 +8333,16 @@ proto.qmq.DatabaseField.prototype.hasWritetime = function() {
  * optional string writerId = 5;
  * @return {string}
  */
-proto.qmq.DatabaseField.prototype.getWriterid = function() {
+proto.qdb.DatabaseField.prototype.getWriterid = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.DatabaseField} returns this
+ * @return {!proto.qdb.DatabaseField} returns this
  */
-proto.qmq.DatabaseField.prototype.setWriterid = function(value) {
+proto.qdb.DatabaseField.prototype.setWriterid = function(value) {
   return jspb.Message.setProto3StringField(this, 5, value);
 };
 
@@ -8353,7 +8353,7 @@ proto.qmq.DatabaseField.prototype.setWriterid = function(value) {
  * @private {!Array<number>}
  * @const
  */
-proto.qmq.DatabaseNotificationConfig.repeatedFields_ = [4];
+proto.qdb.DatabaseNotificationConfig.repeatedFields_ = [4];
 
 
 
@@ -8370,8 +8370,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.DatabaseNotificationConfig.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.DatabaseNotificationConfig.toObject(opt_includeInstance, this);
+proto.qdb.DatabaseNotificationConfig.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.DatabaseNotificationConfig.toObject(opt_includeInstance, this);
 };
 
 
@@ -8380,11 +8380,11 @@ proto.qmq.DatabaseNotificationConfig.prototype.toObject = function(opt_includeIn
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.DatabaseNotificationConfig} msg The msg instance to transform.
+ * @param {!proto.qdb.DatabaseNotificationConfig} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.DatabaseNotificationConfig.toObject = function(includeInstance, msg) {
+proto.qdb.DatabaseNotificationConfig.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
     type: jspb.Message.getFieldWithDefault(msg, 2, ""),
@@ -8404,23 +8404,23 @@ proto.qmq.DatabaseNotificationConfig.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.DatabaseNotificationConfig}
+ * @return {!proto.qdb.DatabaseNotificationConfig}
  */
-proto.qmq.DatabaseNotificationConfig.deserializeBinary = function(bytes) {
+proto.qdb.DatabaseNotificationConfig.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.DatabaseNotificationConfig;
-  return proto.qmq.DatabaseNotificationConfig.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.DatabaseNotificationConfig;
+  return proto.qdb.DatabaseNotificationConfig.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.DatabaseNotificationConfig} msg The message object to deserialize into.
+ * @param {!proto.qdb.DatabaseNotificationConfig} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.DatabaseNotificationConfig}
+ * @return {!proto.qdb.DatabaseNotificationConfig}
  */
-proto.qmq.DatabaseNotificationConfig.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.DatabaseNotificationConfig.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -8460,9 +8460,9 @@ proto.qmq.DatabaseNotificationConfig.deserializeBinaryFromReader = function(msg,
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.DatabaseNotificationConfig.prototype.serializeBinary = function() {
+proto.qdb.DatabaseNotificationConfig.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.DatabaseNotificationConfig.serializeBinaryToWriter(this, writer);
+  proto.qdb.DatabaseNotificationConfig.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -8470,11 +8470,11 @@ proto.qmq.DatabaseNotificationConfig.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.DatabaseNotificationConfig} message
+ * @param {!proto.qdb.DatabaseNotificationConfig} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.DatabaseNotificationConfig.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.DatabaseNotificationConfig.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getId();
   if (f.length > 0) {
@@ -8518,16 +8518,16 @@ proto.qmq.DatabaseNotificationConfig.serializeBinaryToWriter = function(message,
  * optional string id = 1;
  * @return {string}
  */
-proto.qmq.DatabaseNotificationConfig.prototype.getId = function() {
+proto.qdb.DatabaseNotificationConfig.prototype.getId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.DatabaseNotificationConfig} returns this
+ * @return {!proto.qdb.DatabaseNotificationConfig} returns this
  */
-proto.qmq.DatabaseNotificationConfig.prototype.setId = function(value) {
+proto.qdb.DatabaseNotificationConfig.prototype.setId = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -8536,16 +8536,16 @@ proto.qmq.DatabaseNotificationConfig.prototype.setId = function(value) {
  * optional string type = 2;
  * @return {string}
  */
-proto.qmq.DatabaseNotificationConfig.prototype.getType = function() {
+proto.qdb.DatabaseNotificationConfig.prototype.getType = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.DatabaseNotificationConfig} returns this
+ * @return {!proto.qdb.DatabaseNotificationConfig} returns this
  */
-proto.qmq.DatabaseNotificationConfig.prototype.setType = function(value) {
+proto.qdb.DatabaseNotificationConfig.prototype.setType = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -8554,16 +8554,16 @@ proto.qmq.DatabaseNotificationConfig.prototype.setType = function(value) {
  * optional string field = 3;
  * @return {string}
  */
-proto.qmq.DatabaseNotificationConfig.prototype.getField = function() {
+proto.qdb.DatabaseNotificationConfig.prototype.getField = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.DatabaseNotificationConfig} returns this
+ * @return {!proto.qdb.DatabaseNotificationConfig} returns this
  */
-proto.qmq.DatabaseNotificationConfig.prototype.setField = function(value) {
+proto.qdb.DatabaseNotificationConfig.prototype.setField = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
@@ -8572,16 +8572,16 @@ proto.qmq.DatabaseNotificationConfig.prototype.setField = function(value) {
  * repeated string contextFields = 4;
  * @return {!Array<string>}
  */
-proto.qmq.DatabaseNotificationConfig.prototype.getContextfieldsList = function() {
+proto.qdb.DatabaseNotificationConfig.prototype.getContextfieldsList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 4));
 };
 
 
 /**
  * @param {!Array<string>} value
- * @return {!proto.qmq.DatabaseNotificationConfig} returns this
+ * @return {!proto.qdb.DatabaseNotificationConfig} returns this
  */
-proto.qmq.DatabaseNotificationConfig.prototype.setContextfieldsList = function(value) {
+proto.qdb.DatabaseNotificationConfig.prototype.setContextfieldsList = function(value) {
   return jspb.Message.setField(this, 4, value || []);
 };
 
@@ -8589,18 +8589,18 @@ proto.qmq.DatabaseNotificationConfig.prototype.setContextfieldsList = function(v
 /**
  * @param {string} value
  * @param {number=} opt_index
- * @return {!proto.qmq.DatabaseNotificationConfig} returns this
+ * @return {!proto.qdb.DatabaseNotificationConfig} returns this
  */
-proto.qmq.DatabaseNotificationConfig.prototype.addContextfields = function(value, opt_index) {
+proto.qdb.DatabaseNotificationConfig.prototype.addContextfields = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 4, value, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
- * @return {!proto.qmq.DatabaseNotificationConfig} returns this
+ * @return {!proto.qdb.DatabaseNotificationConfig} returns this
  */
-proto.qmq.DatabaseNotificationConfig.prototype.clearContextfieldsList = function() {
+proto.qdb.DatabaseNotificationConfig.prototype.clearContextfieldsList = function() {
   return this.setContextfieldsList([]);
 };
 
@@ -8609,16 +8609,16 @@ proto.qmq.DatabaseNotificationConfig.prototype.clearContextfieldsList = function
  * optional bool notifyOnChange = 5;
  * @return {boolean}
  */
-proto.qmq.DatabaseNotificationConfig.prototype.getNotifyonchange = function() {
+proto.qdb.DatabaseNotificationConfig.prototype.getNotifyonchange = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 5, false));
 };
 
 
 /**
  * @param {boolean} value
- * @return {!proto.qmq.DatabaseNotificationConfig} returns this
+ * @return {!proto.qdb.DatabaseNotificationConfig} returns this
  */
-proto.qmq.DatabaseNotificationConfig.prototype.setNotifyonchange = function(value) {
+proto.qdb.DatabaseNotificationConfig.prototype.setNotifyonchange = function(value) {
   return jspb.Message.setProto3BooleanField(this, 5, value);
 };
 
@@ -8629,7 +8629,7 @@ proto.qmq.DatabaseNotificationConfig.prototype.setNotifyonchange = function(valu
  * @private {!Array<number>}
  * @const
  */
-proto.qmq.DatabaseNotification.repeatedFields_ = [4];
+proto.qdb.DatabaseNotification.repeatedFields_ = [4];
 
 
 
@@ -8646,8 +8646,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.DatabaseNotification.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.DatabaseNotification.toObject(opt_includeInstance, this);
+proto.qdb.DatabaseNotification.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.DatabaseNotification.toObject(opt_includeInstance, this);
 };
 
 
@@ -8656,17 +8656,17 @@ proto.qmq.DatabaseNotification.prototype.toObject = function(opt_includeInstance
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.DatabaseNotification} msg The msg instance to transform.
+ * @param {!proto.qdb.DatabaseNotification} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.DatabaseNotification.toObject = function(includeInstance, msg) {
+proto.qdb.DatabaseNotification.toObject = function(includeInstance, msg) {
   var f, obj = {
     token: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    current: (f = msg.getCurrent()) && proto.qmq.DatabaseField.toObject(includeInstance, f),
-    previous: (f = msg.getPrevious()) && proto.qmq.DatabaseField.toObject(includeInstance, f),
+    current: (f = msg.getCurrent()) && proto.qdb.DatabaseField.toObject(includeInstance, f),
+    previous: (f = msg.getPrevious()) && proto.qdb.DatabaseField.toObject(includeInstance, f),
     contextList: jspb.Message.toObjectList(msg.getContextList(),
-    proto.qmq.DatabaseField.toObject, includeInstance)
+    proto.qdb.DatabaseField.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -8680,23 +8680,23 @@ proto.qmq.DatabaseNotification.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.DatabaseNotification}
+ * @return {!proto.qdb.DatabaseNotification}
  */
-proto.qmq.DatabaseNotification.deserializeBinary = function(bytes) {
+proto.qdb.DatabaseNotification.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.DatabaseNotification;
-  return proto.qmq.DatabaseNotification.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.DatabaseNotification;
+  return proto.qdb.DatabaseNotification.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.DatabaseNotification} msg The message object to deserialize into.
+ * @param {!proto.qdb.DatabaseNotification} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.DatabaseNotification}
+ * @return {!proto.qdb.DatabaseNotification}
  */
-proto.qmq.DatabaseNotification.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.DatabaseNotification.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -8708,18 +8708,18 @@ proto.qmq.DatabaseNotification.deserializeBinaryFromReader = function(msg, reade
       msg.setToken(value);
       break;
     case 2:
-      var value = new proto.qmq.DatabaseField;
-      reader.readMessage(value,proto.qmq.DatabaseField.deserializeBinaryFromReader);
+      var value = new proto.qdb.DatabaseField;
+      reader.readMessage(value,proto.qdb.DatabaseField.deserializeBinaryFromReader);
       msg.setCurrent(value);
       break;
     case 3:
-      var value = new proto.qmq.DatabaseField;
-      reader.readMessage(value,proto.qmq.DatabaseField.deserializeBinaryFromReader);
+      var value = new proto.qdb.DatabaseField;
+      reader.readMessage(value,proto.qdb.DatabaseField.deserializeBinaryFromReader);
       msg.setPrevious(value);
       break;
     case 4:
-      var value = new proto.qmq.DatabaseField;
-      reader.readMessage(value,proto.qmq.DatabaseField.deserializeBinaryFromReader);
+      var value = new proto.qdb.DatabaseField;
+      reader.readMessage(value,proto.qdb.DatabaseField.deserializeBinaryFromReader);
       msg.addContext(value);
       break;
     default:
@@ -8735,9 +8735,9 @@ proto.qmq.DatabaseNotification.deserializeBinaryFromReader = function(msg, reade
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.DatabaseNotification.prototype.serializeBinary = function() {
+proto.qdb.DatabaseNotification.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.DatabaseNotification.serializeBinaryToWriter(this, writer);
+  proto.qdb.DatabaseNotification.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -8745,11 +8745,11 @@ proto.qmq.DatabaseNotification.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.DatabaseNotification} message
+ * @param {!proto.qdb.DatabaseNotification} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.DatabaseNotification.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.DatabaseNotification.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getToken();
   if (f.length > 0) {
@@ -8763,7 +8763,7 @@ proto.qmq.DatabaseNotification.serializeBinaryToWriter = function(message, write
     writer.writeMessage(
       2,
       f,
-      proto.qmq.DatabaseField.serializeBinaryToWriter
+      proto.qdb.DatabaseField.serializeBinaryToWriter
     );
   }
   f = message.getPrevious();
@@ -8771,7 +8771,7 @@ proto.qmq.DatabaseNotification.serializeBinaryToWriter = function(message, write
     writer.writeMessage(
       3,
       f,
-      proto.qmq.DatabaseField.serializeBinaryToWriter
+      proto.qdb.DatabaseField.serializeBinaryToWriter
     );
   }
   f = message.getContextList();
@@ -8779,7 +8779,7 @@ proto.qmq.DatabaseNotification.serializeBinaryToWriter = function(message, write
     writer.writeRepeatedMessage(
       4,
       f,
-      proto.qmq.DatabaseField.serializeBinaryToWriter
+      proto.qdb.DatabaseField.serializeBinaryToWriter
     );
   }
 };
@@ -8789,44 +8789,44 @@ proto.qmq.DatabaseNotification.serializeBinaryToWriter = function(message, write
  * optional string token = 1;
  * @return {string}
  */
-proto.qmq.DatabaseNotification.prototype.getToken = function() {
+proto.qdb.DatabaseNotification.prototype.getToken = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.DatabaseNotification} returns this
+ * @return {!proto.qdb.DatabaseNotification} returns this
  */
-proto.qmq.DatabaseNotification.prototype.setToken = function(value) {
+proto.qdb.DatabaseNotification.prototype.setToken = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
  * optional DatabaseField current = 2;
- * @return {?proto.qmq.DatabaseField}
+ * @return {?proto.qdb.DatabaseField}
  */
-proto.qmq.DatabaseNotification.prototype.getCurrent = function() {
-  return /** @type{?proto.qmq.DatabaseField} */ (
-    jspb.Message.getWrapperField(this, proto.qmq.DatabaseField, 2));
+proto.qdb.DatabaseNotification.prototype.getCurrent = function() {
+  return /** @type{?proto.qdb.DatabaseField} */ (
+    jspb.Message.getWrapperField(this, proto.qdb.DatabaseField, 2));
 };
 
 
 /**
- * @param {?proto.qmq.DatabaseField|undefined} value
- * @return {!proto.qmq.DatabaseNotification} returns this
+ * @param {?proto.qdb.DatabaseField|undefined} value
+ * @return {!proto.qdb.DatabaseNotification} returns this
 */
-proto.qmq.DatabaseNotification.prototype.setCurrent = function(value) {
+proto.qdb.DatabaseNotification.prototype.setCurrent = function(value) {
   return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.DatabaseNotification} returns this
+ * @return {!proto.qdb.DatabaseNotification} returns this
  */
-proto.qmq.DatabaseNotification.prototype.clearCurrent = function() {
+proto.qdb.DatabaseNotification.prototype.clearCurrent = function() {
   return this.setCurrent(undefined);
 };
 
@@ -8835,35 +8835,35 @@ proto.qmq.DatabaseNotification.prototype.clearCurrent = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.DatabaseNotification.prototype.hasCurrent = function() {
+proto.qdb.DatabaseNotification.prototype.hasCurrent = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 
 
 /**
  * optional DatabaseField previous = 3;
- * @return {?proto.qmq.DatabaseField}
+ * @return {?proto.qdb.DatabaseField}
  */
-proto.qmq.DatabaseNotification.prototype.getPrevious = function() {
-  return /** @type{?proto.qmq.DatabaseField} */ (
-    jspb.Message.getWrapperField(this, proto.qmq.DatabaseField, 3));
+proto.qdb.DatabaseNotification.prototype.getPrevious = function() {
+  return /** @type{?proto.qdb.DatabaseField} */ (
+    jspb.Message.getWrapperField(this, proto.qdb.DatabaseField, 3));
 };
 
 
 /**
- * @param {?proto.qmq.DatabaseField|undefined} value
- * @return {!proto.qmq.DatabaseNotification} returns this
+ * @param {?proto.qdb.DatabaseField|undefined} value
+ * @return {!proto.qdb.DatabaseNotification} returns this
 */
-proto.qmq.DatabaseNotification.prototype.setPrevious = function(value) {
+proto.qdb.DatabaseNotification.prototype.setPrevious = function(value) {
   return jspb.Message.setWrapperField(this, 3, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.DatabaseNotification} returns this
+ * @return {!proto.qdb.DatabaseNotification} returns this
  */
-proto.qmq.DatabaseNotification.prototype.clearPrevious = function() {
+proto.qdb.DatabaseNotification.prototype.clearPrevious = function() {
   return this.setPrevious(undefined);
 };
 
@@ -8872,45 +8872,45 @@ proto.qmq.DatabaseNotification.prototype.clearPrevious = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.DatabaseNotification.prototype.hasPrevious = function() {
+proto.qdb.DatabaseNotification.prototype.hasPrevious = function() {
   return jspb.Message.getField(this, 3) != null;
 };
 
 
 /**
  * repeated DatabaseField context = 4;
- * @return {!Array<!proto.qmq.DatabaseField>}
+ * @return {!Array<!proto.qdb.DatabaseField>}
  */
-proto.qmq.DatabaseNotification.prototype.getContextList = function() {
-  return /** @type{!Array<!proto.qmq.DatabaseField>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.qmq.DatabaseField, 4));
+proto.qdb.DatabaseNotification.prototype.getContextList = function() {
+  return /** @type{!Array<!proto.qdb.DatabaseField>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.qdb.DatabaseField, 4));
 };
 
 
 /**
- * @param {!Array<!proto.qmq.DatabaseField>} value
- * @return {!proto.qmq.DatabaseNotification} returns this
+ * @param {!Array<!proto.qdb.DatabaseField>} value
+ * @return {!proto.qdb.DatabaseNotification} returns this
 */
-proto.qmq.DatabaseNotification.prototype.setContextList = function(value) {
+proto.qdb.DatabaseNotification.prototype.setContextList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 4, value);
 };
 
 
 /**
- * @param {!proto.qmq.DatabaseField=} opt_value
+ * @param {!proto.qdb.DatabaseField=} opt_value
  * @param {number=} opt_index
- * @return {!proto.qmq.DatabaseField}
+ * @return {!proto.qdb.DatabaseField}
  */
-proto.qmq.DatabaseNotification.prototype.addContext = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.qmq.DatabaseField, opt_index);
+proto.qdb.DatabaseNotification.prototype.addContext = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.qdb.DatabaseField, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
- * @return {!proto.qmq.DatabaseNotification} returns this
+ * @return {!proto.qdb.DatabaseNotification} returns this
  */
-proto.qmq.DatabaseNotification.prototype.clearContextList = function() {
+proto.qdb.DatabaseNotification.prototype.clearContextList = function() {
   return this.setContextList([]);
 };
 
@@ -8921,7 +8921,7 @@ proto.qmq.DatabaseNotification.prototype.clearContextList = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.qmq.DatabaseEntitySchema.repeatedFields_ = [2];
+proto.qdb.DatabaseEntitySchema.repeatedFields_ = [2];
 
 
 
@@ -8938,8 +8938,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.DatabaseEntitySchema.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.DatabaseEntitySchema.toObject(opt_includeInstance, this);
+proto.qdb.DatabaseEntitySchema.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.DatabaseEntitySchema.toObject(opt_includeInstance, this);
 };
 
 
@@ -8948,11 +8948,11 @@ proto.qmq.DatabaseEntitySchema.prototype.toObject = function(opt_includeInstance
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.DatabaseEntitySchema} msg The msg instance to transform.
+ * @param {!proto.qdb.DatabaseEntitySchema} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.DatabaseEntitySchema.toObject = function(includeInstance, msg) {
+proto.qdb.DatabaseEntitySchema.toObject = function(includeInstance, msg) {
   var f, obj = {
     name: jspb.Message.getFieldWithDefault(msg, 1, ""),
     fieldsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
@@ -8969,23 +8969,23 @@ proto.qmq.DatabaseEntitySchema.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.DatabaseEntitySchema}
+ * @return {!proto.qdb.DatabaseEntitySchema}
  */
-proto.qmq.DatabaseEntitySchema.deserializeBinary = function(bytes) {
+proto.qdb.DatabaseEntitySchema.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.DatabaseEntitySchema;
-  return proto.qmq.DatabaseEntitySchema.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.DatabaseEntitySchema;
+  return proto.qdb.DatabaseEntitySchema.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.DatabaseEntitySchema} msg The message object to deserialize into.
+ * @param {!proto.qdb.DatabaseEntitySchema} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.DatabaseEntitySchema}
+ * @return {!proto.qdb.DatabaseEntitySchema}
  */
-proto.qmq.DatabaseEntitySchema.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.DatabaseEntitySchema.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -9013,9 +9013,9 @@ proto.qmq.DatabaseEntitySchema.deserializeBinaryFromReader = function(msg, reade
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.DatabaseEntitySchema.prototype.serializeBinary = function() {
+proto.qdb.DatabaseEntitySchema.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.DatabaseEntitySchema.serializeBinaryToWriter(this, writer);
+  proto.qdb.DatabaseEntitySchema.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -9023,11 +9023,11 @@ proto.qmq.DatabaseEntitySchema.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.DatabaseEntitySchema} message
+ * @param {!proto.qdb.DatabaseEntitySchema} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.DatabaseEntitySchema.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.DatabaseEntitySchema.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getName();
   if (f.length > 0) {
@@ -9050,16 +9050,16 @@ proto.qmq.DatabaseEntitySchema.serializeBinaryToWriter = function(message, write
  * optional string name = 1;
  * @return {string}
  */
-proto.qmq.DatabaseEntitySchema.prototype.getName = function() {
+proto.qdb.DatabaseEntitySchema.prototype.getName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.DatabaseEntitySchema} returns this
+ * @return {!proto.qdb.DatabaseEntitySchema} returns this
  */
-proto.qmq.DatabaseEntitySchema.prototype.setName = function(value) {
+proto.qdb.DatabaseEntitySchema.prototype.setName = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -9068,16 +9068,16 @@ proto.qmq.DatabaseEntitySchema.prototype.setName = function(value) {
  * repeated string fields = 2;
  * @return {!Array<string>}
  */
-proto.qmq.DatabaseEntitySchema.prototype.getFieldsList = function() {
+proto.qdb.DatabaseEntitySchema.prototype.getFieldsList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 2));
 };
 
 
 /**
  * @param {!Array<string>} value
- * @return {!proto.qmq.DatabaseEntitySchema} returns this
+ * @return {!proto.qdb.DatabaseEntitySchema} returns this
  */
-proto.qmq.DatabaseEntitySchema.prototype.setFieldsList = function(value) {
+proto.qdb.DatabaseEntitySchema.prototype.setFieldsList = function(value) {
   return jspb.Message.setField(this, 2, value || []);
 };
 
@@ -9085,18 +9085,18 @@ proto.qmq.DatabaseEntitySchema.prototype.setFieldsList = function(value) {
 /**
  * @param {string} value
  * @param {number=} opt_index
- * @return {!proto.qmq.DatabaseEntitySchema} returns this
+ * @return {!proto.qdb.DatabaseEntitySchema} returns this
  */
-proto.qmq.DatabaseEntitySchema.prototype.addFields = function(value, opt_index) {
+proto.qdb.DatabaseEntitySchema.prototype.addFields = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 2, value, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
- * @return {!proto.qmq.DatabaseEntitySchema} returns this
+ * @return {!proto.qdb.DatabaseEntitySchema} returns this
  */
-proto.qmq.DatabaseEntitySchema.prototype.clearFieldsList = function() {
+proto.qdb.DatabaseEntitySchema.prototype.clearFieldsList = function() {
   return this.setFieldsList([]);
 };
 
@@ -9117,8 +9117,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.DatabaseFieldSchema.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.DatabaseFieldSchema.toObject(opt_includeInstance, this);
+proto.qdb.DatabaseFieldSchema.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.DatabaseFieldSchema.toObject(opt_includeInstance, this);
 };
 
 
@@ -9127,11 +9127,11 @@ proto.qmq.DatabaseFieldSchema.prototype.toObject = function(opt_includeInstance)
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.DatabaseFieldSchema} msg The msg instance to transform.
+ * @param {!proto.qdb.DatabaseFieldSchema} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.DatabaseFieldSchema.toObject = function(includeInstance, msg) {
+proto.qdb.DatabaseFieldSchema.toObject = function(includeInstance, msg) {
   var f, obj = {
     name: jspb.Message.getFieldWithDefault(msg, 1, ""),
     type: jspb.Message.getFieldWithDefault(msg, 2, "")
@@ -9148,23 +9148,23 @@ proto.qmq.DatabaseFieldSchema.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.DatabaseFieldSchema}
+ * @return {!proto.qdb.DatabaseFieldSchema}
  */
-proto.qmq.DatabaseFieldSchema.deserializeBinary = function(bytes) {
+proto.qdb.DatabaseFieldSchema.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.DatabaseFieldSchema;
-  return proto.qmq.DatabaseFieldSchema.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.DatabaseFieldSchema;
+  return proto.qdb.DatabaseFieldSchema.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.DatabaseFieldSchema} msg The message object to deserialize into.
+ * @param {!proto.qdb.DatabaseFieldSchema} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.DatabaseFieldSchema}
+ * @return {!proto.qdb.DatabaseFieldSchema}
  */
-proto.qmq.DatabaseFieldSchema.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.DatabaseFieldSchema.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -9192,9 +9192,9 @@ proto.qmq.DatabaseFieldSchema.deserializeBinaryFromReader = function(msg, reader
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.DatabaseFieldSchema.prototype.serializeBinary = function() {
+proto.qdb.DatabaseFieldSchema.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.DatabaseFieldSchema.serializeBinaryToWriter(this, writer);
+  proto.qdb.DatabaseFieldSchema.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -9202,11 +9202,11 @@ proto.qmq.DatabaseFieldSchema.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.DatabaseFieldSchema} message
+ * @param {!proto.qdb.DatabaseFieldSchema} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.DatabaseFieldSchema.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.DatabaseFieldSchema.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getName();
   if (f.length > 0) {
@@ -9229,16 +9229,16 @@ proto.qmq.DatabaseFieldSchema.serializeBinaryToWriter = function(message, writer
  * optional string name = 1;
  * @return {string}
  */
-proto.qmq.DatabaseFieldSchema.prototype.getName = function() {
+proto.qdb.DatabaseFieldSchema.prototype.getName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.DatabaseFieldSchema} returns this
+ * @return {!proto.qdb.DatabaseFieldSchema} returns this
  */
-proto.qmq.DatabaseFieldSchema.prototype.setName = function(value) {
+proto.qdb.DatabaseFieldSchema.prototype.setName = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -9247,16 +9247,16 @@ proto.qmq.DatabaseFieldSchema.prototype.setName = function(value) {
  * optional string type = 2;
  * @return {string}
  */
-proto.qmq.DatabaseFieldSchema.prototype.getType = function() {
+proto.qdb.DatabaseFieldSchema.prototype.getType = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.DatabaseFieldSchema} returns this
+ * @return {!proto.qdb.DatabaseFieldSchema} returns this
  */
-proto.qmq.DatabaseFieldSchema.prototype.setType = function(value) {
+proto.qdb.DatabaseFieldSchema.prototype.setType = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -9277,8 +9277,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.DatabaseRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.DatabaseRequest.toObject(opt_includeInstance, this);
+proto.qdb.DatabaseRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.DatabaseRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -9287,17 +9287,17 @@ proto.qmq.DatabaseRequest.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.DatabaseRequest} msg The msg instance to transform.
+ * @param {!proto.qdb.DatabaseRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.DatabaseRequest.toObject = function(includeInstance, msg) {
+proto.qdb.DatabaseRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
     field: jspb.Message.getFieldWithDefault(msg, 2, ""),
     value: (f = msg.getValue()) && google_protobuf_any_pb.Any.toObject(includeInstance, f),
-    writetime: (f = msg.getWritetime()) && proto.qmq.Timestamp.toObject(includeInstance, f),
-    writerid: (f = msg.getWriterid()) && proto.qmq.String.toObject(includeInstance, f),
+    writetime: (f = msg.getWritetime()) && proto.qdb.Timestamp.toObject(includeInstance, f),
+    writerid: (f = msg.getWriterid()) && proto.qdb.String.toObject(includeInstance, f),
     success: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
   };
 
@@ -9312,23 +9312,23 @@ proto.qmq.DatabaseRequest.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.DatabaseRequest}
+ * @return {!proto.qdb.DatabaseRequest}
  */
-proto.qmq.DatabaseRequest.deserializeBinary = function(bytes) {
+proto.qdb.DatabaseRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.DatabaseRequest;
-  return proto.qmq.DatabaseRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.DatabaseRequest;
+  return proto.qdb.DatabaseRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.DatabaseRequest} msg The message object to deserialize into.
+ * @param {!proto.qdb.DatabaseRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.DatabaseRequest}
+ * @return {!proto.qdb.DatabaseRequest}
  */
-proto.qmq.DatabaseRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.DatabaseRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -9349,13 +9349,13 @@ proto.qmq.DatabaseRequest.deserializeBinaryFromReader = function(msg, reader) {
       msg.setValue(value);
       break;
     case 4:
-      var value = new proto.qmq.Timestamp;
-      reader.readMessage(value,proto.qmq.Timestamp.deserializeBinaryFromReader);
+      var value = new proto.qdb.Timestamp;
+      reader.readMessage(value,proto.qdb.Timestamp.deserializeBinaryFromReader);
       msg.setWritetime(value);
       break;
     case 5:
-      var value = new proto.qmq.String;
-      reader.readMessage(value,proto.qmq.String.deserializeBinaryFromReader);
+      var value = new proto.qdb.String;
+      reader.readMessage(value,proto.qdb.String.deserializeBinaryFromReader);
       msg.setWriterid(value);
       break;
     case 6:
@@ -9375,9 +9375,9 @@ proto.qmq.DatabaseRequest.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.DatabaseRequest.prototype.serializeBinary = function() {
+proto.qdb.DatabaseRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.DatabaseRequest.serializeBinaryToWriter(this, writer);
+  proto.qdb.DatabaseRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -9385,11 +9385,11 @@ proto.qmq.DatabaseRequest.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.DatabaseRequest} message
+ * @param {!proto.qdb.DatabaseRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.DatabaseRequest.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.DatabaseRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getId();
   if (f.length > 0) {
@@ -9418,7 +9418,7 @@ proto.qmq.DatabaseRequest.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       4,
       f,
-      proto.qmq.Timestamp.serializeBinaryToWriter
+      proto.qdb.Timestamp.serializeBinaryToWriter
     );
   }
   f = message.getWriterid();
@@ -9426,7 +9426,7 @@ proto.qmq.DatabaseRequest.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       5,
       f,
-      proto.qmq.String.serializeBinaryToWriter
+      proto.qdb.String.serializeBinaryToWriter
     );
   }
   f = message.getSuccess();
@@ -9443,16 +9443,16 @@ proto.qmq.DatabaseRequest.serializeBinaryToWriter = function(message, writer) {
  * optional string id = 1;
  * @return {string}
  */
-proto.qmq.DatabaseRequest.prototype.getId = function() {
+proto.qdb.DatabaseRequest.prototype.getId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.DatabaseRequest} returns this
+ * @return {!proto.qdb.DatabaseRequest} returns this
  */
-proto.qmq.DatabaseRequest.prototype.setId = function(value) {
+proto.qdb.DatabaseRequest.prototype.setId = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -9461,16 +9461,16 @@ proto.qmq.DatabaseRequest.prototype.setId = function(value) {
  * optional string field = 2;
  * @return {string}
  */
-proto.qmq.DatabaseRequest.prototype.getField = function() {
+proto.qdb.DatabaseRequest.prototype.getField = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.DatabaseRequest} returns this
+ * @return {!proto.qdb.DatabaseRequest} returns this
  */
-proto.qmq.DatabaseRequest.prototype.setField = function(value) {
+proto.qdb.DatabaseRequest.prototype.setField = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -9479,7 +9479,7 @@ proto.qmq.DatabaseRequest.prototype.setField = function(value) {
  * optional google.protobuf.Any value = 3;
  * @return {?proto.google.protobuf.Any}
  */
-proto.qmq.DatabaseRequest.prototype.getValue = function() {
+proto.qdb.DatabaseRequest.prototype.getValue = function() {
   return /** @type{?proto.google.protobuf.Any} */ (
     jspb.Message.getWrapperField(this, google_protobuf_any_pb.Any, 3));
 };
@@ -9487,18 +9487,18 @@ proto.qmq.DatabaseRequest.prototype.getValue = function() {
 
 /**
  * @param {?proto.google.protobuf.Any|undefined} value
- * @return {!proto.qmq.DatabaseRequest} returns this
+ * @return {!proto.qdb.DatabaseRequest} returns this
 */
-proto.qmq.DatabaseRequest.prototype.setValue = function(value) {
+proto.qdb.DatabaseRequest.prototype.setValue = function(value) {
   return jspb.Message.setWrapperField(this, 3, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.DatabaseRequest} returns this
+ * @return {!proto.qdb.DatabaseRequest} returns this
  */
-proto.qmq.DatabaseRequest.prototype.clearValue = function() {
+proto.qdb.DatabaseRequest.prototype.clearValue = function() {
   return this.setValue(undefined);
 };
 
@@ -9507,35 +9507,35 @@ proto.qmq.DatabaseRequest.prototype.clearValue = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.DatabaseRequest.prototype.hasValue = function() {
+proto.qdb.DatabaseRequest.prototype.hasValue = function() {
   return jspb.Message.getField(this, 3) != null;
 };
 
 
 /**
  * optional Timestamp writeTime = 4;
- * @return {?proto.qmq.Timestamp}
+ * @return {?proto.qdb.Timestamp}
  */
-proto.qmq.DatabaseRequest.prototype.getWritetime = function() {
-  return /** @type{?proto.qmq.Timestamp} */ (
-    jspb.Message.getWrapperField(this, proto.qmq.Timestamp, 4));
+proto.qdb.DatabaseRequest.prototype.getWritetime = function() {
+  return /** @type{?proto.qdb.Timestamp} */ (
+    jspb.Message.getWrapperField(this, proto.qdb.Timestamp, 4));
 };
 
 
 /**
- * @param {?proto.qmq.Timestamp|undefined} value
- * @return {!proto.qmq.DatabaseRequest} returns this
+ * @param {?proto.qdb.Timestamp|undefined} value
+ * @return {!proto.qdb.DatabaseRequest} returns this
 */
-proto.qmq.DatabaseRequest.prototype.setWritetime = function(value) {
+proto.qdb.DatabaseRequest.prototype.setWritetime = function(value) {
   return jspb.Message.setWrapperField(this, 4, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.DatabaseRequest} returns this
+ * @return {!proto.qdb.DatabaseRequest} returns this
  */
-proto.qmq.DatabaseRequest.prototype.clearWritetime = function() {
+proto.qdb.DatabaseRequest.prototype.clearWritetime = function() {
   return this.setWritetime(undefined);
 };
 
@@ -9544,35 +9544,35 @@ proto.qmq.DatabaseRequest.prototype.clearWritetime = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.DatabaseRequest.prototype.hasWritetime = function() {
+proto.qdb.DatabaseRequest.prototype.hasWritetime = function() {
   return jspb.Message.getField(this, 4) != null;
 };
 
 
 /**
  * optional String writerId = 5;
- * @return {?proto.qmq.String}
+ * @return {?proto.qdb.String}
  */
-proto.qmq.DatabaseRequest.prototype.getWriterid = function() {
-  return /** @type{?proto.qmq.String} */ (
-    jspb.Message.getWrapperField(this, proto.qmq.String, 5));
+proto.qdb.DatabaseRequest.prototype.getWriterid = function() {
+  return /** @type{?proto.qdb.String} */ (
+    jspb.Message.getWrapperField(this, proto.qdb.String, 5));
 };
 
 
 /**
- * @param {?proto.qmq.String|undefined} value
- * @return {!proto.qmq.DatabaseRequest} returns this
+ * @param {?proto.qdb.String|undefined} value
+ * @return {!proto.qdb.DatabaseRequest} returns this
 */
-proto.qmq.DatabaseRequest.prototype.setWriterid = function(value) {
+proto.qdb.DatabaseRequest.prototype.setWriterid = function(value) {
   return jspb.Message.setWrapperField(this, 5, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.DatabaseRequest} returns this
+ * @return {!proto.qdb.DatabaseRequest} returns this
  */
-proto.qmq.DatabaseRequest.prototype.clearWriterid = function() {
+proto.qdb.DatabaseRequest.prototype.clearWriterid = function() {
   return this.setWriterid(undefined);
 };
 
@@ -9581,7 +9581,7 @@ proto.qmq.DatabaseRequest.prototype.clearWriterid = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.DatabaseRequest.prototype.hasWriterid = function() {
+proto.qdb.DatabaseRequest.prototype.hasWriterid = function() {
   return jspb.Message.getField(this, 5) != null;
 };
 
@@ -9590,16 +9590,16 @@ proto.qmq.DatabaseRequest.prototype.hasWriterid = function() {
  * optional bool success = 6;
  * @return {boolean}
  */
-proto.qmq.DatabaseRequest.prototype.getSuccess = function() {
+proto.qdb.DatabaseRequest.prototype.getSuccess = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 6, false));
 };
 
 
 /**
  * @param {boolean} value
- * @return {!proto.qmq.DatabaseRequest} returns this
+ * @return {!proto.qdb.DatabaseRequest} returns this
  */
-proto.qmq.DatabaseRequest.prototype.setSuccess = function(value) {
+proto.qdb.DatabaseRequest.prototype.setSuccess = function(value) {
   return jspb.Message.setProto3BooleanField(this, 6, value);
 };
 
@@ -9610,7 +9610,7 @@ proto.qmq.DatabaseRequest.prototype.setSuccess = function(value) {
  * @private {!Array<number>}
  * @const
  */
-proto.qmq.DatabaseSnapshot.repeatedFields_ = [1,2,3,4];
+proto.qdb.DatabaseSnapshot.repeatedFields_ = [1,2,3,4];
 
 
 
@@ -9627,8 +9627,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.DatabaseSnapshot.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.DatabaseSnapshot.toObject(opt_includeInstance, this);
+proto.qdb.DatabaseSnapshot.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.DatabaseSnapshot.toObject(opt_includeInstance, this);
 };
 
 
@@ -9637,20 +9637,20 @@ proto.qmq.DatabaseSnapshot.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.DatabaseSnapshot} msg The msg instance to transform.
+ * @param {!proto.qdb.DatabaseSnapshot} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.DatabaseSnapshot.toObject = function(includeInstance, msg) {
+proto.qdb.DatabaseSnapshot.toObject = function(includeInstance, msg) {
   var f, obj = {
     entitiesList: jspb.Message.toObjectList(msg.getEntitiesList(),
-    proto.qmq.DatabaseEntity.toObject, includeInstance),
+    proto.qdb.DatabaseEntity.toObject, includeInstance),
     fieldsList: jspb.Message.toObjectList(msg.getFieldsList(),
-    proto.qmq.DatabaseField.toObject, includeInstance),
+    proto.qdb.DatabaseField.toObject, includeInstance),
     entityschemasList: jspb.Message.toObjectList(msg.getEntityschemasList(),
-    proto.qmq.DatabaseEntitySchema.toObject, includeInstance),
+    proto.qdb.DatabaseEntitySchema.toObject, includeInstance),
     fieldschemasList: jspb.Message.toObjectList(msg.getFieldschemasList(),
-    proto.qmq.DatabaseFieldSchema.toObject, includeInstance)
+    proto.qdb.DatabaseFieldSchema.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -9664,23 +9664,23 @@ proto.qmq.DatabaseSnapshot.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.DatabaseSnapshot}
+ * @return {!proto.qdb.DatabaseSnapshot}
  */
-proto.qmq.DatabaseSnapshot.deserializeBinary = function(bytes) {
+proto.qdb.DatabaseSnapshot.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.DatabaseSnapshot;
-  return proto.qmq.DatabaseSnapshot.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.DatabaseSnapshot;
+  return proto.qdb.DatabaseSnapshot.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.DatabaseSnapshot} msg The message object to deserialize into.
+ * @param {!proto.qdb.DatabaseSnapshot} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.DatabaseSnapshot}
+ * @return {!proto.qdb.DatabaseSnapshot}
  */
-proto.qmq.DatabaseSnapshot.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.DatabaseSnapshot.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -9688,23 +9688,23 @@ proto.qmq.DatabaseSnapshot.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new proto.qmq.DatabaseEntity;
-      reader.readMessage(value,proto.qmq.DatabaseEntity.deserializeBinaryFromReader);
+      var value = new proto.qdb.DatabaseEntity;
+      reader.readMessage(value,proto.qdb.DatabaseEntity.deserializeBinaryFromReader);
       msg.addEntities(value);
       break;
     case 2:
-      var value = new proto.qmq.DatabaseField;
-      reader.readMessage(value,proto.qmq.DatabaseField.deserializeBinaryFromReader);
+      var value = new proto.qdb.DatabaseField;
+      reader.readMessage(value,proto.qdb.DatabaseField.deserializeBinaryFromReader);
       msg.addFields(value);
       break;
     case 3:
-      var value = new proto.qmq.DatabaseEntitySchema;
-      reader.readMessage(value,proto.qmq.DatabaseEntitySchema.deserializeBinaryFromReader);
+      var value = new proto.qdb.DatabaseEntitySchema;
+      reader.readMessage(value,proto.qdb.DatabaseEntitySchema.deserializeBinaryFromReader);
       msg.addEntityschemas(value);
       break;
     case 4:
-      var value = new proto.qmq.DatabaseFieldSchema;
-      reader.readMessage(value,proto.qmq.DatabaseFieldSchema.deserializeBinaryFromReader);
+      var value = new proto.qdb.DatabaseFieldSchema;
+      reader.readMessage(value,proto.qdb.DatabaseFieldSchema.deserializeBinaryFromReader);
       msg.addFieldschemas(value);
       break;
     default:
@@ -9720,9 +9720,9 @@ proto.qmq.DatabaseSnapshot.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.DatabaseSnapshot.prototype.serializeBinary = function() {
+proto.qdb.DatabaseSnapshot.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.DatabaseSnapshot.serializeBinaryToWriter(this, writer);
+  proto.qdb.DatabaseSnapshot.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -9730,18 +9730,18 @@ proto.qmq.DatabaseSnapshot.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.DatabaseSnapshot} message
+ * @param {!proto.qdb.DatabaseSnapshot} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.DatabaseSnapshot.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.DatabaseSnapshot.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getEntitiesList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       1,
       f,
-      proto.qmq.DatabaseEntity.serializeBinaryToWriter
+      proto.qdb.DatabaseEntity.serializeBinaryToWriter
     );
   }
   f = message.getFieldsList();
@@ -9749,7 +9749,7 @@ proto.qmq.DatabaseSnapshot.serializeBinaryToWriter = function(message, writer) {
     writer.writeRepeatedMessage(
       2,
       f,
-      proto.qmq.DatabaseField.serializeBinaryToWriter
+      proto.qdb.DatabaseField.serializeBinaryToWriter
     );
   }
   f = message.getEntityschemasList();
@@ -9757,7 +9757,7 @@ proto.qmq.DatabaseSnapshot.serializeBinaryToWriter = function(message, writer) {
     writer.writeRepeatedMessage(
       3,
       f,
-      proto.qmq.DatabaseEntitySchema.serializeBinaryToWriter
+      proto.qdb.DatabaseEntitySchema.serializeBinaryToWriter
     );
   }
   f = message.getFieldschemasList();
@@ -9765,7 +9765,7 @@ proto.qmq.DatabaseSnapshot.serializeBinaryToWriter = function(message, writer) {
     writer.writeRepeatedMessage(
       4,
       f,
-      proto.qmq.DatabaseFieldSchema.serializeBinaryToWriter
+      proto.qdb.DatabaseFieldSchema.serializeBinaryToWriter
     );
   }
 };
@@ -9773,152 +9773,152 @@ proto.qmq.DatabaseSnapshot.serializeBinaryToWriter = function(message, writer) {
 
 /**
  * repeated DatabaseEntity entities = 1;
- * @return {!Array<!proto.qmq.DatabaseEntity>}
+ * @return {!Array<!proto.qdb.DatabaseEntity>}
  */
-proto.qmq.DatabaseSnapshot.prototype.getEntitiesList = function() {
-  return /** @type{!Array<!proto.qmq.DatabaseEntity>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.qmq.DatabaseEntity, 1));
+proto.qdb.DatabaseSnapshot.prototype.getEntitiesList = function() {
+  return /** @type{!Array<!proto.qdb.DatabaseEntity>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.qdb.DatabaseEntity, 1));
 };
 
 
 /**
- * @param {!Array<!proto.qmq.DatabaseEntity>} value
- * @return {!proto.qmq.DatabaseSnapshot} returns this
+ * @param {!Array<!proto.qdb.DatabaseEntity>} value
+ * @return {!proto.qdb.DatabaseSnapshot} returns this
 */
-proto.qmq.DatabaseSnapshot.prototype.setEntitiesList = function(value) {
+proto.qdb.DatabaseSnapshot.prototype.setEntitiesList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 1, value);
 };
 
 
 /**
- * @param {!proto.qmq.DatabaseEntity=} opt_value
+ * @param {!proto.qdb.DatabaseEntity=} opt_value
  * @param {number=} opt_index
- * @return {!proto.qmq.DatabaseEntity}
+ * @return {!proto.qdb.DatabaseEntity}
  */
-proto.qmq.DatabaseSnapshot.prototype.addEntities = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.qmq.DatabaseEntity, opt_index);
+proto.qdb.DatabaseSnapshot.prototype.addEntities = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.qdb.DatabaseEntity, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
- * @return {!proto.qmq.DatabaseSnapshot} returns this
+ * @return {!proto.qdb.DatabaseSnapshot} returns this
  */
-proto.qmq.DatabaseSnapshot.prototype.clearEntitiesList = function() {
+proto.qdb.DatabaseSnapshot.prototype.clearEntitiesList = function() {
   return this.setEntitiesList([]);
 };
 
 
 /**
  * repeated DatabaseField fields = 2;
- * @return {!Array<!proto.qmq.DatabaseField>}
+ * @return {!Array<!proto.qdb.DatabaseField>}
  */
-proto.qmq.DatabaseSnapshot.prototype.getFieldsList = function() {
-  return /** @type{!Array<!proto.qmq.DatabaseField>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.qmq.DatabaseField, 2));
+proto.qdb.DatabaseSnapshot.prototype.getFieldsList = function() {
+  return /** @type{!Array<!proto.qdb.DatabaseField>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.qdb.DatabaseField, 2));
 };
 
 
 /**
- * @param {!Array<!proto.qmq.DatabaseField>} value
- * @return {!proto.qmq.DatabaseSnapshot} returns this
+ * @param {!Array<!proto.qdb.DatabaseField>} value
+ * @return {!proto.qdb.DatabaseSnapshot} returns this
 */
-proto.qmq.DatabaseSnapshot.prototype.setFieldsList = function(value) {
+proto.qdb.DatabaseSnapshot.prototype.setFieldsList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
 
 /**
- * @param {!proto.qmq.DatabaseField=} opt_value
+ * @param {!proto.qdb.DatabaseField=} opt_value
  * @param {number=} opt_index
- * @return {!proto.qmq.DatabaseField}
+ * @return {!proto.qdb.DatabaseField}
  */
-proto.qmq.DatabaseSnapshot.prototype.addFields = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.qmq.DatabaseField, opt_index);
+proto.qdb.DatabaseSnapshot.prototype.addFields = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.qdb.DatabaseField, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
- * @return {!proto.qmq.DatabaseSnapshot} returns this
+ * @return {!proto.qdb.DatabaseSnapshot} returns this
  */
-proto.qmq.DatabaseSnapshot.prototype.clearFieldsList = function() {
+proto.qdb.DatabaseSnapshot.prototype.clearFieldsList = function() {
   return this.setFieldsList([]);
 };
 
 
 /**
  * repeated DatabaseEntitySchema entitySchemas = 3;
- * @return {!Array<!proto.qmq.DatabaseEntitySchema>}
+ * @return {!Array<!proto.qdb.DatabaseEntitySchema>}
  */
-proto.qmq.DatabaseSnapshot.prototype.getEntityschemasList = function() {
-  return /** @type{!Array<!proto.qmq.DatabaseEntitySchema>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.qmq.DatabaseEntitySchema, 3));
+proto.qdb.DatabaseSnapshot.prototype.getEntityschemasList = function() {
+  return /** @type{!Array<!proto.qdb.DatabaseEntitySchema>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.qdb.DatabaseEntitySchema, 3));
 };
 
 
 /**
- * @param {!Array<!proto.qmq.DatabaseEntitySchema>} value
- * @return {!proto.qmq.DatabaseSnapshot} returns this
+ * @param {!Array<!proto.qdb.DatabaseEntitySchema>} value
+ * @return {!proto.qdb.DatabaseSnapshot} returns this
 */
-proto.qmq.DatabaseSnapshot.prototype.setEntityschemasList = function(value) {
+proto.qdb.DatabaseSnapshot.prototype.setEntityschemasList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 3, value);
 };
 
 
 /**
- * @param {!proto.qmq.DatabaseEntitySchema=} opt_value
+ * @param {!proto.qdb.DatabaseEntitySchema=} opt_value
  * @param {number=} opt_index
- * @return {!proto.qmq.DatabaseEntitySchema}
+ * @return {!proto.qdb.DatabaseEntitySchema}
  */
-proto.qmq.DatabaseSnapshot.prototype.addEntityschemas = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.qmq.DatabaseEntitySchema, opt_index);
+proto.qdb.DatabaseSnapshot.prototype.addEntityschemas = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.qdb.DatabaseEntitySchema, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
- * @return {!proto.qmq.DatabaseSnapshot} returns this
+ * @return {!proto.qdb.DatabaseSnapshot} returns this
  */
-proto.qmq.DatabaseSnapshot.prototype.clearEntityschemasList = function() {
+proto.qdb.DatabaseSnapshot.prototype.clearEntityschemasList = function() {
   return this.setEntityschemasList([]);
 };
 
 
 /**
  * repeated DatabaseFieldSchema fieldSchemas = 4;
- * @return {!Array<!proto.qmq.DatabaseFieldSchema>}
+ * @return {!Array<!proto.qdb.DatabaseFieldSchema>}
  */
-proto.qmq.DatabaseSnapshot.prototype.getFieldschemasList = function() {
-  return /** @type{!Array<!proto.qmq.DatabaseFieldSchema>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.qmq.DatabaseFieldSchema, 4));
+proto.qdb.DatabaseSnapshot.prototype.getFieldschemasList = function() {
+  return /** @type{!Array<!proto.qdb.DatabaseFieldSchema>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.qdb.DatabaseFieldSchema, 4));
 };
 
 
 /**
- * @param {!Array<!proto.qmq.DatabaseFieldSchema>} value
- * @return {!proto.qmq.DatabaseSnapshot} returns this
+ * @param {!Array<!proto.qdb.DatabaseFieldSchema>} value
+ * @return {!proto.qdb.DatabaseSnapshot} returns this
 */
-proto.qmq.DatabaseSnapshot.prototype.setFieldschemasList = function(value) {
+proto.qdb.DatabaseSnapshot.prototype.setFieldschemasList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 4, value);
 };
 
 
 /**
- * @param {!proto.qmq.DatabaseFieldSchema=} opt_value
+ * @param {!proto.qdb.DatabaseFieldSchema=} opt_value
  * @param {number=} opt_index
- * @return {!proto.qmq.DatabaseFieldSchema}
+ * @return {!proto.qdb.DatabaseFieldSchema}
  */
-proto.qmq.DatabaseSnapshot.prototype.addFieldschemas = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.qmq.DatabaseFieldSchema, opt_index);
+proto.qdb.DatabaseSnapshot.prototype.addFieldschemas = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.qdb.DatabaseFieldSchema, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
- * @return {!proto.qmq.DatabaseSnapshot} returns this
+ * @return {!proto.qdb.DatabaseSnapshot} returns this
  */
-proto.qmq.DatabaseSnapshot.prototype.clearFieldschemasList = function() {
+proto.qdb.DatabaseSnapshot.prototype.clearFieldschemasList = function() {
   return this.setFieldschemasList([]);
 };
 
@@ -9939,8 +9939,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.Int.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.Int.toObject(opt_includeInstance, this);
+proto.qdb.Int.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.Int.toObject(opt_includeInstance, this);
 };
 
 
@@ -9949,11 +9949,11 @@ proto.qmq.Int.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.Int} msg The msg instance to transform.
+ * @param {!proto.qdb.Int} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.Int.toObject = function(includeInstance, msg) {
+proto.qdb.Int.toObject = function(includeInstance, msg) {
   var f, obj = {
     raw: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
@@ -9969,23 +9969,23 @@ proto.qmq.Int.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.Int}
+ * @return {!proto.qdb.Int}
  */
-proto.qmq.Int.deserializeBinary = function(bytes) {
+proto.qdb.Int.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.Int;
-  return proto.qmq.Int.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.Int;
+  return proto.qdb.Int.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.Int} msg The message object to deserialize into.
+ * @param {!proto.qdb.Int} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.Int}
+ * @return {!proto.qdb.Int}
  */
-proto.qmq.Int.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.Int.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -10009,9 +10009,9 @@ proto.qmq.Int.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.Int.prototype.serializeBinary = function() {
+proto.qdb.Int.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.Int.serializeBinaryToWriter(this, writer);
+  proto.qdb.Int.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -10019,11 +10019,11 @@ proto.qmq.Int.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.Int} message
+ * @param {!proto.qdb.Int} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.Int.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.Int.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getRaw();
   if (f !== 0) {
@@ -10039,16 +10039,16 @@ proto.qmq.Int.serializeBinaryToWriter = function(message, writer) {
  * optional int64 raw = 1;
  * @return {number}
  */
-proto.qmq.Int.prototype.getRaw = function() {
+proto.qdb.Int.prototype.getRaw = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
  * @param {number} value
- * @return {!proto.qmq.Int} returns this
+ * @return {!proto.qdb.Int} returns this
  */
-proto.qmq.Int.prototype.setRaw = function(value) {
+proto.qdb.Int.prototype.setRaw = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
@@ -10069,8 +10069,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.String.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.String.toObject(opt_includeInstance, this);
+proto.qdb.String.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.String.toObject(opt_includeInstance, this);
 };
 
 
@@ -10079,11 +10079,11 @@ proto.qmq.String.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.String} msg The msg instance to transform.
+ * @param {!proto.qdb.String} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.String.toObject = function(includeInstance, msg) {
+proto.qdb.String.toObject = function(includeInstance, msg) {
   var f, obj = {
     raw: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
@@ -10099,23 +10099,23 @@ proto.qmq.String.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.String}
+ * @return {!proto.qdb.String}
  */
-proto.qmq.String.deserializeBinary = function(bytes) {
+proto.qdb.String.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.String;
-  return proto.qmq.String.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.String;
+  return proto.qdb.String.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.String} msg The message object to deserialize into.
+ * @param {!proto.qdb.String} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.String}
+ * @return {!proto.qdb.String}
  */
-proto.qmq.String.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.String.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -10139,9 +10139,9 @@ proto.qmq.String.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.String.prototype.serializeBinary = function() {
+proto.qdb.String.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.String.serializeBinaryToWriter(this, writer);
+  proto.qdb.String.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -10149,11 +10149,11 @@ proto.qmq.String.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.String} message
+ * @param {!proto.qdb.String} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.String.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.String.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getRaw();
   if (f.length > 0) {
@@ -10169,16 +10169,16 @@ proto.qmq.String.serializeBinaryToWriter = function(message, writer) {
  * optional string raw = 1;
  * @return {string}
  */
-proto.qmq.String.prototype.getRaw = function() {
+proto.qdb.String.prototype.getRaw = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.String} returns this
+ * @return {!proto.qdb.String} returns this
  */
-proto.qmq.String.prototype.setRaw = function(value) {
+proto.qdb.String.prototype.setRaw = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -10199,8 +10199,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.Timestamp.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.Timestamp.toObject(opt_includeInstance, this);
+proto.qdb.Timestamp.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.Timestamp.toObject(opt_includeInstance, this);
 };
 
 
@@ -10209,11 +10209,11 @@ proto.qmq.Timestamp.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.Timestamp} msg The msg instance to transform.
+ * @param {!proto.qdb.Timestamp} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.Timestamp.toObject = function(includeInstance, msg) {
+proto.qdb.Timestamp.toObject = function(includeInstance, msg) {
   var f, obj = {
     raw: (f = msg.getRaw()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
@@ -10229,23 +10229,23 @@ proto.qmq.Timestamp.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.Timestamp}
+ * @return {!proto.qdb.Timestamp}
  */
-proto.qmq.Timestamp.deserializeBinary = function(bytes) {
+proto.qdb.Timestamp.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.Timestamp;
-  return proto.qmq.Timestamp.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.Timestamp;
+  return proto.qdb.Timestamp.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.Timestamp} msg The message object to deserialize into.
+ * @param {!proto.qdb.Timestamp} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.Timestamp}
+ * @return {!proto.qdb.Timestamp}
  */
-proto.qmq.Timestamp.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.Timestamp.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -10270,9 +10270,9 @@ proto.qmq.Timestamp.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.Timestamp.prototype.serializeBinary = function() {
+proto.qdb.Timestamp.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.Timestamp.serializeBinaryToWriter(this, writer);
+  proto.qdb.Timestamp.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -10280,11 +10280,11 @@ proto.qmq.Timestamp.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.Timestamp} message
+ * @param {!proto.qdb.Timestamp} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.Timestamp.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.Timestamp.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getRaw();
   if (f != null) {
@@ -10301,7 +10301,7 @@ proto.qmq.Timestamp.serializeBinaryToWriter = function(message, writer) {
  * optional google.protobuf.Timestamp raw = 1;
  * @return {?proto.google.protobuf.Timestamp}
  */
-proto.qmq.Timestamp.prototype.getRaw = function() {
+proto.qdb.Timestamp.prototype.getRaw = function() {
   return /** @type{?proto.google.protobuf.Timestamp} */ (
     jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 1));
 };
@@ -10309,18 +10309,18 @@ proto.qmq.Timestamp.prototype.getRaw = function() {
 
 /**
  * @param {?proto.google.protobuf.Timestamp|undefined} value
- * @return {!proto.qmq.Timestamp} returns this
+ * @return {!proto.qdb.Timestamp} returns this
 */
-proto.qmq.Timestamp.prototype.setRaw = function(value) {
+proto.qdb.Timestamp.prototype.setRaw = function(value) {
   return jspb.Message.setWrapperField(this, 1, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.Timestamp} returns this
+ * @return {!proto.qdb.Timestamp} returns this
  */
-proto.qmq.Timestamp.prototype.clearRaw = function() {
+proto.qdb.Timestamp.prototype.clearRaw = function() {
   return this.setRaw(undefined);
 };
 
@@ -10329,7 +10329,7 @@ proto.qmq.Timestamp.prototype.clearRaw = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.Timestamp.prototype.hasRaw = function() {
+proto.qdb.Timestamp.prototype.hasRaw = function() {
   return jspb.Message.getField(this, 1) != null;
 };
 
@@ -10350,8 +10350,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.Float.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.Float.toObject(opt_includeInstance, this);
+proto.qdb.Float.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.Float.toObject(opt_includeInstance, this);
 };
 
 
@@ -10360,11 +10360,11 @@ proto.qmq.Float.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.Float} msg The msg instance to transform.
+ * @param {!proto.qdb.Float} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.Float.toObject = function(includeInstance, msg) {
+proto.qdb.Float.toObject = function(includeInstance, msg) {
   var f, obj = {
     raw: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0)
   };
@@ -10380,23 +10380,23 @@ proto.qmq.Float.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.Float}
+ * @return {!proto.qdb.Float}
  */
-proto.qmq.Float.deserializeBinary = function(bytes) {
+proto.qdb.Float.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.Float;
-  return proto.qmq.Float.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.Float;
+  return proto.qdb.Float.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.Float} msg The message object to deserialize into.
+ * @param {!proto.qdb.Float} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.Float}
+ * @return {!proto.qdb.Float}
  */
-proto.qmq.Float.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.Float.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -10420,9 +10420,9 @@ proto.qmq.Float.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.Float.prototype.serializeBinary = function() {
+proto.qdb.Float.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.Float.serializeBinaryToWriter(this, writer);
+  proto.qdb.Float.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -10430,11 +10430,11 @@ proto.qmq.Float.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.Float} message
+ * @param {!proto.qdb.Float} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.Float.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.Float.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getRaw();
   if (f !== 0.0) {
@@ -10450,16 +10450,16 @@ proto.qmq.Float.serializeBinaryToWriter = function(message, writer) {
  * optional double raw = 1;
  * @return {number}
  */
-proto.qmq.Float.prototype.getRaw = function() {
+proto.qdb.Float.prototype.getRaw = function() {
   return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 1, 0.0));
 };
 
 
 /**
  * @param {number} value
- * @return {!proto.qmq.Float} returns this
+ * @return {!proto.qdb.Float} returns this
  */
-proto.qmq.Float.prototype.setRaw = function(value) {
+proto.qdb.Float.prototype.setRaw = function(value) {
   return jspb.Message.setProto3FloatField(this, 1, value);
 };
 
@@ -10480,8 +10480,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.Bool.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.Bool.toObject(opt_includeInstance, this);
+proto.qdb.Bool.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.Bool.toObject(opt_includeInstance, this);
 };
 
 
@@ -10490,11 +10490,11 @@ proto.qmq.Bool.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.Bool} msg The msg instance to transform.
+ * @param {!proto.qdb.Bool} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.Bool.toObject = function(includeInstance, msg) {
+proto.qdb.Bool.toObject = function(includeInstance, msg) {
   var f, obj = {
     raw: jspb.Message.getBooleanFieldWithDefault(msg, 1, false)
   };
@@ -10510,23 +10510,23 @@ proto.qmq.Bool.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.Bool}
+ * @return {!proto.qdb.Bool}
  */
-proto.qmq.Bool.deserializeBinary = function(bytes) {
+proto.qdb.Bool.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.Bool;
-  return proto.qmq.Bool.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.Bool;
+  return proto.qdb.Bool.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.Bool} msg The message object to deserialize into.
+ * @param {!proto.qdb.Bool} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.Bool}
+ * @return {!proto.qdb.Bool}
  */
-proto.qmq.Bool.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.Bool.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -10550,9 +10550,9 @@ proto.qmq.Bool.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.Bool.prototype.serializeBinary = function() {
+proto.qdb.Bool.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.Bool.serializeBinaryToWriter(this, writer);
+  proto.qdb.Bool.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -10560,11 +10560,11 @@ proto.qmq.Bool.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.Bool} message
+ * @param {!proto.qdb.Bool} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.Bool.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.Bool.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getRaw();
   if (f) {
@@ -10580,16 +10580,16 @@ proto.qmq.Bool.serializeBinaryToWriter = function(message, writer) {
  * optional bool raw = 1;
  * @return {boolean}
  */
-proto.qmq.Bool.prototype.getRaw = function() {
+proto.qdb.Bool.prototype.getRaw = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 1, false));
 };
 
 
 /**
  * @param {boolean} value
- * @return {!proto.qmq.Bool} returns this
+ * @return {!proto.qdb.Bool} returns this
  */
-proto.qmq.Bool.prototype.setRaw = function(value) {
+proto.qdb.Bool.prototype.setRaw = function(value) {
   return jspb.Message.setProto3BooleanField(this, 1, value);
 };
 
@@ -10610,8 +10610,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.EntityReference.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.EntityReference.toObject(opt_includeInstance, this);
+proto.qdb.EntityReference.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.EntityReference.toObject(opt_includeInstance, this);
 };
 
 
@@ -10620,11 +10620,11 @@ proto.qmq.EntityReference.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.EntityReference} msg The msg instance to transform.
+ * @param {!proto.qdb.EntityReference} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.EntityReference.toObject = function(includeInstance, msg) {
+proto.qdb.EntityReference.toObject = function(includeInstance, msg) {
   var f, obj = {
     raw: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
@@ -10640,23 +10640,23 @@ proto.qmq.EntityReference.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.EntityReference}
+ * @return {!proto.qdb.EntityReference}
  */
-proto.qmq.EntityReference.deserializeBinary = function(bytes) {
+proto.qdb.EntityReference.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.EntityReference;
-  return proto.qmq.EntityReference.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.EntityReference;
+  return proto.qdb.EntityReference.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.EntityReference} msg The message object to deserialize into.
+ * @param {!proto.qdb.EntityReference} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.EntityReference}
+ * @return {!proto.qdb.EntityReference}
  */
-proto.qmq.EntityReference.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.EntityReference.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -10680,9 +10680,9 @@ proto.qmq.EntityReference.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.EntityReference.prototype.serializeBinary = function() {
+proto.qdb.EntityReference.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.EntityReference.serializeBinaryToWriter(this, writer);
+  proto.qdb.EntityReference.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -10690,11 +10690,11 @@ proto.qmq.EntityReference.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.EntityReference} message
+ * @param {!proto.qdb.EntityReference} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.EntityReference.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.EntityReference.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getRaw();
   if (f.length > 0) {
@@ -10710,16 +10710,16 @@ proto.qmq.EntityReference.serializeBinaryToWriter = function(message, writer) {
  * optional string raw = 1;
  * @return {string}
  */
-proto.qmq.EntityReference.prototype.getRaw = function() {
+proto.qdb.EntityReference.prototype.getRaw = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.EntityReference} returns this
+ * @return {!proto.qdb.EntityReference} returns this
  */
-proto.qmq.EntityReference.prototype.setRaw = function(value) {
+proto.qdb.EntityReference.prototype.setRaw = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -10740,8 +10740,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.BinaryFile.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.BinaryFile.toObject(opt_includeInstance, this);
+proto.qdb.BinaryFile.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.BinaryFile.toObject(opt_includeInstance, this);
 };
 
 
@@ -10750,11 +10750,11 @@ proto.qmq.BinaryFile.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.BinaryFile} msg The msg instance to transform.
+ * @param {!proto.qdb.BinaryFile} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.BinaryFile.toObject = function(includeInstance, msg) {
+proto.qdb.BinaryFile.toObject = function(includeInstance, msg) {
   var f, obj = {
     raw: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
@@ -10770,23 +10770,23 @@ proto.qmq.BinaryFile.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.BinaryFile}
+ * @return {!proto.qdb.BinaryFile}
  */
-proto.qmq.BinaryFile.deserializeBinary = function(bytes) {
+proto.qdb.BinaryFile.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.BinaryFile;
-  return proto.qmq.BinaryFile.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.BinaryFile;
+  return proto.qdb.BinaryFile.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.BinaryFile} msg The message object to deserialize into.
+ * @param {!proto.qdb.BinaryFile} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.BinaryFile}
+ * @return {!proto.qdb.BinaryFile}
  */
-proto.qmq.BinaryFile.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.BinaryFile.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -10810,9 +10810,9 @@ proto.qmq.BinaryFile.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.BinaryFile.prototype.serializeBinary = function() {
+proto.qdb.BinaryFile.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.BinaryFile.serializeBinaryToWriter(this, writer);
+  proto.qdb.BinaryFile.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -10820,11 +10820,11 @@ proto.qmq.BinaryFile.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.BinaryFile} message
+ * @param {!proto.qdb.BinaryFile} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.BinaryFile.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.BinaryFile.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getRaw();
   if (f.length > 0) {
@@ -10840,16 +10840,16 @@ proto.qmq.BinaryFile.serializeBinaryToWriter = function(message, writer) {
  * optional string raw = 1;
  * @return {string}
  */
-proto.qmq.BinaryFile.prototype.getRaw = function() {
+proto.qdb.BinaryFile.prototype.getRaw = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.BinaryFile} returns this
+ * @return {!proto.qdb.BinaryFile} returns this
  */
-proto.qmq.BinaryFile.prototype.setRaw = function(value) {
+proto.qdb.BinaryFile.prototype.setRaw = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -10870,8 +10870,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.LogMessage.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.LogMessage.toObject(opt_includeInstance, this);
+proto.qdb.LogMessage.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.LogMessage.toObject(opt_includeInstance, this);
 };
 
 
@@ -10880,11 +10880,11 @@ proto.qmq.LogMessage.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.LogMessage} msg The msg instance to transform.
+ * @param {!proto.qdb.LogMessage} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.LogMessage.toObject = function(includeInstance, msg) {
+proto.qdb.LogMessage.toObject = function(includeInstance, msg) {
   var f, obj = {
     application: jspb.Message.getFieldWithDefault(msg, 1, ""),
     level: jspb.Message.getFieldWithDefault(msg, 2, 0),
@@ -10903,23 +10903,23 @@ proto.qmq.LogMessage.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.LogMessage}
+ * @return {!proto.qdb.LogMessage}
  */
-proto.qmq.LogMessage.deserializeBinary = function(bytes) {
+proto.qdb.LogMessage.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.LogMessage;
-  return proto.qmq.LogMessage.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.LogMessage;
+  return proto.qdb.LogMessage.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.LogMessage} msg The message object to deserialize into.
+ * @param {!proto.qdb.LogMessage} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.LogMessage}
+ * @return {!proto.qdb.LogMessage}
  */
-proto.qmq.LogMessage.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.LogMessage.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -10931,7 +10931,7 @@ proto.qmq.LogMessage.deserializeBinaryFromReader = function(msg, reader) {
       msg.setApplication(value);
       break;
     case 2:
-      var value = /** @type {!proto.qmq.LogMessage.LogLevelEnum} */ (reader.readEnum());
+      var value = /** @type {!proto.qdb.LogMessage.LogLevelEnum} */ (reader.readEnum());
       msg.setLevel(value);
       break;
     case 3:
@@ -10956,9 +10956,9 @@ proto.qmq.LogMessage.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.LogMessage.prototype.serializeBinary = function() {
+proto.qdb.LogMessage.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.LogMessage.serializeBinaryToWriter(this, writer);
+  proto.qdb.LogMessage.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -10966,11 +10966,11 @@ proto.qmq.LogMessage.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.LogMessage} message
+ * @param {!proto.qdb.LogMessage} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.LogMessage.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.LogMessage.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getApplication();
   if (f.length > 0) {
@@ -11007,7 +11007,7 @@ proto.qmq.LogMessage.serializeBinaryToWriter = function(message, writer) {
 /**
  * @enum {number}
  */
-proto.qmq.LogMessage.LogLevelEnum = {
+proto.qdb.LogMessage.LogLevelEnum = {
   UNSPECIFIED: 0,
   TRACE: 1,
   DEBUG: 2,
@@ -11021,34 +11021,34 @@ proto.qmq.LogMessage.LogLevelEnum = {
  * optional string application = 1;
  * @return {string}
  */
-proto.qmq.LogMessage.prototype.getApplication = function() {
+proto.qdb.LogMessage.prototype.getApplication = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.LogMessage} returns this
+ * @return {!proto.qdb.LogMessage} returns this
  */
-proto.qmq.LogMessage.prototype.setApplication = function(value) {
+proto.qdb.LogMessage.prototype.setApplication = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
  * optional LogLevelEnum level = 2;
- * @return {!proto.qmq.LogMessage.LogLevelEnum}
+ * @return {!proto.qdb.LogMessage.LogLevelEnum}
  */
-proto.qmq.LogMessage.prototype.getLevel = function() {
-  return /** @type {!proto.qmq.LogMessage.LogLevelEnum} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+proto.qdb.LogMessage.prototype.getLevel = function() {
+  return /** @type {!proto.qdb.LogMessage.LogLevelEnum} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
 
 /**
- * @param {!proto.qmq.LogMessage.LogLevelEnum} value
- * @return {!proto.qmq.LogMessage} returns this
+ * @param {!proto.qdb.LogMessage.LogLevelEnum} value
+ * @return {!proto.qdb.LogMessage} returns this
  */
-proto.qmq.LogMessage.prototype.setLevel = function(value) {
+proto.qdb.LogMessage.prototype.setLevel = function(value) {
   return jspb.Message.setProto3EnumField(this, 2, value);
 };
 
@@ -11057,16 +11057,16 @@ proto.qmq.LogMessage.prototype.setLevel = function(value) {
  * optional string message = 3;
  * @return {string}
  */
-proto.qmq.LogMessage.prototype.getMessage = function() {
+proto.qdb.LogMessage.prototype.getMessage = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.qmq.LogMessage} returns this
+ * @return {!proto.qdb.LogMessage} returns this
  */
-proto.qmq.LogMessage.prototype.setMessage = function(value) {
+proto.qdb.LogMessage.prototype.setMessage = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
@@ -11075,7 +11075,7 @@ proto.qmq.LogMessage.prototype.setMessage = function(value) {
  * optional google.protobuf.Timestamp timestamp = 4;
  * @return {?proto.google.protobuf.Timestamp}
  */
-proto.qmq.LogMessage.prototype.getTimestamp = function() {
+proto.qdb.LogMessage.prototype.getTimestamp = function() {
   return /** @type{?proto.google.protobuf.Timestamp} */ (
     jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 4));
 };
@@ -11083,18 +11083,18 @@ proto.qmq.LogMessage.prototype.getTimestamp = function() {
 
 /**
  * @param {?proto.google.protobuf.Timestamp|undefined} value
- * @return {!proto.qmq.LogMessage} returns this
+ * @return {!proto.qdb.LogMessage} returns this
 */
-proto.qmq.LogMessage.prototype.setTimestamp = function(value) {
+proto.qdb.LogMessage.prototype.setTimestamp = function(value) {
   return jspb.Message.setWrapperField(this, 4, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.qmq.LogMessage} returns this
+ * @return {!proto.qdb.LogMessage} returns this
  */
-proto.qmq.LogMessage.prototype.clearTimestamp = function() {
+proto.qdb.LogMessage.prototype.clearTimestamp = function() {
   return this.setTimestamp(undefined);
 };
 
@@ -11103,7 +11103,7 @@ proto.qmq.LogMessage.prototype.clearTimestamp = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.qmq.LogMessage.prototype.hasTimestamp = function() {
+proto.qdb.LogMessage.prototype.hasTimestamp = function() {
   return jspb.Message.getField(this, 4) != null;
 };
 
@@ -11124,8 +11124,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.GarageDoorState.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.GarageDoorState.toObject(opt_includeInstance, this);
+proto.qdb.GarageDoorState.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.GarageDoorState.toObject(opt_includeInstance, this);
 };
 
 
@@ -11134,11 +11134,11 @@ proto.qmq.GarageDoorState.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.GarageDoorState} msg The msg instance to transform.
+ * @param {!proto.qdb.GarageDoorState} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.GarageDoorState.toObject = function(includeInstance, msg) {
+proto.qdb.GarageDoorState.toObject = function(includeInstance, msg) {
   var f, obj = {
     raw: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
@@ -11154,23 +11154,23 @@ proto.qmq.GarageDoorState.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.GarageDoorState}
+ * @return {!proto.qdb.GarageDoorState}
  */
-proto.qmq.GarageDoorState.deserializeBinary = function(bytes) {
+proto.qdb.GarageDoorState.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.GarageDoorState;
-  return proto.qmq.GarageDoorState.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.GarageDoorState;
+  return proto.qdb.GarageDoorState.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.GarageDoorState} msg The message object to deserialize into.
+ * @param {!proto.qdb.GarageDoorState} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.GarageDoorState}
+ * @return {!proto.qdb.GarageDoorState}
  */
-proto.qmq.GarageDoorState.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.GarageDoorState.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -11178,7 +11178,7 @@ proto.qmq.GarageDoorState.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.qmq.GarageDoorState.GarageDoorStateEnum} */ (reader.readEnum());
+      var value = /** @type {!proto.qdb.GarageDoorState.GarageDoorStateEnum} */ (reader.readEnum());
       msg.setRaw(value);
       break;
     default:
@@ -11194,9 +11194,9 @@ proto.qmq.GarageDoorState.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.GarageDoorState.prototype.serializeBinary = function() {
+proto.qdb.GarageDoorState.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.GarageDoorState.serializeBinaryToWriter(this, writer);
+  proto.qdb.GarageDoorState.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -11204,11 +11204,11 @@ proto.qmq.GarageDoorState.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.GarageDoorState} message
+ * @param {!proto.qdb.GarageDoorState} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.GarageDoorState.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.GarageDoorState.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getRaw();
   if (f !== 0.0) {
@@ -11223,7 +11223,7 @@ proto.qmq.GarageDoorState.serializeBinaryToWriter = function(message, writer) {
 /**
  * @enum {number}
  */
-proto.qmq.GarageDoorState.GarageDoorStateEnum = {
+proto.qdb.GarageDoorState.GarageDoorStateEnum = {
   UNSPECIFIED: 0,
   OPENED: 1,
   CLOSED: 2
@@ -11231,18 +11231,18 @@ proto.qmq.GarageDoorState.GarageDoorStateEnum = {
 
 /**
  * optional GarageDoorStateEnum raw = 1;
- * @return {!proto.qmq.GarageDoorState.GarageDoorStateEnum}
+ * @return {!proto.qdb.GarageDoorState.GarageDoorStateEnum}
  */
-proto.qmq.GarageDoorState.prototype.getRaw = function() {
-  return /** @type {!proto.qmq.GarageDoorState.GarageDoorStateEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.qdb.GarageDoorState.prototype.getRaw = function() {
+  return /** @type {!proto.qdb.GarageDoorState.GarageDoorStateEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {!proto.qmq.GarageDoorState.GarageDoorStateEnum} value
- * @return {!proto.qmq.GarageDoorState} returns this
+ * @param {!proto.qdb.GarageDoorState.GarageDoorStateEnum} value
+ * @return {!proto.qdb.GarageDoorState} returns this
  */
-proto.qmq.GarageDoorState.prototype.setRaw = function(value) {
+proto.qdb.GarageDoorState.prototype.setRaw = function(value) {
   return jspb.Message.setProto3EnumField(this, 1, value);
 };
 
@@ -11263,8 +11263,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.qmq.ConnectionState.prototype.toObject = function(opt_includeInstance) {
-  return proto.qmq.ConnectionState.toObject(opt_includeInstance, this);
+proto.qdb.ConnectionState.prototype.toObject = function(opt_includeInstance) {
+  return proto.qdb.ConnectionState.toObject(opt_includeInstance, this);
 };
 
 
@@ -11273,11 +11273,11 @@ proto.qmq.ConnectionState.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.qmq.ConnectionState} msg The msg instance to transform.
+ * @param {!proto.qdb.ConnectionState} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.ConnectionState.toObject = function(includeInstance, msg) {
+proto.qdb.ConnectionState.toObject = function(includeInstance, msg) {
   var f, obj = {
     raw: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
@@ -11293,23 +11293,23 @@ proto.qmq.ConnectionState.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.qmq.ConnectionState}
+ * @return {!proto.qdb.ConnectionState}
  */
-proto.qmq.ConnectionState.deserializeBinary = function(bytes) {
+proto.qdb.ConnectionState.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.qmq.ConnectionState;
-  return proto.qmq.ConnectionState.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.qdb.ConnectionState;
+  return proto.qdb.ConnectionState.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.qmq.ConnectionState} msg The message object to deserialize into.
+ * @param {!proto.qdb.ConnectionState} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.qmq.ConnectionState}
+ * @return {!proto.qdb.ConnectionState}
  */
-proto.qmq.ConnectionState.deserializeBinaryFromReader = function(msg, reader) {
+proto.qdb.ConnectionState.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -11317,7 +11317,7 @@ proto.qmq.ConnectionState.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.qmq.ConnectionState.ConnectionStateEnum} */ (reader.readEnum());
+      var value = /** @type {!proto.qdb.ConnectionState.ConnectionStateEnum} */ (reader.readEnum());
       msg.setRaw(value);
       break;
     default:
@@ -11333,9 +11333,9 @@ proto.qmq.ConnectionState.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.qmq.ConnectionState.prototype.serializeBinary = function() {
+proto.qdb.ConnectionState.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.qmq.ConnectionState.serializeBinaryToWriter(this, writer);
+  proto.qdb.ConnectionState.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -11343,11 +11343,11 @@ proto.qmq.ConnectionState.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.qmq.ConnectionState} message
+ * @param {!proto.qdb.ConnectionState} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.qmq.ConnectionState.serializeBinaryToWriter = function(message, writer) {
+proto.qdb.ConnectionState.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getRaw();
   if (f !== 0.0) {
@@ -11362,7 +11362,7 @@ proto.qmq.ConnectionState.serializeBinaryToWriter = function(message, writer) {
 /**
  * @enum {number}
  */
-proto.qmq.ConnectionState.ConnectionStateEnum = {
+proto.qdb.ConnectionState.ConnectionStateEnum = {
   UNSPECIFIED: 0,
   CONNECTED: 1,
   DISCONNECTED: 2
@@ -11370,22 +11370,22 @@ proto.qmq.ConnectionState.ConnectionStateEnum = {
 
 /**
  * optional ConnectionStateEnum raw = 1;
- * @return {!proto.qmq.ConnectionState.ConnectionStateEnum}
+ * @return {!proto.qdb.ConnectionState.ConnectionStateEnum}
  */
-proto.qmq.ConnectionState.prototype.getRaw = function() {
-  return /** @type {!proto.qmq.ConnectionState.ConnectionStateEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.qdb.ConnectionState.prototype.getRaw = function() {
+  return /** @type {!proto.qdb.ConnectionState.ConnectionStateEnum} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {!proto.qmq.ConnectionState.ConnectionStateEnum} value
- * @return {!proto.qmq.ConnectionState} returns this
+ * @param {!proto.qdb.ConnectionState.ConnectionStateEnum} value
+ * @return {!proto.qdb.ConnectionState} returns this
  */
-proto.qmq.ConnectionState.prototype.setRaw = function(value) {
+proto.qdb.ConnectionState.prototype.setRaw = function(value) {
   return jspb.Message.setProto3EnumField(this, 1, value);
 };
 
 
-goog.object.extend(exports, proto.qmq);
+goog.object.extend(exports, proto.qdb);
 
 },{"google-protobuf":1,"google-protobuf/google/protobuf/any_pb.js":2,"google-protobuf/google/protobuf/timestamp_pb.js":3}]},{},[4]);

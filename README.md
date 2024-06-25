@@ -25,6 +25,6 @@ To set up , ensure you have Go installed and follow these steps:
 
 1. Clone the repository.
 2. Navigate to the project directory and build the application using go build.
-3. Run the application with ./qmq.
+3. Run the application with ./qdb.
 
 For more detailed documentation and usage instructions, please refer to the project's Wiki or API documentation.

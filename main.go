@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	qmq "github.com/rqure/qmq/src"
+	qdb "github.com/rqure/qdb/src"
 )
 
 func getDatabaseAddress() string {
@@ -16,22 +16,22 @@ func getDatabaseAddress() string {
 }
 
 func main() {
-	db := qmq.NewRedisDatabase(qmq.RedisDatabaseConfig{
+	db := qdb.NewRedisDatabase(qdb.RedisDatabaseConfig{
 		Address: getDatabaseAddress(),
 	})
 
-	dbWorker := qmq.NewDatabaseWorker(db)
+	dbWorker := qdb.NewDatabaseWorker(db)
 
 	// Create a new application configuration
-	config := qmq.ApplicationConfig{
+	config := qdb.ApplicationConfig{
 		Name: "MyApp",
-		Workers: []qmq.IWorker{
+		Workers: []qdb.IWorker{
 			dbWorker,
 		},
 	}
 
 	// Create a new application
-	app := qmq.NewApplication(config)
+	app := qdb.NewApplication(config)
 
 	// Execute the application
 	app.Execute()

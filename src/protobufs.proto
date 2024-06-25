@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-option go_package = "qmq/qmq";
-package qmq;
+option go_package = "qdb/qdb";
+package qdb;
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/any.proto";

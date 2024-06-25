@@ -4,7 +4,7 @@
 // 	protoc        v4.23.4
 // source: src/protobufs.proto
 
-package qmq
+package qdb
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -898,7 +898,7 @@ type WebConfigCreateEntityResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Status WebConfigCreateEntityResponse_StatusEnum `protobuf:"varint,1,opt,name=status,proto3,enum=qmq.WebConfigCreateEntityResponse_StatusEnum" json:"status,omitempty"`
+	Status WebConfigCreateEntityResponse_StatusEnum `protobuf:"varint,1,opt,name=status,proto3,enum=qdb.WebConfigCreateEntityResponse_StatusEnum" json:"status,omitempty"`
 	Id     string                                   `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
 }
 
@@ -1000,7 +1000,7 @@ type WebConfigDeleteEntityResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Status WebConfigDeleteEntityResponse_StatusEnum `protobuf:"varint,1,opt,name=status,proto3,enum=qmq.WebConfigDeleteEntityResponse_StatusEnum" json:"status,omitempty"`
+	Status WebConfigDeleteEntityResponse_StatusEnum `protobuf:"varint,1,opt,name=status,proto3,enum=qdb.WebConfigDeleteEntityResponse_StatusEnum" json:"status,omitempty"`
 }
 
 func (x *WebConfigDeleteEntityResponse) Reset() {
@@ -1179,7 +1179,7 @@ type WebConfigGetEntityResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Status WebConfigGetEntityResponse_StatusEnum `protobuf:"varint,1,opt,name=status,proto3,enum=qmq.WebConfigGetEntityResponse_StatusEnum" json:"status,omitempty"`
+	Status WebConfigGetEntityResponse_StatusEnum `protobuf:"varint,1,opt,name=status,proto3,enum=qdb.WebConfigGetEntityResponse_StatusEnum" json:"status,omitempty"`
 	Entity *DatabaseEntity                       `protobuf:"bytes,2,opt,name=entity,proto3" json:"entity,omitempty"`
 }
 
@@ -1281,7 +1281,7 @@ type WebConfigGetFieldSchemaResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Status WebConfigGetFieldSchemaResponse_StatusEnum `protobuf:"varint,1,opt,name=status,proto3,enum=qmq.WebConfigGetFieldSchemaResponse_StatusEnum" json:"status,omitempty"`
+	Status WebConfigGetFieldSchemaResponse_StatusEnum `protobuf:"varint,1,opt,name=status,proto3,enum=qdb.WebConfigGetFieldSchemaResponse_StatusEnum" json:"status,omitempty"`
 	Schema *DatabaseFieldSchema                       `protobuf:"bytes,2,opt,name=schema,proto3" json:"schema,omitempty"`
 }
 
@@ -1391,7 +1391,7 @@ type WebConfigSetFieldSchemaResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Status WebConfigSetFieldSchemaResponse_StatusEnum `protobuf:"varint,1,opt,name=status,proto3,enum=qmq.WebConfigSetFieldSchemaResponse_StatusEnum" json:"status,omitempty"`
+	Status WebConfigSetFieldSchemaResponse_StatusEnum `protobuf:"varint,1,opt,name=status,proto3,enum=qdb.WebConfigSetFieldSchemaResponse_StatusEnum" json:"status,omitempty"`
 }
 
 func (x *WebConfigSetFieldSchemaResponse) Reset() {
@@ -1485,7 +1485,7 @@ type WebConfigGetEntitySchemaResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Status WebConfigGetEntitySchemaResponse_StatusEnum `protobuf:"varint,1,opt,name=status,proto3,enum=qmq.WebConfigGetEntitySchemaResponse_StatusEnum" json:"status,omitempty"`
+	Status WebConfigGetEntitySchemaResponse_StatusEnum `protobuf:"varint,1,opt,name=status,proto3,enum=qdb.WebConfigGetEntitySchemaResponse_StatusEnum" json:"status,omitempty"`
 	Schema *DatabaseEntitySchema                       `protobuf:"bytes,2,opt,name=schema,proto3" json:"schema,omitempty"`
 }
 
@@ -1595,7 +1595,7 @@ type WebConfigSetEntitySchemaResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Status WebConfigSetEntitySchemaResponse_StatusEnum `protobuf:"varint,1,opt,name=status,proto3,enum=qmq.WebConfigSetEntitySchemaResponse_StatusEnum" json:"status,omitempty"`
+	Status WebConfigSetEntitySchemaResponse_StatusEnum `protobuf:"varint,1,opt,name=status,proto3,enum=qdb.WebConfigSetEntitySchemaResponse_StatusEnum" json:"status,omitempty"`
 }
 
 func (x *WebConfigSetEntitySchemaResponse) Reset() {
@@ -1680,7 +1680,7 @@ type WebConfigCreateSnapshotResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Status   WebConfigCreateSnapshotResponse_StatusEnum `protobuf:"varint,1,opt,name=status,proto3,enum=qmq.WebConfigCreateSnapshotResponse_StatusEnum" json:"status,omitempty"`
+	Status   WebConfigCreateSnapshotResponse_StatusEnum `protobuf:"varint,1,opt,name=status,proto3,enum=qdb.WebConfigCreateSnapshotResponse_StatusEnum" json:"status,omitempty"`
 	Snapshot *DatabaseSnapshot                          `protobuf:"bytes,2,opt,name=snapshot,proto3" json:"snapshot,omitempty"`
 }
 
@@ -1782,7 +1782,7 @@ type WebConfigRestoreSnapshotResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Status WebConfigRestoreSnapshotResponse_StatusEnum `protobuf:"varint,1,opt,name=status,proto3,enum=qmq.WebConfigRestoreSnapshotResponse_StatusEnum" json:"status,omitempty"`
+	Status WebConfigRestoreSnapshotResponse_StatusEnum `protobuf:"varint,1,opt,name=status,proto3,enum=qdb.WebConfigRestoreSnapshotResponse_StatusEnum" json:"status,omitempty"`
 }
 
 func (x *WebConfigRestoreSnapshotResponse) Reset() {
@@ -1999,7 +1999,7 @@ type WebRuntimeDatabaseRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	RequestType WebRuntimeDatabaseRequest_RequestTypeEnum `protobuf:"varint,1,opt,name=requestType,proto3,enum=qmq.WebRuntimeDatabaseRequest_RequestTypeEnum" json:"requestType,omitempty"`
+	RequestType WebRuntimeDatabaseRequest_RequestTypeEnum `protobuf:"varint,1,opt,name=requestType,proto3,enum=qdb.WebRuntimeDatabaseRequest_RequestTypeEnum" json:"requestType,omitempty"`
 	Requests    []*DatabaseRequest                        `protobuf:"bytes,2,rep,name=requests,proto3" json:"requests,omitempty"`
 }
 
@@ -2327,7 +2327,7 @@ type WebRuntimeUnregisterNotificationResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Status WebRuntimeUnregisterNotificationResponse_StatusEnum `protobuf:"varint,1,opt,name=status,proto3,enum=qmq.WebRuntimeUnregisterNotificationResponse_StatusEnum" json:"status,omitempty"`
+	Status WebRuntimeUnregisterNotificationResponse_StatusEnum `protobuf:"varint,1,opt,name=status,proto3,enum=qdb.WebRuntimeUnregisterNotificationResponse_StatusEnum" json:"status,omitempty"`
 }
 
 func (x *WebRuntimeUnregisterNotificationResponse) Reset() {
@@ -3365,7 +3365,7 @@ type LogMessage struct {
 	unknownFields protoimpl.UnknownFields
 
 	Application string                  `protobuf:"bytes,1,opt,name=application,proto3" json:"application,omitempty"`
-	Level       LogMessage_LogLevelEnum `protobuf:"varint,2,opt,name=level,proto3,enum=qmq.LogMessage_LogLevelEnum" json:"level,omitempty"`
+	Level       LogMessage_LogLevelEnum `protobuf:"varint,2,opt,name=level,proto3,enum=qdb.LogMessage_LogLevelEnum" json:"level,omitempty"`
 	Message     string                  `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
 	Timestamp   *timestamppb.Timestamp  `protobuf:"bytes,4,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
 }
@@ -3435,7 +3435,7 @@ type GarageDoorState struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Raw GarageDoorState_GarageDoorStateEnum `protobuf:"varint,1,opt,name=raw,proto3,enum=qmq.GarageDoorState_GarageDoorStateEnum" json:"raw,omitempty"`
+	Raw GarageDoorState_GarageDoorStateEnum `protobuf:"varint,1,opt,name=raw,proto3,enum=qdb.GarageDoorState_GarageDoorStateEnum" json:"raw,omitempty"`
 }
 
 func (x *GarageDoorState) Reset() {
@@ -3482,7 +3482,7 @@ type ConnectionState struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Raw ConnectionState_ConnectionStateEnum `protobuf:"varint,1,opt,name=raw,proto3,enum=qmq.ConnectionState_ConnectionStateEnum" json:"raw,omitempty"`
+	Raw ConnectionState_ConnectionStateEnum `protobuf:"varint,1,opt,name=raw,proto3,enum=qdb.ConnectionState_ConnectionStateEnum" json:"raw,omitempty"`
 }
 
 func (x *ConnectionState) Reset() {
@@ -3917,122 +3917,122 @@ func file_src_protobufs_proto_rawDescGZIP() []byte {
 var file_src_protobufs_proto_enumTypes = make([]protoimpl.EnumInfo, 14)
 var file_src_protobufs_proto_msgTypes = make([]protoimpl.MessageInfo, 54)
 var file_src_protobufs_proto_goTypes = []any{
-	(WebConfigCreateEntityResponse_StatusEnum)(0),            // 0: qmq.WebConfigCreateEntityResponse.StatusEnum
-	(WebConfigDeleteEntityResponse_StatusEnum)(0),            // 1: qmq.WebConfigDeleteEntityResponse.StatusEnum
-	(WebConfigGetEntityResponse_StatusEnum)(0),               // 2: qmq.WebConfigGetEntityResponse.StatusEnum
-	(WebConfigGetFieldSchemaResponse_StatusEnum)(0),          // 3: qmq.WebConfigGetFieldSchemaResponse.StatusEnum
-	(WebConfigSetFieldSchemaResponse_StatusEnum)(0),          // 4: qmq.WebConfigSetFieldSchemaResponse.StatusEnum
-	(WebConfigGetEntitySchemaResponse_StatusEnum)(0),         // 5: qmq.WebConfigGetEntitySchemaResponse.StatusEnum
-	(WebConfigSetEntitySchemaResponse_StatusEnum)(0),         // 6: qmq.WebConfigSetEntitySchemaResponse.StatusEnum
-	(WebConfigCreateSnapshotResponse_StatusEnum)(0),          // 7: qmq.WebConfigCreateSnapshotResponse.StatusEnum
-	(WebConfigRestoreSnapshotResponse_StatusEnum)(0),         // 8: qmq.WebConfigRestoreSnapshotResponse.StatusEnum
-	(WebRuntimeDatabaseRequest_RequestTypeEnum)(0),           // 9: qmq.WebRuntimeDatabaseRequest.RequestTypeEnum
-	(WebRuntimeUnregisterNotificationResponse_StatusEnum)(0), // 10: qmq.WebRuntimeUnregisterNotificationResponse.StatusEnum
-	(LogMessage_LogLevelEnum)(0),                             // 11: qmq.LogMessage.LogLevelEnum
-	(GarageDoorState_GarageDoorStateEnum)(0),                 // 12: qmq.GarageDoorState.GarageDoorStateEnum
-	(ConnectionState_ConnectionStateEnum)(0),                 // 13: qmq.ConnectionState.ConnectionStateEnum
-	(*WebHeader)(nil),                                        // 14: qmq.WebHeader
-	(*WebMessage)(nil),                                       // 15: qmq.WebMessage
-	(*WebConfigCreateEntityRequest)(nil),                     // 16: qmq.WebConfigCreateEntityRequest
-	(*WebConfigCreateEntityResponse)(nil),                    // 17: qmq.WebConfigCreateEntityResponse
-	(*WebConfigDeleteEntityRequest)(nil),                     // 18: qmq.WebConfigDeleteEntityRequest
-	(*WebConfigDeleteEntityResponse)(nil),                    // 19: qmq.WebConfigDeleteEntityResponse
-	(*WebConfigGetEntityTypesRequest)(nil),                   // 20: qmq.WebConfigGetEntityTypesRequest
-	(*WebConfigGetEntityTypesResponse)(nil),                  // 21: qmq.WebConfigGetEntityTypesResponse
-	(*WebConfigGetEntityRequest)(nil),                        // 22: qmq.WebConfigGetEntityRequest
-	(*WebConfigGetEntityResponse)(nil),                       // 23: qmq.WebConfigGetEntityResponse
-	(*WebConfigGetFieldSchemaRequest)(nil),                   // 24: qmq.WebConfigGetFieldSchemaRequest
-	(*WebConfigGetFieldSchemaResponse)(nil),                  // 25: qmq.WebConfigGetFieldSchemaResponse
-	(*WebConfigSetFieldSchemaRequest)(nil),                   // 26: qmq.WebConfigSetFieldSchemaRequest
-	(*WebConfigSetFieldSchemaResponse)(nil),                  // 27: qmq.WebConfigSetFieldSchemaResponse
-	(*WebConfigGetEntitySchemaRequest)(nil),                  // 28: qmq.WebConfigGetEntitySchemaRequest
-	(*WebConfigGetEntitySchemaResponse)(nil),                 // 29: qmq.WebConfigGetEntitySchemaResponse
-	(*WebConfigSetEntitySchemaRequest)(nil),                  // 30: qmq.WebConfigSetEntitySchemaRequest
-	(*WebConfigSetEntitySchemaResponse)(nil),                 // 31: qmq.WebConfigSetEntitySchemaResponse
-	(*WebConfigCreateSnapshotRequest)(nil),                   // 32: qmq.WebConfigCreateSnapshotRequest
-	(*WebConfigCreateSnapshotResponse)(nil),                  // 33: qmq.WebConfigCreateSnapshotResponse
-	(*WebConfigRestoreSnapshotRequest)(nil),                  // 34: qmq.WebConfigRestoreSnapshotRequest
-	(*WebConfigRestoreSnapshotResponse)(nil),                 // 35: qmq.WebConfigRestoreSnapshotResponse
-	(*WebConfigGetRootRequest)(nil),                          // 36: qmq.WebConfigGetRootRequest
-	(*WebConfigGetRootResponse)(nil),                         // 37: qmq.WebConfigGetRootResponse
-	(*WebConfigGetAllFieldsRequest)(nil),                     // 38: qmq.WebConfigGetAllFieldsRequest
-	(*WebConfigGetAllFieldsResponse)(nil),                    // 39: qmq.WebConfigGetAllFieldsResponse
-	(*WebRuntimeDatabaseRequest)(nil),                        // 40: qmq.WebRuntimeDatabaseRequest
-	(*WebRuntimeDatabaseResponse)(nil),                       // 41: qmq.WebRuntimeDatabaseResponse
-	(*WebRuntimeRegisterNotificationRequest)(nil),            // 42: qmq.WebRuntimeRegisterNotificationRequest
-	(*WebRuntimeRegisterNotificationResponse)(nil),           // 43: qmq.WebRuntimeRegisterNotificationResponse
-	(*WebRuntimeGetNotificationsRequest)(nil),                // 44: qmq.WebRuntimeGetNotificationsRequest
-	(*WebRuntimeGetNotificationsResponse)(nil),               // 45: qmq.WebRuntimeGetNotificationsResponse
-	(*WebRuntimeUnregisterNotificationRequest)(nil),          // 46: qmq.WebRuntimeUnregisterNotificationRequest
-	(*WebRuntimeUnregisterNotificationResponse)(nil),         // 47: qmq.WebRuntimeUnregisterNotificationResponse
-	(*WebRuntimeGetDatabaseConnectionStatusRequest)(nil),     // 48: qmq.WebRuntimeGetDatabaseConnectionStatusRequest
-	(*WebRuntimeGetDatabaseConnectionStatusResponse)(nil),    // 49: qmq.WebRuntimeGetDatabaseConnectionStatusResponse
-	(*DatabaseEntity)(nil),                                   // 50: qmq.DatabaseEntity
-	(*DatabaseField)(nil),                                    // 51: qmq.DatabaseField
-	(*DatabaseNotificationConfig)(nil),                       // 52: qmq.DatabaseNotificationConfig
-	(*DatabaseNotification)(nil),                             // 53: qmq.DatabaseNotification
-	(*DatabaseEntitySchema)(nil),                             // 54: qmq.DatabaseEntitySchema
-	(*DatabaseFieldSchema)(nil),                              // 55: qmq.DatabaseFieldSchema
-	(*DatabaseRequest)(nil),                                  // 56: qmq.DatabaseRequest
-	(*DatabaseSnapshot)(nil),                                 // 57: qmq.DatabaseSnapshot
-	(*Int)(nil),                                              // 58: qmq.Int
-	(*String)(nil),                                           // 59: qmq.String
-	(*Timestamp)(nil),                                        // 60: qmq.Timestamp
-	(*Float)(nil),                                            // 61: qmq.Float
-	(*Bool)(nil),                                             // 62: qmq.Bool
-	(*EntityReference)(nil),                                  // 63: qmq.EntityReference
-	(*BinaryFile)(nil),                                       // 64: qmq.BinaryFile
-	(*LogMessage)(nil),                                       // 65: qmq.LogMessage
-	(*GarageDoorState)(nil),                                  // 66: qmq.GarageDoorState
-	(*ConnectionState)(nil),                                  // 67: qmq.ConnectionState
+	(WebConfigCreateEntityResponse_StatusEnum)(0),            // 0: qdb.WebConfigCreateEntityResponse.StatusEnum
+	(WebConfigDeleteEntityResponse_StatusEnum)(0),            // 1: qdb.WebConfigDeleteEntityResponse.StatusEnum
+	(WebConfigGetEntityResponse_StatusEnum)(0),               // 2: qdb.WebConfigGetEntityResponse.StatusEnum
+	(WebConfigGetFieldSchemaResponse_StatusEnum)(0),          // 3: qdb.WebConfigGetFieldSchemaResponse.StatusEnum
+	(WebConfigSetFieldSchemaResponse_StatusEnum)(0),          // 4: qdb.WebConfigSetFieldSchemaResponse.StatusEnum
+	(WebConfigGetEntitySchemaResponse_StatusEnum)(0),         // 5: qdb.WebConfigGetEntitySchemaResponse.StatusEnum
+	(WebConfigSetEntitySchemaResponse_StatusEnum)(0),         // 6: qdb.WebConfigSetEntitySchemaResponse.StatusEnum
+	(WebConfigCreateSnapshotResponse_StatusEnum)(0),          // 7: qdb.WebConfigCreateSnapshotResponse.StatusEnum
+	(WebConfigRestoreSnapshotResponse_StatusEnum)(0),         // 8: qdb.WebConfigRestoreSnapshotResponse.StatusEnum
+	(WebRuntimeDatabaseRequest_RequestTypeEnum)(0),           // 9: qdb.WebRuntimeDatabaseRequest.RequestTypeEnum
+	(WebRuntimeUnregisterNotificationResponse_StatusEnum)(0), // 10: qdb.WebRuntimeUnregisterNotificationResponse.StatusEnum
+	(LogMessage_LogLevelEnum)(0),                             // 11: qdb.LogMessage.LogLevelEnum
+	(GarageDoorState_GarageDoorStateEnum)(0),                 // 12: qdb.GarageDoorState.GarageDoorStateEnum
+	(ConnectionState_ConnectionStateEnum)(0),                 // 13: qdb.ConnectionState.ConnectionStateEnum
+	(*WebHeader)(nil),                                        // 14: qdb.WebHeader
+	(*WebMessage)(nil),                                       // 15: qdb.WebMessage
+	(*WebConfigCreateEntityRequest)(nil),                     // 16: qdb.WebConfigCreateEntityRequest
+	(*WebConfigCreateEntityResponse)(nil),                    // 17: qdb.WebConfigCreateEntityResponse
+	(*WebConfigDeleteEntityRequest)(nil),                     // 18: qdb.WebConfigDeleteEntityRequest
+	(*WebConfigDeleteEntityResponse)(nil),                    // 19: qdb.WebConfigDeleteEntityResponse
+	(*WebConfigGetEntityTypesRequest)(nil),                   // 20: qdb.WebConfigGetEntityTypesRequest
+	(*WebConfigGetEntityTypesResponse)(nil),                  // 21: qdb.WebConfigGetEntityTypesResponse
+	(*WebConfigGetEntityRequest)(nil),                        // 22: qdb.WebConfigGetEntityRequest
+	(*WebConfigGetEntityResponse)(nil),                       // 23: qdb.WebConfigGetEntityResponse
+	(*WebConfigGetFieldSchemaRequest)(nil),                   // 24: qdb.WebConfigGetFieldSchemaRequest
+	(*WebConfigGetFieldSchemaResponse)(nil),                  // 25: qdb.WebConfigGetFieldSchemaResponse
+	(*WebConfigSetFieldSchemaRequest)(nil),                   // 26: qdb.WebConfigSetFieldSchemaRequest
+	(*WebConfigSetFieldSchemaResponse)(nil),                  // 27: qdb.WebConfigSetFieldSchemaResponse
+	(*WebConfigGetEntitySchemaRequest)(nil),                  // 28: qdb.WebConfigGetEntitySchemaRequest
+	(*WebConfigGetEntitySchemaResponse)(nil),                 // 29: qdb.WebConfigGetEntitySchemaResponse
+	(*WebConfigSetEntitySchemaRequest)(nil),                  // 30: qdb.WebConfigSetEntitySchemaRequest
+	(*WebConfigSetEntitySchemaResponse)(nil),                 // 31: qdb.WebConfigSetEntitySchemaResponse
+	(*WebConfigCreateSnapshotRequest)(nil),                   // 32: qdb.WebConfigCreateSnapshotRequest
+	(*WebConfigCreateSnapshotResponse)(nil),                  // 33: qdb.WebConfigCreateSnapshotResponse
+	(*WebConfigRestoreSnapshotRequest)(nil),                  // 34: qdb.WebConfigRestoreSnapshotRequest
+	(*WebConfigRestoreSnapshotResponse)(nil),                 // 35: qdb.WebConfigRestoreSnapshotResponse
+	(*WebConfigGetRootRequest)(nil),                          // 36: qdb.WebConfigGetRootRequest
+	(*WebConfigGetRootResponse)(nil),                         // 37: qdb.WebConfigGetRootResponse
+	(*WebConfigGetAllFieldsRequest)(nil),                     // 38: qdb.WebConfigGetAllFieldsRequest
+	(*WebConfigGetAllFieldsResponse)(nil),                    // 39: qdb.WebConfigGetAllFieldsResponse
+	(*WebRuntimeDatabaseRequest)(nil),                        // 40: qdb.WebRuntimeDatabaseRequest
+	(*WebRuntimeDatabaseResponse)(nil),                       // 41: qdb.WebRuntimeDatabaseResponse
+	(*WebRuntimeRegisterNotificationRequest)(nil),            // 42: qdb.WebRuntimeRegisterNotificationRequest
+	(*WebRuntimeRegisterNotificationResponse)(nil),           // 43: qdb.WebRuntimeRegisterNotificationResponse
+	(*WebRuntimeGetNotificationsRequest)(nil),                // 44: qdb.WebRuntimeGetNotificationsRequest
+	(*WebRuntimeGetNotificationsResponse)(nil),               // 45: qdb.WebRuntimeGetNotificationsResponse
+	(*WebRuntimeUnregisterNotificationRequest)(nil),          // 46: qdb.WebRuntimeUnregisterNotificationRequest
+	(*WebRuntimeUnregisterNotificationResponse)(nil),         // 47: qdb.WebRuntimeUnregisterNotificationResponse
+	(*WebRuntimeGetDatabaseConnectionStatusRequest)(nil),     // 48: qdb.WebRuntimeGetDatabaseConnectionStatusRequest
+	(*WebRuntimeGetDatabaseConnectionStatusResponse)(nil),    // 49: qdb.WebRuntimeGetDatabaseConnectionStatusResponse
+	(*DatabaseEntity)(nil),                                   // 50: qdb.DatabaseEntity
+	(*DatabaseField)(nil),                                    // 51: qdb.DatabaseField
+	(*DatabaseNotificationConfig)(nil),                       // 52: qdb.DatabaseNotificationConfig
+	(*DatabaseNotification)(nil),                             // 53: qdb.DatabaseNotification
+	(*DatabaseEntitySchema)(nil),                             // 54: qdb.DatabaseEntitySchema
+	(*DatabaseFieldSchema)(nil),                              // 55: qdb.DatabaseFieldSchema
+	(*DatabaseRequest)(nil),                                  // 56: qdb.DatabaseRequest
+	(*DatabaseSnapshot)(nil),                                 // 57: qdb.DatabaseSnapshot
+	(*Int)(nil),                                              // 58: qdb.Int
+	(*String)(nil),                                           // 59: qdb.String
+	(*Timestamp)(nil),                                        // 60: qdb.Timestamp
+	(*Float)(nil),                                            // 61: qdb.Float
+	(*Bool)(nil),                                             // 62: qdb.Bool
+	(*EntityReference)(nil),                                  // 63: qdb.EntityReference
+	(*BinaryFile)(nil),                                       // 64: qdb.BinaryFile
+	(*LogMessage)(nil),                                       // 65: qdb.LogMessage
+	(*GarageDoorState)(nil),                                  // 66: qdb.GarageDoorState
+	(*ConnectionState)(nil),                                  // 67: qdb.ConnectionState
 	(*timestamppb.Timestamp)(nil),                            // 68: google.protobuf.Timestamp
 	(*anypb.Any)(nil),                                        // 69: google.protobuf.Any
 }
 var file_src_protobufs_proto_depIdxs = []int32{
-	68, // 0: qmq.WebHeader.timestamp:type_name -> google.protobuf.Timestamp
-	14, // 1: qmq.WebMessage.header:type_name -> qmq.WebHeader
-	69, // 2: qmq.WebMessage.payload:type_name -> google.protobuf.Any
-	0,  // 3: qmq.WebConfigCreateEntityResponse.status:type_name -> qmq.WebConfigCreateEntityResponse.StatusEnum
-	1,  // 4: qmq.WebConfigDeleteEntityResponse.status:type_name -> qmq.WebConfigDeleteEntityResponse.StatusEnum
-	2,  // 5: qmq.WebConfigGetEntityResponse.status:type_name -> qmq.WebConfigGetEntityResponse.StatusEnum
-	50, // 6: qmq.WebConfigGetEntityResponse.entity:type_name -> qmq.DatabaseEntity
-	3,  // 7: qmq.WebConfigGetFieldSchemaResponse.status:type_name -> qmq.WebConfigGetFieldSchemaResponse.StatusEnum
-	55, // 8: qmq.WebConfigGetFieldSchemaResponse.schema:type_name -> qmq.DatabaseFieldSchema
-	55, // 9: qmq.WebConfigSetFieldSchemaRequest.schema:type_name -> qmq.DatabaseFieldSchema
-	4,  // 10: qmq.WebConfigSetFieldSchemaResponse.status:type_name -> qmq.WebConfigSetFieldSchemaResponse.StatusEnum
-	5,  // 11: qmq.WebConfigGetEntitySchemaResponse.status:type_name -> qmq.WebConfigGetEntitySchemaResponse.StatusEnum
-	54, // 12: qmq.WebConfigGetEntitySchemaResponse.schema:type_name -> qmq.DatabaseEntitySchema
-	6,  // 13: qmq.WebConfigSetEntitySchemaResponse.status:type_name -> qmq.WebConfigSetEntitySchemaResponse.StatusEnum
-	7,  // 14: qmq.WebConfigCreateSnapshotResponse.status:type_name -> qmq.WebConfigCreateSnapshotResponse.StatusEnum
-	57, // 15: qmq.WebConfigCreateSnapshotResponse.snapshot:type_name -> qmq.DatabaseSnapshot
-	57, // 16: qmq.WebConfigRestoreSnapshotRequest.snapshot:type_name -> qmq.DatabaseSnapshot
-	8,  // 17: qmq.WebConfigRestoreSnapshotResponse.status:type_name -> qmq.WebConfigRestoreSnapshotResponse.StatusEnum
-	9,  // 18: qmq.WebRuntimeDatabaseRequest.requestType:type_name -> qmq.WebRuntimeDatabaseRequest.RequestTypeEnum
-	56, // 19: qmq.WebRuntimeDatabaseRequest.requests:type_name -> qmq.DatabaseRequest
-	56, // 20: qmq.WebRuntimeDatabaseResponse.response:type_name -> qmq.DatabaseRequest
-	52, // 21: qmq.WebRuntimeRegisterNotificationRequest.requests:type_name -> qmq.DatabaseNotificationConfig
-	53, // 22: qmq.WebRuntimeGetNotificationsResponse.notifications:type_name -> qmq.DatabaseNotification
-	10, // 23: qmq.WebRuntimeUnregisterNotificationResponse.status:type_name -> qmq.WebRuntimeUnregisterNotificationResponse.StatusEnum
-	67, // 24: qmq.WebRuntimeGetDatabaseConnectionStatusResponse.status:type_name -> qmq.ConnectionState
-	63, // 25: qmq.DatabaseEntity.parent:type_name -> qmq.EntityReference
-	63, // 26: qmq.DatabaseEntity.children:type_name -> qmq.EntityReference
-	69, // 27: qmq.DatabaseField.value:type_name -> google.protobuf.Any
-	68, // 28: qmq.DatabaseField.writeTime:type_name -> google.protobuf.Timestamp
-	51, // 29: qmq.DatabaseNotification.current:type_name -> qmq.DatabaseField
-	51, // 30: qmq.DatabaseNotification.previous:type_name -> qmq.DatabaseField
-	51, // 31: qmq.DatabaseNotification.context:type_name -> qmq.DatabaseField
-	69, // 32: qmq.DatabaseRequest.value:type_name -> google.protobuf.Any
-	60, // 33: qmq.DatabaseRequest.writeTime:type_name -> qmq.Timestamp
-	59, // 34: qmq.DatabaseRequest.writerId:type_name -> qmq.String
-	50, // 35: qmq.DatabaseSnapshot.entities:type_name -> qmq.DatabaseEntity
-	51, // 36: qmq.DatabaseSnapshot.fields:type_name -> qmq.DatabaseField
-	54, // 37: qmq.DatabaseSnapshot.entitySchemas:type_name -> qmq.DatabaseEntitySchema
-	55, // 38: qmq.DatabaseSnapshot.fieldSchemas:type_name -> qmq.DatabaseFieldSchema
-	68, // 39: qmq.Timestamp.raw:type_name -> google.protobuf.Timestamp
-	11, // 40: qmq.LogMessage.level:type_name -> qmq.LogMessage.LogLevelEnum
-	68, // 41: qmq.LogMessage.timestamp:type_name -> google.protobuf.Timestamp
-	12, // 42: qmq.GarageDoorState.raw:type_name -> qmq.GarageDoorState.GarageDoorStateEnum
-	13, // 43: qmq.ConnectionState.raw:type_name -> qmq.ConnectionState.ConnectionStateEnum
+	68, // 0: qdb.WebHeader.timestamp:type_name -> google.protobuf.Timestamp
+	14, // 1: qdb.WebMessage.header:type_name -> qdb.WebHeader
+	69, // 2: qdb.WebMessage.payload:type_name -> google.protobuf.Any
+	0,  // 3: qdb.WebConfigCreateEntityResponse.status:type_name -> qdb.WebConfigCreateEntityResponse.StatusEnum
+	1,  // 4: qdb.WebConfigDeleteEntityResponse.status:type_name -> qdb.WebConfigDeleteEntityResponse.StatusEnum
+	2,  // 5: qdb.WebConfigGetEntityResponse.status:type_name -> qdb.WebConfigGetEntityResponse.StatusEnum
+	50, // 6: qdb.WebConfigGetEntityResponse.entity:type_name -> qdb.DatabaseEntity
+	3,  // 7: qdb.WebConfigGetFieldSchemaResponse.status:type_name -> qdb.WebConfigGetFieldSchemaResponse.StatusEnum
+	55, // 8: qdb.WebConfigGetFieldSchemaResponse.schema:type_name -> qdb.DatabaseFieldSchema
+	55, // 9: qdb.WebConfigSetFieldSchemaRequest.schema:type_name -> qdb.DatabaseFieldSchema
+	4,  // 10: qdb.WebConfigSetFieldSchemaResponse.status:type_name -> qdb.WebConfigSetFieldSchemaResponse.StatusEnum
+	5,  // 11: qdb.WebConfigGetEntitySchemaResponse.status:type_name -> qdb.WebConfigGetEntitySchemaResponse.StatusEnum
+	54, // 12: qdb.WebConfigGetEntitySchemaResponse.schema:type_name -> qdb.DatabaseEntitySchema
+	6,  // 13: qdb.WebConfigSetEntitySchemaResponse.status:type_name -> qdb.WebConfigSetEntitySchemaResponse.StatusEnum
+	7,  // 14: qdb.WebConfigCreateSnapshotResponse.status:type_name -> qdb.WebConfigCreateSnapshotResponse.StatusEnum
+	57, // 15: qdb.WebConfigCreateSnapshotResponse.snapshot:type_name -> qdb.DatabaseSnapshot
+	57, // 16: qdb.WebConfigRestoreSnapshotRequest.snapshot:type_name -> qdb.DatabaseSnapshot
+	8,  // 17: qdb.WebConfigRestoreSnapshotResponse.status:type_name -> qdb.WebConfigRestoreSnapshotResponse.StatusEnum
+	9,  // 18: qdb.WebRuntimeDatabaseRequest.requestType:type_name -> qdb.WebRuntimeDatabaseRequest.RequestTypeEnum
+	56, // 19: qdb.WebRuntimeDatabaseRequest.requests:type_name -> qdb.DatabaseRequest
+	56, // 20: qdb.WebRuntimeDatabaseResponse.response:type_name -> qdb.DatabaseRequest
+	52, // 21: qdb.WebRuntimeRegisterNotificationRequest.requests:type_name -> qdb.DatabaseNotificationConfig
+	53, // 22: qdb.WebRuntimeGetNotificationsResponse.notifications:type_name -> qdb.DatabaseNotification
+	10, // 23: qdb.WebRuntimeUnregisterNotificationResponse.status:type_name -> qdb.WebRuntimeUnregisterNotificationResponse.StatusEnum
+	67, // 24: qdb.WebRuntimeGetDatabaseConnectionStatusResponse.status:type_name -> qdb.ConnectionState
+	63, // 25: qdb.DatabaseEntity.parent:type_name -> qdb.EntityReference
+	63, // 26: qdb.DatabaseEntity.children:type_name -> qdb.EntityReference
+	69, // 27: qdb.DatabaseField.value:type_name -> google.protobuf.Any
+	68, // 28: qdb.DatabaseField.writeTime:type_name -> google.protobuf.Timestamp
+	51, // 29: qdb.DatabaseNotification.current:type_name -> qdb.DatabaseField
+	51, // 30: qdb.DatabaseNotification.previous:type_name -> qdb.DatabaseField
+	51, // 31: qdb.DatabaseNotification.context:type_name -> qdb.DatabaseField
+	69, // 32: qdb.DatabaseRequest.value:type_name -> google.protobuf.Any
+	60, // 33: qdb.DatabaseRequest.writeTime:type_name -> qdb.Timestamp
+	59, // 34: qdb.DatabaseRequest.writerId:type_name -> qdb.String
+	50, // 35: qdb.DatabaseSnapshot.entities:type_name -> qdb.DatabaseEntity
+	51, // 36: qdb.DatabaseSnapshot.fields:type_name -> qdb.DatabaseField
+	54, // 37: qdb.DatabaseSnapshot.entitySchemas:type_name -> qdb.DatabaseEntitySchema
+	55, // 38: qdb.DatabaseSnapshot.fieldSchemas:type_name -> qdb.DatabaseFieldSchema
+	68, // 39: qdb.Timestamp.raw:type_name -> google.protobuf.Timestamp
+	11, // 40: qdb.LogMessage.level:type_name -> qdb.LogMessage.LogLevelEnum
+	68, // 41: qdb.LogMessage.timestamp:type_name -> google.protobuf.Timestamp
+	12, // 42: qdb.GarageDoorState.raw:type_name -> qdb.GarageDoorState.GarageDoorStateEnum
+	13, // 43: qdb.ConnectionState.raw:type_name -> qdb.ConnectionState.ConnectionStateEnum
 	44, // [44:44] is the sub-list for method output_type
 	44, // [44:44] is the sub-list for method input_type
 	44, // [44:44] is the sub-list for extension type_name
