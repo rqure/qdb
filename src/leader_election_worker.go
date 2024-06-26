@@ -6,6 +6,14 @@ import (
 	"time"
 )
 
+type LeaderStates int
+
+const (
+	Unavailable LeaderStates = iota
+	Follower
+	Leader
+)
+
 // leader:<appName>:current
 // leader:<appName>:candidates:<instanceId>
 type LeaderElectionKeyGenerator struct{}
@@ -18,7 +26,7 @@ func (g *LeaderElectionKeyGenerator) GetLeaderCandidatesKey(app string, instance
 	return "leader:" + app + ":candidates:" + instanceId
 }
 
-const LeaderTokenExpiry = 5 * time.Second
+const LeaderLeaseTimeout = 3 * time.Second
 
 type LeaderAvailabilityCriteria func() bool
 
@@ -33,11 +41,12 @@ type LeaderElectionWorker struct {
 
 	db                         IDatabase
 	leaderAvailabilityCriteria []LeaderAvailabilityCriteria
-	lastAvailability           bool
-	isLeader                   bool
+	state                      LeaderStates
 	applicationName            string
 	applicationInstanceId      string
 	keygen                     LeaderElectionKeyGenerator
+	lastLeaderAttemptTime      time.Time
+	lastLeaseRenewalTime       time.Time
 }
 
 func NewLeaderElectionWorker(db IDatabase) *LeaderElectionWorker {
@@ -63,6 +72,8 @@ func (w *LeaderElectionWorker) Init() {
 }
 
 func (w *LeaderElectionWorker) Deinit() {
+	w.updateLeadershipStatus(false)
+	w.updateCandidateStatus(false)
 }
 
 func (w *LeaderElectionWorker) OnDatabaseConnected() {
@@ -78,33 +89,74 @@ func (w *LeaderElectionWorker) OnSchemaUpdated() {
 }
 
 func (w *LeaderElectionWorker) DoWork() {
-	available := w.IsAvailable()
-	if available != w.lastAvailability {
-		if available {
-			w.Signals.BecameFollower.Emit()
+	switch w.state {
+	case Unavailable:
+		if w.determineAvailability() {
+			w.setState(Follower)
 		} else {
-			w.Signals.BecameUnavailable.Emit()
+			w.setState(Unavailable)
+		}
+	case Follower:
+		if w.determineAvailability() {
+			if w.determineLeadershipStatus() {
+				w.setState(Follower)
+				w.setState(Leader)
+			} else {
+			}
+		} else {
+			w.setState(Unavailable)
+		}
+	case Leader:
+		if w.determineAvailability() {
+			if w.determineLeadershipStatus() {
+				w.setState(Leader)
+
+				if time.Now().After(w.lastLeaseRenewalTime.Add(LeaderLeaseTimeout / 2)) {
+					w.renewLeadershipLease()
+					w.lastLeaseRenewalTime = time.Now()
+				}
+			} else {
+				w.setState(Follower)
+			}
+		} else {
+			w.setState(Unavailable)
+		}
+	}
+
+	if w.isAvailable {
+		w.updateLeadershipStatus(w.determineLeadershipStatus())
+
+		if !w.isLeader && time.Now().After(w.lastLeaderAttemptTime.Add(LeaderLeaseTimeout)) {
+			w.tryBecomeLeader()
+			w.lastLeaderAttemptTime = time.Now()
+			return
 		}
 
-		w.lastAvailability = available
-		return
-	}
-
-	w.isLeader = w.checkIsLeader()
-	if available && !w.isLeader {
-		// Check if you can become a leader
-
-		return
-	}
-
-	if available && w.isLeader {
-		// Check if you are still the leader
-		// Update leadership expiry
-		return
+		if w.isLeader && time.Now().After(w.lastLeaseRenewalTime.Add(LeaderLeaseTimeout/2)) {
+			w.renewLeadershipLease()
+			w.lastLeaseRenewalTime = time.Now()
+			return
+		}
 	}
 }
 
-func (w *LeaderElectionWorker) IsAvailable() bool {
+func (w *LeaderElectionWorker) setState(state LeaderStates) {
+	if w.state == state {
+		return
+	}
+
+	w.state = state
+	switch state {
+	case Leader:
+		w.Signals.BecameLeader.Emit()
+	case Follower:
+		w.Signals.BecameFollower.Emit()
+	case Unavailable:
+		w.Signals.BecameUnavailable.Emit()
+	}
+}
+
+func (w *LeaderElectionWorker) determineAvailability() bool {
 	for _, criteria := range w.leaderAvailabilityCriteria {
 		if !criteria() {
 			return false
@@ -126,29 +178,58 @@ func (w *LeaderElectionWorker) randomString() string {
 	return base64.StdEncoding.EncodeToString(randomBytes)
 }
 
-func (w *LeaderElectionWorker) checkIsLeader() bool {
+func (w *LeaderElectionWorker) determineLeadershipStatus() bool {
 	return w.db.TempGet(w.keygen.GetLeaderKey(w.applicationName)) == w.applicationInstanceId
 }
 
-func (w *LeaderElectionWorker) tryBecomeLeader() bool {
-	return w.db.TempSet(w.keygen.GetLeaderKey(w.applicationName), w.applicationInstanceId, LeaderTokenExpiry)
+func (w *LeaderElectionWorker) updateAvailablityStatus(available bool) {
+	if available == w.isAvailable {
+		return
+	}
+
+	w.isAvailable = available
+	w.updateCandidateStatus(available)
+
+	if available {
+		w.Signals.BecameFollower.Emit()
+	} else {
+		w.Signals.BecameUnavailable.Emit()
+	}
 }
 
-func (w *LeaderElectionWorker) renewLeadershipExpiry() {
-	w.db.TempExpire(w.keygen.GetLeaderKey(w.applicationName), LeaderTokenExpiry)
+func (w *LeaderElectionWorker) updateLeadershipStatus(leader bool) {
+	if w.isLeader == leader {
+		return
+	}
+
+	w.isLeader = leader
+	if leader {
+		w.Signals.BecameLeader.Emit()
+	} else {
+		w.updateAvailablityStatus(w.determineAvailability())
+	}
+}
+
+func (w *LeaderElectionWorker) updateCandidateStatus(available bool) bool {
+	return w.db.TempGet(w.keygen.GetLeaderCandidatesKey(w.applicationName, w.applicationInstanceId)) == w.applicationInstanceId
+}
+
+func (w *LeaderElectionWorker) tryBecomeLeader() bool {
+	return w.db.TempSet(w.keygen.GetLeaderKey(w.applicationName), w.applicationInstanceId, LeaderLeaseTimeout)
+}
+
+func (w *LeaderElectionWorker) renewLeadershipLease() {
+	w.db.TempExpire(w.keygen.GetLeaderKey(w.applicationName), LeaderLeaseTimeout)
 }
 
 func (w *LeaderElectionWorker) onBecameLeader() {
 	Info("[LeaderElectionWorker::onBecameLeader] Became the leader")
-	w.isLeader = true
 }
 
 func (w *LeaderElectionWorker) onBecameFollower() {
 	Info("[LeaderElectionWorker::onBecameFollower] Became a follower")
-	w.isLeader = false
 }
 
 func (w *LeaderElectionWorker) onBecameUnavailable() {
 	Info("[LeaderElectionWorker::onBecameUnavailable] Became unavailable")
-	w.isLeader = false
 }
