@@ -42,14 +42,17 @@ func (w *LeaderElectionWorker) Deinit() {
 
 func (w *LeaderElectionWorker) onBecameLeader() {
 	Info("[LeaderElectionWorker::onBecameLeader] Became the leader")
+	w.isLeader = true
 }
 
 func (w *LeaderElectionWorker) onBecameFollower() {
 	Info("[LeaderElectionWorker::onBecameFollower] Became a follower")
+	w.isLeader = false
 }
 
 func (w *LeaderElectionWorker) onBecameUnavailable() {
 	Info("[LeaderElectionWorker::onBecameUnavailable] Became unavailable")
+	w.isLeader = false
 }
 
 func (w *LeaderElectionWorker) DoWork() {

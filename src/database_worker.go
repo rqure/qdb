@@ -3,8 +3,9 @@ package qdb
 import "time"
 
 type DatabaseWorkerSignals struct {
-	Connected    Signal
-	Disconnected Signal
+	Connected     Signal
+	Disconnected  Signal
+	SchemaUpdated Signal
 }
 
 type DatabaseWorker struct {
@@ -13,21 +14,30 @@ type DatabaseWorker struct {
 	db                      IDatabase
 	connectionState         ConnectionState_ConnectionStateEnum
 	lastConnectionCheckTime time.Time
+	subscriptionIds         []string
 }
 
 func NewDatabaseWorker(db IDatabase) *DatabaseWorker {
 	return &DatabaseWorker{
 		db:              db,
 		connectionState: ConnectionState_DISCONNECTED,
+		subscriptionIds: []string{},
 	}
 }
 
 func (w *DatabaseWorker) Init() {
-
+	w.subscriptionIds = append(w.subscriptionIds, w.db.Notify(&DatabaseNotificationConfig{
+		Type:  "Root",
+		Field: "SchemaUpdateTrigger",
+	}, w.OnSchemaUpdated))
 }
 
 func (w *DatabaseWorker) Deinit() {
+	for _, id := range w.subscriptionIds {
+		w.db.Unnotify(id)
+	}
 
+	w.subscriptionIds = []string{}
 }
 
 func (w *DatabaseWorker) DoWork() {
@@ -62,4 +72,12 @@ func (w *DatabaseWorker) setConnectionStatus(connected bool) {
 	} else {
 		w.Signals.Disconnected.Emit()
 	}
+}
+
+func (w *DatabaseWorker) IsConnected() bool {
+	return w.connectionState == ConnectionState_CONNECTED
+}
+
+func (w *DatabaseWorker) OnSchemaUpdated(*DatabaseNotification) {
+	w.Signals.SchemaUpdated.Emit()
 }
