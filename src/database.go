@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"slices"
 	"strings"
+	"time"
 
 	"github.com/google/uuid"
 	"github.com/redis/go-redis/v9"
@@ -43,6 +44,12 @@ type IDatabase interface {
 
 	Read(requests []*DatabaseRequest)
 	Write(requests []*DatabaseRequest)
+
+	TempSet(key string, value string, expiration time.Duration) bool
+	TempGet(key string) string
+	TempExpire(key string, expiration time.Duration)
+	TempDel(key string)
+	TempScan(prefix string) []string
 
 	Notify(config *DatabaseNotificationConfig, callback func(*DatabaseNotification)) string
 	Unnotify(subscriptionId string)
