@@ -9,7 +9,7 @@ import (
 )
 
 func Log(level LogMessage_LogLevelEnum, message string, args ...interface{}) {
-	logLevel, err := strconv.Atoi(os.Getenv("QMQ_LOGMessage_LEVEL"))
+	logLevel, err := strconv.Atoi(os.Getenv("QDB_LOGMessage_LEVEL"))
 	if err != nil {
 		logLevel = 2
 	}
@@ -22,7 +22,7 @@ func Log(level LogMessage_LogLevelEnum, message string, args ...interface{}) {
 		Level:       level,
 		Message:     fmt.Sprintf(message, args...),
 		Timestamp:   timestamppb.Now(),
-		Application: os.Getenv("QMQ_APP_NAME"),
+		Application: os.Getenv("QDB_APP_NAME"),
 	}
 
 	fmt.Printf("%s | %s | %s | %s\n", logMsg.Timestamp.AsTime().String(), logMsg.Application, logMsg.Level.String(), logMsg.Message)

@@ -7,7 +7,7 @@ import (
 )
 
 func getDatabaseAddress() string {
-	addr := os.Getenv("QMQ_ADDR")
+	addr := os.Getenv("QDB_ADDR")
 	if addr == "" {
 		addr = "redis:6379"
 	}
