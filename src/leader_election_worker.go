@@ -209,7 +209,8 @@ func (w *LeaderElectionWorker) randomString() string {
 		return ""
 	}
 
-	return base64.StdEncoding.EncodeToString(randomBytes)
+	r := base64.StdEncoding.EncodeToString(randomBytes)
+	return r[:len(r)-1]
 }
 
 func (w *LeaderElectionWorker) determineLeadershipStatus() bool {
