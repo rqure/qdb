@@ -49,7 +49,7 @@ type IDatabase interface {
 	TempGet(key string) string
 	TempExpire(key string, expiration time.Duration)
 	TempDel(key string)
-	TempScan(prefix string) []string
+	TempScan(key string) []string
 
 	Notify(config *DatabaseNotificationConfig, callback func(*DatabaseNotification)) string
 	Unnotify(subscriptionId string)
@@ -956,4 +956,41 @@ func (db *RedisDatabase) triggerNotifications(request *DatabaseRequest) {
 			continue
 		}
 	}
+}
+
+func (db *RedisDatabase) TempSet(key, value string, expiration time.Duration) bool {
+	r, err := db.client.SetNX(context.Background(), key, value, expiration).Result()
+	if err != nil {
+		return false
+	}
+
+	return r
+}
+
+func (db *RedisDatabase) TempGet(key string) string {
+	r, err := db.client.Get(context.Background(), key).Result()
+	if err != nil {
+		return ""
+	}
+
+	return r
+}
+
+func (db *RedisDatabase) TempExpire(key string, expiration time.Duration) {
+	db.client.Expire(context.Background(), key, expiration)
+}
+
+func (db *RedisDatabase) TempDel(key string) {
+	db.client.Del(context.Background(), key)
+}
+
+func (db *RedisDatabase) TempScan(key string) []string {
+	it := db.client.Scan(context.Background(), 0, key, 0).Iterator()
+	keys := []string{}
+
+	for it.Next(context.Background()) {
+		keys = append(keys, it.Val())
+	}
+
+	return keys
 }
