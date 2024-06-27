@@ -139,9 +139,12 @@ func (f *FieldCondition[C, T]) IsEqualTo(rhs T) FieldConditionEval {
 			return false
 		}
 
-		if err := request.Value.UnmarshalTo(f.LhsValue); err != nil {
+		lhsValue, err := request.Value.UnmarshalNew()
+		if err != nil {
+			Error("[FieldCondition::IsEqualTo] Failed to unmarshal value: %s", err.Error())
 			return false
 		}
+		f.LhsValue = lhsValue.(T)
 
 		return f.LhsValue.GetRaw() == rhs.GetRaw()
 	}

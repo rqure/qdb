@@ -465,20 +465,20 @@ func (db *RedisDatabase) GetEntityTypes() []string {
 func (db *RedisDatabase) GetEntitySchema(entityType string) *DatabaseEntitySchema {
 	e, err := db.client.Get(context.Background(), db.keygen.GetEntitySchemaKey(entityType)).Result()
 	if err != nil {
-		Error("[RedisDatabase::GetEntitySchema] Failed to get entity schema: %v", err)
+		Error("[RedisDatabase::GetEntitySchema] Failed to get entity schema (%v): %v", entityType, err)
 		return nil
 	}
 
 	b, err := base64.StdEncoding.DecodeString(e)
 	if err != nil {
-		Error("[RedisDatabase::GetEntitySchema] Failed to decode entity schema: %v", err)
+		Error("[RedisDatabase::GetEntitySchema] Failed to decode entity schema (%v): %v", entityType, err)
 		return nil
 	}
 
 	p := &DatabaseEntitySchema{}
 	err = proto.Unmarshal(b, p)
 	if err != nil {
-		Error("[RedisDatabase::GetEntitySchema] Failed to unmarshal entity schema: %v", err)
+		Error("[RedisDatabase::GetEntitySchema] Failed to unmarshal entity schema (%v): %v", entityType, err)
 		return nil
 	}
 
@@ -648,7 +648,7 @@ func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callba
 
 	e := base64.StdEncoding.EncodeToString(b)
 
-	if db.FieldExists(notification.Field, notification.Id) {
+	if notification.Id != "" && db.FieldExists(notification.Field, notification.Id) {
 		r, err := db.client.XInfoStream(context.Background(), db.keygen.GetNotificationChannelKey(e)).Result()
 		if err != nil {
 			Warn("[RedisDatabase::Notify] Failed to find stream for: %v (%v)", e, err)
@@ -662,7 +662,7 @@ func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callba
 		return e
 	}
 
-	if db.FieldExists(notification.Field, notification.Type) {
+	if notification.Type != "" && db.FieldExists(notification.Field, notification.Type) {
 		r, err := db.client.XInfoStream(context.Background(), db.keygen.GetNotificationChannelKey(e)).Result()
 		if err != nil {
 			Warn("[RedisDatabase::Notify] Failed to find stream for: %v (%v)", e, err)

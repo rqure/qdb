@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"time"
 
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
@@ -25,7 +26,7 @@ func Log(level LogMessage_LogLevelEnum, message string, args ...interface{}) {
 		Application: os.Getenv("QDB_APP_NAME"),
 	}
 
-	fmt.Printf("%s | %s | %s | %s\n", logMsg.Timestamp.AsTime().String(), logMsg.Application, logMsg.Level.String(), logMsg.Message)
+	fmt.Printf("%s | %s | %s | %s\n", logMsg.Timestamp.AsTime().Local().Format(time.RFC3339Nano), logMsg.Application, logMsg.Level.String(), logMsg.Message)
 }
 
 func Trace(message string, args ...interface{}) {

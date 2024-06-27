@@ -21,12 +21,17 @@ func main() {
 	})
 
 	dbWorker := qdb.NewDatabaseWorker(db)
+	leaderElectionWorker := qdb.NewLeaderElectionWorker(db)
+
+	dbWorker.Signals.Connected.Connect(qdb.Slot(leaderElectionWorker.OnDatabaseConnected))
+	dbWorker.Signals.Disconnected.Connect(qdb.Slot(leaderElectionWorker.OnDatabaseDisconnected))
 
 	// Create a new application configuration
 	config := qdb.ApplicationConfig{
-		Name: "MyApp",
+		Name: "webgateway",
 		Workers: []qdb.IWorker{
 			dbWorker,
+			leaderElectionWorker,
 		},
 	}
 
