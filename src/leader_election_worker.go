@@ -72,8 +72,7 @@ func (w *LeaderElectionWorker) Init() {
 }
 
 func (w *LeaderElectionWorker) Deinit() {
-	w.updateLeadershipStatus(false)
-	w.updateCandidateStatus(false)
+	w.setState(Unavailable)
 }
 
 func (w *LeaderElectionWorker) OnDatabaseConnected() {
@@ -99,9 +98,14 @@ func (w *LeaderElectionWorker) DoWork() {
 	case Follower:
 		if w.determineAvailability() {
 			if w.determineLeadershipStatus() {
-				w.setState(Follower)
 				w.setState(Leader)
 			} else {
+				w.setState(Follower)
+
+				if time.Now().After(w.lastLeaderAttemptTime.Add(LeaderLeaseTimeout)) {
+					w.tryBecomeLeader()
+					w.lastLeaderAttemptTime = time.Now()
+				}
 			}
 		} else {
 			w.setState(Unavailable)
@@ -120,22 +124,6 @@ func (w *LeaderElectionWorker) DoWork() {
 			}
 		} else {
 			w.setState(Unavailable)
-		}
-	}
-
-	if w.isAvailable {
-		w.updateLeadershipStatus(w.determineLeadershipStatus())
-
-		if !w.isLeader && time.Now().After(w.lastLeaderAttemptTime.Add(LeaderLeaseTimeout)) {
-			w.tryBecomeLeader()
-			w.lastLeaderAttemptTime = time.Now()
-			return
-		}
-
-		if w.isLeader && time.Now().After(w.lastLeaseRenewalTime.Add(LeaderLeaseTimeout/2)) {
-			w.renewLeadershipLease()
-			w.lastLeaseRenewalTime = time.Now()
-			return
 		}
 	}
 }
@@ -182,34 +170,6 @@ func (w *LeaderElectionWorker) determineLeadershipStatus() bool {
 	return w.db.TempGet(w.keygen.GetLeaderKey(w.applicationName)) == w.applicationInstanceId
 }
 
-func (w *LeaderElectionWorker) updateAvailablityStatus(available bool) {
-	if available == w.isAvailable {
-		return
-	}
-
-	w.isAvailable = available
-	w.updateCandidateStatus(available)
-
-	if available {
-		w.Signals.BecameFollower.Emit()
-	} else {
-		w.Signals.BecameUnavailable.Emit()
-	}
-}
-
-func (w *LeaderElectionWorker) updateLeadershipStatus(leader bool) {
-	if w.isLeader == leader {
-		return
-	}
-
-	w.isLeader = leader
-	if leader {
-		w.Signals.BecameLeader.Emit()
-	} else {
-		w.updateAvailablityStatus(w.determineAvailability())
-	}
-}
-
 func (w *LeaderElectionWorker) updateCandidateStatus(available bool) bool {
 	return w.db.TempGet(w.keygen.GetLeaderCandidatesKey(w.applicationName, w.applicationInstanceId)) == w.applicationInstanceId
 }
@@ -224,12 +184,15 @@ func (w *LeaderElectionWorker) renewLeadershipLease() {
 
 func (w *LeaderElectionWorker) onBecameLeader() {
 	Info("[LeaderElectionWorker::onBecameLeader] Became the leader")
+	w.updateCandidateStatus(true)
 }
 
 func (w *LeaderElectionWorker) onBecameFollower() {
 	Info("[LeaderElectionWorker::onBecameFollower] Became a follower")
+	w.updateCandidateStatus(true)
 }
 
 func (w *LeaderElectionWorker) onBecameUnavailable() {
 	Info("[LeaderElectionWorker::onBecameUnavailable] Became unavailable")
+	w.updateCandidateStatus(false)
 }
