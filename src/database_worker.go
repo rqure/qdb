@@ -26,18 +26,11 @@ func NewDatabaseWorker(db IDatabase) *DatabaseWorker {
 }
 
 func (w *DatabaseWorker) Init() {
-	w.subscriptionIds = append(w.subscriptionIds, w.db.Notify(&DatabaseNotificationConfig{
-		Type:  "Root",
-		Field: "SchemaUpdateTrigger",
-	}, w.OnSchemaUpdated))
+	w.Signals.Connected.Connect(Slot(w.onDatabaseConnected))
 }
 
 func (w *DatabaseWorker) Deinit() {
-	for _, id := range w.subscriptionIds {
-		w.db.Unnotify(id)
-	}
 
-	w.subscriptionIds = []string{}
 }
 
 func (w *DatabaseWorker) DoWork() {
@@ -53,6 +46,19 @@ func (w *DatabaseWorker) DoWork() {
 	}
 
 	w.db.ProcessNotifications()
+}
+
+func (w *DatabaseWorker) onDatabaseConnected() {
+	for _, id := range w.subscriptionIds {
+		w.db.Unnotify(id)
+	}
+
+	w.subscriptionIds = []string{}
+
+	w.subscriptionIds = append(w.subscriptionIds, w.db.Notify(&DatabaseNotificationConfig{
+		Type:  "Root",
+		Field: "SchemaUpdateTrigger",
+	}, w.OnSchemaUpdated))
 }
 
 func (w *DatabaseWorker) setConnectionStatus(connected bool) {
