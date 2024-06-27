@@ -265,7 +265,7 @@ func (w *LeaderElectionWorker) setLeaderAndCandidateFields() {
 		},
 	})
 
-	candidates := strings.Join(w.db.TempScan(w.keygen.GetLeaderCandidatesKey(w.applicationName, "*")), ",")
+	candidates := strings.ReplaceAll(strings.Join(w.db.TempScan(w.keygen.GetLeaderCandidatesKey(w.applicationName, "*")), ","), w.keygen.GetLeaderCandidatesKey(w.applicationName, ""), "")
 	for _, service := range services {
 		leaderField := service.GetField("Leader")
 		if leaderField.PullValue(&String{}).(*String).Raw != w.applicationInstanceId {
@@ -287,7 +287,7 @@ func (w *LeaderElectionWorker) clearLeaderAndCandidateFields() {
 		},
 	})
 
-	candidates := strings.Join(w.db.TempScan(w.keygen.GetLeaderCandidatesKey(w.applicationName, "*")), ",")
+	candidates := strings.ReplaceAll(strings.Join(w.db.TempScan(w.keygen.GetLeaderCandidatesKey(w.applicationName, "*")), ","), w.keygen.GetLeaderCandidatesKey(w.applicationName, ""), "")
 	for _, service := range services {
 		leaderField := service.GetField("Leader")
 		if leaderField.PullValue(&String{}).(*String).Raw == w.applicationInstanceId {
