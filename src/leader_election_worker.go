@@ -74,6 +74,8 @@ func (w *LeaderElectionWorker) AddAvailabilityCriteria(criteria LeaderAvailabili
 }
 
 func (w *LeaderElectionWorker) Init() {
+	w.applicationName = os.Getenv("QDB_APP_NAME")
+
 	if os.Getenv("QDB_IN_DOCKER") != "" {
 		w.applicationInstanceId = os.Getenv("HOSTNAME")
 	}
