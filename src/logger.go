@@ -10,7 +10,7 @@ import (
 )
 
 func Log(level LogMessage_LogLevelEnum, message string, args ...interface{}) {
-	logLevel, err := strconv.Atoi(os.Getenv("QDB_LOGMessage_LEVEL"))
+	logLevel, err := strconv.Atoi(os.Getenv("QDB_LOG_LEVEL"))
 	if err != nil {
 		logLevel = 2
 	}
