@@ -628,9 +628,15 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 		p.Id = indirectEntity
 		p.Name = indirectField
 
-		db.triggerNotifications(request)
-
+		oldRequest := &DatabaseRequest{
+			Id:    request.Id,
+			Field: request.Field,
+		}
+		db.Read([]*DatabaseRequest{oldRequest})
 		_, err = db.client.Set(context.Background(), db.keygen.GetFieldKey(indirectField, indirectEntity), base64.StdEncoding.EncodeToString(b), 0).Result()
+
+		db.triggerNotifications(request, oldRequest)
+
 		if err != nil {
 			Error("[RedisDatabase::Write] Failed to write field: %v", err)
 			continue
@@ -803,6 +809,7 @@ func (db *RedisDatabase) ResolveIndirection(indirectField, entityId string) (str
 		}
 
 		if !foundChild {
+			Error("[RedisDatabase::ResolveIndirection] Failed to find child entity: %v", field)
 			return "", ""
 		}
 	}
@@ -810,13 +817,7 @@ func (db *RedisDatabase) ResolveIndirection(indirectField, entityId string) (str
 	return fields[len(fields)-1], entityId
 }
 
-func (db *RedisDatabase) triggerNotifications(request *DatabaseRequest) {
-	oldRequest := &DatabaseRequest{
-		Id:    request.Id,
-		Field: request.Field,
-	}
-	db.Read([]*DatabaseRequest{oldRequest})
-
+func (db *RedisDatabase) triggerNotifications(request *DatabaseRequest, oldRequest *DatabaseRequest) {
 	// failed to read old value (it may not exist initially)
 	if !oldRequest.Success {
 		Warn("[RedisDatabase::triggerNotifications] Failed to read old value: %v", oldRequest)
@@ -994,4 +995,25 @@ func (db *RedisDatabase) TempScan(key string) []string {
 	}
 
 	return keys
+}
+
+func FileEncode(content []byte) string {
+	prefix := "data:application/octet-stream;base64,"
+	return prefix + base64.URLEncoding.EncodeToString(content)
+}
+
+func FileDecode(encoded string) []byte {
+	prefix := "data:application/octet-stream;base64,"
+	if !strings.HasPrefix(encoded, prefix) {
+		Error("[FileDecode] Invalid prefix: %v", encoded)
+		return []byte{}
+	}
+
+	decoded, err := base64.URLEncoding.DecodeString(strings.TrimPrefix(encoded, prefix))
+	if err != nil {
+		Error("[FileDecode] Failed to decode: %v", err)
+		return []byte{}
+	}
+
+	return decoded
 }
