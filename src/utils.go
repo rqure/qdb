@@ -6,14 +6,11 @@ import (
 )
 
 func Truncate(text string, width int) string {
-	if width < 0 {
-		Error("[Truncate] Width must be greater than or equal to 0")
-		return ""
+	text = text[:min(len(text), width)]
+	if len(text) == width {
+		text = text + "..."
 	}
-
-	r := []rune(text)
-	trunc := r[:width]
-	return string(trunc) + "..."
+	return text
 }
 
 func FileEncode(content []byte) string {

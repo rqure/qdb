@@ -26,7 +26,7 @@ func Log(level LogMessage_LogLevelEnum, message string, args ...interface{}) {
 		Application: os.Getenv("QDB_APP_NAME"),
 	}
 
-	fmt.Printf("%s | %s | %s | %s\n", logMsg.Timestamp.AsTime().Local().Format(time.RFC3339Nano), logMsg.Application, logMsg.Level.String(), logMsg.Message)
+	fmt.Printf("%s | %s | %s | %s\n", logMsg.Timestamp.AsTime().Local().Format(time.RFC3339Nano), logMsg.Application, logMsg.Level.String(), Truncate(logMsg.Message, 1024))
 }
 
 func Trace(message string, args ...interface{}) {
