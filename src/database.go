@@ -740,11 +740,12 @@ func (db *RedisDatabase) ProcessNotifications() {
 
 func (db *RedisDatabase) ResolveIndirection(indirectField, entityId string) (string, string) {
 	fields := strings.Split(indirectField, "->")
+
 	if len(fields) == 1 {
 		return indirectField, entityId
 	}
 
-	for _, field := range fields {
+	for _, field := range fields[:len(fields)-1] {
 		request := &DatabaseRequest{
 			Id:    entityId,
 			Field: field,
