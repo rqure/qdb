@@ -999,7 +999,7 @@ func (db *RedisDatabase) TempScan(key string) []string {
 
 func FileEncode(content []byte) string {
 	prefix := "data:application/octet-stream;base64,"
-	return prefix + base64.URLEncoding.EncodeToString(content)
+	return prefix + base64.StdEncoding.EncodeToString(content)
 }
 
 func FileDecode(encoded string) []byte {
@@ -1009,7 +1009,7 @@ func FileDecode(encoded string) []byte {
 		return []byte{}
 	}
 
-	decoded, err := base64.URLEncoding.DecodeString(strings.TrimPrefix(encoded, prefix))
+	decoded, err := base64.StdEncoding.DecodeString(strings.TrimPrefix(encoded, prefix))
 	if err != nil {
 		Error("[FileDecode] Failed to decode: %v", err)
 		return []byte{}
