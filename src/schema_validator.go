@@ -8,7 +8,6 @@ type ISchemaValidator interface {
 	AddEntity(entityId string, fields ...string)
 	IsValid() bool
 	Validate() bool
-	ValidationRequired() bool
 	OnSchemaUpdated()
 }
 
@@ -19,7 +18,7 @@ type SchemaValidator struct {
 	isValid            bool
 }
 
-func NewSchemaValidator(db IDatabase) *SchemaValidator {
+func NewSchemaValidator(db IDatabase) ISchemaValidator {
 	return &SchemaValidator{
 		db:                 db,
 		entities:           map[string][]string{},
