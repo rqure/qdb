@@ -261,7 +261,7 @@ func (w *LeaderElectionWorker) setLeaderAndCandidateFields() {
 	services := NewEntityFinder(w.db).Find(SearchCriteria{
 		EntityType: "Service",
 		Conditions: []FieldConditionEval{
-			new(FieldCondition[string, *String]).Where("ApplicationName").IsEqualTo(&String{Raw: w.applicationName}),
+			NewStringCondition().Where("ApplicationName").IsEqualTo(&String{Raw: w.applicationName}),
 		},
 	})
 
@@ -283,7 +283,7 @@ func (w *LeaderElectionWorker) clearLeaderAndCandidateFields() {
 	services := NewEntityFinder(w.db).Find(SearchCriteria{
 		EntityType: "Service",
 		Conditions: []FieldConditionEval{
-			new(FieldCondition[string, *String]).Where("ApplicationName").IsEqualTo(&String{Raw: w.applicationName}),
+			NewStringCondition().Where("ApplicationName").IsEqualTo(&String{Raw: w.applicationName}),
 		},
 	})
 

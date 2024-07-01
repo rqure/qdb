@@ -6,6 +6,7 @@ import (
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/reflect/protoreflect"
 	"google.golang.org/protobuf/types/known/anypb"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type IField interface {
@@ -107,23 +108,28 @@ func (e *Entity) GetField(fieldName string) IField {
 	return NewField(e.db, e.GetId(), fieldName)
 }
 
-type IFieldProto[T cmp.Ordered] interface {
+type IFieldProto[T comparable] interface {
 	protoreflect.ProtoMessage
 	GetRaw() T
 }
 
-type FieldConditionEval func(IDatabase, string) bool
-type FieldCondition[C cmp.Ordered, T IFieldProto[C]] struct {
-	Lhs      string
-	LhsValue T
+func DefaultCaster[A any, B any](in A) B {
+	return any(in).(B)
 }
 
-func (f *FieldCondition[C, T]) Where(lhs string) *FieldCondition[C, T] {
+type FieldConditionEval func(IDatabase, string) bool
+type FieldCondition[T IFieldProto[K], C cmp.Ordered, K comparable] struct {
+	Lhs      string
+	LhsValue T
+	Caster   func(K) C
+}
+
+func (f *FieldCondition[T, C, K]) Where(lhs string) *FieldCondition[T, C, K] {
 	f.Lhs = lhs
 	return f
 }
 
-func (f *FieldCondition[C, T]) IsEqualTo(rhs T) FieldConditionEval {
+func (f *FieldCondition[T, C, K]) IsEqualTo(rhs T) FieldConditionEval {
 	return func(db IDatabase, entityId string) bool {
 		request := &DatabaseRequest{
 			Id:    entityId,
@@ -146,11 +152,11 @@ func (f *FieldCondition[C, T]) IsEqualTo(rhs T) FieldConditionEval {
 		}
 		f.LhsValue = lhsValue.(T)
 
-		return f.LhsValue.GetRaw() == rhs.GetRaw()
+		return f.Caster(f.LhsValue.GetRaw()) == f.Caster(rhs.GetRaw())
 	}
 }
 
-func (f *FieldCondition[C, T]) IsNotEqualTo(rhs T) FieldConditionEval {
+func (f *FieldCondition[T, C, K]) IsNotEqualTo(rhs T) FieldConditionEval {
 	return func(db IDatabase, entityId string) bool {
 		request := &DatabaseRequest{
 			Id:    entityId,
@@ -170,11 +176,11 @@ func (f *FieldCondition[C, T]) IsNotEqualTo(rhs T) FieldConditionEval {
 			return false
 		}
 
-		return f.LhsValue.GetRaw() != rhs.GetRaw()
+		return f.Caster(f.LhsValue.GetRaw()) != f.Caster(rhs.GetRaw())
 	}
 }
 
-func (f *FieldCondition[C, T]) IsGreaterThan(rhs T) FieldConditionEval {
+func (f *FieldCondition[T, C, K]) IsGreaterThan(rhs T) FieldConditionEval {
 	return func(db IDatabase, entityId string) bool {
 		request := &DatabaseRequest{
 			Id:    entityId,
@@ -194,11 +200,11 @@ func (f *FieldCondition[C, T]) IsGreaterThan(rhs T) FieldConditionEval {
 			return false
 		}
 
-		return f.LhsValue.GetRaw() > rhs.GetRaw()
+		return f.Caster(f.LhsValue.GetRaw()) > f.Caster(rhs.GetRaw())
 	}
 }
 
-func (f *FieldCondition[C, T]) IsLessThan(rhs T) FieldConditionEval {
+func (f *FieldCondition[T, C, K]) IsLessThan(rhs T) FieldConditionEval {
 	return func(db IDatabase, entityId string) bool {
 		request := &DatabaseRequest{
 			Id:    entityId,
@@ -218,11 +224,11 @@ func (f *FieldCondition[C, T]) IsLessThan(rhs T) FieldConditionEval {
 			return false
 		}
 
-		return f.LhsValue.GetRaw() < rhs.GetRaw()
+		return f.Caster(f.LhsValue.GetRaw()) < f.Caster(rhs.GetRaw())
 	}
 }
 
-func (f *FieldCondition[C, T]) IsGreaterThanOrEqualTo(rhs T) FieldConditionEval {
+func (f *FieldCondition[T, C, K]) IsGreaterThanOrEqualTo(rhs T) FieldConditionEval {
 	return func(db IDatabase, entityId string) bool {
 		request := &DatabaseRequest{
 			Id:    entityId,
@@ -242,11 +248,11 @@ func (f *FieldCondition[C, T]) IsGreaterThanOrEqualTo(rhs T) FieldConditionEval 
 			return false
 		}
 
-		return f.LhsValue.GetRaw() >= rhs.GetRaw()
+		return f.Caster(f.LhsValue.GetRaw()) >= f.Caster(rhs.GetRaw())
 	}
 }
 
-func (f *FieldCondition[C, T]) IsLessThanOrEqualTo(rhs T) FieldConditionEval {
+func (f *FieldCondition[T, C, K]) IsLessThanOrEqualTo(rhs T) FieldConditionEval {
 	return func(db IDatabase, entityId string) bool {
 		request := &DatabaseRequest{
 			Id:    entityId,
@@ -266,11 +272,11 @@ func (f *FieldCondition[C, T]) IsLessThanOrEqualTo(rhs T) FieldConditionEval {
 			return false
 		}
 
-		return f.LhsValue.GetRaw() <= rhs.GetRaw()
+		return f.Caster(f.LhsValue.GetRaw()) <= f.Caster(rhs.GetRaw())
 	}
 }
 
-func (f *FieldCondition[C, T]) IsBetween(lower T, upper T) FieldConditionEval {
+func (f *FieldCondition[T, C, K]) IsBetween(lower T, upper T) FieldConditionEval {
 	return func(db IDatabase, entityId string) bool {
 		request := &DatabaseRequest{
 			Id:    entityId,
@@ -290,11 +296,11 @@ func (f *FieldCondition[C, T]) IsBetween(lower T, upper T) FieldConditionEval {
 			return false
 		}
 
-		return f.LhsValue.GetRaw() >= lower.GetRaw() && f.LhsValue.GetRaw() <= upper.GetRaw()
+		return f.Caster(f.LhsValue.GetRaw()) >= f.Caster(lower.GetRaw()) && f.Caster(f.LhsValue.GetRaw()) <= f.Caster(upper.GetRaw())
 	}
 }
 
-func (f *FieldCondition[C, T]) IsIn(values []T) FieldConditionEval {
+func (f *FieldCondition[T, C, K]) IsIn(values []T) FieldConditionEval {
 	return func(db IDatabase, entityId string) bool {
 		request := &DatabaseRequest{
 			Id:    entityId,
@@ -315,7 +321,7 @@ func (f *FieldCondition[C, T]) IsIn(values []T) FieldConditionEval {
 		}
 
 		for _, value := range values {
-			if f.LhsValue.GetRaw() == value.GetRaw() {
+			if f.Caster(f.LhsValue.GetRaw()) == f.Caster(value.GetRaw()) {
 				return true
 			}
 		}
@@ -324,7 +330,7 @@ func (f *FieldCondition[C, T]) IsIn(values []T) FieldConditionEval {
 	}
 }
 
-func (f *FieldCondition[C, T]) IsNotIn(values []T) FieldConditionEval {
+func (f *FieldCondition[T, C, K]) IsNotIn(values []T) FieldConditionEval {
 	return func(db IDatabase, entityId string) bool {
 		request := &DatabaseRequest{
 			Id:    entityId,
@@ -345,7 +351,7 @@ func (f *FieldCondition[C, T]) IsNotIn(values []T) FieldConditionEval {
 		}
 
 		for _, value := range values {
-			if f.LhsValue.GetRaw() == value.GetRaw() {
+			if f.Caster(f.LhsValue.GetRaw()) == f.Caster(value.GetRaw()) {
 				return false
 			}
 		}
@@ -392,4 +398,58 @@ func (f *EntityFinder) Find(criteria SearchCriteria) []IEntity {
 	}
 
 	return entities
+}
+
+type FCString = FieldCondition[*String, string, string]
+type FCBool = FieldCondition[*Bool, int, bool]
+type FCInt = FieldCondition[*Int, int64, int64]
+type FCFloat = FieldCondition[*Float, float64, float64]
+type FCEnum[T ~int32] struct {
+	FieldCondition[IFieldProto[T], T, T]
+}
+type FCTimestamp = FieldCondition[*Timestamp, int64, *timestamppb.Timestamp]
+
+func NewStringCondition() *FCString {
+	return &FCString{
+		Caster: DefaultCaster[string, string],
+	}
+}
+
+func NewBoolCondition() *FCBool {
+	return &FCBool{
+		Caster: func(b bool) int {
+			if b {
+				return 1
+			}
+			return 0
+		},
+	}
+}
+
+func NewIntCondition() *FCInt {
+	return &FCInt{
+		Caster: DefaultCaster[int64, int64],
+	}
+}
+
+func NewFloatCondition() *FCFloat {
+	return &FCFloat{
+		Caster: DefaultCaster[float64, float64],
+	}
+}
+
+func NewEnumCondition[T ~int32]() *FCEnum[T] {
+	return &FCEnum[T]{
+		FieldCondition: FieldCondition[IFieldProto[T], T, T]{
+			Caster: DefaultCaster[T, T],
+		},
+	}
+}
+
+func NewTimestampCondition() *FCTimestamp {
+	return &FCTimestamp{
+		Caster: func(t *timestamppb.Timestamp) int64 {
+			return t.AsTime().UnixMilli()
+		},
+	}
 }
