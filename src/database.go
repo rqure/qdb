@@ -539,7 +539,7 @@ func (db *RedisDatabase) Read(requests []*DatabaseRequest) {
 		}
 
 		e, err := db.client.Get(context.Background(), db.keygen.GetFieldKey(indirectField, indirectEntity)).Result()
-		if err != redis.Nil {
+		if err != nil && err != redis.Nil {
 			Error("[RedisDatabase::Read] Failed to read field: %v", err)
 			continue
 		}
