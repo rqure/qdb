@@ -539,8 +539,14 @@ func (db *RedisDatabase) Read(requests []*DatabaseRequest) {
 		}
 
 		e, err := db.client.Get(context.Background(), db.keygen.GetFieldKey(indirectField, indirectEntity)).Result()
-		if err != nil && err != redis.Nil {
-			Error("[RedisDatabase::Read] Failed to read field: %v", err)
+		if err != nil {
+			if err != redis.Nil {
+				Error("[RedisDatabase::Read] Failed to read field: %v", err)
+			} else {
+				// If we can't read because the key doesn't exist, it's not a necessarily an issue.
+				// It would be good to know from a troubleshooting aspect though.
+				Trace("[RedisDatabase::Read] Failed to read field: %v", err)
+			}
 			continue
 		}
 
