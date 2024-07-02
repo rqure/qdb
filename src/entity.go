@@ -172,9 +172,12 @@ func (f *FieldCondition[T, C, K]) IsNotEqualTo(rhs T) FieldConditionEval {
 			return false
 		}
 
-		if err := request.Value.UnmarshalTo(f.LhsValue); err != nil {
+		lhsValue, err := request.Value.UnmarshalNew()
+		if err != nil {
+			Error("[FieldCondition::IsNotEqualTo] Failed to unmarshal value: %s", err.Error())
 			return false
 		}
+		f.LhsValue = lhsValue.(T)
 
 		return f.Caster(f.LhsValue.GetRaw()) != f.Caster(rhs.GetRaw())
 	}
@@ -196,9 +199,12 @@ func (f *FieldCondition[T, C, K]) IsGreaterThan(rhs T) FieldConditionEval {
 			return false
 		}
 
-		if err := request.Value.UnmarshalTo(f.LhsValue); err != nil {
+		lhsValue, err := request.Value.UnmarshalNew()
+		if err != nil {
+			Error("[FieldCondition::IsGreaterThan] Failed to unmarshal value: %s", err.Error())
 			return false
 		}
+		f.LhsValue = lhsValue.(T)
 
 		return f.Caster(f.LhsValue.GetRaw()) > f.Caster(rhs.GetRaw())
 	}
@@ -220,9 +226,12 @@ func (f *FieldCondition[T, C, K]) IsLessThan(rhs T) FieldConditionEval {
 			return false
 		}
 
-		if err := request.Value.UnmarshalTo(f.LhsValue); err != nil {
+		lhsValue, err := request.Value.UnmarshalNew()
+		if err != nil {
+			Error("[FieldCondition::IsLessThan] Failed to unmarshal value: %s", err.Error())
 			return false
 		}
+		f.LhsValue = lhsValue.(T)
 
 		return f.Caster(f.LhsValue.GetRaw()) < f.Caster(rhs.GetRaw())
 	}
@@ -244,9 +253,12 @@ func (f *FieldCondition[T, C, K]) IsGreaterThanOrEqualTo(rhs T) FieldConditionEv
 			return false
 		}
 
-		if err := request.Value.UnmarshalTo(f.LhsValue); err != nil {
+		lhsValue, err := request.Value.UnmarshalNew()
+		if err != nil {
+			Error("[FieldCondition::IsGreaterThanOrEqualTo] Failed to unmarshal value: %s", err.Error())
 			return false
 		}
+		f.LhsValue = lhsValue.(T)
 
 		return f.Caster(f.LhsValue.GetRaw()) >= f.Caster(rhs.GetRaw())
 	}
@@ -268,9 +280,11 @@ func (f *FieldCondition[T, C, K]) IsLessThanOrEqualTo(rhs T) FieldConditionEval 
 			return false
 		}
 
-		if err := request.Value.UnmarshalTo(f.LhsValue); err != nil {
+		lhsValue, err := request.Value.UnmarshalNew()
+		if err != nil {
 			return false
 		}
+		f.LhsValue = lhsValue.(T)
 
 		return f.Caster(f.LhsValue.GetRaw()) <= f.Caster(rhs.GetRaw())
 	}
@@ -292,9 +306,12 @@ func (f *FieldCondition[T, C, K]) IsBetween(lower T, upper T) FieldConditionEval
 			return false
 		}
 
-		if err := request.Value.UnmarshalTo(f.LhsValue); err != nil {
+		lhsValue, err := request.Value.UnmarshalNew()
+		if err != nil {
+			Error("[FieldCondition::IsBetween] Failed to unmarshal value: %s", err.Error())
 			return false
 		}
+		f.LhsValue = lhsValue.(T)
 
 		return f.Caster(f.LhsValue.GetRaw()) >= f.Caster(lower.GetRaw()) && f.Caster(f.LhsValue.GetRaw()) <= f.Caster(upper.GetRaw())
 	}
@@ -316,9 +333,12 @@ func (f *FieldCondition[T, C, K]) IsIn(values []T) FieldConditionEval {
 			return false
 		}
 
-		if err := request.Value.UnmarshalTo(f.LhsValue); err != nil {
+		lhsValue, err := request.Value.UnmarshalNew()
+		if err != nil {
+			Error("[FieldCondition::IsIn] Failed to unmarshal value: %s", err.Error())
 			return false
 		}
+		f.LhsValue = lhsValue.(T)
 
 		for _, value := range values {
 			if f.Caster(f.LhsValue.GetRaw()) == f.Caster(value.GetRaw()) {
@@ -346,9 +366,12 @@ func (f *FieldCondition[T, C, K]) IsNotIn(values []T) FieldConditionEval {
 			return false
 		}
 
-		if err := request.Value.UnmarshalTo(f.LhsValue); err != nil {
+		lhsValue, err := request.Value.UnmarshalNew()
+		if err != nil {
+			Error("[FieldCondition::IsNotIn] Failed to unmarshal value: %s", err.Error())
 			return false
 		}
+		f.LhsValue = lhsValue.(T)
 
 		for _, value := range values {
 			if f.Caster(f.LhsValue.GetRaw()) == f.Caster(value.GetRaw()) {
