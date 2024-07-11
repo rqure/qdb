@@ -290,13 +290,13 @@ func (w *LeaderElectionWorker) clearLeaderAndCandidateFields() {
 	candidates := strings.ReplaceAll(strings.Join(w.db.TempScan(w.keygen.GetLeaderCandidatesKey(w.applicationName, "*")), ","), w.keygen.GetLeaderCandidatesKey(w.applicationName, ""), "")
 	for _, service := range services {
 		leaderField := service.GetField("Leader")
-		if leaderField.PullValue(&String{}).(*String).Raw == w.applicationInstanceId {
-			leaderField.PushValue(&String{Raw: ""})
+		if leaderField.PullString() == w.applicationInstanceId {
+			leaderField.PushString("")
 		}
 
 		candidatesField := service.GetField("Candidates")
-		if candidatesField.PullValue(&String{}).(*String).Raw != "" {
-			candidatesField.PushValue(&String{Raw: candidates})
+		if candidatesField.PullString() != "" {
+			candidatesField.PushString(candidates)
 		}
 	}
 }

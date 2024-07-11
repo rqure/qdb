@@ -11,7 +11,20 @@ import (
 
 type IField interface {
 	PullValue(m proto.Message) proto.Message
+	PullInt() int64
+	PullFloat() float64
+	PullString() string
+	PullBool() bool
+	PullBinaryFile() string
+	PullEntityReference() string
+
 	PushValue(m proto.Message) bool
+	PushInt(int64) bool
+	PushFloat(float64) bool
+	PushString(string) bool
+	PushBool(bool) bool
+	PushBinaryFile(string) bool
+	PushEntityReference(string) bool
 }
 
 type Field struct {
@@ -61,6 +74,54 @@ func (f *Field) PushValue(m proto.Message) bool {
 	f.db.Write([]*DatabaseRequest{request})
 
 	return request.Success
+}
+
+func (f *Field) PullInt() int64 {
+	return f.PullValue(new(Int)).(*Int).GetRaw()
+}
+
+func (f *Field) PullFloat() float64 {
+	return f.PullValue(new(Float)).(*Float).GetRaw()
+}
+
+func (f *Field) PullString() string {
+	return f.PullValue(new(String)).(*String).GetRaw()
+}
+
+func (f *Field) PullBool() bool {
+	return f.PullValue(new(Bool)).(*Bool).GetRaw()
+}
+
+func (f *Field) PullBinaryFile() string {
+	return f.PullValue(new(BinaryFile)).(*BinaryFile).GetRaw()
+}
+
+func (f *Field) PullEntityReference() string {
+	return f.PullValue(new(EntityReference)).(*EntityReference).GetRaw()
+}
+
+func (f *Field) PushInt(value int64) bool {
+	return f.PushValue(&Int{Raw: value})
+}
+
+func (f *Field) PushFloat(value float64) bool {
+	return f.PushValue(&Float{Raw: value})
+}
+
+func (f *Field) PushString(value string) bool {
+	return f.PushValue(&String{Raw: value})
+}
+
+func (f *Field) PushBool(value bool) bool {
+	return f.PushValue(&Bool{Raw: value})
+}
+
+func (f *Field) PushBinaryFile(value string) bool {
+	return f.PushValue(&BinaryFile{Raw: value})
+}
+
+func (f *Field) PushEntityReference(value string) bool {
+	return f.PushValue(&EntityReference{Raw: value})
 }
 
 type IEntity interface {
