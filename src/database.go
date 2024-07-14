@@ -139,7 +139,7 @@ func (g *RedisDatabaseKeyGenerator) GetNotificationChannelKey(marshalledNotifica
 type RedisDatabase struct {
 	client    *redis.Client
 	config    RedisDatabaseConfig
-	callbacks map[string]func(*DatabaseNotification)
+	callbacks map[string][]func(*DatabaseNotification)
 	lastIds   map[string]string
 	keygen    RedisDatabaseKeyGenerator
 }
@@ -147,7 +147,7 @@ type RedisDatabase struct {
 func NewRedisDatabase(config RedisDatabaseConfig) IDatabase {
 	return &RedisDatabase{
 		config:    config,
-		callbacks: map[string]func(*DatabaseNotification){},
+		callbacks: map[string][]func(*DatabaseNotification){},
 		lastIds:   map[string]string{},
 		keygen:    RedisDatabaseKeyGenerator{},
 	}
@@ -670,7 +670,7 @@ func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callba
 		}
 
 		db.client.SAdd(context.Background(), db.keygen.GetEntityIdNotificationConfigKey(notification.Id, notification.Field), e)
-		db.callbacks[e] = callback
+		db.callbacks[e] = append(db.callbacks[e], callback)
 		return e
 	}
 
@@ -684,7 +684,7 @@ func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callba
 		}
 
 		db.client.SAdd(context.Background(), db.keygen.GetEntityTypeNotificationConfigKey(notification.Type, notification.Field), e)
-		db.callbacks[e] = callback
+		db.callbacks[e] = append(db.callbacks[e], callback)
 		return e
 	}
 
@@ -743,7 +743,9 @@ func (db *RedisDatabase) ProcessNotifications() {
 						continue
 					}
 
-					db.callbacks[e](n)
+					for _, callback := range db.callbacks[e] {
+						callback(n)
+					}
 				}
 			}
 		}
