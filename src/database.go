@@ -51,9 +51,53 @@ type IDatabase interface {
 	TempDel(key string)
 	TempScan(key string) []string
 
-	Notify(config *DatabaseNotificationConfig, callback func(*DatabaseNotification)) string
+	Notify(config *DatabaseNotificationConfig, callback INotificationCallback) INotificationToken
 	Unnotify(subscriptionId string)
+	UnnotifyCallback(subscriptionId string, callback INotificationCallback)
 	ProcessNotifications()
+}
+
+type INotificationCallback interface {
+	Fn(*DatabaseNotification)
+	Id() string
+}
+
+type NotificationCallback struct {
+	fn func(*DatabaseNotification)
+	id string
+}
+
+type INotificationToken interface {
+	Unbind()
+}
+
+type NotificationToken struct {
+	db             IDatabase
+	subscriptionId string
+	callback       INotificationCallback
+}
+
+func (t *NotificationToken) Unbind() {
+	if t.callback != nil {
+		t.db.UnnotifyCallback(t.subscriptionId, t.callback)
+	} else {
+		t.db.Unnotify(t.subscriptionId)
+	}
+}
+
+func NewNotificationCallback(fn func(*DatabaseNotification)) INotificationCallback {
+	return &NotificationCallback{
+		fn: fn,
+		id: uuid.New().String(),
+	}
+}
+
+func (c *NotificationCallback) Fn(n *DatabaseNotification) {
+	c.fn(n)
+}
+
+func (c *NotificationCallback) Id() string {
+	return c.id
 }
 
 type RedisDatabaseConfig struct {
@@ -139,7 +183,7 @@ func (g *RedisDatabaseKeyGenerator) GetNotificationChannelKey(marshalledNotifica
 type RedisDatabase struct {
 	client    *redis.Client
 	config    RedisDatabaseConfig
-	callbacks map[string][]func(*DatabaseNotification)
+	callbacks map[string][]INotificationCallback
 	lastIds   map[string]string
 	keygen    RedisDatabaseKeyGenerator
 }
@@ -147,7 +191,7 @@ type RedisDatabase struct {
 func NewRedisDatabase(config RedisDatabaseConfig) IDatabase {
 	return &RedisDatabase{
 		config:    config,
-		callbacks: map[string][]func(*DatabaseNotification){},
+		callbacks: map[string][]INotificationCallback{},
 		lastIds:   map[string]string{},
 		keygen:    RedisDatabaseKeyGenerator{},
 	}
@@ -651,11 +695,15 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 	}
 }
 
-func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callback func(*DatabaseNotification)) string {
+func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callback INotificationCallback) INotificationToken {
 	b, err := proto.Marshal(notification)
 	if err != nil {
 		Error("[RedisDatabase::Notify] Failed to marshal notification config: %v", err)
-		return ""
+		return &NotificationToken{
+			db:             db,
+			subscriptionId: "",
+			callback:       nil,
+		}
 	}
 
 	e := base64.StdEncoding.EncodeToString(b)
@@ -671,7 +719,11 @@ func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callba
 
 		db.client.SAdd(context.Background(), db.keygen.GetEntityIdNotificationConfigKey(notification.Id, notification.Field), e)
 		db.callbacks[e] = append(db.callbacks[e], callback)
-		return e
+		return &NotificationToken{
+			db:             db,
+			subscriptionId: e,
+			callback:       callback,
+		}
 	}
 
 	if notification.Type != "" && db.FieldExists(notification.Field, notification.Type) {
@@ -685,11 +737,19 @@ func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callba
 
 		db.client.SAdd(context.Background(), db.keygen.GetEntityTypeNotificationConfigKey(notification.Type, notification.Field), e)
 		db.callbacks[e] = append(db.callbacks[e], callback)
-		return e
+		return &NotificationToken{
+			db:             db,
+			subscriptionId: e,
+			callback:       callback,
+		}
 	}
 
 	Warn("[RedisDatabase::Notify] Failed to find field: %v", notification)
-	return ""
+	return &NotificationToken{
+		db:             db,
+		subscriptionId: "",
+		callback:       nil,
+	}
 }
 
 func (db *RedisDatabase) Unnotify(e string) {
@@ -700,6 +760,22 @@ func (db *RedisDatabase) Unnotify(e string) {
 
 	delete(db.callbacks, e)
 	delete(db.lastIds, e)
+}
+
+func (db *RedisDatabase) UnnotifyCallback(e string, c INotificationCallback) {
+	if db.callbacks[e] == nil {
+		Warn("[RedisDatabase::UnnotifyCallback] Failed to find callback: %v", e)
+		return
+	}
+
+	callbacks := []INotificationCallback{}
+	for _, callback := range db.callbacks[e] {
+		if callback.Id() != c.Id() {
+			callbacks = append(callbacks, callback)
+		}
+	}
+
+	db.callbacks[e] = callbacks
 }
 
 func (db *RedisDatabase) ProcessNotifications() {
@@ -744,7 +820,7 @@ func (db *RedisDatabase) ProcessNotifications() {
 					}
 
 					for _, callback := range db.callbacks[e] {
-						callback(n)
+						callback.Fn(n)
 					}
 				}
 			}

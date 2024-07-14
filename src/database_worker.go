@@ -14,14 +14,14 @@ type DatabaseWorker struct {
 	db                      IDatabase
 	connectionState         ConnectionState_ConnectionStateEnum
 	lastConnectionCheckTime time.Time
-	subscriptionIds         []string
+	notificationTokens      []INotificationToken
 }
 
 func NewDatabaseWorker(db IDatabase) *DatabaseWorker {
 	return &DatabaseWorker{
-		db:              db,
-		connectionState: ConnectionState_DISCONNECTED,
-		subscriptionIds: []string{},
+		db:                 db,
+		connectionState:    ConnectionState_DISCONNECTED,
+		notificationTokens: []INotificationToken{},
 	}
 }
 
@@ -49,16 +49,16 @@ func (w *DatabaseWorker) DoWork() {
 }
 
 func (w *DatabaseWorker) onDatabaseConnected() {
-	for _, id := range w.subscriptionIds {
-		w.db.Unnotify(id)
+	for _, token := range w.notificationTokens {
+		token.Unbind()
 	}
 
-	w.subscriptionIds = []string{}
+	w.notificationTokens = []INotificationToken{}
 
-	w.subscriptionIds = append(w.subscriptionIds, w.db.Notify(&DatabaseNotificationConfig{
+	w.notificationTokens = append(w.notificationTokens, w.db.Notify(&DatabaseNotificationConfig{
 		Type:  "Root",
 		Field: "SchemaUpdateTrigger",
-	}, w.OnSchemaUpdated))
+	}, NewNotificationCallback(w.OnSchemaUpdated)))
 }
 
 func (w *DatabaseWorker) setConnectionStatus(connected bool) {
