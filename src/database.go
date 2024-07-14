@@ -68,6 +68,7 @@ type NotificationCallback struct {
 }
 
 type INotificationToken interface {
+	Id() string
 	Unbind()
 }
 
@@ -75,6 +76,10 @@ type NotificationToken struct {
 	db             IDatabase
 	subscriptionId string
 	callback       INotificationCallback
+}
+
+func (t *NotificationToken) Id() string {
+	return t.subscriptionId
 }
 
 func (t *NotificationToken) Unbind() {
