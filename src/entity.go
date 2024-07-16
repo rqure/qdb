@@ -492,6 +492,7 @@ type FCEnum[T ~int32] struct {
 	FieldCondition[IFieldProto[T], T, T]
 }
 type FCTimestamp = FieldCondition[*Timestamp, int64, *timestamppb.Timestamp]
+type FCReference = FieldCondition[*EntityReference, string, string]
 
 func NewStringCondition() *FCString {
 	return &FCString{
@@ -535,5 +536,11 @@ func NewTimestampCondition() *FCTimestamp {
 		Caster: func(t *timestamppb.Timestamp) int64 {
 			return t.AsTime().UnixMilli()
 		},
+	}
+}
+
+func NewReferenceCondition() *FCReference {
+	return &FCReference{
+		Caster: DefaultCaster[string, string],
 	}
 }
