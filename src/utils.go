@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"strings"
 
+	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
 )
 
@@ -36,7 +37,7 @@ func FileDecode(encoded string) []byte {
 	return decoded
 }
 
-func ValueCast[T any](value *anypb.Any) T {
+func ValueCast[T proto.Message](value *anypb.Any) T {
 	p, err := value.UnmarshalNew()
 
 	if err != nil {
