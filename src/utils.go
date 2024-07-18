@@ -3,6 +3,8 @@ package qdb
 import (
 	"encoding/base64"
 	"strings"
+
+	"google.golang.org/protobuf/types/known/anypb"
 )
 
 func Truncate(text string, width int) string {
@@ -32,4 +34,19 @@ func FileDecode(encoded string) []byte {
 	}
 
 	return decoded
+}
+
+func ValueCast[T any](value *anypb.Any) T {
+	p, err := value.UnmarshalNew()
+
+	if err != nil {
+		Error("[ValueCast] Failed to unmarshal: %v", err)
+	}
+
+	c, ok := p.(T)
+	if !ok {
+		Error("[ValueCast] Failed to cast: %v", value)
+	}
+
+	return c
 }

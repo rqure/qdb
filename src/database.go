@@ -913,7 +913,17 @@ func (db *RedisDatabase) triggerNotifications(request *DatabaseRequest, oldReque
 		return
 	}
 
-	changed := proto.Equal(oldRequest.Value, request.Value)
+	a, err := oldRequest.Value.UnmarshalNew()
+	if err != nil {
+		Error("[RedisDatabase::triggerNotifications] Failed to unmarshal old value: %v", err)
+		return
+	}
+	b, err := request.Value.UnmarshalNew()
+	if err != nil {
+		Error("[RedisDatabase::triggerNotifications] Failed to unmarshal new value: %v", err)
+		return
+	}
+	changed := proto.Equal(a, b)
 
 	indirectField, indirectEntity := db.ResolveIndirection(request.Field, request.Id)
 
