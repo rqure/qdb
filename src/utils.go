@@ -61,7 +61,7 @@ func ValueEquals(a *anypb.Any, b *anypb.Any) bool {
 		return false
 	}
 
-	if !a.MessageIs(b) {
+	if a.TypeUrl != b.TypeUrl {
 		return false
 	}
 
