@@ -51,3 +51,59 @@ func ValueCast[T proto.Message](value *anypb.Any) T {
 
 	return c
 }
+
+func ValueEquals(a *anypb.Any, b *anypb.Any) bool {
+	if a == nil && b == nil {
+		return true
+	}
+
+	if a == nil || b == nil {
+		return false
+	}
+
+	if !a.MessageIs(b) {
+		return false
+	}
+
+	if a.MessageIs(&Int{}) {
+		return ValueCast[*Int](a).Raw == ValueCast[*Int](b).Raw
+	}
+
+	if a.MessageIs(&Float{}) {
+		return ValueCast[*Float](a).Raw == ValueCast[*Float](b).Raw
+	}
+
+	if a.MessageIs(&String{}) {
+		return ValueCast[*String](a).Raw == ValueCast[*String](b).Raw
+	}
+
+	if a.MessageIs(&Bool{}) {
+		return ValueCast[*Bool](a).Raw == ValueCast[*Bool](b).Raw
+	}
+
+	if a.MessageIs(&EntityReference{}) {
+		return ValueCast[*EntityReference](a).Raw == ValueCast[*EntityReference](b).Raw
+	}
+
+	if a.MessageIs(&BinaryFile{}) {
+		return ValueCast[*BinaryFile](a).Raw == ValueCast[*BinaryFile](b).Raw
+	}
+
+	if a.MessageIs(&GarageDoorState{}) {
+		return ValueCast[*GarageDoorState](a).Raw == ValueCast[*GarageDoorState](b).Raw
+	}
+
+	if a.MessageIs(&ConnectionState{}) {
+		return ValueCast[*ConnectionState](a).Raw == ValueCast[*ConnectionState](b).Raw
+	}
+
+	if a.MessageIs(&Timestamp{}) {
+		ac := ValueCast[*Timestamp](a).Raw
+		bc := ValueCast[*Timestamp](b).Raw
+		return ac.Nanos == bc.Nanos && ac.Seconds == bc.Seconds
+	}
+
+	Error("[ValueEquals] Unsupported type: %s", a.TypeUrl)
+
+	return false
+}
