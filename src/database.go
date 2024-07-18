@@ -913,7 +913,7 @@ func (db *RedisDatabase) triggerNotifications(request *DatabaseRequest, oldReque
 		return
 	}
 
-	changed := ValueEquals(request.Value, oldRequest.Value)
+	changed := !proto.Equal(request.Value, oldRequest.Value)
 
 	indirectField, indirectEntity := db.ResolveIndirection(request.Field, request.Id)
 
