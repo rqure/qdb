@@ -224,6 +224,14 @@ message WebRuntimeGetDatabaseConnectionStatusResponse {
     ConnectionState status = 1;
 }
 
+message WebRuntimeGetEntitiesRequest {
+    string entityType = 1;
+}
+
+message WebRuntimeGetEntitiesResponse {
+    repeated DatabaseEntity entities = 1;
+}
+
 message DatabaseEntity {
     string id = 1;
     string type = 2;
