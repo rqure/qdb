@@ -47,6 +47,7 @@ func (w *WebServiceWorker) Init() {
 	Register_web_handler_app()
 	Register_web_handler_server_interactor()
 	Register_web_handler_utils()
+	Register_web_handler_database_interactor()
 
 	go func() {
 		err := http.ListenAndServe(w.addr, nil)
