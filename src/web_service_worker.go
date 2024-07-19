@@ -22,14 +22,16 @@ type WebServiceWorker struct {
 	clients        map[string]IWebClient
 	addClientCh    chan IWebClient
 	removeClientCh chan string
+	addr           string
 }
 
-func NewWebServiceWorker() *WebServiceWorker {
+func NewWebServiceWorker(addr string) *WebServiceWorker {
 	return &WebServiceWorker{
 		Signals:        WebServiceWorkerSignals{},
 		clients:        make(map[string]IWebClient),
 		addClientCh:    make(chan IWebClient, 100),
 		removeClientCh: make(chan string, 100),
+		addr:           addr,
 	}
 }
 
@@ -47,7 +49,7 @@ func (w *WebServiceWorker) Init() {
 	Register_web_handler_utils()
 
 	go func() {
-		err := http.ListenAndServe("0.0.0.0:20000", nil)
+		err := http.ListenAndServe(w.addr, nil)
 		if err != nil {
 			Panic("[WebServiceWorker::Init] HTTP server error: %v", err)
 		}

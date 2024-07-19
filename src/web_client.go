@@ -2,6 +2,7 @@ package qdb
 
 import (
 	"sync"
+	"sync/atomic"
 
 	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
@@ -21,6 +22,7 @@ type WebClient struct {
 	readCh     chan *WebMessage
 	wg         sync.WaitGroup
 	onClose    func(string)
+	isClosed   atomic.Bool
 }
 
 func NewWebClient(connection *websocket.Conn, onClose func(string)) *WebClient {
@@ -91,13 +93,15 @@ func (c *WebClient) Write(message *WebMessage) {
 }
 
 func (c *WebClient) Close() {
-	close(c.readCh)
+	if !c.isClosed.CompareAndSwap(false, true) {
+		close(c.readCh)
 
-	if err := c.connection.Close(); err != nil {
-		Error("[WebClient::Close] Error closing connection: %v", err)
+		if err := c.connection.Close(); err != nil {
+			Error("[WebClient::Close] Error closing connection: %v", err)
+		}
+
+		c.wg.Wait()
+
+		c.onClose(c.id)
 	}
-
-	c.wg.Wait()
-
-	c.onClose(c.id)
 }
