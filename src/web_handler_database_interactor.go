@@ -86,15 +86,18 @@ class DatabaseEventManager {
 class DatabaseInteractor {
     constructor(overrides) {
         let port = location.port == "" ? "" : ":" + location.port;
+        this._mainLoopInterval = 500;
         if (overrides) {
             if ("port" in overrides) {
                 port = overrides.port;
+            }
+            if ("mainLoopInterval" in overrides) {
+                this._mainLoopInterval = overrides.mainLoopInterval;
             }
         }
         this._serverInteractor = new ServerInteractor(` + "`" + `${location.protocol == "https:" ? "wss:" : "ws:"}//${location.hostname}${port}/ws` + "`" + `);
         this._eventManager = new DatabaseEventManager();
         this._runInBackground = false;
-        this._mainLoopInterval = 500;
         this._isConnected = null;
     }
 
