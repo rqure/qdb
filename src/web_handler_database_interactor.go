@@ -188,11 +188,11 @@ class DatabaseInteractor {
     }
 
     queryAllEntities(entityType) {
-        const request = new proto.qdb.WebConfigGetEntitiesRequest();
+        const request = new proto.qdb.WebRuntimeGetEntitiesRequest();
         request.setType(entityType);
 
         this._serverInteractor
-            .send(request, proto.qdb.WebConfigGetEntitiesResponse)
+            .send(request, proto.qdb.WebRuntimeGetEntitiesResponse)
             .then(response => {
                 this._eventManager.dispatchEvent(DATABASE_EVENTS.QUERY_ALL_ENTITIES, {entities: response.getEntitiesList()});
             })
