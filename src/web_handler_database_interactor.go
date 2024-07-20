@@ -192,7 +192,7 @@ class DatabaseInteractor {
 
     queryAllEntities(entityType) {
         const request = new proto.qdb.WebRuntimeGetEntitiesRequest();
-        request.setType(entityType);
+        request.setEntityType(entityType);
 
         this._serverInteractor
             .send(request, proto.qdb.WebRuntimeGetEntitiesResponse)
