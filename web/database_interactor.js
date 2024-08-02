@@ -75,6 +75,7 @@ class DatabaseInteractor {
     constructor(overrides) {
         let port = location.port == "" ? "" : ":" + location.port;
         this._mainLoopInterval = 500;
+        this._connectionBackoffTime = 2500;
         if (overrides) {
             if ("port" in overrides) {
                 port = overrides.port;
@@ -82,11 +83,15 @@ class DatabaseInteractor {
             if ("mainLoopInterval" in overrides) {
                 this._mainLoopInterval = overrides.mainLoopInterval;
             }
+            if ("connectionBackoffTime" in overrides) {
+                this._connectionBackoffTime = overrides.connectionBackoffTime;
+            }
         }
         this._serverInteractor = new ServerInteractor(`${location.protocol == "https:" ? "wss:" : "ws:"}//${location.hostname}${port}/ws`);
         this._eventManager = new DatabaseEventManager();
         this._runInBackground = false;
         this._isConnected = null;
+        this._lastConnnectionAttempt = new Date(0).getTime();
     }
 
     isConnected() {
@@ -121,7 +126,11 @@ class DatabaseInteractor {
         }
 
         if (!this._serverInteractor.isConnected()) {
-            this._serverInteractor.connect();
+            const currentTime = new Date().getTime();
+            if ((this._lastConnnectionAttempt + this._connectionBackoffTime) <= currentTime) {
+                this._serverInteractor.connect();
+                this._lastConnnectionAttempt = currentTime;
+            }
 
             setTimeout(() => {
                 this.mainLoop();
