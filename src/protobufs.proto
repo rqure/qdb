@@ -7,8 +7,15 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/any.proto";
 
 message WebHeader {
+    enum AuthenticationStatusEnum {
+        UNSPECIFIED = 0;
+        AUTHENTICATED = 1;
+        UNAUTHENTICATED = 2;
+    }
+
     string id = 1;
     google.protobuf.Timestamp timestamp = 2;
+    AuthenticationStatusEnum authenticationStatus = 3;
 }
 
 message WebMessage {
