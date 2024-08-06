@@ -765,6 +765,7 @@ goog.exportSymbol('proto.qdb.WebConfigSetFieldSchemaRequest', null, global);
 goog.exportSymbol('proto.qdb.WebConfigSetFieldSchemaResponse', null, global);
 goog.exportSymbol('proto.qdb.WebConfigSetFieldSchemaResponse.StatusEnum', null, global);
 goog.exportSymbol('proto.qdb.WebHeader', null, global);
+goog.exportSymbol('proto.qdb.WebHeader.AuthenticationStatusEnum', null, global);
 goog.exportSymbol('proto.qdb.WebMessage', null, global);
 goog.exportSymbol('proto.qdb.WebRuntimeDatabaseRequest', null, global);
 goog.exportSymbol('proto.qdb.WebRuntimeDatabaseRequest.RequestTypeEnum', null, global);
@@ -1989,7 +1990,8 @@ proto.qdb.WebHeader.prototype.toObject = function(opt_includeInstance) {
 proto.qdb.WebHeader.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
+    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+    authenticationstatus: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {
@@ -2035,6 +2037,10 @@ proto.qdb.WebHeader.deserializeBinaryFromReader = function(msg, reader) {
       reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
       msg.setTimestamp(value);
       break;
+    case 3:
+      var value = /** @type {!proto.qdb.WebHeader.AuthenticationStatusEnum} */ (reader.readEnum());
+      msg.setAuthenticationstatus(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -2079,8 +2085,24 @@ proto.qdb.WebHeader.serializeBinaryToWriter = function(message, writer) {
       google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
+  f = message.getAuthenticationstatus();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      3,
+      f
+    );
+  }
 };
 
+
+/**
+ * @enum {number}
+ */
+proto.qdb.WebHeader.AuthenticationStatusEnum = {
+  UNSPECIFIED: 0,
+  AUTHENTICATED: 1,
+  UNAUTHENTICATED: 2
+};
 
 /**
  * optional string id = 1;
@@ -2134,6 +2156,24 @@ proto.qdb.WebHeader.prototype.clearTimestamp = function() {
  */
 proto.qdb.WebHeader.prototype.hasTimestamp = function() {
   return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional AuthenticationStatusEnum authenticationStatus = 3;
+ * @return {!proto.qdb.WebHeader.AuthenticationStatusEnum}
+ */
+proto.qdb.WebHeader.prototype.getAuthenticationstatus = function() {
+  return /** @type {!proto.qdb.WebHeader.AuthenticationStatusEnum} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/**
+ * @param {!proto.qdb.WebHeader.AuthenticationStatusEnum} value
+ * @return {!proto.qdb.WebHeader} returns this
+ */
+proto.qdb.WebHeader.prototype.setAuthenticationstatus = function(value) {
+  return jspb.Message.setProto3EnumField(this, 3, value);
 };
 
 
