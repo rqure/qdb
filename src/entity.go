@@ -2,6 +2,7 @@ package qdb
 
 import (
 	"cmp"
+	"time"
 
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/reflect/protoreflect"
@@ -39,6 +40,76 @@ func NewField(db IDatabase, entityId string, fieldName string) *Field {
 		fieldName: fieldName,
 		entityId:  entityId,
 	}
+}
+
+func NewStringValue(value string) *anypb.Any {
+	a, err := anypb.New(&String{Raw: value})
+	if err != nil {
+		Error("[NewStringValue] Failed to create Any: %s", err.Error())
+		return nil
+	}
+
+	return a
+}
+
+func NewIntValue(value int64) *anypb.Any {
+	a, err := anypb.New(&Int{Raw: value})
+	if err != nil {
+		Error("[NewIntValue] Failed to create Any: %s", err.Error())
+		return nil
+	}
+
+	return a
+}
+
+func NewFloatValue(value float64) *anypb.Any {
+	a, err := anypb.New(&Float{Raw: value})
+	if err != nil {
+		Error("[NewFloatValue] Failed to create Any: %s", err.Error())
+		return nil
+	}
+
+	return a
+}
+
+func NewBoolValue(value bool) *anypb.Any {
+	a, err := anypb.New(&Bool{Raw: value})
+	if err != nil {
+		Error("[NewBoolValue] Failed to create Any: %s", err.Error())
+		return nil
+	}
+
+	return a
+}
+
+func NewBinaryFileValue(value string) *anypb.Any {
+	a, err := anypb.New(&BinaryFile{Raw: value})
+	if err != nil {
+		Error("[NewBinaryFileValue] Failed to create Any: %s", err.Error())
+		return nil
+	}
+
+	return a
+}
+
+func NewEntityReferenceValue(value string) *anypb.Any {
+	a, err := anypb.New(&EntityReference{Raw: value})
+	if err != nil {
+		Error("[NewEntityReferenceValue] Failed to create Any: %s", err.Error())
+		return nil
+	}
+
+	return a
+}
+
+func NewTimestampValue(value time.Time) *anypb.Any {
+	a, err := anypb.New(&Timestamp{Raw: timestamppb.New(value)})
+	if err != nil {
+		Error("[NewTimestampValue] Failed to create Any: %s", err.Error())
+		return nil
+	}
+
+	return a
 }
 
 func (f *Field) PullValue(m proto.Message) proto.Message {
