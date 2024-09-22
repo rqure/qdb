@@ -141,7 +141,7 @@ class DatabaseInteractor {
                          * Unregister all notifications when the connection is re-established
                          * This is to prevent duplicate notifications from being registered
                          */
-                        this._notificationManager.unregisterNotifications(this._tokens);
+                        this.unregisterNotifications(this._tokens);
 
                         this._notificationManager.dispatchEvent(DATABASE_EVENTS.CONNECTED, {});
                     }
