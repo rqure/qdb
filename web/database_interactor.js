@@ -1,25 +1,9 @@
 DATABASE_EVENTS = {
     CONNECTED: "connected",
-    CREATE_SNAPSHOT: "create_snapshot",
     DISCONNECTED: "disconnected",
-    ENTITY_CREATED: "entity_created",
-    ENTITY_DELETED: "entity_deleted",
-    ENTITY_TYPE_CREATED: "entity_type_created",
-    FIELD_CREATED: "field_created",
-    NOTIFICATION: "notification",
-    QUERY_ALL_ENTITIES: "query_all_entities",
-    QUERY_ALL_ENTITY_TYPES: "query_all_entity_types",
-    QUERY_ALL_FIELDS: "query_all_fields",
-    QUERY_ENTITY_SCHEMA: "query_entity_schema",
-    QUERY_ENTITY: "query_entity",
-    QUERY_ROOT_ENTITY_ID: "query_root_entity_id",
-    READ_RESULT: "read_result",
-    REGISTER_NOTIFICATION_RESPONSE: "register_notification_response",
-    RESTORE_SNAPSHOT: "restore_snapshot",
-    WRITE_RESULT: "write_result"
-}
+};
 
-class DatabaseEventListener {
+class DatabaseNotificationListener {
     constructor(eventName, callback) {
         this._eventName = eventName;
         this._callback = callback;
@@ -38,7 +22,7 @@ class DatabaseEventListener {
     }
 }
 
-class DatabaseEventManager {
+class DatabaseNotificationManager {
     constructor() {
         this._listeners = {};
     }
@@ -48,7 +32,7 @@ class DatabaseEventManager {
             this._listeners[eventName] = [];
         }
 
-        this._listeners[eventName].push(new DatabaseEventListener(eventName, callback));
+        this._listeners[eventName].push(new DatabaseNotificationListener(eventName, callback));
 
         return this;
     }
@@ -76,6 +60,8 @@ class DatabaseInteractor {
         let port = location.port == "" ? "" : ":" + location.port;
         this._mainLoopInterval = 500;
         this._connectionBackoffTime = 2500;
+        this._tokens = [];
+
         if (overrides) {
             if ("port" in overrides) {
                 port = overrides.port;
@@ -88,7 +74,7 @@ class DatabaseInteractor {
             }
         }
         this._serverInteractor = new ServerInteractor(`${location.protocol == "https:" ? "wss:" : "ws:"}//${location.hostname}${port}/ws`);
-        this._eventManager = new DatabaseEventManager();
+        this._notificationManager = new DatabaseNotificationManager();
         this._runInBackground = false;
         this._isConnected = null;
         this._lastConnnectionAttempt = new Date(0).getTime();
@@ -103,7 +89,7 @@ class DatabaseInteractor {
     }
 
     getEventManager() {
-        return this._eventManager;
+        return this._notificationManager;
     }
 
     getAvailableFieldTypes() {
@@ -145,12 +131,19 @@ class DatabaseInteractor {
                 if (response.getStatus().getRaw() !== proto.qdb.ConnectionState.ConnectionStateEnum.CONNECTED) {
                     if(this._isConnected !== false) {
                         this._isConnected = false;
-                        this._eventManager.dispatchEvent(DATABASE_EVENTS.DISCONNECTED, {});
+                        this._notificationManager.dispatchEvent(DATABASE_EVENTS.DISCONNECTED, {});
                     }
                 } else {
                     if(this._isConnected !== true) {
                         this._isConnected = true;
-                        this._eventManager.dispatchEvent(DATABASE_EVENTS.CONNECTED, {});
+
+                        /**
+                         * Unregister all notifications when the connection is re-established
+                         * This is to prevent duplicate notifications from being registered
+                         */
+                        this._notificationManager.unregisterNotifications(this._tokens);
+
+                        this._notificationManager.dispatchEvent(DATABASE_EVENTS.CONNECTED, {});
                     }
                 }
             })
@@ -172,50 +165,49 @@ class DatabaseInteractor {
         request.setName(entityName);
         request.setType(entityType);
 
-        me._serverInteractor
+        return me._serverInteractor
             .send(request, proto.qdb.WebConfigCreateEntityResponse)
             .then(response => {
                 if (response.getStatus() !== proto.qdb.WebConfigCreateEntityResponse.StatusEnum.SUCCESS) {
-                    qError(`[DatabaseInteractor::createEntity] Could not complete the request: ${response.getStatus()}`);
-                    return;
+                    throw new Error(`[DatabaseInteractor::createEntity] Could not complete the request: ${response.getStatus()}`);
                 }
                 
-                me._eventManager.dispatchEvent(DATABASE_EVENTS.ENTITY_CREATED, {entityName: entityName, entityType: entityType, parentId: parentId});
+                return {entityName: entityName, entityType: entityType, parentId: parentId};
             })
             .catch(error => {
-                qError(`[DatabaseInteractor::createEntity] Failed to create entity: ${error}`)
-            })
+                throw new Error(`[DatabaseInteractor::createEntity] Failed to create entity: ${error}`);
+            });
     }
 
     queryAllEntities(entityType) {
         const request = new proto.qdb.WebRuntimeGetEntitiesRequest();
         request.setEntitytype(entityType);
 
-        this._serverInteractor
+        return this._serverInteractor
             .send(request, proto.qdb.WebRuntimeGetEntitiesResponse)
             .then(response => {
-                this._eventManager.dispatchEvent(DATABASE_EVENTS.QUERY_ALL_ENTITIES, {entities: response.getEntitiesList()});
+                return {entities: response.getEntitiesList()};
             })
             .catch(error => {
-                qError(`[DatabaseInteractor::queryAllEntities] Failed to get all entities: ${error}`)
+                throw new Error(`[DatabaseInteractor::queryAllEntities] Failed to get all entities: ${error}`);
             });
     }
 
     queryEntity(entityId) {
         const request = new proto.qdb.WebConfigGetEntityRequest();
         request.setId(entityId);
-        this._serverInteractor
+        
+        return this._serverInteractor
             .send(request, proto.qdb.WebConfigGetEntityResponse)
             .then(response => {
                 if (response.getStatus() !== proto.qdb.WebConfigGetEntityResponse.StatusEnum.SUCCESS) {
-                    qError(`[DatabaseInteractor::queryEntity] Could not complete the request: ${response.getStatus()}`);
-                    return;
+                    throw new Error(`[DatabaseInteractor::queryEntity] Could not complete the request: ${response.getStatus()}`);
                 }
                 
-                this._eventManager.dispatchEvent(DATABASE_EVENTS.QUERY_ENTITY, {entity: response.getEntity()});
+                return {entity: response.getEntity()};
             })
             .catch(error => {
-                qError(`[DatabaseInteractor::queryEntity] Failed to get entity: ${error}`)
+                throw new Error(`[DatabaseInteractor::queryEntity] Failed to get entity: ${error}`);
             });
     }
 
@@ -223,40 +215,39 @@ class DatabaseInteractor {
         const request = new proto.qdb.WebConfigGetEntitySchemaRequest();
         request.setType(entityType);
 
-        this._serverInteractor
+        return this._serverInteractor
             .send(request, proto.qdb.WebConfigGetEntitySchemaResponse)
             .then(response => {
                 if(response.getStatus() !== proto.qdb.WebConfigGetEntitySchemaResponse.StatusEnum.SUCCESS) {
-                    qError(`[DatabaseInteractor::queryEntitySchema] Failed to get entity schema: ${response.getStatus()}`);
-                    return;
+                    throw new Error(`[DatabaseInteractor::queryEntitySchema] Could not complete the request: ${response.getStatus()}`);
                 }
 
-                this._eventManager.dispatchEvent(DATABASE_EVENTS.QUERY_ENTITY_SCHEMA, {schema: response.getSchema()});
+                return {schema: response.getSchema()};
             })
             .catch(error => {
-                qError(`[DatabaseInteractor::queryEntitySchema] Failed to get entity schema: ${error}`)
+                throw new Error(`[DatabaseInteractor::queryEntitySchema] Failed to get entity schema: ${error}`);
             });
     }
 
     queryAllFields() {
-        this._serverInteractor
+        return this._serverInteractor
             .send(new proto.qdb.WebConfigGetAllFieldsRequest(), proto.qdb.WebConfigGetAllFieldsResponse)
             .then(response => {
-                this._eventManager.dispatchEvent(DATABASE_EVENTS.QUERY_ALL_FIELDS, {fields: response.getFieldsList()});
+                return {fields: response.getFieldsList()};
             })
             .catch(error => {
-                qError(`[DatabaseInteractor::queryAllFields] Failed to get all fields: ${error}`)
+                throw new Error(`[DatabaseInteractor::queryAllFields] Failed to get all fields: ${error}`);
             });
     }
 
     queryAllEntityTypes() {
-        this._serverInteractor
+        return this._serverInteractor
             .send(new proto.qdb.WebConfigGetEntityTypesRequest(), proto.qdb.WebConfigGetEntityTypesResponse)
             .then(response => {
-                this._eventManager.dispatchEvent(DATABASE_EVENTS.QUERY_ALL_ENTITY_TYPES, {entityTypes: response.getTypesList()});
+                return {entityTypes: response.getTypesList()};
             })
             .catch(error => {
-                qError(`[DatabaseInteractor::queryAllEntityTypes] Failed to get all entity types: ${error}`)
+                throw new Error(`[DatabaseInteractor::queryAllEntityTypes] Failed to get all entity types: ${error}`);
             });
     }
 
@@ -265,18 +256,17 @@ class DatabaseInteractor {
         const request = new proto.qdb.WebConfigDeleteEntityRequest();
         request.setId(entityId);
 
-        me._serverInteractor
+        return me._serverInteractor
             .send(request, proto.qdb.WebConfigDeleteEntityResponse)
             .then(response => {
                 if (response.getStatus() !== proto.qdb.WebConfigDeleteEntityResponse.StatusEnum.SUCCESS) {
-                    qError(`[DatabaseInteractor::deleteEntity] Could not complete the request: ${response.getStatus()}`);
-                    return;
+                    throw new Error(`[DatabaseInteractor::deleteEntity] Could not complete the request: ${response.getStatus()}`);
                 }
 
-                me._eventManager.dispatchEvent(DATABASE_EVENTS.ENTITY_DELETED, {entityId: entityId});
+                return {entityId: entityId};
             })
             .catch(error => {
-                qError(`[DatabaseInteractor::deleteEntity] Failed to delete entity: ${error}`);
+                throw new Error(`[DatabaseInteractor::deleteEntity] Failed to delete entity: ${error}`);
             });
     }
 
@@ -285,17 +275,17 @@ class DatabaseInteractor {
         request.setName(entityType);
         request.setFieldsList(entityFields);
 
-        this._serverInteractor
+        return this._serverInteractor
             .send(request, proto.qdb.WebConfigSetEntitySchemaResponse)
             .then(response => {
                 if (response.getStatus() !== proto.qdb.WebConfigSetEntitySchemaResponse.StatusEnum.SUCCESS) {
-                    qError("[DatabaseInteractor::createOrUpdateEntityType] Could not complete the request: " + response.getStatus());
-                    return;
+                    throw new Error(`[DatabaseInteractor::createOrUpdateEntityType] Could not complete the request: ${response.getStatus()}`);
                 }
-                this._eventManager.dispatchEvent(DATABASE_EVENTS.ENTITY_TYPE_CREATED, {entityType: entityType, entityFields: entityFields});
+                
+                return {entityType: entityType, entityFields: entityFields};
             })
             .catch(error => {
-                qError("[DatabaseInteractor::createOrUpdateEntityType] Could not complete the request: " + error)
+                throw new Error(`[DatabaseInteractor::createOrUpdateEntityType] Failed to create or update entity type: ${error}`);
             });
     }
 
@@ -308,16 +298,16 @@ class DatabaseInteractor {
         schema.setType( 'qdb.' + fieldType );
         request.setSchema( schema );
 
-        this._serverInteractor.send(request, proto.qdb.WebConfigSetFieldSchemaResponse)
+        return this._serverInteractor.send(request, proto.qdb.WebConfigSetFieldSchemaResponse)
             .then(response => {
                 if (response.getStatus() !== proto.qdb.WebConfigSetFieldSchemaResponse.StatusEnum.SUCCESS) {
-                    qError("[DatabaseInteractor::createField] Could not complete the request: " + response.getStatus());
-                    return;
+                    throw new Error(`[DatabaseInteractor::createField] Could not complete the request: ${response.getStatus()}`);
                 }
-                this._eventManager.dispatchEvent(DATABASE_EVENTS.FIELD_CREATED, {fieldName: fieldName, fieldType: fieldType});
+                
+                return {fieldName: fieldName, fieldType: fieldType};
             })
             .catch(error => {
-                qError("[DatabaseInteractor::createField] Could not complete the request: " + error)
+                throw new Error(`[DatabaseInteractor::createField] Failed to create field: ${error}`);
             });
     }
 
@@ -325,18 +315,17 @@ class DatabaseInteractor {
         const me = this;
         const request = new proto.qdb.WebConfigCreateSnapshotRequest();
 
-        me._serverInteractor
+        return me._serverInteractor
             .send(request, proto.qdb.WebConfigCreateSnapshotResponse)
             .then(response => {
                 if (response.getStatus() !== proto.qdb.WebConfigCreateSnapshotResponse.StatusEnum.SUCCESS) {
-                    qError(`[DatabaseInteractor::createSnapshot] Could not complete the request: ${response.getStatus()}`);
-                    return;
+                    throw new Error(`[DatabaseInteractor::createSnapshot] Could not complete the request: ${response.getStatus()}`);
                 }
                 
-                me._eventManager.dispatchEvent(DATABASE_EVENTS.CREATE_SNAPSHOT, {snapshot: response.getSnapshot()});
+                return {snapshot: response.getSnapshot()};
             })
             .catch(error => {
-                qError(`[DatabaseInteractor::createSnapshot] Failed to backup database: ${error}`);
+                throw new Error(`[DatabaseInteractor::createSnapshot] Failed to create snapshot: ${error}`);
             });
     }
 
@@ -344,43 +333,42 @@ class DatabaseInteractor {
         const me = this;
         const request = new proto.qdb.WebConfigRestoreSnapshotRequest();
         request.setSnapshot((snapshot));
-        me._serverInteractor
+
+        return me._serverInteractor
             .send(request, proto.qdb.WebConfigRestoreSnapshotResponse)
             .then(response => {
                 if (response.getStatus() !== proto.qdb.WebConfigRestoreSnapshotResponse.StatusEnum.SUCCESS) {
-                    qError(`[DatabaseInteractor::restoreSnapshot] Could not complete the request: ${response.getStatus()}`);
-                    return;
+                    throw new Error(`[DatabaseInteractor::restoreSnapshot] Could not complete the request: ${response.getStatus()}`);
                 }
 
-                me._eventManager.dispatchEvent(DATABASE_EVENTS.RESTORE_SNAPSHOT, {});
+                return {};
             })
             .catch(error => {
-                qError(`[DatabaseInteractor::restoreSnapshot] Failed to restore database: ${error}`);
+                throw new Error(`[DatabaseInteractor::restoreSnapshot] Failed to restore snapshot: ${error}`);
             });
     }
 
     queryRootEntityId() {
-        this._serverInteractor
+        return this._serverInteractor
             .send(new proto.qdb.WebConfigGetRootRequest(), proto.qdb.WebConfigGetRootResponse)
             .then(response => {
                 if (response.getRootid() === "") {
-                    qError("[DatabaseInteractor::getRootEntity] Could not complete the request: Root ID is empty");
-                    return;
+                    throw new Error(`[DatabaseInteractor::queryRootEntityId] Could not complete the request: No root entity id returned`);
                 }
-
-                this._eventManager.dispatchEvent(DATABASE_EVENTS.QUERY_ROOT_ENTITY_ID, {rootId: response.getRootid()});
+                
+                return {rootId: response.getRootid()};
             })
             .catch(error => {
-                qError(`[DatabaseInteractor::getRootEntity] Failed to get root entity: ${error}`);
+                throw new Error(`[DatabaseInteractor::queryRootEntityId] Failed to get root entity id: ${error}`);
             });
     }
 
     processNotifications() {
-        this._serverInteractor
+        return this._serverInteractor
             .send(new proto.qdb.WebRuntimeGetNotificationsRequest(), proto.qdb.WebRuntimeGetNotificationsResponse)
             .then(response => {
                 response.getNotificationsList().forEach(notification => {
-                    this._eventManager.dispatchEvent(DATABASE_EVENTS.NOTIFICATION, {notification: notification});
+                    this._notificationManager.dispatchEvent(notification.getToken(), notification);
                 });
             })
             .catch(error => {
@@ -388,7 +376,7 @@ class DatabaseInteractor {
             });
     }
 
-    registerNotifications(nRequests, responseIdentifier) {
+    registerNotifications(nRequests, callback) {
         const request = new proto.qdb.WebRuntimeRegisterNotificationRequest();
         request.setRequestsList(nRequests.map(r => {
             const nr = new proto.qdb.DatabaseNotificationConfig();
@@ -406,21 +394,25 @@ class DatabaseInteractor {
             return nr;
         }));
 
-        this._serverInteractor
+        return this._serverInteractor
             .send(request, proto.qdb.WebRuntimeRegisterNotificationResponse)
             .then(response => {
                 if (response.getTokensList().length === 0) {
-                    qError(`[DatabaseInteractor::registerNotification] Could not complete the request: No tokens returned`);
-                    return;
+                    throw new Error(`[DatabaseInteractor::registerNotification] Could not complete the request: No tokens returned`);
                 }
 
-                this._eventManager.dispatchEvent(DATABASE_EVENTS.REGISTER_NOTIFICATION_RESPONSE, {
-                    tokens: response.getTokensList().filter(t => t !== ""),
-                    responseIdentifier: responseIdentifier
+                response.getTokensList().forEach(token => {
+                    this._notificationManager.addEventListener(token, callback);
                 });
+
+                this._tokens.push(...response.getTokensList().filter(t => t !== ""));
+
+                return {
+                    tokens: response.getTokensList().filter(t => t !== ""),
+                };
             })
             .catch(error => {
-                qError(`[DatabaseInteractor::registerNotification] Failed to register notification: ${error}`);
+                throw new Error(`[DatabaseInteractor::registerNotification] Failed to register notification: ${error}`);
             });
     }
 
@@ -428,16 +420,21 @@ class DatabaseInteractor {
         const request = new proto.qdb.WebRuntimeUnregisterNotificationRequest();
         request.setTokensList(tokens);
 
-        this._serverInteractor
+        return this._serverInteractor
             .send(request, proto.qdb.WebRuntimeUnregisterNotificationResponse)
             .then(response => {
                 if (response.getStatus() !== proto.qdb.WebRuntimeUnregisterNotificationResponse.StatusEnum.SUCCESS) {
-                    qError(`[DatabaseInteractor::unregisterNotification] Could not complete the request: ${response.getStatus()}`);
-                    return;
+                    throw new Error(`[DatabaseInteractor::unregisterNotification] Could not complete the request: ${response.getStatus()}`);
                 }
+
+                tokens.forEach(token => {
+                    this._notificationManager.removeEventListener(token);
+                });
+
+                this._tokens = this._tokens.filter(t => !tokens.includes(t));
             })
             .catch(error => {
-                qError(`[DatabaseInteractor::unregisterNotification] Failed to unregister notification: ${error}`);
+                throw new Error(`[DatabaseInteractor::unregisterNotification] Failed to unregister notification: ${error}`);
             });
     }
 
@@ -453,14 +450,14 @@ class DatabaseInteractor {
             return dr;
         }));
 
-        this._serverInteractor
+        return this._serverInteractor
             .send(request, proto.qdb.WebRuntimeDatabaseResponse)
             .then(response => {
-                this._eventManager.dispatchEvent(DATABASE_EVENTS.READ_RESULT, response.getResponseList());
+                return response.getResponseList();
             })
             .catch(error => {
-                qError(`[DatabaseInteractor::read] Failed to read entity: ${error}`);
-            }); 
+                throw new Error(`[DatabaseInteractor::read] Failed to read entity: ${error}`);
+            });
     }
 
     write(dbRequest) {
@@ -476,13 +473,13 @@ class DatabaseInteractor {
             return dr;
         }));
 
-        this._serverInteractor
+        return this._serverInteractor
             .send(request, proto.qdb.WebRuntimeDatabaseResponse)
             .then(response => {
-                this._eventManager.dispatchEvent(DATABASE_EVENTS.WRITE_RESULT, response.getResponseList());
+                return response.getResponseList();
             })
             .catch(error => {
-                qError(`[DatabaseInteractor::write] Failed to write entity: ${error}`);
+                throw new Error(`[DatabaseInteractor::write] Failed to write entity: ${error}`);
             });
     }
 }
