@@ -276,6 +276,8 @@ func (w *LeaderElectionWorker) setLeaderAndCandidateFields() {
 		if candidatesField.PullString() != candidates {
 			candidatesField.PushString(candidates)
 		}
+
+		service.GetField("HeartbeatTrigger").PushInt(0)
 	}
 }
 

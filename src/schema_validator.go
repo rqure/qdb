@@ -20,8 +20,11 @@ type SchemaValidator struct {
 
 func NewSchemaValidator(db IDatabase) ISchemaValidator {
 	return &SchemaValidator{
-		db:                 db,
-		entities:           map[string][]string{},
+		db: db,
+		entities: map[string][]string{
+			"Root":    {"SchemaUpdateTrigger"},
+			"Service": {"Leader", "Candidates", "HeartbeatTrigger", "ApplicationName"},
+		},
 		validationRequired: true,
 	}
 }
