@@ -26,7 +26,7 @@ type ApplicationConfig struct {
 type Application struct {
 	config ApplicationConfig
 
-	quit bool
+	quit chan interface{}
 
 	deinit Signal
 	init   Signal
@@ -34,7 +34,10 @@ type Application struct {
 }
 
 func NewApplication(config ApplicationConfig) IApplication {
-	a := &Application{config: config}
+	a := &Application{
+		config: config,
+		quit:   make(chan interface{}, 1),
+	}
 
 	os.Setenv("QDB_APP_NAME", config.Name)
 
@@ -66,15 +69,13 @@ func (a *Application) Execute() {
 		case <-interrupt:
 			return
 		case <-ticker.C:
-			if a.quit {
-				return
-			}
-
 			a.tick.Emit()
+		case <-a.quit:
+			return
 		}
 	}
 }
 
 func (a *Application) Quit() {
-	a.quit = true
+	a.quit <- nil
 }
