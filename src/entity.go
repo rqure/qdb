@@ -10,6 +10,13 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
+type PushOpt int
+
+const (
+	PushNormal PushOpt = iota
+	PushIfNotEqual
+)
+
 type IField interface {
 	PullValue(m proto.Message) proto.Message
 	PullInt() int64
@@ -20,12 +27,12 @@ type IField interface {
 	PullEntityReference() string
 
 	PushValue(m proto.Message) bool
-	PushInt(int64) bool
-	PushFloat(float64) bool
-	PushString(string) bool
-	PushBool(bool) bool
-	PushBinaryFile(string) bool
-	PushEntityReference(string) bool
+	PushInt(...interface{}) bool
+	PushFloat(...interface{}) bool
+	PushString(...interface{}) bool
+	PushBool(...interface{}) bool
+	PushBinaryFile(...interface{}) bool
+	PushEntityReference(...interface{}) bool
 }
 
 type Field struct {
@@ -171,27 +178,116 @@ func (f *Field) PullEntityReference() string {
 	return f.PullValue(new(EntityReference)).(*EntityReference).GetRaw()
 }
 
-func (f *Field) PushInt(value int64) bool {
+func (f *Field) PushInt(args ...interface{}) bool {
+	value := int64(0)
+
+	if len(args) > 0 {
+		value = args[0].(int64)
+	}
+
+	if len(args) > 1 {
+		pushIfNotEqual := args[1].(PushOpt) == PushIfNotEqual
+
+		if pushIfNotEqual && f.PullInt() == value {
+			return false
+		}
+	}
+
 	return f.PushValue(&Int{Raw: value})
 }
 
-func (f *Field) PushFloat(value float64) bool {
+func (f *Field) PushFloat(args ...interface{}) bool {
+	value := float64(0)
+
+	if len(args) > 0 {
+		value = args[0].(float64)
+	}
+
+	if len(args) > 1 {
+		pushIfNotEqual := args[1].(PushOpt) == PushIfNotEqual
+
+		if pushIfNotEqual && f.PullFloat() == value {
+			return false
+		}
+	}
+
 	return f.PushValue(&Float{Raw: value})
 }
 
-func (f *Field) PushString(value string) bool {
+func (f *Field) PushString(args ...interface{}) bool {
+	value := ""
+
+	if len(args) > 0 {
+		value = args[0].(string)
+	}
+
+	if len(args) > 1 {
+		pushIfNotEqual := args[1].(PushOpt) == PushIfNotEqual
+
+		if pushIfNotEqual && f.PullString() == value {
+			return false
+		}
+	}
+
 	return f.PushValue(&String{Raw: value})
 }
 
-func (f *Field) PushBool(value bool) bool {
+func (f *Field) PushBool(args ...interface{}) bool {
+	value := false
+
+	if len(args) > 0 {
+		value = args[0].(bool)
+	}
+
+	if len(args) > 1 {
+		pushIfNotEqual := args[1].(PushOpt) == PushIfNotEqual
+
+		if pushIfNotEqual && f.PullBool() == value {
+			return false
+		}
+	}
+
 	return f.PushValue(&Bool{Raw: value})
 }
 
-func (f *Field) PushBinaryFile(value string) bool {
+func (f *Field) PushBinaryFile(args ...interface{}) bool {
+	value := ""
+
+	if len(args) > 0 {
+		value = args[0].(string)
+	}
+
+	if len(args) > 1 {
+		pushIfNotEqual := args[1].(PushOpt) == PushIfNotEqual
+
+		if pushIfNotEqual && f.PullBinaryFile() == value {
+			return false
+		}
+	}
+
 	return f.PushValue(&BinaryFile{Raw: value})
 }
 
-func (f *Field) PushEntityReference(value string) bool {
+func (f *Field) PushEntityReference(args ...interface{}) bool {
+	value := ""
+
+	if len(args) > 0 {
+		value = args[0].(string)
+	}
+
+	if len(args) > 1 {
+		pushIfNotEqual := args[1].(PushOpt) == PushIfNotEqual
+
+		if pushIfNotEqual && f.PullEntityReference() == value {
+			return false
+		}
+	}
+
+	// Check if entity exists
+	if value != "" && f.db.GetEntity(value) == nil {
+		return false
+	}
+
 	return f.PushValue(&EntityReference{Raw: value})
 }
 

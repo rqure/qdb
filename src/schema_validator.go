@@ -23,7 +23,7 @@ func NewSchemaValidator(db IDatabase) ISchemaValidator {
 		db: db,
 		entities: map[string][]string{
 			"Root":    {"SchemaUpdateTrigger"},
-			"Service": {"Leader", "Candidates", "HeartbeatTrigger", "ApplicationName"},
+			"Service": {"Leader", "Candidates", "HeartbeatTrigger", "ApplicationName", "FailOverTrigger"},
 		},
 		validationRequired: true,
 	}
