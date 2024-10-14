@@ -25,6 +25,7 @@ type IField interface {
 	PullBool() bool
 	PullBinaryFile() string
 	PullEntityReference() string
+	PullTimestamp() time.Time
 
 	PushValue(m proto.Message) bool
 	PushInt(...interface{}) bool
@@ -33,6 +34,7 @@ type IField interface {
 	PushBool(...interface{}) bool
 	PushBinaryFile(...interface{}) bool
 	PushEntityReference(...interface{}) bool
+	PushTimestamp(...interface{}) bool
 }
 
 type Field struct {
@@ -178,6 +180,10 @@ func (f *Field) PullEntityReference() string {
 	return f.PullValue(new(EntityReference)).(*EntityReference).GetRaw()
 }
 
+func (f *Field) PullTimestamp() time.Time {
+	return f.PullValue(new(Timestamp)).(*Timestamp).GetRaw().AsTime()
+}
+
 func (f *Field) PushInt(args ...interface{}) bool {
 	value := int64(0)
 
@@ -289,6 +295,24 @@ func (f *Field) PushEntityReference(args ...interface{}) bool {
 	}
 
 	return f.PushValue(&EntityReference{Raw: value})
+}
+
+func (f *Field) PushTimestamp(args ...interface{}) bool {
+	value := time.Now()
+
+	if len(args) > 0 {
+		value = args[0].(time.Time)
+	}
+
+	if len(args) > 1 {
+		pushIfNotEqual := args[1].(PushOpt) == PushIfNotEqual
+
+		if pushIfNotEqual && f.PullTimestamp() == value {
+			return false
+		}
+	}
+
+	return f.PushValue(&Timestamp{Raw: timestamppb.New(value)})
 }
 
 type IEntity interface {
