@@ -271,7 +271,6 @@ func (f *Field) PushFloat(args ...interface{}) bool {
 			Error("[Field::PushFloat] Unsupported type: %T", v)
 			return false
 		}
-		value = args[0].(float64)
 	}
 
 	if len(args) > 1 {
