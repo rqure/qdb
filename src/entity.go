@@ -26,6 +26,21 @@ type IField interface {
 	PullBinaryFile() string
 	PullEntityReference() string
 	PullTimestamp() time.Time
+	PullWriteTime() time.Time
+	PullWriter() string
+
+	GetValue(m proto.Message) proto.Message
+	GetInt() int64
+	GetFloat() float64
+	GetString() string
+	GetBool() bool
+	GetBinaryFile() string
+	GetEntityReference() string
+	GetTimestamp() time.Time
+	GetWriteTime() time.Time
+	GetWriter() string
+	GetId() string
+	GetName() string
 
 	PushValue(m proto.Message) bool
 	PushInt(...interface{}) bool
@@ -38,16 +53,17 @@ type IField interface {
 }
 
 type Field struct {
-	db        IDatabase
-	fieldName string
-	entityId  string
+	db  IDatabase
+	req *DatabaseRequest
 }
 
 func NewField(db IDatabase, entityId string, fieldName string) *Field {
 	return &Field{
-		db:        db,
-		fieldName: fieldName,
-		entityId:  entityId,
+		db: db,
+		req: &DatabaseRequest{
+			Id:    entityId,
+			Field: fieldName,
+		},
 	}
 }
 
@@ -122,21 +138,9 @@ func NewTimestampValue(value time.Time) *anypb.Any {
 }
 
 func (f *Field) PullValue(m proto.Message) proto.Message {
-	request := &DatabaseRequest{
-		Id:    f.entityId,
-		Field: f.fieldName,
-	}
-	f.db.Read([]*DatabaseRequest{request})
+	f.db.Read([]*DatabaseRequest{f.req})
 
-	if !request.Success {
-		return m
-	}
-
-	if err := request.Value.UnmarshalTo(m); err != nil {
-		return m
-	}
-
-	return m
+	return f.GetValue(m)
 }
 
 func (f *Field) PushValue(m proto.Message) bool {
@@ -145,15 +149,11 @@ func (f *Field) PushValue(m proto.Message) bool {
 		return false
 	}
 
-	request := &DatabaseRequest{
-		Id:    f.entityId,
-		Field: f.fieldName,
-		Value: a,
-	}
+	f.req.Value = a
 
-	f.db.Write([]*DatabaseRequest{request})
+	f.db.Write([]*DatabaseRequest{f.req})
 
-	return request.Success
+	return f.req.Success
 }
 
 func (f *Field) PullInt() int64 {
@@ -188,7 +188,39 @@ func (f *Field) PushInt(args ...interface{}) bool {
 	value := int64(0)
 
 	if len(args) > 0 {
-		value = args[0].(int64)
+		switch v := args[0].(type) {
+		case int:
+			value = int64(v)
+		case int8:
+			value = int64(v)
+		case int16:
+			value = int64(v)
+		case int32:
+			value = int64(v)
+		case int64:
+			value = v
+		case uint:
+			value = int64(v)
+		case uint8:
+			value = int64(v)
+		case uint16:
+			value = int64(v)
+		case uint32:
+			value = int64(v)
+		case uint64:
+			value = int64(v)
+		case float32:
+			value = int64(v)
+		case float64:
+			value = int64(v)
+		case bool:
+			if v {
+				value = 1
+			}
+		default:
+			Error("[Field::PushInt] Unsupported type: %T", v)
+			return false
+		}
 	}
 
 	if len(args) > 1 {
@@ -206,6 +238,39 @@ func (f *Field) PushFloat(args ...interface{}) bool {
 	value := float64(0)
 
 	if len(args) > 0 {
+		switch v := args[0].(type) {
+		case int:
+			value = float64(v)
+		case int8:
+			value = float64(v)
+		case int16:
+			value = float64(v)
+		case int32:
+			value = float64(v)
+		case int64:
+			value = float64(v)
+		case uint:
+			value = float64(v)
+		case uint8:
+			value = float64(v)
+		case uint16:
+			value = float64(v)
+		case uint32:
+			value = float64(v)
+		case uint64:
+			value = float64(v)
+		case float32:
+			value = float64(v)
+		case float64:
+			value = v
+		case bool:
+			if v {
+				value = 1
+			}
+		default:
+			Error("[Field::PushFloat] Unsupported type: %T", v)
+			return false
+		}
 		value = args[0].(float64)
 	}
 
@@ -224,7 +289,13 @@ func (f *Field) PushString(args ...interface{}) bool {
 	value := ""
 
 	if len(args) > 0 {
-		value = args[0].(string)
+		switch v := args[0].(type) {
+		case string:
+			value = v
+		default:
+			Error("[Field::PushString] Unsupported type: %T", v)
+			return false
+		}
 	}
 
 	if len(args) > 1 {
@@ -242,7 +313,37 @@ func (f *Field) PushBool(args ...interface{}) bool {
 	value := false
 
 	if len(args) > 0 {
-		value = args[0].(bool)
+		switch v := args[0].(type) {
+		case bool:
+			value = v
+		case int:
+			value = v != 0
+		case int8:
+			value = v != 0
+		case int16:
+			value = v != 0
+		case int32:
+			value = v != 0
+		case int64:
+			value = v != 0
+		case uint:
+			value = v != 0
+		case uint8:
+			value = v != 0
+		case uint16:
+			value = v != 0
+		case uint32:
+			value = v != 0
+		case uint64:
+			value = v != 0
+		case float32:
+			value = v != 0
+		case float64:
+			value = v != 0
+		default:
+			Error("[Field::PushBool] Unsupported type: %T", v)
+			return false
+		}
 	}
 
 	if len(args) > 1 {
@@ -260,7 +361,13 @@ func (f *Field) PushBinaryFile(args ...interface{}) bool {
 	value := ""
 
 	if len(args) > 0 {
-		value = args[0].(string)
+		switch v := args[0].(type) {
+		case string:
+			value = v
+		default:
+			Error("[Field::PushBinaryFile] Unsupported type: %T", v)
+			return false
+		}
 	}
 
 	if len(args) > 1 {
@@ -278,7 +385,13 @@ func (f *Field) PushEntityReference(args ...interface{}) bool {
 	value := ""
 
 	if len(args) > 0 {
-		value = args[0].(string)
+		switch v := args[0].(type) {
+		case string:
+			value = v
+		default:
+			Error("[Field::PushEntityReference] Unsupported type: %T", v)
+			return false
+		}
 	}
 
 	if len(args) > 1 {
@@ -291,6 +404,7 @@ func (f *Field) PushEntityReference(args ...interface{}) bool {
 
 	// Check if entity exists
 	if value != "" && f.db.GetEntity(value) == nil {
+		Error("[Field::PushEntityReference] Entity does not exist: %s", value)
 		return false
 	}
 
@@ -301,7 +415,32 @@ func (f *Field) PushTimestamp(args ...interface{}) bool {
 	value := time.Now()
 
 	if len(args) > 0 {
-		value = args[0].(time.Time)
+		switch v := args[0].(type) {
+		case int:
+			value = time.Unix(int64(v), 0)
+		case uint:
+			value = time.Unix(int64(v), 0)
+		case int64:
+			value = time.Unix(v, 0)
+		case uint64:
+			value = time.Unix(int64(v), 0)
+		case float32:
+			value = time.Unix(int64(v), 0)
+		case float64:
+			value = time.Unix(int64(v), 0)
+		case string:
+			t, err := time.Parse(time.RFC3339, v)
+			if err != nil {
+				Error("[Field::PushTimestamp] Failed to parse time: %s", err.Error())
+				return false
+			}
+			value = t
+		case time.Time:
+			value = v
+		default:
+			Error("[Field::PushTimestamp] Unsupported type: %T", v)
+			return false
+		}
 	}
 
 	if len(args) > 1 {
@@ -313,6 +452,82 @@ func (f *Field) PushTimestamp(args ...interface{}) bool {
 	}
 
 	return f.PushValue(&Timestamp{Raw: timestamppb.New(value)})
+}
+
+func (f *Field) PullWriteTime() time.Time {
+	f.db.Read([]*DatabaseRequest{f.req})
+
+	return f.GetWriteTime()
+}
+
+func (f *Field) PullWriter() string {
+	f.db.Read([]*DatabaseRequest{f.req})
+
+	return f.GetWriter()
+}
+
+func (f *Field) GetValue(m proto.Message) proto.Message {
+	if !f.req.Success {
+		return m
+	}
+
+	if err := f.req.Value.UnmarshalTo(m); err != nil {
+		return m
+	}
+
+	return m
+}
+
+func (f *Field) GetInt() int64 {
+	return f.GetValue(new(Int)).(*Int).GetRaw()
+}
+
+func (f *Field) GetFloat() float64 {
+	return f.GetValue(new(Float)).(*Float).GetRaw()
+}
+
+func (f *Field) GetString() string {
+	return f.GetValue(new(String)).(*String).GetRaw()
+}
+
+func (f *Field) GetBool() bool {
+	return f.GetValue(new(Bool)).(*Bool).GetRaw()
+}
+
+func (f *Field) GetBinaryFile() string {
+	return f.GetValue(new(BinaryFile)).(*BinaryFile).GetRaw()
+}
+
+func (f *Field) GetEntityReference() string {
+	return f.GetValue(new(EntityReference)).(*EntityReference).GetRaw()
+}
+
+func (f *Field) GetTimestamp() time.Time {
+	return f.GetValue(new(Timestamp)).(*Timestamp).GetRaw().AsTime()
+}
+
+func (f *Field) GetWriteTime() time.Time {
+	if !f.req.Success {
+		return time.Time{}
+	}
+
+	return f.req.WriteTime.GetRaw().AsTime()
+}
+
+func (f *Field) GetWriter() string {
+	if !f.req.Success {
+		return ""
+	}
+
+	return f.req.WriterId.GetRaw()
+}
+
+func (f *Field) GetId() string {
+	return f.req.Id
+}
+
+func (f *Field) GetName() string {
+	return f.req.Field
 }
 
 type IEntity interface {
