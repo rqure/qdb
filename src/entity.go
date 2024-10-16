@@ -150,6 +150,7 @@ func (f *Field) PushValue(m proto.Message) bool {
 	}
 
 	f.req.Value = a
+	f.req.WriteTime = &Timestamp{Raw: timestamppb.Now()}
 
 	f.db.Write([]*DatabaseRequest{f.req})
 
