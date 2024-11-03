@@ -124,6 +124,11 @@ class DatabaseInteractor {
         }
 
         if (!this._serverInteractor.isConnected()) {
+            if (this._isConnected !== false) {
+                this._isConnected = false;
+                this._notificationManager.dispatchEvent(DATABASE_EVENTS.DISCONNECTED, {});
+            }
+
             const currentTime = new Date().getTime();
             if ((this._lastConnnectionAttempt + this._connectionBackoffTime) <= currentTime) {
                 this._serverInteractor.connect();
