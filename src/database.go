@@ -296,8 +296,14 @@ func (db *RedisDatabase) RestoreSnapshot(snapshot *DatabaseSnapshot) {
 func (db *RedisDatabase) CreateEntity(entityType, parentId, name string) {
 	entityId := uuid.New().String()
 
+	schema := db.GetEntitySchema(entityType)
+	if schema == nil {
+		Error("[RedisDatabase::CreateEntity] Failed to get entity schema: %v", entityType)
+		return
+	}
+
 	requests := []*DatabaseRequest{}
-	for _, fieldName := range db.GetEntitySchema(entityType).Fields {
+	for _, fieldName := range schema.Fields {
 		requests = append(requests, &DatabaseRequest{
 			Id:    entityId,
 			Field: fieldName,
