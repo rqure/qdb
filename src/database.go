@@ -787,7 +787,7 @@ func (db *RedisDatabase) UnnotifyCallback(e string, c INotificationCallback) {
 func (db *RedisDatabase) ProcessNotifications() {
 	r, err := db.client.XRead(context.Background(), &redis.XReadArgs{
 		Streams: []string{db.keygen.GetNotificationChannelKey(db.getServiceId()), db.lastStreamMessageId},
-		Count:   100,
+		Count:   1000,
 		Block:   -1,
 	}).Result()
 
