@@ -8359,7 +8359,8 @@ proto.qdb.DatabaseNotificationConfig.toObject = function(includeInstance, msg) {
     type: jspb.Message.getFieldWithDefault(msg, 2, ""),
     field: jspb.Message.getFieldWithDefault(msg, 3, ""),
     contextfieldsList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f,
-    notifyonchange: jspb.Message.getBooleanFieldWithDefault(msg, 5, false)
+    notifyonchange: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
+    serviceid: jspb.Message.getFieldWithDefault(msg, 6, "")
   };
 
   if (includeInstance) {
@@ -8415,6 +8416,10 @@ proto.qdb.DatabaseNotificationConfig.deserializeBinaryFromReader = function(msg,
     case 5:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setNotifyonchange(value);
+      break;
+    case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setServiceid(value);
       break;
     default:
       reader.skipField();
@@ -8477,6 +8482,13 @@ proto.qdb.DatabaseNotificationConfig.serializeBinaryToWriter = function(message,
   if (f) {
     writer.writeBool(
       5,
+      f
+    );
+  }
+  f = message.getServiceid();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
       f
     );
   }
@@ -8589,6 +8601,24 @@ proto.qdb.DatabaseNotificationConfig.prototype.getNotifyonchange = function() {
  */
 proto.qdb.DatabaseNotificationConfig.prototype.setNotifyonchange = function(value) {
   return jspb.Message.setProto3BooleanField(this, 5, value);
+};
+
+
+/**
+ * optional string serviceId = 6;
+ * @return {string}
+ */
+proto.qdb.DatabaseNotificationConfig.prototype.getServiceid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.qdb.DatabaseNotificationConfig} returns this
+ */
+proto.qdb.DatabaseNotificationConfig.prototype.setServiceid = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
