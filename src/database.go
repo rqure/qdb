@@ -715,6 +715,10 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 }
 
 func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callback INotificationCallback) INotificationToken {
+	if notification.ServiceId == "" {
+		notification.ServiceId = db.getServiceId()
+	}
+
 	b, err := proto.Marshal(notification)
 	if err != nil {
 		Error("[RedisDatabase::Notify] Failed to marshal notification config: %v", err)
@@ -726,10 +730,6 @@ func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callba
 	}
 
 	e := base64.StdEncoding.EncodeToString(b)
-
-	if notification.ServiceId == "" {
-		notification.ServiceId = db.getServiceId()
-	}
 
 	if notification.Id != "" && db.FieldExists(notification.Field, notification.Id) {
 		db.client.SAdd(context.Background(), db.keygen.GetEntityIdNotificationConfigKey(notification.Id, notification.Field), e)
