@@ -261,6 +261,7 @@ message DatabaseNotificationConfig {
     string field = 3;
     repeated string contextFields = 4;
     bool notifyOnChange = 5;
+    string serviceId = 6;
 }
 
 message DatabaseNotification {

@@ -3,6 +3,7 @@ package qdb
 import (
 	"context"
 	"encoding/base64"
+	"os"
 	"slices"
 	"strings"
 	"time"
@@ -106,8 +107,9 @@ func (c *NotificationCallback) Id() string {
 }
 
 type RedisDatabaseConfig struct {
-	Address  string
-	Password string
+	Address   string
+	Password  string
+	ServiceID string
 }
 
 func (r *DatabaseRequest) FromField(field *DatabaseField) *DatabaseRequest {
@@ -181,24 +183,31 @@ func (g *RedisDatabaseKeyGenerator) GetEntityTypeNotificationConfigKey(entityTyp
 	return "instance:notification-config:" + entityType + ":" + fieldName
 }
 
-func (g *RedisDatabaseKeyGenerator) GetNotificationChannelKey(marshalledNotificationConfig string) string {
-	return "instance:notification:" + marshalledNotificationConfig
+func (g *RedisDatabaseKeyGenerator) GetNotificationChannelKey(serviceId string) string {
+	return "instance:notification:" + serviceId
 }
 
 type RedisDatabase struct {
-	client    *redis.Client
-	config    RedisDatabaseConfig
-	callbacks map[string][]INotificationCallback
-	lastIds   map[string]string
-	keygen    RedisDatabaseKeyGenerator
+	client              *redis.Client
+	config              RedisDatabaseConfig
+	callbacks           map[string][]INotificationCallback
+	lastStreamMessageId string
+	keygen              RedisDatabaseKeyGenerator
+	serviceId           string
 }
 
 func NewRedisDatabase(config RedisDatabaseConfig) IDatabase {
+	serviceId := config.ServiceID
+	if config.ServiceID == "" {
+		serviceId = os.Getenv("QDB_APP_NAME")
+	}
+
 	return &RedisDatabase{
-		config:    config,
-		callbacks: map[string][]INotificationCallback{},
-		lastIds:   map[string]string{},
-		keygen:    RedisDatabaseKeyGenerator{},
+		config:              config,
+		callbacks:           map[string][]INotificationCallback{},
+		lastStreamMessageId: "$",
+		keygen:              RedisDatabaseKeyGenerator{},
+		serviceId:           serviceId,
 	}
 }
 
@@ -720,14 +729,6 @@ func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callba
 	e := base64.StdEncoding.EncodeToString(b)
 
 	if notification.Id != "" && db.FieldExists(notification.Field, notification.Id) {
-		r, err := db.client.XInfoStream(context.Background(), db.keygen.GetNotificationChannelKey(e)).Result()
-		if err != nil {
-			Warn("[RedisDatabase::Notify] Failed to find stream for: %v (%v)", e, err)
-			db.lastIds[e] = "0"
-		} else {
-			db.lastIds[e] = r.LastGeneratedID
-		}
-
 		db.client.SAdd(context.Background(), db.keygen.GetEntityIdNotificationConfigKey(notification.Id, notification.Field), e)
 		db.callbacks[e] = append(db.callbacks[e], callback)
 		return &NotificationToken{
@@ -738,14 +739,6 @@ func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callba
 	}
 
 	if notification.Type != "" && db.FieldExists(notification.Field, notification.Type) {
-		r, err := db.client.XInfoStream(context.Background(), db.keygen.GetNotificationChannelKey(e)).Result()
-		if err != nil {
-			Warn("[RedisDatabase::Notify] Failed to find stream for: %v (%v)", e, err)
-			db.lastIds[e] = "0"
-		} else {
-			db.lastIds[e] = r.LastGeneratedID
-		}
-
 		db.client.SAdd(context.Background(), db.keygen.GetEntityTypeNotificationConfigKey(notification.Type, notification.Field), e)
 		db.callbacks[e] = append(db.callbacks[e], callback)
 		return &NotificationToken{
@@ -770,7 +763,6 @@ func (db *RedisDatabase) Unnotify(e string) {
 	}
 
 	delete(db.callbacks, e)
-	delete(db.lastIds, e)
 }
 
 func (db *RedisDatabase) UnnotifyCallback(e string, c INotificationCallback) {
@@ -792,7 +784,7 @@ func (db *RedisDatabase) UnnotifyCallback(e string, c INotificationCallback) {
 func (db *RedisDatabase) ProcessNotifications() {
 	for e := range db.callbacks {
 		r, err := db.client.XRead(context.Background(), &redis.XReadArgs{
-			Streams: []string{db.keygen.GetNotificationChannelKey(e), db.lastIds[e]},
+			Streams: []string{db.keygen.GetNotificationChannelKey(db.serviceId), db.lastStreamMessageId},
 			Count:   100,
 			Block:   -1,
 		}).Result()
@@ -804,7 +796,7 @@ func (db *RedisDatabase) ProcessNotifications() {
 
 		for _, x := range r {
 			for _, m := range x.Messages {
-				db.lastIds[e] = m.ID
+				db.lastStreamMessageId = m.ID
 				decodedMessage := make(map[string]string)
 
 				for key, value := range m.Values {
@@ -977,7 +969,7 @@ func (db *RedisDatabase) triggerNotifications(request *DatabaseRequest, oldReque
 		}
 
 		_, err = db.client.XAdd(context.Background(), &redis.XAddArgs{
-			Stream: db.keygen.GetNotificationChannelKey(e),
+			Stream: db.keygen.GetNotificationChannelKey(p.ServiceId),
 			Values: []string{"data", base64.StdEncoding.EncodeToString(b)},
 			MaxLen: 100,
 			Approx: true,
@@ -1043,7 +1035,7 @@ func (db *RedisDatabase) triggerNotifications(request *DatabaseRequest, oldReque
 		}
 
 		_, err = db.client.XAdd(context.Background(), &redis.XAddArgs{
-			Stream: db.keygen.GetNotificationChannelKey(e),
+			Stream: db.keygen.GetNotificationChannelKey(p.ServiceId),
 			Values: []string{"data", base64.StdEncoding.EncodeToString(b)},
 			MaxLen: 100,
 			Approx: true,
