@@ -33,13 +33,29 @@ type Application struct {
 	tick   Signal
 }
 
+func GetSetAppName() (func() string, func(string)) {
+	appName := ""
+
+	get := func() string {
+		return appName
+	}
+
+	set := func(name string) {
+		appName = name
+		os.Setenv("QDB_APP_NAME", name)
+	}
+
+	return get, set
+}
+
 func NewApplication(config ApplicationConfig) IApplication {
 	a := &Application{
 		config: config,
 		quit:   make(chan interface{}, 1),
 	}
 
-	os.Setenv("QDB_APP_NAME", config.Name)
+	_, setAppName := GetSetAppName()
+	setAppName(config.Name)
 
 	for _, worker := range config.Workers {
 		a.init.Connect(Slot(worker.Init))

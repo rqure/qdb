@@ -3,7 +3,6 @@ package qdb
 import (
 	"context"
 	"encoding/base64"
-	"os"
 	"slices"
 	"strings"
 	"time"
@@ -109,7 +108,7 @@ func (c *NotificationCallback) Id() string {
 type RedisDatabaseConfig struct {
 	Address   string
 	Password  string
-	ServiceID string
+	ServiceID func() string
 }
 
 func (r *DatabaseRequest) FromField(field *DatabaseField) *DatabaseRequest {
@@ -193,13 +192,13 @@ type RedisDatabase struct {
 	callbacks           map[string][]INotificationCallback
 	lastStreamMessageId string
 	keygen              RedisDatabaseKeyGenerator
-	serviceId           string
+	getServiceId        func() string
 }
 
 func NewRedisDatabase(config RedisDatabaseConfig) IDatabase {
-	serviceId := config.ServiceID
-	if config.ServiceID == "" {
-		serviceId = os.Getenv("QDB_APP_NAME")
+	getServiceId := config.ServiceID
+	if config.ServiceID == nil {
+		getServiceId, _ = GetSetAppName()
 	}
 
 	return &RedisDatabase{
@@ -207,7 +206,7 @@ func NewRedisDatabase(config RedisDatabaseConfig) IDatabase {
 		callbacks:           map[string][]INotificationCallback{},
 		lastStreamMessageId: "$",
 		keygen:              RedisDatabaseKeyGenerator{},
-		serviceId:           serviceId,
+		getServiceId:        getServiceId,
 	}
 }
 
@@ -729,7 +728,7 @@ func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callba
 	e := base64.StdEncoding.EncodeToString(b)
 
 	if notification.ServiceId == "" {
-		notification.ServiceId = db.serviceId
+		notification.ServiceId = db.getServiceId()
 	}
 
 	if notification.Id != "" && db.FieldExists(notification.Field, notification.Id) {
@@ -788,7 +787,7 @@ func (db *RedisDatabase) UnnotifyCallback(e string, c INotificationCallback) {
 func (db *RedisDatabase) ProcessNotifications() {
 	for e := range db.callbacks {
 		r, err := db.client.XRead(context.Background(), &redis.XReadArgs{
-			Streams: []string{db.keygen.GetNotificationChannelKey(db.serviceId), db.lastStreamMessageId},
+			Streams: []string{db.keygen.GetNotificationChannelKey(db.getServiceId()), db.lastStreamMessageId},
 			Count:   100,
 			Block:   -1,
 		}).Result()
