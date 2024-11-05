@@ -23,7 +23,7 @@ func Log(level LogMessage_LogLevelEnum, message string, args ...interface{}) {
 		Level:       level,
 		Message:     fmt.Sprintf(message, args...),
 		Timestamp:   timestamppb.Now(),
-		Application: os.Getenv("QDB_APP_NAME"),
+		Application: GetApplicationName(),
 	}
 
 	fmt.Printf("%s | %s | %s | %s\n", logMsg.Timestamp.AsTime().Local().Format(time.RFC3339Nano), logMsg.Application, logMsg.Level.String(), Truncate(logMsg.Message, 1024))

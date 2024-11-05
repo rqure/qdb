@@ -198,7 +198,7 @@ type RedisDatabase struct {
 func NewRedisDatabase(config RedisDatabaseConfig) IDatabase {
 	getServiceId := config.ServiceID
 	if config.ServiceID == nil {
-		getServiceId, _ = GetSetAppName()
+		getServiceId = GetApplicationName
 	}
 
 	return &RedisDatabase{
