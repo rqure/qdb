@@ -785,49 +785,47 @@ func (db *RedisDatabase) UnnotifyCallback(e string, c INotificationCallback) {
 }
 
 func (db *RedisDatabase) ProcessNotifications() {
-	for e := range db.callbacks {
-		r, err := db.client.XRead(context.Background(), &redis.XReadArgs{
-			Streams: []string{db.keygen.GetNotificationChannelKey(db.getServiceId()), db.lastStreamMessageId},
-			Count:   100,
-			Block:   -1,
-		}).Result()
+	r, err := db.client.XRead(context.Background(), &redis.XReadArgs{
+		Streams: []string{db.keygen.GetNotificationChannelKey(db.getServiceId()), db.lastStreamMessageId},
+		Count:   100,
+		Block:   -1,
+	}).Result()
 
-		if err != nil && err != redis.Nil {
-			Error("[RedisDatabase::ProcessNotifications] Failed to read stream %v: %v", e, err)
-			continue
-		}
+	if err != nil && err != redis.Nil {
+		Error("[RedisDatabase::ProcessNotifications] Failed to read stream %v: %v", db.keygen.GetNotificationChannelKey(db.getServiceId()), err)
+		return
+	}
 
-		for _, x := range r {
-			for _, m := range x.Messages {
-				db.lastStreamMessageId = m.ID
-				decodedMessage := make(map[string]string)
+	for _, x := range r {
+		for _, m := range x.Messages {
+			db.lastStreamMessageId = m.ID
+			decodedMessage := make(map[string]string)
 
-				for key, value := range m.Values {
-					if castedValue, ok := value.(string); ok {
-						decodedMessage[key] = castedValue
-					} else {
-						Error("[RedisDatabase::ProcessNotifications] Failed to cast value: %v", value)
-						continue
-					}
+			for key, value := range m.Values {
+				if castedValue, ok := value.(string); ok {
+					decodedMessage[key] = castedValue
+				} else {
+					Error("[RedisDatabase::ProcessNotifications] Failed to cast value: %v", value)
+					continue
+				}
+			}
+
+			if data, ok := decodedMessage["data"]; ok {
+				p, err := base64.StdEncoding.DecodeString(data)
+				if err != nil {
+					Error("[RedisDatabase::ProcessNotifications] Failed to decode notification: %v", err)
+					continue
 				}
 
-				if data, ok := decodedMessage["data"]; ok {
-					p, err := base64.StdEncoding.DecodeString(data)
-					if err != nil {
-						Error("[RedisDatabase::ProcessNotifications] Failed to decode notification: %v", err)
-						continue
-					}
+				n := &DatabaseNotification{}
+				err = proto.Unmarshal(p, n)
+				if err != nil {
+					Error("[RedisDatabase::ProcessNotifications] Failed to unmarshal notification: %v", err)
+					continue
+				}
 
-					n := &DatabaseNotification{}
-					err = proto.Unmarshal(p, n)
-					if err != nil {
-						Error("[RedisDatabase::ProcessNotifications] Failed to unmarshal notification: %v", err)
-						continue
-					}
-
-					for _, callback := range db.callbacks[e] {
-						callback.Fn(n)
-					}
+				for _, callback := range db.callbacks[n.Token] {
+					callback.Fn(n)
 				}
 			}
 		}
