@@ -971,7 +971,7 @@ func (db *RedisDatabase) triggerNotifications(request *DatabaseRequest, oldReque
 		_, err = db.client.XAdd(context.Background(), &redis.XAddArgs{
 			Stream: db.keygen.GetNotificationChannelKey(p.ServiceId),
 			Values: []string{"data", base64.StdEncoding.EncodeToString(b)},
-			MaxLen: 100,
+			MaxLen: 1000,
 			Approx: true,
 		}).Result()
 		if err != nil {
