@@ -731,6 +731,15 @@ func (db *RedisDatabase) Notify(notification *DatabaseNotificationConfig, callba
 
 	e := base64.StdEncoding.EncodeToString(b)
 
+	if db.lastStreamMessageId == "$" {
+		r, err := db.client.XInfoStream(context.Background(), db.keygen.GetNotificationChannelKey(db.getServiceId())).Result()
+		if err != nil {
+			db.lastStreamMessageId = "0"
+		} else {
+			db.lastStreamMessageId = r.LastGeneratedID
+		}
+	}
+
 	if notification.Id != "" && db.FieldExists(notification.Field, notification.Id) {
 		db.client.SAdd(context.Background(), db.keygen.GetEntityIdNotificationConfigKey(notification.Id, notification.Field), e)
 		db.callbacks[e] = append(db.callbacks[e], callback)
