@@ -325,6 +325,10 @@ message BinaryFile {
     string raw = 1;
 }
 
+message Transformation {
+    string raw = 1;
+}
+
 message LogMessage {
     enum LogLevelEnum {
         UNSPECIFIED = 0;
