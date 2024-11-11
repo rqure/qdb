@@ -7,6 +7,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/d5/tengo/v2"
 	"github.com/google/uuid"
 	"github.com/redis/go-redis/v9"
 	"google.golang.org/protobuf/proto"
@@ -103,6 +104,36 @@ func (c *NotificationCallback) Fn(n *DatabaseNotification) {
 
 func (c *NotificationCallback) Id() string {
 	return c.id
+}
+
+type ITransformer interface {
+	Exec(*Transformation, IField)
+}
+
+type Transformer struct {
+	db IDatabase
+}
+
+func NewTransformer(db IDatabase) ITransformer {
+	return &Transformer{
+		db: db,
+	}
+}
+
+func (t *Transformer) Exec(transformation *Transformation, field IField) {
+	// Check if there is a script to execute
+	if len(transformation.Raw) == 0 {
+		return
+	}
+
+	script := tengo.NewScript([]byte(transformation.Raw))
+	script.Add("qdb", t.db)
+	script.Add("field", NewTengoField(field).ToTengoMap())
+
+	_, err := script.Run()
+	if err != nil {
+		Error("[Transformer::Exec] Failed to execute script: %v", err)
+	}
 }
 
 type RedisDatabaseConfig struct {
@@ -654,25 +685,25 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 		}
 
 		schema := db.GetFieldSchema(indirectField)
-		sampleType, err := protoregistry.GlobalTypes.FindMessageByName(protoreflect.FullName(schema.Type))
+		actualFieldType, err := protoregistry.GlobalTypes.FindMessageByName(protoreflect.FullName(schema.Type))
 		if err != nil {
 			Error("[RedisDatabase::Write] Failed to find message type: %v", err)
 			continue
 		}
 
 		if request.Value == nil {
-			if request.Value, err = anypb.New(sampleType.New().Interface()); err != nil {
+			if request.Value, err = anypb.New(actualFieldType.New().Interface()); err != nil {
 				Error("[RedisDatabase::Write] Failed to create anypb: %v", err)
 				continue
 			}
 		} else {
-			sampleAnyType, err := anypb.New(sampleType.New().Interface())
+			sampleAnyType, err := anypb.New(actualFieldType.New().Interface())
 			if err != nil {
 				Error("[RedisDatabase::Write] Failed to create anypb: %v", err)
 				continue
 			}
 
-			if request.Value.TypeUrl != sampleAnyType.TypeUrl {
+			if request.Value.TypeUrl != sampleAnyType.TypeUrl && !sampleAnyType.MessageIs(&Transformation{}) {
 				Warn("[RedisDatabase::Write] Field type mismatch: %v != %v. Overwritting...", request.Value.TypeUrl, sampleAnyType.TypeUrl)
 				request.Value = sampleAnyType
 			}
@@ -686,6 +717,28 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 			request.WriterId = &String{Raw: ""}
 		}
 
+		oldRequest := &DatabaseRequest{
+			Id:    request.Id,
+			Field: request.Field,
+		}
+		db.Read([]*DatabaseRequest{oldRequest})
+
+		// Set the value in the database
+		// Note that for a transformation, we don't actually write the value to the database
+		// unless the new value is a transformation. This is because the transformation is
+		// executed by the transformer, which will write the result to the database.
+		if oldRequest.Success && oldRequest.Value.MessageIs(&Transformation{}) {
+			t := ValueCast[*Transformation](oldRequest.Value)
+			transformer := NewTransformer(db)
+			f := NewField(db, request.Id, request.Field)
+			f.req = request
+			transformer.Exec(t, f)
+
+			if !request.Value.MessageIs(&Transformation{}) {
+				request.Value = oldRequest.Value
+			}
+		}
+
 		p := new(DatabaseField).FromRequest(request)
 
 		b, err := proto.Marshal(p)
@@ -697,13 +750,9 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 		p.Id = indirectEntity
 		p.Name = indirectField
 
-		oldRequest := &DatabaseRequest{
-			Id:    request.Id,
-			Field: request.Field,
-		}
-		db.Read([]*DatabaseRequest{oldRequest})
 		_, err = db.client.Set(context.Background(), db.keygen.GetFieldKey(indirectField, indirectEntity), base64.StdEncoding.EncodeToString(b), 0).Result()
 
+		// Notify listeners of the change
 		db.triggerNotifications(request, oldRequest)
 
 		if err != nil {

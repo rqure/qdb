@@ -26,6 +26,7 @@ type IField interface {
 	PullBinaryFile() string
 	PullEntityReference() string
 	PullTimestamp() time.Time
+	PullTransformation() string
 	PullWriteTime() time.Time
 	PullWriter() string
 
@@ -37,6 +38,7 @@ type IField interface {
 	GetBinaryFile() string
 	GetEntityReference() string
 	GetTimestamp() time.Time
+	GetTransformation() string
 	GetWriteTime() time.Time
 	GetWriter() string
 	GetId() string
@@ -50,6 +52,7 @@ type IField interface {
 	PushBinaryFile(...interface{}) bool
 	PushEntityReference(...interface{}) bool
 	PushTimestamp(...interface{}) bool
+	PushTransformation(...interface{}) bool
 }
 
 type Field struct {
@@ -137,6 +140,16 @@ func NewTimestampValue(value time.Time) *anypb.Any {
 	return a
 }
 
+func NewTransformationValue(value string) *anypb.Any {
+	a, err := anypb.New(&Transformation{Raw: value})
+	if err != nil {
+		Error("[NewTransformationValue] Failed to create Any: %s", err.Error())
+		return nil
+	}
+
+	return a
+}
+
 func (f *Field) PullValue(m proto.Message) proto.Message {
 	f.db.Read([]*DatabaseRequest{f.req})
 
@@ -183,6 +196,10 @@ func (f *Field) PullEntityReference() string {
 
 func (f *Field) PullTimestamp() time.Time {
 	return f.PullValue(new(Timestamp)).(*Timestamp).GetRaw().AsTime()
+}
+
+func (f *Field) PullTransformation() string {
+	return f.PullValue(new(Transformation)).(*Transformation).GetRaw()
 }
 
 func (f *Field) PushInt(args ...interface{}) bool {
@@ -454,6 +471,30 @@ func (f *Field) PushTimestamp(args ...interface{}) bool {
 	return f.PushValue(&Timestamp{Raw: timestamppb.New(value)})
 }
 
+func (f *Field) PushTransformation(args ...interface{}) bool {
+	value := ""
+
+	if len(args) > 0 {
+		switch v := args[0].(type) {
+		case string:
+			value = v
+		default:
+			Error("[Field::PushTransformation] Unsupported type: %T", v)
+			return false
+		}
+	}
+
+	if len(args) > 1 {
+		pushIfNotEqual := args[1].(PushOpt) == PushIfNotEqual
+
+		if pushIfNotEqual && f.PullTransformation() == value {
+			return false
+		}
+	}
+
+	return f.PushValue(&Transformation{Raw: value})
+}
+
 func (f *Field) PullWriteTime() time.Time {
 	f.db.Read([]*DatabaseRequest{f.req})
 
@@ -504,6 +545,10 @@ func (f *Field) GetEntityReference() string {
 
 func (f *Field) GetTimestamp() time.Time {
 	return f.GetValue(new(Timestamp)).(*Timestamp).GetRaw().AsTime()
+}
+
+func (f *Field) GetTransformation() string {
+	return f.GetValue(new(Transformation)).(*Transformation).GetRaw()
 }
 
 func (f *Field) GetWriteTime() time.Time {
