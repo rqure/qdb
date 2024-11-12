@@ -721,7 +721,7 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 			}
 
 			if request.Value.TypeUrl != sampleAnyType.TypeUrl && !sampleAnyType.MessageIs(&Transformation{}) {
-				Warn("[RedisDatabase::Write] Field type mismatch: %v != %v. Overwritting...", request.Value.TypeUrl, sampleAnyType.TypeUrl)
+				Warn("[RedisDatabase::Write] Field type mismatch for %s.%s. Got: %v, Expected: %v.", request.Id, request.Field, request.Value.TypeUrl, sampleAnyType.TypeUrl)
 				request.Value = sampleAnyType
 			}
 		}
