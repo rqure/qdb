@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/d5/tengo/v2"
+	"github.com/d5/tengo/v2/stdlib"
 	"github.com/google/uuid"
 	"github.com/redis/go-redis/v9"
 	"google.golang.org/protobuf/proto"
@@ -128,6 +129,7 @@ func (t *TengoTransformer) Transform(transformation *Transformation, field IFiel
 	}
 
 	script := tengo.NewScript([]byte(transformation.Raw))
+	script.SetImports(stdlib.GetModuleMap(stdlib.AllModuleNames()...))
 	script.Add("qdb", t.db.ToTengoMap())
 	script.Add("field", NewTengoField(field).ToTengoMap())
 
