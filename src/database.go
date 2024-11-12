@@ -745,7 +745,7 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 		if oldRequest.Success && oldRequest.Value.MessageIs(&Transformation{}) {
 			t := ValueCast[*Transformation](oldRequest.Value)
 
-			if !request.Value.MessageIs(&Transformation{}) {
+			if request.Value.MessageIs(&Transformation{}) {
 				t = ValueCast[*Transformation](request.Value)
 			}
 
