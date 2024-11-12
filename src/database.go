@@ -133,7 +133,7 @@ func (t *TengoTransformer) Transform(transformation *Transformation, field IFiel
 
 	_, err := script.Run()
 	if err != nil {
-		Error("[Transformer::Exec] Failed to execute script: %v", err)
+		Error("[Transformer::Transform] Failed to execute script: %v", err)
 	}
 }
 
