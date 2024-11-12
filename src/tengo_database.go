@@ -158,12 +158,12 @@ func (tdb *TengoDatabase) ToTengoMap() tengo.Object {
 
 func (tdb *TengoDatabase) GetEntity(args ...tengo.Object) (tengo.Object, error) {
 	if len(args) < 1 {
-		return tengo.UndefinedValue, tengo.ErrWrongNumArguments
+		return nil, tengo.ErrWrongNumArguments
 	}
 
 	entityId, ok := tengo.ToString(args[0])
 	if !ok {
-		return tengo.UndefinedValue, &tengo.ErrInvalidArgumentType{
+		return nil, &tengo.ErrInvalidArgumentType{
 			Name:     "entityId",
 			Expected: "string",
 			Found:    args[0].TypeName(),
@@ -172,7 +172,7 @@ func (tdb *TengoDatabase) GetEntity(args ...tengo.Object) (tengo.Object, error) 
 
 	e := NewEntity(tdb.db, entityId)
 	if e.entity == nil {
-		return tengo.UndefinedValue, errors.New("entity not found")
+		return nil, errors.New("entity not found")
 	}
 
 	return NewTengoEntity(e).ToTengoMap(), nil
@@ -180,12 +180,12 @@ func (tdb *TengoDatabase) GetEntity(args ...tengo.Object) (tengo.Object, error) 
 
 func (tdb *TengoDatabase) Find(args ...tengo.Object) (tengo.Object, error) {
 	if len(args) < 1 {
-		return tengo.UndefinedValue, tengo.ErrWrongNumArguments
+		return nil, tengo.ErrWrongNumArguments
 	}
 
 	entityType, ok := tengo.ToString(args[0])
 	if !ok {
-		return tengo.UndefinedValue, &tengo.ErrInvalidArgumentType{
+		return nil, &tengo.ErrInvalidArgumentType{
 			Name:     "entityType",
 			Expected: "string",
 			Found:    args[0].TypeName(),
@@ -203,7 +203,7 @@ func (tdb *TengoDatabase) Find(args ...tengo.Object) (tengo.Object, error) {
 	if len(args) > 1 {
 		conditionFn, ok := args[1].(*tengo.UserFunction)
 		if !ok {
-			return tengo.UndefinedValue, &tengo.ErrInvalidArgumentType{
+			return nil, &tengo.ErrInvalidArgumentType{
 				Name:     "conditionFn",
 				Expected: "function",
 				Found:    args[1].TypeName(),
@@ -213,7 +213,7 @@ func (tdb *TengoDatabase) Find(args ...tengo.Object) (tengo.Object, error) {
 		for _, e := range entities {
 			met, err := conditionFn.Call(e)
 			if err != nil {
-				return tengo.UndefinedValue, err
+				return nil, err
 			}
 
 			if met == tengo.TrueValue {
@@ -229,12 +229,12 @@ func (tdb *TengoDatabase) Find(args ...tengo.Object) (tengo.Object, error) {
 
 func (tdb *TengoDatabase) Schedule(args ...tengo.Object) (tengo.Object, error) {
 	if len(args) < 1 {
-		return tengo.UndefinedValue, tengo.ErrWrongNumArguments
+		return nil, tengo.ErrWrongNumArguments
 	}
 
 	fn, ok := args[0].(*tengo.UserFunction)
 	if !ok {
-		return tengo.UndefinedValue, &tengo.ErrInvalidArgumentType{
+		return nil, &tengo.ErrInvalidArgumentType{
 			Name:     "fn",
 			Expected: "function",
 			Found:    args[0].TypeName(),
@@ -243,7 +243,7 @@ func (tdb *TengoDatabase) Schedule(args ...tengo.Object) (tengo.Object, error) {
 
 	deadline, ok := args[1].(*tengo.Time)
 	if !ok {
-		return tengo.UndefinedValue, &tengo.ErrInvalidArgumentType{
+		return nil, &tengo.ErrInvalidArgumentType{
 			Name:     "deadline",
 			Expected: "time",
 			Found:    args[1].TypeName(),
@@ -319,12 +319,12 @@ func (te *TengoEntity) GetParent(...tengo.Object) (tengo.Object, error) {
 
 func (te *TengoEntity) GetField(args ...tengo.Object) (tengo.Object, error) {
 	if len(args) < 1 {
-		return tengo.UndefinedValue, tengo.ErrWrongNumArguments
+		return nil, tengo.ErrWrongNumArguments
 	}
 
 	fieldId, ok := tengo.ToString(args[0])
 	if !ok {
-		return tengo.UndefinedValue, &tengo.ErrInvalidArgumentType{
+		return nil, &tengo.ErrInvalidArgumentType{
 			Name:     "fieldId",
 			Expected: "string",
 			Found:    args[0].TypeName(),
@@ -541,12 +541,12 @@ func (tf *TengoField) GetName(...tengo.Object) (tengo.Object, error) {
 
 func (tf *TengoField) PushInt(args ...tengo.Object) (tengo.Object, error) {
 	if len(args) < 1 {
-		return tengo.UndefinedValue, tengo.ErrWrongNumArguments
+		return nil, tengo.ErrWrongNumArguments
 	}
 
 	i, ok := tengo.ToInt(args[0])
 	if !ok {
-		return tengo.UndefinedValue, &tengo.ErrInvalidArgumentType{
+		return nil, &tengo.ErrInvalidArgumentType{
 			Name:     "i",
 			Expected: "int",
 			Found:    args[0].TypeName(),
@@ -559,12 +559,12 @@ func (tf *TengoField) PushInt(args ...tengo.Object) (tengo.Object, error) {
 
 func (tf *TengoField) PushFloat(args ...tengo.Object) (tengo.Object, error) {
 	if len(args) < 1 {
-		return tengo.UndefinedValue, tengo.ErrWrongNumArguments
+		return nil, tengo.ErrWrongNumArguments
 	}
 
 	f, ok := tengo.ToFloat64(args[0])
 	if !ok {
-		return tengo.UndefinedValue, &tengo.ErrInvalidArgumentType{
+		return nil, &tengo.ErrInvalidArgumentType{
 			Name:     "f",
 			Expected: "float",
 			Found:    args[0].TypeName(),
@@ -577,12 +577,12 @@ func (tf *TengoField) PushFloat(args ...tengo.Object) (tengo.Object, error) {
 
 func (tf *TengoField) PushString(args ...tengo.Object) (tengo.Object, error) {
 	if len(args) < 1 {
-		return tengo.UndefinedValue, tengo.ErrWrongNumArguments
+		return nil, tengo.ErrWrongNumArguments
 	}
 
 	s, ok := tengo.ToString(args[0])
 	if !ok {
-		return tengo.UndefinedValue, &tengo.ErrInvalidArgumentType{
+		return nil, &tengo.ErrInvalidArgumentType{
 			Name:     "s",
 			Expected: "string",
 			Found:    args[0].TypeName(),
@@ -595,12 +595,12 @@ func (tf *TengoField) PushString(args ...tengo.Object) (tengo.Object, error) {
 
 func (tf *TengoField) PushBool(args ...tengo.Object) (tengo.Object, error) {
 	if len(args) < 1 {
-		return tengo.UndefinedValue, tengo.ErrWrongNumArguments
+		return nil, tengo.ErrWrongNumArguments
 	}
 
 	b, ok := tengo.ToBool(args[0])
 	if !ok {
-		return tengo.UndefinedValue, &tengo.ErrInvalidArgumentType{
+		return nil, &tengo.ErrInvalidArgumentType{
 			Name:     "b",
 			Expected: "bool",
 			Found:    args[0].TypeName(),
@@ -613,12 +613,12 @@ func (tf *TengoField) PushBool(args ...tengo.Object) (tengo.Object, error) {
 
 func (tf *TengoField) PushBinaryFile(args ...tengo.Object) (tengo.Object, error) {
 	if len(args) < 1 {
-		return tengo.UndefinedValue, tengo.ErrWrongNumArguments
+		return nil, tengo.ErrWrongNumArguments
 	}
 
 	b, ok := tengo.ToString(args[0])
 	if !ok {
-		return tengo.UndefinedValue, &tengo.ErrInvalidArgumentType{
+		return nil, &tengo.ErrInvalidArgumentType{
 			Name:     "b",
 			Expected: "string",
 			Found:    args[0].TypeName(),
@@ -631,12 +631,12 @@ func (tf *TengoField) PushBinaryFile(args ...tengo.Object) (tengo.Object, error)
 
 func (tf *TengoField) PushEntityReference(args ...tengo.Object) (tengo.Object, error) {
 	if len(args) < 1 {
-		return tengo.UndefinedValue, tengo.ErrWrongNumArguments
+		return nil, tengo.ErrWrongNumArguments
 	}
 
 	e, ok := tengo.ToString(args[0])
 	if !ok {
-		return tengo.UndefinedValue, &tengo.ErrInvalidArgumentType{
+		return nil, &tengo.ErrInvalidArgumentType{
 			Name:     "e",
 			Expected: "string",
 			Found:    args[0].TypeName(),
@@ -649,12 +649,12 @@ func (tf *TengoField) PushEntityReference(args ...tengo.Object) (tengo.Object, e
 
 func (tf *TengoField) PushTimestamp(args ...tengo.Object) (tengo.Object, error) {
 	if len(args) < 1 {
-		return tengo.UndefinedValue, tengo.ErrWrongNumArguments
+		return nil, tengo.ErrWrongNumArguments
 	}
 
 	t, ok := tengo.ToTime(args[0])
 	if !ok {
-		return tengo.UndefinedValue, &tengo.ErrInvalidArgumentType{
+		return nil, &tengo.ErrInvalidArgumentType{
 			Name:     "t",
 			Expected: "time",
 			Found:    args[0].TypeName(),
