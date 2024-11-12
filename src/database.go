@@ -285,10 +285,12 @@ func (db *RedisDatabase) IsConnected() bool {
 func (db *RedisDatabase) CreateSnapshot() *DatabaseSnapshot {
 	snapshot := &DatabaseSnapshot{}
 
+	usedEntityType := map[string]bool{}
+	usedFields := map[string]bool{}
 	for _, entityType := range db.GetEntityTypes() {
 		entitySchema := db.GetEntitySchema(entityType)
-		snapshot.EntitySchemas = append(snapshot.EntitySchemas, entitySchema)
 		for _, entityId := range db.FindEntities(entityType) {
+			usedEntityType[entityType] = true
 			snapshot.Entities = append(snapshot.Entities, db.GetEntity(entityId))
 			for _, fieldName := range entitySchema.Fields {
 				request := &DatabaseRequest{
@@ -299,11 +301,20 @@ func (db *RedisDatabase) CreateSnapshot() *DatabaseSnapshot {
 				if request.Success {
 					snapshot.Fields = append(snapshot.Fields, new(DatabaseField).FromRequest(request))
 				}
+				usedFields[fieldName] = true
 			}
+		}
+
+		if usedEntityType[entityType] {
+			snapshot.EntitySchemas = append(snapshot.EntitySchemas, entitySchema)
 		}
 	}
 
-	snapshot.FieldSchemas = db.GetFieldSchemas()
+	for _, fieldSchema := range db.GetFieldSchemas() {
+		if usedFields[fieldSchema.Name] {
+			snapshot.FieldSchemas = append(snapshot.FieldSchemas, fieldSchema)
+		}
+	}
 
 	return snapshot
 }
