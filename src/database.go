@@ -107,32 +107,42 @@ func (c *NotificationCallback) Id() string {
 }
 
 type ITransformer interface {
-	Exec(*Transformation, IField)
+	Transform(*Transformation, IField)
+	ProcessPending()
 }
 
-type Transformer struct {
-	db IDatabase
+type TengoTransformer struct {
+	db ITengoDatabase
 }
 
 func NewTransformer(db IDatabase) ITransformer {
-	return &Transformer{
-		db: db,
+	return &TengoTransformer{
+		db: NewTengoDatabase(db),
 	}
 }
 
-func (t *Transformer) Exec(transformation *Transformation, field IField) {
+func (t *TengoTransformer) Transform(transformation *Transformation, field IField) {
 	// Check if there is a script to execute
 	if len(transformation.Raw) == 0 {
 		return
 	}
 
 	script := tengo.NewScript([]byte(transformation.Raw))
-	script.Add("qdb", t.db)
+	script.Add("qdb", t.db.ToTengoMap())
 	script.Add("field", NewTengoField(field).ToTengoMap())
 
 	_, err := script.Run()
 	if err != nil {
 		Error("[Transformer::Exec] Failed to execute script: %v", err)
+	}
+}
+
+func (t *TengoTransformer) ProcessPending() {
+	for _, pending := range t.db.PopAvailableJobs() {
+		_, err := pending.task.Call()
+		if err != nil {
+			Error("[Transformer::ProcessPending] Failed to execute script: %v", err)
+		}
 	}
 }
 
@@ -224,6 +234,7 @@ type RedisDatabase struct {
 	lastStreamMessageId string
 	keygen              RedisDatabaseKeyGenerator
 	getServiceId        func() string
+	transformer         ITransformer // Transformer calls scripts to transform field values of type Transformation
 }
 
 func NewRedisDatabase(config RedisDatabaseConfig) IDatabase {
@@ -232,13 +243,17 @@ func NewRedisDatabase(config RedisDatabaseConfig) IDatabase {
 		getServiceId = GetApplicationName
 	}
 
-	return &RedisDatabase{
+	db := &RedisDatabase{
 		config:              config,
 		callbacks:           map[string][]INotificationCallback{},
 		lastStreamMessageId: "$",
 		keygen:              RedisDatabaseKeyGenerator{},
 		getServiceId:        getServiceId,
 	}
+
+	db.transformer = NewTransformer(db)
+
+	return db
 }
 
 func (db *RedisDatabase) Connect() {
@@ -729,10 +744,9 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 		// executed by the transformer, which will write the result to the database.
 		if oldRequest.Success && oldRequest.Value.MessageIs(&Transformation{}) {
 			t := ValueCast[*Transformation](oldRequest.Value)
-			transformer := NewTransformer(db)
 			f := NewField(db, request.Id, request.Field)
 			f.req = request
-			transformer.Exec(t, f)
+			db.transformer.Transform(t, f)
 
 			if !request.Value.MessageIs(&Transformation{}) {
 				request.Value = oldRequest.Value
@@ -843,6 +857,8 @@ func (db *RedisDatabase) UnnotifyCallback(e string, c INotificationCallback) {
 }
 
 func (db *RedisDatabase) ProcessNotifications() {
+	db.transformer.ProcessPending()
+
 	r, err := db.client.XRead(context.Background(), &redis.XReadArgs{
 		Streams: []string{db.keygen.GetNotificationChannelKey(db.getServiceId()), db.lastStreamMessageId},
 		Count:   1000,

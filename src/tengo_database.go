@@ -1,7 +1,9 @@
 package qdb
 
 import (
+	"container/heap"
 	"errors"
+	"time"
 
 	"github.com/d5/tengo/v2"
 )
@@ -61,14 +63,70 @@ type ITengoDatabase interface {
 	ToTengoMap() tengo.Object
 	GetEntity(...tengo.Object) (tengo.Object, error)
 	Find(...tengo.Object) (tengo.Object, error)
+	Schedule(...tengo.Object) (tengo.Object, error)
+	PopAvailableJobs() []*TengoJob
+}
+
+type TengoJob struct {
+	task     *tengo.UserFunction
+	deadline time.Time
+	index    int
+}
+
+type JobQueue []*TengoJob
+
+// Len returns the length of the queue.
+func (pq JobQueue) Len() int { return len(pq) }
+
+// Less compares two items based on their timestamps (earlier timestamp = higher priority).
+func (pq JobQueue) Less(i, j int) bool {
+	return pq[i].deadline.Before(pq[j].deadline)
+}
+
+// Swap swaps the elements at the specified indices.
+func (pq JobQueue) Swap(i, j int) {
+	pq[i], pq[j] = pq[j], pq[i]
+	pq[i].index = i
+	pq[j].index = j
+}
+
+// Push adds an element to the queue.
+func (pq *JobQueue) Push(x any) {
+	n := len(*pq)
+	item := x.(*TengoJob)
+	item.index = n
+	*pq = append(*pq, item)
+}
+
+// Pop removes the highest-priority element from the queue.
+func (pq *JobQueue) Pop() any {
+	old := *pq
+	n := len(old)
+	job := old[n-1]
+	old[n-1] = nil // Avoid memory leak.
+	job.index = -1
+	*pq = old[0 : n-1]
+	return job
+}
+
+// update modifies the timestamp and value of an Item in the queue.
+func (pq *JobQueue) update(job *TengoJob, task *tengo.UserFunction, deadline time.Time) {
+	job.task = task
+	job.deadline = deadline
+	heap.Fix(pq, job.index)
 }
 
 type TengoDatabase struct {
-	db IDatabase
+	db   IDatabase
+	jobs JobQueue
 }
 
 func NewTengoDatabase(db IDatabase) ITengoDatabase {
-	return &TengoDatabase{db: db}
+	tdb := &TengoDatabase{db: db}
+
+	heap.Init(&tdb.jobs)
+
+	return tdb
 }
 
 func NewTengoEntity(entity IEntity) ITengoEntity {
@@ -85,6 +143,14 @@ func (tdb *TengoDatabase) ToTengoMap() tengo.Object {
 			"getEntity": &tengo.UserFunction{
 				Name:  "getEntity",
 				Value: tdb.GetEntity,
+			},
+			"find": &tengo.UserFunction{
+				Name:  "find",
+				Value: tdb.Find,
+			},
+			"schedule": &tengo.UserFunction{
+				Name:  "schedule",
+				Value: tdb.Schedule,
 			},
 		},
 	}
@@ -159,6 +225,48 @@ func (tdb *TengoDatabase) Find(args ...tengo.Object) (tengo.Object, error) {
 	}
 
 	return &tengo.Array{Value: resultEntities}, nil
+}
+
+func (tdb *TengoDatabase) Schedule(args ...tengo.Object) (tengo.Object, error) {
+	if len(args) < 1 {
+		return tengo.UndefinedValue, tengo.ErrWrongNumArguments
+	}
+
+	fn, ok := args[0].(*tengo.UserFunction)
+	if !ok {
+		return tengo.UndefinedValue, &tengo.ErrInvalidArgumentType{
+			Name:     "fn",
+			Expected: "function",
+			Found:    args[0].TypeName(),
+		}
+	}
+
+	deadline, ok := args[1].(*tengo.Time)
+	if !ok {
+		return tengo.UndefinedValue, &tengo.ErrInvalidArgumentType{
+			Name:     "deadline",
+			Expected: "time",
+			Found:    args[1].TypeName(),
+		}
+	}
+
+	heap.Push(&tdb.jobs, &TengoJob{task: fn, deadline: deadline.Value})
+
+	return tengo.UndefinedValue, nil
+}
+
+func (tdb *TengoDatabase) PopAvailableJobs() []*TengoJob {
+	now := time.Now()
+	availableJobs := make([]*TengoJob, 0)
+	for tdb.jobs.Len() > 0 {
+		if tdb.jobs[0].deadline.After(now) {
+			break
+		}
+
+		availableJobs = append(availableJobs, heap.Pop(&tdb.jobs).(*TengoJob))
+	}
+
+	return availableJobs
 }
 
 func (te *TengoEntity) ToTengoMap() tengo.Object {
