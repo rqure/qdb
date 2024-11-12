@@ -744,6 +744,11 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 		// executed by the transformer, which will write the result to the database.
 		if oldRequest.Success && oldRequest.Value.MessageIs(&Transformation{}) {
 			t := ValueCast[*Transformation](oldRequest.Value)
+
+			if !request.Value.MessageIs(&Transformation{}) {
+				t = ValueCast[*Transformation](request.Value)
+			}
+
 			f := NewField(db, request.Id, request.Field)
 			f.req = request
 			db.transformer.Transform(t, f)
