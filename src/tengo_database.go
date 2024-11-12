@@ -110,7 +110,7 @@ func (pq *JobQueue) Pop() any {
 }
 
 // update modifies the timestamp and value of an Item in the queue.
-func (pq *JobQueue) update(job *TengoJob, task *tengo.UserFunction, deadline time.Time) {
+func (pq *JobQueue) Update(job *TengoJob, task *tengo.UserFunction, deadline time.Time) {
 	job.task = task
 	job.deadline = deadline
 	heap.Fix(pq, job.index)
