@@ -744,20 +744,17 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 		// Note that for a transformation, we don't actually write the value to the database
 		// unless the new value is a transformation. This is because the transformation is
 		// executed by the transformer, which will write the result to the database.
-		if oldRequest.Success && oldRequest.Value.MessageIs(&Transformation{}) {
-			t := ValueCast[*Transformation](oldRequest.Value)
-
-			if request.Value.MessageIs(&Transformation{}) {
-				t = ValueCast[*Transformation](request.Value)
+		if oldRequest.Success && oldRequest.Value.MessageIs(&Transformation{}) && !request.Value.MessageIs(&Transformation{}) {
+			transformation := ValueCast[*Transformation](oldRequest.Value)
+			field := NewField(db, request.Id, request.Field)
+			field.req = &DatabaseRequest{
+				Id:      request.Id,
+				Field:   request.Field,
+				Value:   request.Value,
+				Success: true,
 			}
-
-			f := NewField(db, request.Id, request.Field)
-			f.req = request
-			db.transformer.Transform(t, f)
-
-			if !request.Value.MessageIs(&Transformation{}) {
-				request.Value = oldRequest.Value
-			}
+			db.transformer.Transform(transformation, field)
+			request.Value = oldRequest.Value
 		}
 
 		p := new(DatabaseField).FromRequest(request)
