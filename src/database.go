@@ -18,6 +18,11 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
+type SortedSetMember struct {
+	Score  float64
+	Member string
+}
+
 type IDatabase interface {
 	Connect()
 	Disconnect()
@@ -51,12 +56,16 @@ type IDatabase interface {
 	TempGet(key string) string
 	TempExpire(key string, expiration time.Duration)
 	TempDel(key string)
-	TempScan(key string) []string
 
 	Notify(config *DatabaseNotificationConfig, callback INotificationCallback) INotificationToken
 	Unnotify(subscriptionId string)
 	UnnotifyCallback(subscriptionId string, callback INotificationCallback)
 	ProcessNotifications()
+
+	SortedSetAdd(key string, member string, score float64) int64
+	SortedSetRemove(key string, member string) int64
+	SortedSetRemoveRangeByRank(key string, start, stop int64) int64
+	SortedSetRangeByScoreWithScores(key string, min, max string) []SortedSetMember
 }
 
 type INotificationCallback interface {
@@ -486,22 +495,21 @@ func (db *RedisDatabase) EntityExists(entityId string) bool {
 	return e != ""
 }
 
-func (db *RedisDatabase) FieldExists(fieldName, entityTypeOrId string) bool {
-	if !strings.Contains(entityTypeOrId, "-") {
-		schema := db.GetEntitySchema(entityTypeOrId)
+func (db *RedisDatabase) FieldExists(fieldName, entityType string) bool {
+	if !strings.Contains(entityType, "-") {
+		schema := db.GetEntitySchema(entityType)
 		if schema != nil {
 			for _, field := range schema.Fields {
 				if field == fieldName {
 					return true
 				}
 			}
-
 			return false
 		}
 	}
 
 	request := &DatabaseRequest{
-		Id:    entityTypeOrId,
+		Id:    entityType,
 		Field: fieldName,
 	}
 	db.Read([]*DatabaseRequest{request})
@@ -1163,13 +1171,51 @@ func (db *RedisDatabase) TempDel(key string) {
 	db.client.Del(context.Background(), key)
 }
 
-func (db *RedisDatabase) TempScan(key string) []string {
-	it := db.client.Scan(context.Background(), 0, key, 0).Iterator()
-	keys := []string{}
-
-	for it.Next(context.Background()) {
-		keys = append(keys, it.Val())
+func (db *RedisDatabase) SortedSetAdd(key string, member string, score float64) int64 {
+	result, err := db.client.ZAdd(context.Background(), key, redis.Z{
+		Score:  score,
+		Member: member,
+	}).Result()
+	if err != nil {
+		Error("[RedisDatabase::SortedSetAdd] Failed to add member to sorted set: %v", err)
+		return 0
 	}
+	return result
+}
 
-	return keys
+func (db *RedisDatabase) SortedSetRemove(key string, member string) int64 {
+	result, err := db.client.ZRem(context.Background(), key, member).Result()
+	if err != nil {
+		Error("[RedisDatabase::SortedSetRemove] Failed to remove member from sorted set: %v", err)
+		return 0
+	}
+	return result
+}
+
+func (db *RedisDatabase) SortedSetRemoveRangeByRank(key string, start, stop int64) int64 {
+	result, err := db.client.ZRemRangeByRank(context.Background(), key, start, stop).Result()
+	if err != nil {
+		Error("[RedisDatabase::SortedSetRemoveRangeByRank] Failed to remove range from sorted set: %v", err)
+		return 0
+	}
+	return result
+}
+
+func (db *RedisDatabase) SortedSetRangeByScoreWithScores(key string, min, max string) []SortedSetMember {
+	result, err := db.client.ZRangeByScoreWithScores(context.Background(), key, &redis.ZRangeBy{
+		Min: min,
+		Max: max,
+	}).Result()
+	if err != nil {
+		Error("[RedisDatabase::SortedSetRangeByScoreWithScores] Failed to get range from sorted set: %v", err)
+		return nil
+	}
+	members := make([]SortedSetMember, len(result))
+	for i, z := range result {
+		members[i] = SortedSetMember{
+			Score:  z.Score,
+			Member: z.Member.(string),
+		}
+	}
+	return members
 }
