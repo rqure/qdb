@@ -11,17 +11,18 @@ type DatabaseWorkerSignals struct {
 type DatabaseWorker struct {
 	Signals DatabaseWorkerSignals
 
-	db                      IDatabase
-	connectionState         ConnectionState_ConnectionStateEnum
-	lastConnectionCheckTime time.Time
-	notificationTokens      []INotificationToken
+	db                    IDatabase
+	connectionState       ConnectionState_ConnectionStateEnum
+	connectionCheckTicker *time.Ticker
+	notificationTokens    []INotificationToken
 }
 
 func NewDatabaseWorker(db IDatabase) *DatabaseWorker {
 	return &DatabaseWorker{
-		db:                 db,
-		connectionState:    ConnectionState_DISCONNECTED,
-		notificationTokens: []INotificationToken{},
+		db:                    db,
+		connectionState:       ConnectionState_DISCONNECTED,
+		notificationTokens:    []INotificationToken{},
+		connectionCheckTicker: time.NewTicker(5 * time.Second),
 	}
 }
 
@@ -34,15 +35,15 @@ func (w *DatabaseWorker) Deinit() {
 }
 
 func (w *DatabaseWorker) DoWork() {
-	currentTime := time.Now()
-	if currentTime.After(w.lastConnectionCheckTime.Add(5 * time.Second)) {
+	select {
+	case <-w.connectionCheckTicker.C:
 		w.setConnectionStatus(w.db.IsConnected())
-		w.lastConnectionCheckTime = currentTime
 
 		if w.connectionState != ConnectionState_CONNECTED {
 			w.db.Connect()
 			return
 		}
+	default:
 	}
 
 	w.db.ProcessNotifications()
