@@ -345,23 +345,3 @@ message LogMessage {
     string message = 3;
     google.protobuf.Timestamp timestamp = 4;
 }
-
-message GarageDoorState {
-    enum GarageDoorStateEnum {
-        UNSPECIFIED = 0;
-        OPENED = 1;
-        CLOSED = 2;
-    }
-
-    GarageDoorStateEnum raw = 1;
-}
-
-message ConnectionState {
-    enum ConnectionStateEnum {
-        UNSPECIFIED = 0;
-        CONNECTED = 1;
-        DISCONNECTED = 2;
-    }
-
-    ConnectionStateEnum raw = 1;
-}
