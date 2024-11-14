@@ -44,6 +44,7 @@ type LeaderElectionWorkerSignals struct {
 // ILeaderState interface defines the behavior for each state
 type ILeaderState interface {
 	DoWork(w *LeaderElectionWorker)
+	OnEnterState(w *LeaderElectionWorker, previousState ILeaderState)
 	Name() LeaderStates
 }
 
@@ -81,6 +82,15 @@ func (s *unavailableState) DoWork(w *LeaderElectionWorker) {
 	}
 }
 
+func (s *unavailableState) OnEnterState(w *LeaderElectionWorker, previousState ILeaderState) {
+	wasLeader := previousState != nil && previousState.Name() == Leader
+	if wasLeader {
+		w.Signals.LosingLeadership.Emit()
+	}
+
+	w.Signals.BecameUnavailable.Emit()
+}
+
 type followerState struct {
 	baseState
 }
@@ -115,6 +125,19 @@ func (s *followerState) DoWork(w *LeaderElectionWorker) {
 	}
 }
 
+func (s *followerState) OnEnterState(w *LeaderElectionWorker, previousState ILeaderState) {
+	wasLeader := previousState != nil && previousState.Name() == Leader
+	if wasLeader {
+		w.Signals.LosingLeadership.Emit()
+	}
+
+	w.Signals.BecameFollower.Emit()
+
+	if w.tryBecomeLeader() {
+		w.setState(newLeaderState())
+	}
+}
+
 type leaderState struct {
 	baseState
 }
@@ -146,6 +169,10 @@ func (s *leaderState) DoWork(w *LeaderElectionWorker) {
 			return
 		}
 	}
+}
+
+func (s *leaderState) OnEnterState(w *LeaderElectionWorker, previousState ILeaderState) {
+	w.Signals.BecameLeader.Emit()
 }
 
 // Modify LeaderElectionWorker struct
@@ -234,23 +261,9 @@ func (w *LeaderElectionWorker) setState(newState ILeaderState) {
 		return
 	}
 
-	wasLeader := w.currentState != nil && w.currentState.Name() == Leader
+	previousState := w.currentState
 	w.currentState = newState
-
-	switch newState.Name() {
-	case Leader:
-		w.Signals.BecameLeader.Emit()
-	case Follower:
-		if wasLeader {
-			w.Signals.LosingLeadership.Emit()
-		}
-		w.Signals.BecameFollower.Emit()
-	case Unavailable:
-		if wasLeader {
-			w.Signals.LosingLeadership.Emit()
-		}
-		w.Signals.BecameUnavailable.Emit()
-	}
+	w.currentState.OnEnterState(w, previousState)
 }
 
 func (w *LeaderElectionWorker) isAvailable() bool {
