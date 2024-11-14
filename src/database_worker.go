@@ -39,14 +39,16 @@ func (w *DatabaseWorker) DoWork() {
 	case <-w.connectionCheckTicker.C:
 		w.setConnectionStatus(w.db.IsConnected())
 
-		if w.connectionState != ConnectionState_CONNECTED {
+		if !w.IsConnected() {
 			w.db.Connect()
 			return
 		}
 	default:
 	}
 
-	w.db.ProcessNotifications()
+	if w.IsConnected() {
+		w.db.ProcessNotifications()
+	}
 }
 
 func (w *DatabaseWorker) onDatabaseConnected() {
