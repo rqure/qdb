@@ -671,55 +671,6 @@ func (LogMessage_LogLevelEnum) EnumDescriptor() ([]byte, []int) {
 	return file_src_protobufs_proto_rawDescGZIP(), []int{54, 0}
 }
 
-type GarageDoorState_GarageDoorStateEnum int32
-
-const (
-	GarageDoorState_UNSPECIFIED GarageDoorState_GarageDoorStateEnum = 0
-	GarageDoorState_OPENED      GarageDoorState_GarageDoorStateEnum = 1
-	GarageDoorState_CLOSED      GarageDoorState_GarageDoorStateEnum = 2
-)
-
-// Enum value maps for GarageDoorState_GarageDoorStateEnum.
-var (
-	GarageDoorState_GarageDoorStateEnum_name = map[int32]string{
-		0: "UNSPECIFIED",
-		1: "OPENED",
-		2: "CLOSED",
-	}
-	GarageDoorState_GarageDoorStateEnum_value = map[string]int32{
-		"UNSPECIFIED": 0,
-		"OPENED":      1,
-		"CLOSED":      2,
-	}
-)
-
-func (x GarageDoorState_GarageDoorStateEnum) Enum() *GarageDoorState_GarageDoorStateEnum {
-	p := new(GarageDoorState_GarageDoorStateEnum)
-	*p = x
-	return p
-}
-
-func (x GarageDoorState_GarageDoorStateEnum) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (GarageDoorState_GarageDoorStateEnum) Descriptor() protoreflect.EnumDescriptor {
-	return file_src_protobufs_proto_enumTypes[13].Descriptor()
-}
-
-func (GarageDoorState_GarageDoorStateEnum) Type() protoreflect.EnumType {
-	return &file_src_protobufs_proto_enumTypes[13]
-}
-
-func (x GarageDoorState_GarageDoorStateEnum) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use GarageDoorState_GarageDoorStateEnum.Descriptor instead.
-func (GarageDoorState_GarageDoorStateEnum) EnumDescriptor() ([]byte, []int) {
-	return file_src_protobufs_proto_rawDescGZIP(), []int{55, 0}
-}
-
 type ConnectionState_ConnectionStateEnum int32
 
 const (
@@ -753,11 +704,11 @@ func (x ConnectionState_ConnectionStateEnum) String() string {
 }
 
 func (ConnectionState_ConnectionStateEnum) Descriptor() protoreflect.EnumDescriptor {
-	return file_src_protobufs_proto_enumTypes[14].Descriptor()
+	return file_src_protobufs_proto_enumTypes[13].Descriptor()
 }
 
 func (ConnectionState_ConnectionStateEnum) Type() protoreflect.EnumType {
-	return &file_src_protobufs_proto_enumTypes[14]
+	return &file_src_protobufs_proto_enumTypes[13]
 }
 
 func (x ConnectionState_ConnectionStateEnum) Number() protoreflect.EnumNumber {
@@ -766,7 +717,7 @@ func (x ConnectionState_ConnectionStateEnum) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ConnectionState_ConnectionStateEnum.Descriptor instead.
 func (ConnectionState_ConnectionStateEnum) EnumDescriptor() ([]byte, []int) {
-	return file_src_protobufs_proto_rawDescGZIP(), []int{56, 0}
+	return file_src_protobufs_proto_rawDescGZIP(), []int{55, 0}
 }
 
 type WebHeader struct {
@@ -3526,51 +3477,6 @@ func (x *LogMessage) GetTimestamp() *timestamppb.Timestamp {
 	return nil
 }
 
-type GarageDoorState struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Raw GarageDoorState_GarageDoorStateEnum `protobuf:"varint,1,opt,name=raw,proto3,enum=qdb.GarageDoorState_GarageDoorStateEnum" json:"raw,omitempty"`
-}
-
-func (x *GarageDoorState) Reset() {
-	*x = GarageDoorState{}
-	mi := &file_src_protobufs_proto_msgTypes[55]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GarageDoorState) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GarageDoorState) ProtoMessage() {}
-
-func (x *GarageDoorState) ProtoReflect() protoreflect.Message {
-	mi := &file_src_protobufs_proto_msgTypes[55]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GarageDoorState.ProtoReflect.Descriptor instead.
-func (*GarageDoorState) Descriptor() ([]byte, []int) {
-	return file_src_protobufs_proto_rawDescGZIP(), []int{55}
-}
-
-func (x *GarageDoorState) GetRaw() GarageDoorState_GarageDoorStateEnum {
-	if x != nil {
-		return x.Raw
-	}
-	return GarageDoorState_UNSPECIFIED
-}
-
 type ConnectionState struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3581,7 +3487,7 @@ type ConnectionState struct {
 
 func (x *ConnectionState) Reset() {
 	*x = ConnectionState{}
-	mi := &file_src_protobufs_proto_msgTypes[56]
+	mi := &file_src_protobufs_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3593,7 +3499,7 @@ func (x *ConnectionState) String() string {
 func (*ConnectionState) ProtoMessage() {}
 
 func (x *ConnectionState) ProtoReflect() protoreflect.Message {
-	mi := &file_src_protobufs_proto_msgTypes[56]
+	mi := &file_src_protobufs_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3606,7 +3512,7 @@ func (x *ConnectionState) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConnectionState.ProtoReflect.Descriptor instead.
 func (*ConnectionState) Descriptor() ([]byte, []int) {
-	return file_src_protobufs_proto_rawDescGZIP(), []int{56}
+	return file_src_protobufs_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *ConnectionState) GetRaw() ConnectionState_ConnectionStateEnum {
@@ -3996,16 +3902,7 @@ var file_src_protobufs_proto_rawDesc = []byte{
 	0x41, 0x43, 0x45, 0x10, 0x01, 0x12, 0x09, 0x0a, 0x05, 0x44, 0x45, 0x42, 0x55, 0x47, 0x10, 0x02,
 	0x12, 0x08, 0x0a, 0x04, 0x49, 0x4e, 0x46, 0x4f, 0x10, 0x03, 0x12, 0x08, 0x0a, 0x04, 0x57, 0x41,
 	0x52, 0x4e, 0x10, 0x04, 0x12, 0x09, 0x0a, 0x05, 0x45, 0x52, 0x52, 0x4f, 0x52, 0x10, 0x05, 0x12,
-	0x09, 0x0a, 0x05, 0x50, 0x41, 0x4e, 0x49, 0x43, 0x10, 0x06, 0x22, 0x8d, 0x01, 0x0a, 0x0f, 0x47,
-	0x61, 0x72, 0x61, 0x67, 0x65, 0x44, 0x6f, 0x6f, 0x72, 0x53, 0x74, 0x61, 0x74, 0x65, 0x12, 0x3a,
-	0x0a, 0x03, 0x72, 0x61, 0x77, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x28, 0x2e, 0x71, 0x64,
-	0x62, 0x2e, 0x47, 0x61, 0x72, 0x61, 0x67, 0x65, 0x44, 0x6f, 0x6f, 0x72, 0x53, 0x74, 0x61, 0x74,
-	0x65, 0x2e, 0x47, 0x61, 0x72, 0x61, 0x67, 0x65, 0x44, 0x6f, 0x6f, 0x72, 0x53, 0x74, 0x61, 0x74,
-	0x65, 0x45, 0x6e, 0x75, 0x6d, 0x52, 0x03, 0x72, 0x61, 0x77, 0x22, 0x3e, 0x0a, 0x13, 0x47, 0x61,
-	0x72, 0x61, 0x67, 0x65, 0x44, 0x6f, 0x6f, 0x72, 0x53, 0x74, 0x61, 0x74, 0x65, 0x45, 0x6e, 0x75,
-	0x6d, 0x12, 0x0f, 0x0a, 0x0b, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44,
-	0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06, 0x4f, 0x50, 0x45, 0x4e, 0x45, 0x44, 0x10, 0x01, 0x12, 0x0a,
-	0x0a, 0x06, 0x43, 0x4c, 0x4f, 0x53, 0x45, 0x44, 0x10, 0x02, 0x22, 0x96, 0x01, 0x0a, 0x0f, 0x43,
+	0x09, 0x0a, 0x05, 0x50, 0x41, 0x4e, 0x49, 0x43, 0x10, 0x06, 0x22, 0x96, 0x01, 0x0a, 0x0f, 0x43,
 	0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x61, 0x74, 0x65, 0x12, 0x3a,
 	0x0a, 0x03, 0x72, 0x61, 0x77, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x28, 0x2e, 0x71, 0x64,
 	0x62, 0x2e, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x61, 0x74,
@@ -4031,8 +3928,8 @@ func file_src_protobufs_proto_rawDescGZIP() []byte {
 	return file_src_protobufs_proto_rawDescData
 }
 
-var file_src_protobufs_proto_enumTypes = make([]protoimpl.EnumInfo, 15)
-var file_src_protobufs_proto_msgTypes = make([]protoimpl.MessageInfo, 57)
+var file_src_protobufs_proto_enumTypes = make([]protoimpl.EnumInfo, 14)
+var file_src_protobufs_proto_msgTypes = make([]protoimpl.MessageInfo, 56)
 var file_src_protobufs_proto_goTypes = []any{
 	(WebHeader_AuthenticationStatusEnum)(0),                  // 0: qdb.WebHeader.AuthenticationStatusEnum
 	(WebConfigCreateEntityResponse_StatusEnum)(0),            // 1: qdb.WebConfigCreateEntityResponse.StatusEnum
@@ -4047,120 +3944,117 @@ var file_src_protobufs_proto_goTypes = []any{
 	(WebRuntimeDatabaseRequest_RequestTypeEnum)(0),           // 10: qdb.WebRuntimeDatabaseRequest.RequestTypeEnum
 	(WebRuntimeUnregisterNotificationResponse_StatusEnum)(0), // 11: qdb.WebRuntimeUnregisterNotificationResponse.StatusEnum
 	(LogMessage_LogLevelEnum)(0),                             // 12: qdb.LogMessage.LogLevelEnum
-	(GarageDoorState_GarageDoorStateEnum)(0),                 // 13: qdb.GarageDoorState.GarageDoorStateEnum
-	(ConnectionState_ConnectionStateEnum)(0),                 // 14: qdb.ConnectionState.ConnectionStateEnum
-	(*WebHeader)(nil),                                        // 15: qdb.WebHeader
-	(*WebMessage)(nil),                                       // 16: qdb.WebMessage
-	(*WebConfigCreateEntityRequest)(nil),                     // 17: qdb.WebConfigCreateEntityRequest
-	(*WebConfigCreateEntityResponse)(nil),                    // 18: qdb.WebConfigCreateEntityResponse
-	(*WebConfigDeleteEntityRequest)(nil),                     // 19: qdb.WebConfigDeleteEntityRequest
-	(*WebConfigDeleteEntityResponse)(nil),                    // 20: qdb.WebConfigDeleteEntityResponse
-	(*WebConfigGetEntityTypesRequest)(nil),                   // 21: qdb.WebConfigGetEntityTypesRequest
-	(*WebConfigGetEntityTypesResponse)(nil),                  // 22: qdb.WebConfigGetEntityTypesResponse
-	(*WebConfigGetEntityRequest)(nil),                        // 23: qdb.WebConfigGetEntityRequest
-	(*WebConfigGetEntityResponse)(nil),                       // 24: qdb.WebConfigGetEntityResponse
-	(*WebConfigGetFieldSchemaRequest)(nil),                   // 25: qdb.WebConfigGetFieldSchemaRequest
-	(*WebConfigGetFieldSchemaResponse)(nil),                  // 26: qdb.WebConfigGetFieldSchemaResponse
-	(*WebConfigSetFieldSchemaRequest)(nil),                   // 27: qdb.WebConfigSetFieldSchemaRequest
-	(*WebConfigSetFieldSchemaResponse)(nil),                  // 28: qdb.WebConfigSetFieldSchemaResponse
-	(*WebConfigGetEntitySchemaRequest)(nil),                  // 29: qdb.WebConfigGetEntitySchemaRequest
-	(*WebConfigGetEntitySchemaResponse)(nil),                 // 30: qdb.WebConfigGetEntitySchemaResponse
-	(*WebConfigSetEntitySchemaRequest)(nil),                  // 31: qdb.WebConfigSetEntitySchemaRequest
-	(*WebConfigSetEntitySchemaResponse)(nil),                 // 32: qdb.WebConfigSetEntitySchemaResponse
-	(*WebConfigCreateSnapshotRequest)(nil),                   // 33: qdb.WebConfigCreateSnapshotRequest
-	(*WebConfigCreateSnapshotResponse)(nil),                  // 34: qdb.WebConfigCreateSnapshotResponse
-	(*WebConfigRestoreSnapshotRequest)(nil),                  // 35: qdb.WebConfigRestoreSnapshotRequest
-	(*WebConfigRestoreSnapshotResponse)(nil),                 // 36: qdb.WebConfigRestoreSnapshotResponse
-	(*WebConfigGetRootRequest)(nil),                          // 37: qdb.WebConfigGetRootRequest
-	(*WebConfigGetRootResponse)(nil),                         // 38: qdb.WebConfigGetRootResponse
-	(*WebConfigGetAllFieldsRequest)(nil),                     // 39: qdb.WebConfigGetAllFieldsRequest
-	(*WebConfigGetAllFieldsResponse)(nil),                    // 40: qdb.WebConfigGetAllFieldsResponse
-	(*WebRuntimeDatabaseRequest)(nil),                        // 41: qdb.WebRuntimeDatabaseRequest
-	(*WebRuntimeDatabaseResponse)(nil),                       // 42: qdb.WebRuntimeDatabaseResponse
-	(*WebRuntimeRegisterNotificationRequest)(nil),            // 43: qdb.WebRuntimeRegisterNotificationRequest
-	(*WebRuntimeRegisterNotificationResponse)(nil),           // 44: qdb.WebRuntimeRegisterNotificationResponse
-	(*WebRuntimeGetNotificationsRequest)(nil),                // 45: qdb.WebRuntimeGetNotificationsRequest
-	(*WebRuntimeGetNotificationsResponse)(nil),               // 46: qdb.WebRuntimeGetNotificationsResponse
-	(*WebRuntimeUnregisterNotificationRequest)(nil),          // 47: qdb.WebRuntimeUnregisterNotificationRequest
-	(*WebRuntimeUnregisterNotificationResponse)(nil),         // 48: qdb.WebRuntimeUnregisterNotificationResponse
-	(*WebRuntimeGetDatabaseConnectionStatusRequest)(nil),     // 49: qdb.WebRuntimeGetDatabaseConnectionStatusRequest
-	(*WebRuntimeGetDatabaseConnectionStatusResponse)(nil),    // 50: qdb.WebRuntimeGetDatabaseConnectionStatusResponse
-	(*WebRuntimeGetEntitiesRequest)(nil),                     // 51: qdb.WebRuntimeGetEntitiesRequest
-	(*WebRuntimeGetEntitiesResponse)(nil),                    // 52: qdb.WebRuntimeGetEntitiesResponse
-	(*DatabaseEntity)(nil),                                   // 53: qdb.DatabaseEntity
-	(*DatabaseField)(nil),                                    // 54: qdb.DatabaseField
-	(*DatabaseNotificationConfig)(nil),                       // 55: qdb.DatabaseNotificationConfig
-	(*DatabaseNotification)(nil),                             // 56: qdb.DatabaseNotification
-	(*DatabaseEntitySchema)(nil),                             // 57: qdb.DatabaseEntitySchema
-	(*DatabaseFieldSchema)(nil),                              // 58: qdb.DatabaseFieldSchema
-	(*DatabaseRequest)(nil),                                  // 59: qdb.DatabaseRequest
-	(*DatabaseSnapshot)(nil),                                 // 60: qdb.DatabaseSnapshot
-	(*Int)(nil),                                              // 61: qdb.Int
-	(*String)(nil),                                           // 62: qdb.String
-	(*Timestamp)(nil),                                        // 63: qdb.Timestamp
-	(*Float)(nil),                                            // 64: qdb.Float
-	(*Bool)(nil),                                             // 65: qdb.Bool
-	(*EntityReference)(nil),                                  // 66: qdb.EntityReference
-	(*BinaryFile)(nil),                                       // 67: qdb.BinaryFile
-	(*Transformation)(nil),                                   // 68: qdb.Transformation
-	(*LogMessage)(nil),                                       // 69: qdb.LogMessage
-	(*GarageDoorState)(nil),                                  // 70: qdb.GarageDoorState
-	(*ConnectionState)(nil),                                  // 71: qdb.ConnectionState
-	(*timestamppb.Timestamp)(nil),                            // 72: google.protobuf.Timestamp
-	(*anypb.Any)(nil),                                        // 73: google.protobuf.Any
+	(ConnectionState_ConnectionStateEnum)(0),                 // 13: qdb.ConnectionState.ConnectionStateEnum
+	(*WebHeader)(nil),                                        // 14: qdb.WebHeader
+	(*WebMessage)(nil),                                       // 15: qdb.WebMessage
+	(*WebConfigCreateEntityRequest)(nil),                     // 16: qdb.WebConfigCreateEntityRequest
+	(*WebConfigCreateEntityResponse)(nil),                    // 17: qdb.WebConfigCreateEntityResponse
+	(*WebConfigDeleteEntityRequest)(nil),                     // 18: qdb.WebConfigDeleteEntityRequest
+	(*WebConfigDeleteEntityResponse)(nil),                    // 19: qdb.WebConfigDeleteEntityResponse
+	(*WebConfigGetEntityTypesRequest)(nil),                   // 20: qdb.WebConfigGetEntityTypesRequest
+	(*WebConfigGetEntityTypesResponse)(nil),                  // 21: qdb.WebConfigGetEntityTypesResponse
+	(*WebConfigGetEntityRequest)(nil),                        // 22: qdb.WebConfigGetEntityRequest
+	(*WebConfigGetEntityResponse)(nil),                       // 23: qdb.WebConfigGetEntityResponse
+	(*WebConfigGetFieldSchemaRequest)(nil),                   // 24: qdb.WebConfigGetFieldSchemaRequest
+	(*WebConfigGetFieldSchemaResponse)(nil),                  // 25: qdb.WebConfigGetFieldSchemaResponse
+	(*WebConfigSetFieldSchemaRequest)(nil),                   // 26: qdb.WebConfigSetFieldSchemaRequest
+	(*WebConfigSetFieldSchemaResponse)(nil),                  // 27: qdb.WebConfigSetFieldSchemaResponse
+	(*WebConfigGetEntitySchemaRequest)(nil),                  // 28: qdb.WebConfigGetEntitySchemaRequest
+	(*WebConfigGetEntitySchemaResponse)(nil),                 // 29: qdb.WebConfigGetEntitySchemaResponse
+	(*WebConfigSetEntitySchemaRequest)(nil),                  // 30: qdb.WebConfigSetEntitySchemaRequest
+	(*WebConfigSetEntitySchemaResponse)(nil),                 // 31: qdb.WebConfigSetEntitySchemaResponse
+	(*WebConfigCreateSnapshotRequest)(nil),                   // 32: qdb.WebConfigCreateSnapshotRequest
+	(*WebConfigCreateSnapshotResponse)(nil),                  // 33: qdb.WebConfigCreateSnapshotResponse
+	(*WebConfigRestoreSnapshotRequest)(nil),                  // 34: qdb.WebConfigRestoreSnapshotRequest
+	(*WebConfigRestoreSnapshotResponse)(nil),                 // 35: qdb.WebConfigRestoreSnapshotResponse
+	(*WebConfigGetRootRequest)(nil),                          // 36: qdb.WebConfigGetRootRequest
+	(*WebConfigGetRootResponse)(nil),                         // 37: qdb.WebConfigGetRootResponse
+	(*WebConfigGetAllFieldsRequest)(nil),                     // 38: qdb.WebConfigGetAllFieldsRequest
+	(*WebConfigGetAllFieldsResponse)(nil),                    // 39: qdb.WebConfigGetAllFieldsResponse
+	(*WebRuntimeDatabaseRequest)(nil),                        // 40: qdb.WebRuntimeDatabaseRequest
+	(*WebRuntimeDatabaseResponse)(nil),                       // 41: qdb.WebRuntimeDatabaseResponse
+	(*WebRuntimeRegisterNotificationRequest)(nil),            // 42: qdb.WebRuntimeRegisterNotificationRequest
+	(*WebRuntimeRegisterNotificationResponse)(nil),           // 43: qdb.WebRuntimeRegisterNotificationResponse
+	(*WebRuntimeGetNotificationsRequest)(nil),                // 44: qdb.WebRuntimeGetNotificationsRequest
+	(*WebRuntimeGetNotificationsResponse)(nil),               // 45: qdb.WebRuntimeGetNotificationsResponse
+	(*WebRuntimeUnregisterNotificationRequest)(nil),          // 46: qdb.WebRuntimeUnregisterNotificationRequest
+	(*WebRuntimeUnregisterNotificationResponse)(nil),         // 47: qdb.WebRuntimeUnregisterNotificationResponse
+	(*WebRuntimeGetDatabaseConnectionStatusRequest)(nil),     // 48: qdb.WebRuntimeGetDatabaseConnectionStatusRequest
+	(*WebRuntimeGetDatabaseConnectionStatusResponse)(nil),    // 49: qdb.WebRuntimeGetDatabaseConnectionStatusResponse
+	(*WebRuntimeGetEntitiesRequest)(nil),                     // 50: qdb.WebRuntimeGetEntitiesRequest
+	(*WebRuntimeGetEntitiesResponse)(nil),                    // 51: qdb.WebRuntimeGetEntitiesResponse
+	(*DatabaseEntity)(nil),                                   // 52: qdb.DatabaseEntity
+	(*DatabaseField)(nil),                                    // 53: qdb.DatabaseField
+	(*DatabaseNotificationConfig)(nil),                       // 54: qdb.DatabaseNotificationConfig
+	(*DatabaseNotification)(nil),                             // 55: qdb.DatabaseNotification
+	(*DatabaseEntitySchema)(nil),                             // 56: qdb.DatabaseEntitySchema
+	(*DatabaseFieldSchema)(nil),                              // 57: qdb.DatabaseFieldSchema
+	(*DatabaseRequest)(nil),                                  // 58: qdb.DatabaseRequest
+	(*DatabaseSnapshot)(nil),                                 // 59: qdb.DatabaseSnapshot
+	(*Int)(nil),                                              // 60: qdb.Int
+	(*String)(nil),                                           // 61: qdb.String
+	(*Timestamp)(nil),                                        // 62: qdb.Timestamp
+	(*Float)(nil),                                            // 63: qdb.Float
+	(*Bool)(nil),                                             // 64: qdb.Bool
+	(*EntityReference)(nil),                                  // 65: qdb.EntityReference
+	(*BinaryFile)(nil),                                       // 66: qdb.BinaryFile
+	(*Transformation)(nil),                                   // 67: qdb.Transformation
+	(*LogMessage)(nil),                                       // 68: qdb.LogMessage
+	(*ConnectionState)(nil),                                  // 69: qdb.ConnectionState
+	(*timestamppb.Timestamp)(nil),                            // 70: google.protobuf.Timestamp
+	(*anypb.Any)(nil),                                        // 71: google.protobuf.Any
 }
 var file_src_protobufs_proto_depIdxs = []int32{
-	72, // 0: qdb.WebHeader.timestamp:type_name -> google.protobuf.Timestamp
+	70, // 0: qdb.WebHeader.timestamp:type_name -> google.protobuf.Timestamp
 	0,  // 1: qdb.WebHeader.authenticationStatus:type_name -> qdb.WebHeader.AuthenticationStatusEnum
-	15, // 2: qdb.WebMessage.header:type_name -> qdb.WebHeader
-	73, // 3: qdb.WebMessage.payload:type_name -> google.protobuf.Any
+	14, // 2: qdb.WebMessage.header:type_name -> qdb.WebHeader
+	71, // 3: qdb.WebMessage.payload:type_name -> google.protobuf.Any
 	1,  // 4: qdb.WebConfigCreateEntityResponse.status:type_name -> qdb.WebConfigCreateEntityResponse.StatusEnum
 	2,  // 5: qdb.WebConfigDeleteEntityResponse.status:type_name -> qdb.WebConfigDeleteEntityResponse.StatusEnum
 	3,  // 6: qdb.WebConfigGetEntityResponse.status:type_name -> qdb.WebConfigGetEntityResponse.StatusEnum
-	53, // 7: qdb.WebConfigGetEntityResponse.entity:type_name -> qdb.DatabaseEntity
+	52, // 7: qdb.WebConfigGetEntityResponse.entity:type_name -> qdb.DatabaseEntity
 	4,  // 8: qdb.WebConfigGetFieldSchemaResponse.status:type_name -> qdb.WebConfigGetFieldSchemaResponse.StatusEnum
-	58, // 9: qdb.WebConfigGetFieldSchemaResponse.schema:type_name -> qdb.DatabaseFieldSchema
-	58, // 10: qdb.WebConfigSetFieldSchemaRequest.schema:type_name -> qdb.DatabaseFieldSchema
+	57, // 9: qdb.WebConfigGetFieldSchemaResponse.schema:type_name -> qdb.DatabaseFieldSchema
+	57, // 10: qdb.WebConfigSetFieldSchemaRequest.schema:type_name -> qdb.DatabaseFieldSchema
 	5,  // 11: qdb.WebConfigSetFieldSchemaResponse.status:type_name -> qdb.WebConfigSetFieldSchemaResponse.StatusEnum
 	6,  // 12: qdb.WebConfigGetEntitySchemaResponse.status:type_name -> qdb.WebConfigGetEntitySchemaResponse.StatusEnum
-	57, // 13: qdb.WebConfigGetEntitySchemaResponse.schema:type_name -> qdb.DatabaseEntitySchema
+	56, // 13: qdb.WebConfigGetEntitySchemaResponse.schema:type_name -> qdb.DatabaseEntitySchema
 	7,  // 14: qdb.WebConfigSetEntitySchemaResponse.status:type_name -> qdb.WebConfigSetEntitySchemaResponse.StatusEnum
 	8,  // 15: qdb.WebConfigCreateSnapshotResponse.status:type_name -> qdb.WebConfigCreateSnapshotResponse.StatusEnum
-	60, // 16: qdb.WebConfigCreateSnapshotResponse.snapshot:type_name -> qdb.DatabaseSnapshot
-	60, // 17: qdb.WebConfigRestoreSnapshotRequest.snapshot:type_name -> qdb.DatabaseSnapshot
+	59, // 16: qdb.WebConfigCreateSnapshotResponse.snapshot:type_name -> qdb.DatabaseSnapshot
+	59, // 17: qdb.WebConfigRestoreSnapshotRequest.snapshot:type_name -> qdb.DatabaseSnapshot
 	9,  // 18: qdb.WebConfigRestoreSnapshotResponse.status:type_name -> qdb.WebConfigRestoreSnapshotResponse.StatusEnum
 	10, // 19: qdb.WebRuntimeDatabaseRequest.requestType:type_name -> qdb.WebRuntimeDatabaseRequest.RequestTypeEnum
-	59, // 20: qdb.WebRuntimeDatabaseRequest.requests:type_name -> qdb.DatabaseRequest
-	59, // 21: qdb.WebRuntimeDatabaseResponse.response:type_name -> qdb.DatabaseRequest
-	55, // 22: qdb.WebRuntimeRegisterNotificationRequest.requests:type_name -> qdb.DatabaseNotificationConfig
-	56, // 23: qdb.WebRuntimeGetNotificationsResponse.notifications:type_name -> qdb.DatabaseNotification
+	58, // 20: qdb.WebRuntimeDatabaseRequest.requests:type_name -> qdb.DatabaseRequest
+	58, // 21: qdb.WebRuntimeDatabaseResponse.response:type_name -> qdb.DatabaseRequest
+	54, // 22: qdb.WebRuntimeRegisterNotificationRequest.requests:type_name -> qdb.DatabaseNotificationConfig
+	55, // 23: qdb.WebRuntimeGetNotificationsResponse.notifications:type_name -> qdb.DatabaseNotification
 	11, // 24: qdb.WebRuntimeUnregisterNotificationResponse.status:type_name -> qdb.WebRuntimeUnregisterNotificationResponse.StatusEnum
-	71, // 25: qdb.WebRuntimeGetDatabaseConnectionStatusResponse.status:type_name -> qdb.ConnectionState
-	53, // 26: qdb.WebRuntimeGetEntitiesResponse.entities:type_name -> qdb.DatabaseEntity
-	66, // 27: qdb.DatabaseEntity.parent:type_name -> qdb.EntityReference
-	66, // 28: qdb.DatabaseEntity.children:type_name -> qdb.EntityReference
-	73, // 29: qdb.DatabaseField.value:type_name -> google.protobuf.Any
-	72, // 30: qdb.DatabaseField.writeTime:type_name -> google.protobuf.Timestamp
-	54, // 31: qdb.DatabaseNotification.current:type_name -> qdb.DatabaseField
-	54, // 32: qdb.DatabaseNotification.previous:type_name -> qdb.DatabaseField
-	54, // 33: qdb.DatabaseNotification.context:type_name -> qdb.DatabaseField
-	73, // 34: qdb.DatabaseRequest.value:type_name -> google.protobuf.Any
-	63, // 35: qdb.DatabaseRequest.writeTime:type_name -> qdb.Timestamp
-	62, // 36: qdb.DatabaseRequest.writerId:type_name -> qdb.String
-	53, // 37: qdb.DatabaseSnapshot.entities:type_name -> qdb.DatabaseEntity
-	54, // 38: qdb.DatabaseSnapshot.fields:type_name -> qdb.DatabaseField
-	57, // 39: qdb.DatabaseSnapshot.entitySchemas:type_name -> qdb.DatabaseEntitySchema
-	58, // 40: qdb.DatabaseSnapshot.fieldSchemas:type_name -> qdb.DatabaseFieldSchema
-	72, // 41: qdb.Timestamp.raw:type_name -> google.protobuf.Timestamp
+	69, // 25: qdb.WebRuntimeGetDatabaseConnectionStatusResponse.status:type_name -> qdb.ConnectionState
+	52, // 26: qdb.WebRuntimeGetEntitiesResponse.entities:type_name -> qdb.DatabaseEntity
+	65, // 27: qdb.DatabaseEntity.parent:type_name -> qdb.EntityReference
+	65, // 28: qdb.DatabaseEntity.children:type_name -> qdb.EntityReference
+	71, // 29: qdb.DatabaseField.value:type_name -> google.protobuf.Any
+	70, // 30: qdb.DatabaseField.writeTime:type_name -> google.protobuf.Timestamp
+	53, // 31: qdb.DatabaseNotification.current:type_name -> qdb.DatabaseField
+	53, // 32: qdb.DatabaseNotification.previous:type_name -> qdb.DatabaseField
+	53, // 33: qdb.DatabaseNotification.context:type_name -> qdb.DatabaseField
+	71, // 34: qdb.DatabaseRequest.value:type_name -> google.protobuf.Any
+	62, // 35: qdb.DatabaseRequest.writeTime:type_name -> qdb.Timestamp
+	61, // 36: qdb.DatabaseRequest.writerId:type_name -> qdb.String
+	52, // 37: qdb.DatabaseSnapshot.entities:type_name -> qdb.DatabaseEntity
+	53, // 38: qdb.DatabaseSnapshot.fields:type_name -> qdb.DatabaseField
+	56, // 39: qdb.DatabaseSnapshot.entitySchemas:type_name -> qdb.DatabaseEntitySchema
+	57, // 40: qdb.DatabaseSnapshot.fieldSchemas:type_name -> qdb.DatabaseFieldSchema
+	70, // 41: qdb.Timestamp.raw:type_name -> google.protobuf.Timestamp
 	12, // 42: qdb.LogMessage.level:type_name -> qdb.LogMessage.LogLevelEnum
-	72, // 43: qdb.LogMessage.timestamp:type_name -> google.protobuf.Timestamp
-	13, // 44: qdb.GarageDoorState.raw:type_name -> qdb.GarageDoorState.GarageDoorStateEnum
-	14, // 45: qdb.ConnectionState.raw:type_name -> qdb.ConnectionState.ConnectionStateEnum
-	46, // [46:46] is the sub-list for method output_type
-	46, // [46:46] is the sub-list for method input_type
-	46, // [46:46] is the sub-list for extension type_name
-	46, // [46:46] is the sub-list for extension extendee
-	0,  // [0:46] is the sub-list for field type_name
+	70, // 43: qdb.LogMessage.timestamp:type_name -> google.protobuf.Timestamp
+	13, // 44: qdb.ConnectionState.raw:type_name -> qdb.ConnectionState.ConnectionStateEnum
+	45, // [45:45] is the sub-list for method output_type
+	45, // [45:45] is the sub-list for method input_type
+	45, // [45:45] is the sub-list for extension type_name
+	45, // [45:45] is the sub-list for extension extendee
+	0,  // [0:45] is the sub-list for field type_name
 }
 
 func init() { file_src_protobufs_proto_init() }
@@ -4173,8 +4067,8 @@ func file_src_protobufs_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_src_protobufs_proto_rawDesc,
-			NumEnums:      15,
-			NumMessages:   57,
+			NumEnums:      14,
+			NumMessages:   56,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
