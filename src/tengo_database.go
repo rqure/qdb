@@ -144,6 +144,10 @@ func (tdb *TengoDatabase) ToTengoMap() tengo.Object {
 				Name:  "getEntity",
 				Value: tdb.GetEntity,
 			},
+			"entity": &tengo.UserFunction{
+				Name:  "entity",
+				Value: tdb.GetEntity,
+			},
 			"find": &tengo.UserFunction{
 				Name:  "find",
 				Value: tdb.Find,
