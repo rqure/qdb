@@ -1051,7 +1051,7 @@ func (db *RedisDatabase) triggerNotifications(request *DatabaseRequest, oldReque
 
 		for _, context := range p.ContextFields {
 			contextRequest := &DatabaseRequest{
-				Id:    request.Id,
+				Id:    indirectEntity,
 				Field: context,
 			}
 			db.Read([]*DatabaseRequest{contextRequest})
@@ -1117,7 +1117,7 @@ func (db *RedisDatabase) triggerNotifications(request *DatabaseRequest, oldReque
 
 		for _, context := range p.ContextFields {
 			contextRequest := &DatabaseRequest{
-				Id:    request.Id,
+				Id:    indirectEntity,
 				Field: context,
 			}
 			db.Read([]*DatabaseRequest{contextRequest})
