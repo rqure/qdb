@@ -1988,9 +1988,9 @@ proto.qdb.WebHeader.prototype.toObject = function(opt_includeInstance) {
  */
 proto.qdb.WebHeader.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    authenticationstatus: jspb.Message.getFieldWithDefault(msg, 3, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+authenticationstatus: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {
@@ -2208,8 +2208,8 @@ proto.qdb.WebMessage.prototype.toObject = function(opt_includeInstance) {
  */
 proto.qdb.WebMessage.toObject = function(includeInstance, msg) {
   var f, obj = {
-    header: (f = msg.getHeader()) && proto.qdb.WebHeader.toObject(includeInstance, f),
-    payload: (f = msg.getPayload()) && google_protobuf_any_pb.Any.toObject(includeInstance, f)
+header: (f = msg.getHeader()) && proto.qdb.WebHeader.toObject(includeInstance, f),
+payload: (f = msg.getPayload()) && google_protobuf_any_pb.Any.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -2410,9 +2410,9 @@ proto.qdb.WebConfigCreateEntityRequest.prototype.toObject = function(opt_include
  */
 proto.qdb.WebConfigCreateEntityRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    type: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    parentid: jspb.Message.getFieldWithDefault(msg, 3, "")
+type: jspb.Message.getFieldWithDefault(msg, 1, ""),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+parentid: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -2600,8 +2600,8 @@ proto.qdb.WebConfigCreateEntityResponse.prototype.toObject = function(opt_includ
  */
 proto.qdb.WebConfigCreateEntityResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    status: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    id: jspb.Message.getFieldWithDefault(msg, 2, "")
+status: jspb.Message.getFieldWithDefault(msg, 1, 0),
+id: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -2769,7 +2769,7 @@ proto.qdb.WebConfigDeleteEntityRequest.prototype.toObject = function(opt_include
  */
 proto.qdb.WebConfigDeleteEntityRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, "")
+id: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -2899,7 +2899,7 @@ proto.qdb.WebConfigDeleteEntityResponse.prototype.toObject = function(opt_includ
  */
 proto.qdb.WebConfigDeleteEntityResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    status: jspb.Message.getFieldWithDefault(msg, 1, 0)
+status: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -3146,7 +3146,7 @@ proto.qdb.WebConfigGetEntityTypesResponse.prototype.toObject = function(opt_incl
  */
 proto.qdb.WebConfigGetEntityTypesResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    typesList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
+typesList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -3295,7 +3295,7 @@ proto.qdb.WebConfigGetEntityRequest.prototype.toObject = function(opt_includeIns
  */
 proto.qdb.WebConfigGetEntityRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, "")
+id: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -3425,8 +3425,8 @@ proto.qdb.WebConfigGetEntityResponse.prototype.toObject = function(opt_includeIn
  */
 proto.qdb.WebConfigGetEntityResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    status: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    entity: (f = msg.getEntity()) && proto.qdb.DatabaseEntity.toObject(includeInstance, f)
+status: jspb.Message.getFieldWithDefault(msg, 1, 0),
+entity: (f = msg.getEntity()) && proto.qdb.DatabaseEntity.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -3615,7 +3615,7 @@ proto.qdb.WebConfigGetFieldSchemaRequest.prototype.toObject = function(opt_inclu
  */
 proto.qdb.WebConfigGetFieldSchemaRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    field: jspb.Message.getFieldWithDefault(msg, 1, "")
+field: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -3745,8 +3745,8 @@ proto.qdb.WebConfigGetFieldSchemaResponse.prototype.toObject = function(opt_incl
  */
 proto.qdb.WebConfigGetFieldSchemaResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    status: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    schema: (f = msg.getSchema()) && proto.qdb.DatabaseFieldSchema.toObject(includeInstance, f)
+status: jspb.Message.getFieldWithDefault(msg, 1, 0),
+schema: (f = msg.getSchema()) && proto.qdb.DatabaseFieldSchema.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -3935,8 +3935,8 @@ proto.qdb.WebConfigSetFieldSchemaRequest.prototype.toObject = function(opt_inclu
  */
 proto.qdb.WebConfigSetFieldSchemaRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    field: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    schema: (f = msg.getSchema()) && proto.qdb.DatabaseFieldSchema.toObject(includeInstance, f)
+field: jspb.Message.getFieldWithDefault(msg, 1, ""),
+schema: (f = msg.getSchema()) && proto.qdb.DatabaseFieldSchema.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -4116,7 +4116,7 @@ proto.qdb.WebConfigSetFieldSchemaResponse.prototype.toObject = function(opt_incl
  */
 proto.qdb.WebConfigSetFieldSchemaResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    status: jspb.Message.getFieldWithDefault(msg, 1, 0)
+status: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -4255,7 +4255,7 @@ proto.qdb.WebConfigGetEntitySchemaRequest.prototype.toObject = function(opt_incl
  */
 proto.qdb.WebConfigGetEntitySchemaRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    type: jspb.Message.getFieldWithDefault(msg, 1, "")
+type: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -4385,8 +4385,8 @@ proto.qdb.WebConfigGetEntitySchemaResponse.prototype.toObject = function(opt_inc
  */
 proto.qdb.WebConfigGetEntitySchemaResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    status: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    schema: (f = msg.getSchema()) && proto.qdb.DatabaseEntitySchema.toObject(includeInstance, f)
+status: jspb.Message.getFieldWithDefault(msg, 1, 0),
+schema: (f = msg.getSchema()) && proto.qdb.DatabaseEntitySchema.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -4582,8 +4582,8 @@ proto.qdb.WebConfigSetEntitySchemaRequest.prototype.toObject = function(opt_incl
  */
 proto.qdb.WebConfigSetEntitySchemaRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    fieldsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+fieldsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -4761,7 +4761,7 @@ proto.qdb.WebConfigSetEntitySchemaResponse.prototype.toObject = function(opt_inc
  */
 proto.qdb.WebConfigSetEntitySchemaResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    status: jspb.Message.getFieldWithDefault(msg, 1, 0)
+status: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -5001,8 +5001,8 @@ proto.qdb.WebConfigCreateSnapshotResponse.prototype.toObject = function(opt_incl
  */
 proto.qdb.WebConfigCreateSnapshotResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    status: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    snapshot: (f = msg.getSnapshot()) && proto.qdb.DatabaseSnapshot.toObject(includeInstance, f)
+status: jspb.Message.getFieldWithDefault(msg, 1, 0),
+snapshot: (f = msg.getSnapshot()) && proto.qdb.DatabaseSnapshot.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -5191,7 +5191,7 @@ proto.qdb.WebConfigRestoreSnapshotRequest.prototype.toObject = function(opt_incl
  */
 proto.qdb.WebConfigRestoreSnapshotRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    snapshot: (f = msg.getSnapshot()) && proto.qdb.DatabaseSnapshot.toObject(includeInstance, f)
+snapshot: (f = msg.getSnapshot()) && proto.qdb.DatabaseSnapshot.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -5342,7 +5342,7 @@ proto.qdb.WebConfigRestoreSnapshotResponse.prototype.toObject = function(opt_inc
  */
 proto.qdb.WebConfigRestoreSnapshotResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    status: jspb.Message.getFieldWithDefault(msg, 1, 0)
+status: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -5582,7 +5582,7 @@ proto.qdb.WebConfigGetRootResponse.prototype.toObject = function(opt_includeInst
  */
 proto.qdb.WebConfigGetRootResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    rootid: jspb.Message.getFieldWithDefault(msg, 1, "")
+rootid: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -5820,7 +5820,7 @@ proto.qdb.WebConfigGetAllFieldsResponse.prototype.toObject = function(opt_includ
  */
 proto.qdb.WebConfigGetAllFieldsResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    fieldsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
+fieldsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -5976,8 +5976,8 @@ proto.qdb.WebRuntimeDatabaseRequest.prototype.toObject = function(opt_includeIns
  */
 proto.qdb.WebRuntimeDatabaseRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    requesttype: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    requestsList: jspb.Message.toObjectList(msg.getRequestsList(),
+requesttype: jspb.Message.getFieldWithDefault(msg, 1, 0),
+requestsList: jspb.Message.toObjectList(msg.getRequestsList(),
     proto.qdb.DatabaseRequest.toObject, includeInstance)
   };
 
@@ -6175,7 +6175,7 @@ proto.qdb.WebRuntimeDatabaseResponse.prototype.toObject = function(opt_includeIn
  */
 proto.qdb.WebRuntimeDatabaseResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    responseList: jspb.Message.toObjectList(msg.getResponseList(),
+responseList: jspb.Message.toObjectList(msg.getResponseList(),
     proto.qdb.DatabaseRequest.toObject, includeInstance)
   };
 
@@ -6335,7 +6335,7 @@ proto.qdb.WebRuntimeRegisterNotificationRequest.prototype.toObject = function(op
  */
 proto.qdb.WebRuntimeRegisterNotificationRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    requestsList: jspb.Message.toObjectList(msg.getRequestsList(),
+requestsList: jspb.Message.toObjectList(msg.getRequestsList(),
     proto.qdb.DatabaseNotificationConfig.toObject, includeInstance)
   };
 
@@ -6495,7 +6495,7 @@ proto.qdb.WebRuntimeRegisterNotificationResponse.prototype.toObject = function(o
  */
 proto.qdb.WebRuntimeRegisterNotificationResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    tokensList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
+tokensList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -6752,7 +6752,7 @@ proto.qdb.WebRuntimeGetNotificationsResponse.prototype.toObject = function(opt_i
  */
 proto.qdb.WebRuntimeGetNotificationsResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    notificationsList: jspb.Message.toObjectList(msg.getNotificationsList(),
+notificationsList: jspb.Message.toObjectList(msg.getNotificationsList(),
     proto.qdb.DatabaseNotification.toObject, includeInstance)
   };
 
@@ -6912,7 +6912,7 @@ proto.qdb.WebRuntimeUnregisterNotificationRequest.prototype.toObject = function(
  */
 proto.qdb.WebRuntimeUnregisterNotificationRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    tokensList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
+tokensList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -7061,7 +7061,7 @@ proto.qdb.WebRuntimeUnregisterNotificationResponse.prototype.toObject = function
  */
 proto.qdb.WebRuntimeUnregisterNotificationResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    status: jspb.Message.getFieldWithDefault(msg, 1, 0)
+status: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -7301,7 +7301,7 @@ proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse.prototype.toObject = fun
  */
 proto.qdb.WebRuntimeGetDatabaseConnectionStatusResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    status: (f = msg.getStatus()) && proto.qdb.ConnectionState.toObject(includeInstance, f)
+status: (f = msg.getStatus()) && proto.qdb.ConnectionState.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -7452,7 +7452,7 @@ proto.qdb.WebRuntimeGetEntitiesRequest.prototype.toObject = function(opt_include
  */
 proto.qdb.WebRuntimeGetEntitiesRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    entitytype: jspb.Message.getFieldWithDefault(msg, 1, "")
+entitytype: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -7589,7 +7589,7 @@ proto.qdb.WebRuntimeGetEntitiesResponse.prototype.toObject = function(opt_includ
  */
 proto.qdb.WebRuntimeGetEntitiesResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    entitiesList: jspb.Message.toObjectList(msg.getEntitiesList(),
+entitiesList: jspb.Message.toObjectList(msg.getEntitiesList(),
     proto.qdb.DatabaseEntity.toObject, includeInstance)
   };
 
@@ -7749,11 +7749,11 @@ proto.qdb.DatabaseEntity.prototype.toObject = function(opt_includeInstance) {
  */
 proto.qdb.DatabaseEntity.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    type: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    parent: (f = msg.getParent()) && proto.qdb.EntityReference.toObject(includeInstance, f),
-    childrenList: jspb.Message.toObjectList(msg.getChildrenList(),
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+type: jspb.Message.getFieldWithDefault(msg, 2, ""),
+name: jspb.Message.getFieldWithDefault(msg, 3, ""),
+parent: (f = msg.getParent()) && proto.qdb.EntityReference.toObject(includeInstance, f),
+childrenList: jspb.Message.toObjectList(msg.getChildrenList(),
     proto.qdb.EntityReference.toObject, includeInstance)
   };
 
@@ -8043,11 +8043,11 @@ proto.qdb.DatabaseField.prototype.toObject = function(opt_includeInstance) {
  */
 proto.qdb.DatabaseField.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    value: (f = msg.getValue()) && google_protobuf_any_pb.Any.toObject(includeInstance, f),
-    writetime: (f = msg.getWritetime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    writerid: jspb.Message.getFieldWithDefault(msg, 5, "")
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+value: (f = msg.getValue()) && google_protobuf_any_pb.Any.toObject(includeInstance, f),
+writetime: (f = msg.getWritetime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+writerid: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {
@@ -8342,12 +8342,12 @@ proto.qdb.DatabaseNotificationConfig.prototype.toObject = function(opt_includeIn
  */
 proto.qdb.DatabaseNotificationConfig.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    type: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    field: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    contextfieldsList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f,
-    notifyonchange: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
-    serviceid: jspb.Message.getFieldWithDefault(msg, 6, "")
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+type: jspb.Message.getFieldWithDefault(msg, 2, ""),
+field: jspb.Message.getFieldWithDefault(msg, 3, ""),
+contextfieldsList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f,
+notifyonchange: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
+serviceid: jspb.Message.getFieldWithDefault(msg, 6, "")
   };
 
   if (includeInstance) {
@@ -8648,10 +8648,10 @@ proto.qdb.DatabaseNotification.prototype.toObject = function(opt_includeInstance
  */
 proto.qdb.DatabaseNotification.toObject = function(includeInstance, msg) {
   var f, obj = {
-    token: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    current: (f = msg.getCurrent()) && proto.qdb.DatabaseField.toObject(includeInstance, f),
-    previous: (f = msg.getPrevious()) && proto.qdb.DatabaseField.toObject(includeInstance, f),
-    contextList: jspb.Message.toObjectList(msg.getContextList(),
+token: jspb.Message.getFieldWithDefault(msg, 1, ""),
+current: (f = msg.getCurrent()) && proto.qdb.DatabaseField.toObject(includeInstance, f),
+previous: (f = msg.getPrevious()) && proto.qdb.DatabaseField.toObject(includeInstance, f),
+contextList: jspb.Message.toObjectList(msg.getContextList(),
     proto.qdb.DatabaseField.toObject, includeInstance)
   };
 
@@ -8940,8 +8940,8 @@ proto.qdb.DatabaseEntitySchema.prototype.toObject = function(opt_includeInstance
  */
 proto.qdb.DatabaseEntitySchema.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    fieldsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+fieldsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -9119,8 +9119,8 @@ proto.qdb.DatabaseFieldSchema.prototype.toObject = function(opt_includeInstance)
  */
 proto.qdb.DatabaseFieldSchema.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    type: jspb.Message.getFieldWithDefault(msg, 2, "")
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+type: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -9279,12 +9279,12 @@ proto.qdb.DatabaseRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.qdb.DatabaseRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    field: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    value: (f = msg.getValue()) && google_protobuf_any_pb.Any.toObject(includeInstance, f),
-    writetime: (f = msg.getWritetime()) && proto.qdb.Timestamp.toObject(includeInstance, f),
-    writerid: (f = msg.getWriterid()) && proto.qdb.String.toObject(includeInstance, f),
-    success: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+field: jspb.Message.getFieldWithDefault(msg, 2, ""),
+value: (f = msg.getValue()) && google_protobuf_any_pb.Any.toObject(includeInstance, f),
+writetime: (f = msg.getWritetime()) && proto.qdb.Timestamp.toObject(includeInstance, f),
+writerid: (f = msg.getWriterid()) && proto.qdb.String.toObject(includeInstance, f),
+success: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
   };
 
   if (includeInstance) {
@@ -9629,13 +9629,13 @@ proto.qdb.DatabaseSnapshot.prototype.toObject = function(opt_includeInstance) {
  */
 proto.qdb.DatabaseSnapshot.toObject = function(includeInstance, msg) {
   var f, obj = {
-    entitiesList: jspb.Message.toObjectList(msg.getEntitiesList(),
+entitiesList: jspb.Message.toObjectList(msg.getEntitiesList(),
     proto.qdb.DatabaseEntity.toObject, includeInstance),
-    fieldsList: jspb.Message.toObjectList(msg.getFieldsList(),
+fieldsList: jspb.Message.toObjectList(msg.getFieldsList(),
     proto.qdb.DatabaseField.toObject, includeInstance),
-    entityschemasList: jspb.Message.toObjectList(msg.getEntityschemasList(),
+entityschemasList: jspb.Message.toObjectList(msg.getEntityschemasList(),
     proto.qdb.DatabaseEntitySchema.toObject, includeInstance),
-    fieldschemasList: jspb.Message.toObjectList(msg.getFieldschemasList(),
+fieldschemasList: jspb.Message.toObjectList(msg.getFieldschemasList(),
     proto.qdb.DatabaseFieldSchema.toObject, includeInstance)
   };
 
@@ -9941,7 +9941,7 @@ proto.qdb.Int.prototype.toObject = function(opt_includeInstance) {
  */
 proto.qdb.Int.toObject = function(includeInstance, msg) {
   var f, obj = {
-    raw: jspb.Message.getFieldWithDefault(msg, 1, 0)
+raw: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -10071,7 +10071,7 @@ proto.qdb.String.prototype.toObject = function(opt_includeInstance) {
  */
 proto.qdb.String.toObject = function(includeInstance, msg) {
   var f, obj = {
-    raw: jspb.Message.getFieldWithDefault(msg, 1, "")
+raw: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -10201,7 +10201,7 @@ proto.qdb.Timestamp.prototype.toObject = function(opt_includeInstance) {
  */
 proto.qdb.Timestamp.toObject = function(includeInstance, msg) {
   var f, obj = {
-    raw: (f = msg.getRaw()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
+raw: (f = msg.getRaw()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -10352,7 +10352,7 @@ proto.qdb.Float.prototype.toObject = function(opt_includeInstance) {
  */
 proto.qdb.Float.toObject = function(includeInstance, msg) {
   var f, obj = {
-    raw: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0)
+raw: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0)
   };
 
   if (includeInstance) {
@@ -10482,7 +10482,7 @@ proto.qdb.Bool.prototype.toObject = function(opt_includeInstance) {
  */
 proto.qdb.Bool.toObject = function(includeInstance, msg) {
   var f, obj = {
-    raw: jspb.Message.getBooleanFieldWithDefault(msg, 1, false)
+raw: jspb.Message.getBooleanFieldWithDefault(msg, 1, false)
   };
 
   if (includeInstance) {
@@ -10612,7 +10612,7 @@ proto.qdb.EntityReference.prototype.toObject = function(opt_includeInstance) {
  */
 proto.qdb.EntityReference.toObject = function(includeInstance, msg) {
   var f, obj = {
-    raw: jspb.Message.getFieldWithDefault(msg, 1, "")
+raw: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -10742,7 +10742,7 @@ proto.qdb.BinaryFile.prototype.toObject = function(opt_includeInstance) {
  */
 proto.qdb.BinaryFile.toObject = function(includeInstance, msg) {
   var f, obj = {
-    raw: jspb.Message.getFieldWithDefault(msg, 1, "")
+raw: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -10872,7 +10872,7 @@ proto.qdb.Transformation.prototype.toObject = function(opt_includeInstance) {
  */
 proto.qdb.Transformation.toObject = function(includeInstance, msg) {
   var f, obj = {
-    raw: jspb.Message.getFieldWithDefault(msg, 1, "")
+raw: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -11002,10 +11002,10 @@ proto.qdb.LogMessage.prototype.toObject = function(opt_includeInstance) {
  */
 proto.qdb.LogMessage.toObject = function(includeInstance, msg) {
   var f, obj = {
-    application: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    level: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
+application: jspb.Message.getFieldWithDefault(msg, 1, ""),
+level: jspb.Message.getFieldWithDefault(msg, 2, 0),
+message: jspb.Message.getFieldWithDefault(msg, 3, ""),
+timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -11256,7 +11256,7 @@ proto.qdb.ConnectionState.prototype.toObject = function(opt_includeInstance) {
  */
 proto.qdb.ConnectionState.toObject = function(includeInstance, msg) {
   var f, obj = {
-    raw: jspb.Message.getFieldWithDefault(msg, 1, 0)
+raw: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
