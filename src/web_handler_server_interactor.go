@@ -10,7 +10,7 @@ func Register_web_handler_server_interactor() {
 
     http.HandleFunc("/js/qdb/server_interactor.js", func(w http.ResponseWriter, r *http.Request) {
         w.Header().Set("Content-Type", "application/javascript")
-        fmt.Fprint(w, `SERVER_INTERACTOR_CONNECTION_STATES = {
+        s := `SERVER_INTERACTOR_CONNECTION_STATES = {
     DISCONNECTED: 0,
     CONNECTING: 1,
     CONNECTED: 2,
@@ -142,6 +142,7 @@ class ServerInteractor {
             delete this._waitingResponses[requestId];
         }
     }
-}`)
+}`
+        fmt.Fprint(w, s)
     })
 }

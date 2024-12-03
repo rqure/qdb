@@ -10,7 +10,7 @@ func Register_web_handler_database_interactor() {
 
     http.HandleFunc("/js/qdb/database_interactor.js", func(w http.ResponseWriter, r *http.Request) {
         w.Header().Set("Content-Type", "application/javascript")
-        fmt.Fprint(w, `DATABASE_EVENTS = {
+        s := `DATABASE_EVENTS = {
     CONNECTED: "connected",
     DISCONNECTED: "disconnected",
 };
@@ -499,6 +499,7 @@ class DatabaseInteractor {
                 throw new Error(` + "`" + `[DatabaseInteractor::write] Failed to write entity: ${error}` + "`" + `);
             });
     }
-}`)
+}`
+        fmt.Fprint(w, s)
     })
 }

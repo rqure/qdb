@@ -29,7 +29,8 @@ for FILE in $(find $WEB_DIR -type f -name "*.js"); do
     echo "" >> $OUTPUT_FILE
     echo "    http.HandleFunc(\"/js/qdb/$FILENAME.js\", func(w http.ResponseWriter, r *http.Request) {" >> $OUTPUT_FILE
     echo "        w.Header().Set(\"Content-Type\", \"application/javascript\")" >> $OUTPUT_FILE
-    echo "        fmt.Fprint(w, \`$CONTENT\`)" >> $OUTPUT_FILE
+    echo "        s := \`$CONTENT\`" >> $OUTPUT_FILE
+    echo "        fmt.Fprint(w, s)" >> $OUTPUT_FILE
     echo "    })" >> $OUTPUT_FILE
     echo "}" >> $OUTPUT_FILE
 done

@@ -374,18 +374,28 @@ func (db *RedisDatabase) CreateEntity(entityType, parentId, name string) {
 
 	schema := db.GetEntitySchema(entityType)
 	if schema == nil {
-		Error("[RedisDatabase::CreateEntity] Failed to get entity schema: %v", entityType)
+		Error("[RedisDatabase::CreateEntity] Failed to get entity schema for type %s", entityType)
 		return
 	}
 
+	// Initialize empty fields
 	requests := []*DatabaseRequest{}
 	for _, fieldName := range schema.Fields {
+		fieldSchema := db.GetFieldSchema(fieldName)
+		if fieldSchema == nil {
+			Error("[RedisDatabase::CreateEntity] Failed to get field schema for %s", fieldName)
+			continue
+		}
+
 		requests = append(requests, &DatabaseRequest{
 			Id:    entityId,
 			Field: fieldName,
 		})
 	}
-	db.Write(requests)
+
+	if len(requests) > 0 {
+		db.Write(requests)
+	}
 
 	p := &DatabaseEntity{
 		Id:       entityId,
@@ -714,16 +724,20 @@ func (db *RedisDatabase) Write(requests []*DatabaseRequest) {
 		request.Success = false
 
 		indirectField, indirectEntity := db.ResolveIndirection(request.Field, request.Id)
-
 		if indirectField == "" || indirectEntity == "" {
 			Error("[RedisDatabase::Write] Failed to resolve indirection: %v", request)
 			continue
 		}
 
 		schema := db.GetFieldSchema(indirectField)
+		if schema == nil {
+			Error("[RedisDatabase::Write] Failed to get field schema for %s", indirectField)
+			continue
+		}
+
 		actualFieldType, err := protoregistry.GlobalTypes.FindMessageByName(protoreflect.FullName(schema.Type))
 		if err != nil {
-			Error("[RedisDatabase::Write] Failed to find message type: %v", err)
+			Error("[RedisDatabase::Write] Failed to find message type %s: %v", schema.Type, err)
 			continue
 		}
 
